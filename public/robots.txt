@@ -1,0 +1,45 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://almasceram.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /admin/products
+Disallow: /admin/products/new
+Disallow: /admin/products/*
+
+# Disallow auth pages from indexing
+Disallow: /login
+Disallow: /register
+
+# Allow important pages
+Allow: /
+Allow: /about
+Allow: /products
+Allow: /products/dimension/*
+Allow: /contact
+Allow: /technical
+Allow: /projects
+Allow: /shop
+Allow: /services
+Allow: /inspiration
+Allow: /catalogues
+
+# Allow static assets
+Allow: /images/
+Allow: /assets/
+Allow: /ALMAS/
+
+# Block unnecessary files
+Disallow: *.json$
+Disallow: *.xml$
+Disallow: *.txt$
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /docs/

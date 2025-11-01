@@ -1,0 +1,324 @@
+/* Import custom cursor styles */
+@import './components/styles.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Foundation Neutrals */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
+    
+    --alabaster: 60 9% 98%;
+    --warm-linen: 30 20% 96%;
+    --soft-parchment: 36 14% 91%;
+    --cream-beige: 36 18% 88%;
+    
+    /* Premium Text Hierarchy */
+    --midnight-noir: 0 0% 4%;
+    --charcoal-deep: 0 0% 10%;
+    --carbon-steel: 0 0% 18%;
+    --graphite: 0 0% 29%;
+    --slate-gray: 0 0% 42%;
+    --stone-mist: 0 0% 61%;
+    --light-smoke: 0 0% 80%;
+    --whisper: 0 0% 90%;
+    
+    /* Luxury Accent Palette */
+    --champagne-gold: 43 63% 52%;
+    --burnished-bronze: 35 32% 51%;
+    --antique-brass: 30 22% 43%;
+    --rose-gold: 350 27% 58%;
+    --deep-amber: 42 45% 59%;
+    
+    /* Semantic Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    
+    --primary: 43 63% 52%;
+    --primary-foreground: 0 0% 4%;
+    
+    --secondary: 36 14% 91%;
+    --secondary-foreground: 0 0% 10%;
+    
+    --muted: 36 14% 91%;
+    --muted-foreground: 0 0% 42%;
+    
+    --accent: 43 63% 52%;
+    --accent-foreground: 0 0% 4%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 152 51% 33%;
+    --warning: 28 86% 44%;
+    --info: 221 58% 38%;
+    
+    --border: 0 0% 90%;
+    --input: 36 14% 91%;
+    --ring: 43 63% 52%;
+    
+    --radius: 0.625rem;
+    
+    /* Gradients */
+    --gradient-hero-dark: linear-gradient(135deg, rgba(10,10,10,0.78) 0%, rgba(26,26,26,0.42) 50%, rgba(10,10,10,0.68) 100%);
+    --gradient-card-elegance: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,0.88) 100%);
+    --gradient-gold-shimmer: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.35) 50%, rgba(212,175,55,0.1) 100%);
+    --gradient-glass-morph: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 100%);
+    --gradient-warm-fade: linear-gradient(180deg, rgba(245,243,240,0) 0%, rgba(245,243,240,1) 85%);
+    --gradient-premium-overlay: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.15) 0%, transparent 70%);
+    
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--champagne-gold) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--champagne-gold) / 0.4);
+    --shadow-card: 0 3px 18px rgba(0,0,0,0.08);
+    --shadow-card-hover: 0 20px 56px rgba(0,0,0,0.16);
+    
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-elegant: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Utilities */
+  --scale-112: 1.12;
+  --scale-115: 1.15;
+  --scale-118: 1.18;
+  --scale-107: 1.07;
+  --scale-103: 1.03;
+  --scale-108: 1.08;
+  }
+  
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 43 63% 52%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 61%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 43 63% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Font optimization: Add font-display swap for better performance */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Playfair Display';
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'DM Sans';
+    font-display: swap;
+  }
+}
+
+@layer utilities {
+  /* Hide native browser scrollbars globally (keep scrolling enabled) */
+  html, body {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  /* Focus visible styles for keyboard users */
+  .focus-visible:focus-visible {
+    outline: 2px solid hsl(var(--champagne-gold));
+    outline-offset: 2px;
+  }
+  /* Reduce motion support to lower GPU usage on low-power devices */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  
+  .font-sans {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  .font-technical {
+    font-family: 'DM Sans', 'Montserrat', sans-serif;
+  }
+  
+  .text-luxury-gold {
+    color: hsl(var(--champagne-gold));
+  }
+  
+  .bg-luxury-gold {
+    background-color: hsl(var(--champagne-gold));
+  }
+  
+  .bg-alabaster {
+    background-color: hsl(var(--alabaster));
+  }
+  
+  .bg-warm-linen {
+    background-color: hsl(var(--warm-linen));
+  }
+  
+  .text-charcoal {
+    color: hsl(var(--charcoal-deep));
+  }
+  
+  .text-graphite {
+    color: hsl(var(--graphite));
+  }
+  
+  .text-slate {
+    color: hsl(var(--slate-gray));
+  }
+  
+  .text-stone-mist {
+    color: hsl(var(--stone-mist));
+  }
+  
+  .gradient-hero-dark {
+    background: var(--gradient-hero-dark);
+  }
+  
+  .gradient-card-elegance {
+    background: var(--gradient-card-elegance);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-elegant {
+    transition: var(--transition-elegant);
+  }
+  
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+  
+  /* On touch devices, slightly reduce shadow intensity to lower GPU cost */
+  @media (pointer: coarse) {
+    :root {
+      --shadow-elegant: 0 8px 24px -10px hsl(var(--champagne-gold) / 0.22);
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-card-hover: 0 14px 40px rgba(0,0,0,0.12);
+    }
+  }
+  
+  /* Scale utilities */
+  .hover\:scale-112:hover {
+    transform: scale(1.12);
+  }
+  .hover\:scale-115:hover {
+    transform: scale(1.15);
+  }
+  .hover\:scale-118:hover {
+    transform: scale(1.18);
+  }
+  .hover\:scale-107:hover {
+    transform: scale(1.07);
+  }
+  .hover\:scale-103:hover {
+    transform: scale(1.03);
+  }
+  .hover\:scale-108:hover {
+    transform: scale(1.08);
+  }
+  .scale-112 {
+    transform: scale(1.12);
+  }
+  .scale-107 {
+    transform: scale(1.07);
+  }
+  .scale-103 {
+    transform: scale(1.03);
+  }
+
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-thumb-luxury-gold {
+    scrollbar-color: hsl(var(--champagne-gold)) hsl(var(--champagne-gold) / 0.3);
+  }
+  .scrollbar-track-luxury-gold\/30::-webkit-scrollbar {
+    height: 4px;
+  }
+  .scrollbar-track-luxury-gold\/30::-webkit-scrollbar-track {
+    background: hsl(var(--champagne-gold) / 0.3);
+  }
+  .scrollbar-track-luxury-gold\/30::-webkit-scrollbar-thumb {
+    background: hsl(var(--champagne-gold));
+    border-radius: 10px;
+  }
+
+  /* Product page animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Hide native cursor globally: only custom cream dot will be seen */
+  *, *:hover, *:focus, *:active { cursor: none !important; }
+  a, button, [role="button"], input, select, textarea, label, .cursor-pointer { cursor: none !important; }
+}

@@ -1,0 +1,131 @@
+{
+  "project": {
+    "name": "Pietra Luxe Hub",
+    "alias": {"@": "./src"},
+    "devServer": {"defaultPort": 8080, "observedPort": 8081},
+    "framework": "React 18",
+    "language": "TypeScript",
+    "bundler": "Vite 5",
+    "styling": "Tailwind CSS 3",
+    "ui": ["Radix UI", "shadcn-style components"],
+    "data": "@tanstack/react-query",
+    "routing": "react-router-dom v6"
+  },
+  "theme": {
+    "mode": "class",
+    "cssVariablesSource": "src/index.css",
+    "tokens": {
+      "semantic": [
+        "background",
+        "foreground",
+        "primary",
+        "primary-foreground",
+        "secondary",
+        "secondary-foreground",
+        "muted",
+        "muted-foreground",
+        "accent",
+        "accent-foreground",
+        "card",
+        "card-foreground",
+        "popover",
+        "popover-foreground",
+        "border",
+        "input",
+        "ring"
+      ],
+      "luxury": ["champagne-gold", "burnished-bronze", "antique-brass", "rose-gold", "deep-amber"],
+      "neutral": ["alabaster", "warm-linen", "soft-parchment", "charcoal-deep", "graphite", "slate-gray", "stone-mist"],
+      "radius": "--radius"
+    },
+    "gradients": [
+      "gradient-hero-dark",
+      "gradient-card-elegance",
+      "gradient-gold-shimmer",
+      "gradient-glass-morph",
+      "gradient-warm-fade",
+      "gradient-premium-overlay"
+    ],
+    "shadows": ["shadow-elegant", "shadow-glow", "shadow-card", "shadow-card-hover"],
+    "transitions": ["transition-smooth", "transition-elegant"],
+    "fonts": {
+      "display": "Playfair Display",
+      "sans": "Inter",
+      "technical": ["DM Sans", "Montserrat"]
+    },
+    "animations": {
+      "keyframes": [
+        "accordion-down",
+        "accordion-up",
+        "fade-in-up",
+        "fade-in",
+        "scale-in",
+        "slide-down",
+        "bounce-gentle"
+      ]
+    }
+  },
+  "routes": [
+    {"path": "/", "component": "Index"},
+    {"path": "/about", "component": "About"},
+    {"path": "/products", "component": "Products"},
+    {"path": "/projects", "component": "Projects"},
+    {"path": "/shop", "component": "Shop"},
+    {"path": "/technical", "component": "TechnicalResources"},
+    {"path": "/contact", "component": "Contact"},
+    {"path": "/services", "component": "ProfessionalServices"},
+    {"path": "/inspiration", "component": "Inspiration"},
+    {"path": "*", "component": "NotFound"}
+  ],
+  "homepage": {
+    "file": "src/pages/Index.tsx",
+    "composition": [
+      "SmoothScroll",
+      "Navigation",
+      "Hero",
+      "FeaturedCollections",
+      "ProductShowcase",
+      "TrendingCarousel",
+      "QualityCertifications",
+      "TechnicalSpecs",
+      "InspirationGallery",
+      "Testimonials",
+      "ContactShowroom",
+      "Footer"
+    ]
+  },
+  "components": {
+    "Navigation": {
+      "features": ["sticky header", "scroll-aware styling", "desktop navigation", "mobile menu"],
+      "accent": "text-luxury-gold",
+      "icons": "lucide-react",
+      "buttons": "ui/button"
+    },
+    "Hero": {
+      "features": ["parallax via scrollY", "full-screen image", "gradient overlay", "display typography"],
+      "animation": ["framer-motion", "fade-in-up", "scale-in", "bounce-gentle"]
+    }
+  },
+  "conventions": [
+    "Use @ alias for imports",
+    "Keep all colors in HSL",
+    "Reuse utility classes from index.css (gradients, shadows, transitions)",
+    "Use font-display for headlines and font-sans for body",
+    "Prefer existing keyframes for animations",
+    "Wrap page content in Tailwind container (centered, padding 2rem)"
+  ],
+  "assets": {
+    "path": "src/assets",
+    "files": [
+      "hero-luxury-bathroom.jpg",
+      "collection-concrete.jpg",
+      "collection-marble.jpg",
+      "collection-wood-look.jpg",
+      "inspiration-hotel-lobby.jpg",
+      "inspiration-kitchen.jpg",
+      "product-black-marble.jpg",
+      "product-stone-beige.jpg",
+      "showroom-main.jpg"
+    ]
+  }
+}
