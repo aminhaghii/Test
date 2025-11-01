@@ -42,7 +42,7 @@ backend/.env
 *.sw?
 
 # Test outputs
-test-reports.json
+backend/test-reports.json
 playwright-report
 test-results
 

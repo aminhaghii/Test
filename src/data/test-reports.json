@@ -1,0 +1,327 @@
+{
+  "30x30": {
+    "title": "Test Report - 30x30 cm",
+    "specifications": {
+      "Size": "30x30 cm",
+      "Thickness": "8.5 mm",
+      "Water Absorption": "3-6%",
+      "Surface": "Available in Matt, Trans, and Polished finishes",
+      "Body": "White Body",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1300 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Residential and commercial wall applications",
+      "Bathrooms and wet areas",
+      "Kitchen backsplashes",
+      "Swimming pool surrounds",
+      "Interior and exterior use"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Low water absorption ensures durability in wet conditions",
+      "Suitable for both interior and exterior applications",
+      "High breaking strength ensures longevity",
+      "Available in multiple surface finishes"
+    ]
+  },
+  "40x40": {
+    "title": "Test Report - 40x40 cm",
+    "specifications": {
+      "Size": "40x40 cm",
+      "Thickness": "13.5 mm",
+      "Water Absorption": "6-10%",
+      "Surface": "Available in Matt, Trans, and Polished finishes",
+      "Body": "White Body",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1400 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Residential and commercial floor applications",
+      "High-traffic areas",
+      "Retail spaces",
+      "Hospitality venues",
+      "Interior and exterior use"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Increased thickness provides enhanced durability",
+      "Suitable for both floor and wall applications",
+      "High breaking strength for commercial use",
+      "Available in multiple surface finishes"
+    ]
+  },
+  "60x60": {
+    "title": "Test Report - 60x60 cm",
+    "specifications": {
+      "Size": "60x60 cm",
+      "Thickness": "10.5 mm",
+      "Water Absorption": "3-6%",
+      "Surface": "Available in Matt, Trans, and Polished finishes",
+      "Body": "Porcelain (Polished) / White Body (Matt/Trans)",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1600 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Commercial and residential flooring",
+      "Shopping centers",
+      "Office buildings",
+      "Hotels and restaurants",
+      "Large format installations"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Large format tile reduces grout lines",
+      "Suitable for high-traffic commercial applications",
+      "Excellent for modern interior designs",
+      "Low water absorption for wet areas"
+    ]
+  },
+  "60x120": {
+    "title": "Test Report - 60x120 cm",
+    "specifications": {
+      "Size": "60x120 cm",
+      "Thickness": "10 mm",
+      "Water Absorption": "6-10%",
+      "Surface": "Available in Matt and Polished finishes",
+      "Body": "Porcelain (Polished) / White Body (Matt)",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 2000 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Modern residential and commercial flooring",
+      "Large open spaces",
+      "Modern architectural designs",
+      "Minimalist interior projects",
+      "Contemporary wall applications"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Extra-large format for seamless installations",
+      "Perfect for modern minimalist designs",
+      "High breaking strength for large tiles",
+      "Suitable for wall and floor applications"
+    ]
+  },
+  "30x90": {
+    "title": "Test Report - 30x90 cm",
+    "specifications": {
+      "Size": "30x90 cm",
+      "Thickness": "9.5 mm",
+      "Water Absorption": "11-18%",
+      "Surface": "Available in Matt and Trans finishes",
+      "Body": "White Body",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1200 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Good"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R12",
+      "Chemical Resistance": "Good resistance to common chemicals",
+      "Scratch Resistance": "Mohs scale: 5-6",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Vertical wall applications",
+      "Feature walls",
+      "Interior decorative purposes",
+      "Bathroom and kitchen walls",
+      "Residential projects"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Rectangular format ideal for vertical installation",
+      "Suitable for interior wall applications",
+      "Moderate water absorption rate",
+      "Perfect for decorative wall features"
+    ]
+  },
+  "30x60": {
+    "title": "Test Report - 30x60 cm",
+    "specifications": {
+      "Size": "30x60 cm",
+      "Thickness": "8.5 mm",
+      "Water Absorption": "11-18%",
+      "Surface": "Available in Matt and Trans finishes",
+      "Body": "White Body",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1200 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Good"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R12",
+      "Chemical Resistance": "Good resistance to common chemicals",
+      "Scratch Resistance": "Mohs scale: 5-6",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Vertical wall applications",
+      "Bathroom walls",
+      "Kitchen backsplashes",
+      "Interior decorative walls",
+      "Residential projects"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Ideal for vertical wall installations",
+      "Suitable for interior applications",
+      "Moderate water absorption rate",
+      "Perfect for bathroom and kitchen projects"
+    ]
+  },
+  "40x100": {
+    "title": "Test Report - 40x100 cm",
+    "specifications": {
+      "Size": "40x100 cm",
+      "Thickness": "10 mm",
+      "Water Absorption": "3-6%",
+      "Surface": "Available in Matt and Polished finishes",
+      "Body": "Porcelain (Polished) / White Body (Matt)",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 1800 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Modern wall applications",
+      "Large format decorative walls",
+      "Commercial spaces",
+      "Contemporary interior designs",
+      "Feature walls"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Extra-long format for seamless installations",
+      "Perfect for modern wall designs",
+      "High breaking strength",
+      "Suitable for commercial applications"
+    ]
+  },
+  "80x80": {
+    "title": "Test Report - 80x80 cm",
+    "specifications": {
+      "Size": "80x80 cm",
+      "Thickness": "10 mm",
+      "Water Absorption": "3-6%",
+      "Surface": "Available in Matt and Polished finishes",
+      "Body": "Porcelain (Polished) / White Body (Matt)",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 2200 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Commercial and residential flooring",
+      "Large commercial spaces",
+      "Premium residential projects",
+      "Hotel lobbies",
+      "Modern architectural designs"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Extra-large format for seamless installations",
+      "Perfect for luxurious commercial applications",
+      "Highest breaking strength",
+      "Ideal for premium projects"
+    ]
+  },
+  "100x100": {
+    "title": "Test Report - 100x100 cm",
+    "specifications": {
+      "Size": "100x100 cm",
+      "Thickness": "10 mm",
+      "Water Absorption": "3-6%",
+      "Surface": "Available in Polished finishes",
+      "Body": "Porcelain",
+      "PCE Standard": "Yes",
+      "ISO 13006": "Yes",
+      "Breaking Strength": "Min 2500 N",
+      "Frost Resistance": "Yes",
+      "Chemical Resistance": "Excellent"
+    },
+    "performanceData": {
+      "Fire Resistance": "Class A (Non-combustible)",
+      "Slip Resistance": "R10-R13",
+      "Chemical Resistance": "High resistance to acids and alkalis",
+      "Scratch Resistance": "Mohs scale: 6-7",
+      "Fade Resistance": "UV stable"
+    },
+    "applications": [
+      "Premium commercial flooring",
+      "Luxury residential projects",
+      "High-end commercial spaces",
+      "Architectural masterpieces",
+      "Minimalist large-scale installations"
+    ],
+    "technicalNotes": [
+      "Manufactured under strict ISO 13006 quality standards",
+      "Maximum format size for ultimate seamless effect",
+      "Highest breaking strength in the range",
+      "Premium commercial and residential applications",
+      "Exclusive luxury tile format"
+    ]
+  }
+}
+
