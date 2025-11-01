@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, FileText, BarChart3, TestTube, ClipboardList, Target, Building } from 'lucide-react';
-import testReports from '../../backend/test-reports.json';
+import testReports from '@/data/test-reports.json';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TestReportModalProps {
