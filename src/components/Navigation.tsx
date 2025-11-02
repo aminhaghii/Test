@@ -283,81 +283,96 @@ export function Navigation() {
                   >
                     <div className="bg-background/95 backdrop-blur-md border border-neutral-stone/40 shadow-2xl rounded-xl p-3 min-w-[360px] scale-100 opacity-100 ring-1 ring-luxury-gold/10">
                       <div className="grid grid-cols-2 gap-2">
-                        <Link 
-                          to="/about#overview" 
-                          onClick={(e) => {
+                        <button
+                          onClick={() => {
                             setIsAboutOpen(false);
-                            setTimeout(() => {
+                            if (location.pathname !== '/about') {
+                              navigate('/about');
+                              window.location.hash = 'overview';
+                            } else {
+                              window.location.hash = 'overview';
                               const element = document.getElementById('overview');
                               if (element) {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                            }, 100);
+                            }
                           }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
                         >
                           {t('about.overview')}
-                        </Link>
-                        <Link 
-                          to="/about#story" 
-                          onClick={(e) => {
+                        </button>
+                        <button
+                          onClick={() => {
                             setIsAboutOpen(false);
-                            setTimeout(() => {
+                            if (location.pathname !== '/about') {
+                              navigate('/about');
+                              window.location.hash = 'story';
+                            } else {
+                              window.location.hash = 'story';
                               const element = document.getElementById('story');
                               if (element) {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                            }, 100);
+                            }
                           }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
                         >
                           {t('about.story')}
-                        </Link>
-                        <Link 
-                          to="/about#milestones" 
-                          onClick={(e) => {
+                        </button>
+                        <button
+                          onClick={() => {
                             setIsAboutOpen(false);
-                            setTimeout(() => {
+                            if (location.pathname !== '/about') {
+                              navigate('/about');
+                              window.location.hash = 'milestones';
+                            } else {
+                              window.location.hash = 'milestones';
                               const element = document.getElementById('milestones');
                               if (element) {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                            }, 100);
+                            }
                           }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
                         >
                           {t('about.milestones')}
-                        </Link>
-                        <Link 
-                          to="/about#capabilities" 
-                          onClick={(e) => {
+                        </button>
+                        <button
+                          onClick={() => {
                             setIsAboutOpen(false);
-                            setTimeout(() => {
+                            if (location.pathname !== '/about') {
+                              navigate('/about');
+                              window.location.hash = 'capabilities';
+                            } else {
+                              window.location.hash = 'capabilities';
                               const element = document.getElementById('capabilities');
                               if (element) {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                            }, 100);
+                            }
                           }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
                         >
                           {t('about.capabilities')}
-                        </Link>
-                        <Link 
-                          to="/about#certifications" 
-                          onClick={(e) => {
+                        </button>
+                        <button
+                          onClick={() => {
                             setIsAboutOpen(false);
-                            setTimeout(() => {
+                            if (location.pathname !== '/about') {
+                              navigate('/about');
+                              window.location.hash = 'certifications';
+                            } else {
+                              window.location.hash = 'certifications';
                               const element = document.getElementById('certifications');
                               if (element) {
                                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                            }, 100);
+                            }
                           }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
                         >
                           {t('about.certifications')}
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -498,96 +513,114 @@ export function Navigation() {
               <div className="mt-3">
                 <div className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/70">{t('nav.about')}</div>
                 <div className="grid grid-cols-2 gap-2 px-2">
-                  <Link 
-                    to="/about#overview" 
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'overview';
+                      } else {
+                        window.location.hash = 'overview';
                         const element = document.getElementById('overview');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.overview')}
-                  </Link>
-                  <Link 
-                    to="/about#story" 
+                  </button>
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'story';
+                      } else {
+                        window.location.hash = 'story';
                         const element = document.getElementById('story');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.story')}
-                  </Link>
-                  <Link 
-                    to="/about#milestones" 
+                  </button>
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'milestones';
+                      } else {
+                        window.location.hash = 'milestones';
                         const element = document.getElementById('milestones');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.milestones')}
-                  </Link>
-                  <Link 
-                    to="/about#capabilities" 
+                  </button>
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'capabilities';
+                      } else {
+                        window.location.hash = 'capabilities';
                         const element = document.getElementById('capabilities');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.capabilities')}
-                  </Link>
-                  <Link 
-                    to="/about#certifications" 
+                  </button>
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'certifications';
+                      } else {
+                        window.location.hash = 'certifications';
                         const element = document.getElementById('certifications');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.certifications')}
-                  </Link>
-                  <Link 
-                    to="/about#downloads" 
+                  </button>
+                  <button
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      setTimeout(() => {
+                      if (location.pathname !== '/about') {
+                        navigate('/about');
+                        window.location.hash = 'downloads';
+                      } else {
+                        window.location.hash = 'downloads';
                         const element = document.getElementById('downloads');
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                      }, 100);
+                      }
                     }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
                   >
                     {t('about.downloads')}
-                  </Link>
+                  </button>
                 </div>
                 <div className="px-4 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <a href="/about/export" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/15 transition-colors">{t('about.exportServices')}</a>
