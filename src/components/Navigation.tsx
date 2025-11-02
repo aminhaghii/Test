@@ -283,11 +283,81 @@ export function Navigation() {
                   >
                     <div className="bg-background/95 backdrop-blur-md border border-neutral-stone/40 shadow-2xl rounded-xl p-3 min-w-[360px] scale-100 opacity-100 ring-1 ring-luxury-gold/10">
                       <div className="grid grid-cols-2 gap-2">
-                        <a href="/about#overview" onClick={()=>setIsAboutOpen(false)} className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40">{t('about.overview')}</a>
-                        <a href="/about#story" onClick={()=>setIsAboutOpen(false)} className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40">{t('about.story')}</a>
-                        <a href="/about#milestones" onClick={()=>setIsAboutOpen(false)} className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40">{t('about.milestones')}</a>
-                        <a href="/about#capabilities" onClick={()=>setIsAboutOpen(false)} className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40">{t('about.capabilities')}</a>
-                        <a href="/about#certifications" onClick={()=>setIsAboutOpen(false)} className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40">{t('about.certifications')}</a>
+                        <Link 
+                          to="/about#overview" 
+                          onClick={(e) => {
+                            setIsAboutOpen(false);
+                            setTimeout(() => {
+                              const element = document.getElementById('overview');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }}
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                        >
+                          {t('about.overview')}
+                        </Link>
+                        <Link 
+                          to="/about#story" 
+                          onClick={(e) => {
+                            setIsAboutOpen(false);
+                            setTimeout(() => {
+                              const element = document.getElementById('story');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }}
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                        >
+                          {t('about.story')}
+                        </Link>
+                        <Link 
+                          to="/about#milestones" 
+                          onClick={(e) => {
+                            setIsAboutOpen(false);
+                            setTimeout(() => {
+                              const element = document.getElementById('milestones');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }}
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                        >
+                          {t('about.milestones')}
+                        </Link>
+                        <Link 
+                          to="/about#capabilities" 
+                          onClick={(e) => {
+                            setIsAboutOpen(false);
+                            setTimeout(() => {
+                              const element = document.getElementById('capabilities');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }}
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                        >
+                          {t('about.capabilities')}
+                        </Link>
+                        <Link 
+                          to="/about#certifications" 
+                          onClick={(e) => {
+                            setIsAboutOpen(false);
+                            setTimeout(() => {
+                              const element = document.getElementById('certifications');
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }}
+                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40"
+                        >
+                          {t('about.certifications')}
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -428,12 +498,96 @@ export function Navigation() {
               <div className="mt-3">
                 <div className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/70">{t('nav.about')}</div>
                 <div className="grid grid-cols-2 gap-2 px-2">
-                  <a href="/about#overview" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.overview')}</a>
-                  <a href="/about#story" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.story')}</a>
-                  <a href="/about#milestones" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.milestones')}</a>
-                  <a href="/about#capabilities" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.capabilities')}</a>
-                  <a href="/about#certifications" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.certifications')}</a>
-                  <a href="/about#downloads" onClick={() => setIsMobileMenuOpen(false)} className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white">{t('about.downloads')}</a>
+                  <Link 
+                    to="/about#overview" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('overview');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.overview')}
+                  </Link>
+                  <Link 
+                    to="/about#story" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('story');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.story')}
+                  </Link>
+                  <Link 
+                    to="/about#milestones" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('milestones');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.milestones')}
+                  </Link>
+                  <Link 
+                    to="/about#capabilities" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('capabilities');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.capabilities')}
+                  </Link>
+                  <Link 
+                    to="/about#certifications" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('certifications');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.certifications')}
+                  </Link>
+                  <Link 
+                    to="/about#downloads" 
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setTimeout(() => {
+                        const element = document.getElementById('downloads');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white"
+                  >
+                    {t('about.downloads')}
+                  </Link>
                 </div>
                 <div className="px-4 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <a href="/about/export" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/15 transition-colors">{t('about.exportServices')}</a>

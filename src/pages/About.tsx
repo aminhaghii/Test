@@ -4,8 +4,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Award, CheckCircle2, Download, ZoomIn, Wrench, Globe, Palette, Shield, Cog, Headphones, Package, Lightbulb, Factory, TestTube, Medal, HandHeart, Heart, Users, TrendingUp, Building2, FileText, Leaf, ShieldCheck, Rocket, Globe2, ClipboardCheck, Phone, Box, Flame, Microscope } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,9 +20,26 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const About = () => {
   const { t } = useLanguage();
+  const location = useLocation();
   const { elementRef: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { elementRef: storyRef, isVisible: storyVisible } = useScrollReveal();
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
+
+  // Handle hash navigation on mount and location change
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      // Remove the # from hash
+      const elementId = hash.substring(1);
+      // Wait for the page to render
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
 
   const certificates = [
     {
@@ -126,12 +143,84 @@ const About = () => {
       {/* Mobile In-Page TOC for About sections */}
       <nav className="lg:hidden sticky top-16 z-40 bg-background/95 backdrop-blur-md border-y border-neutral-stone/30">
         <div className="container mx-auto px-4 py-3 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-luxury-gold scrollbar-track-luxury-gold/30">
-          <a href="#overview" className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.overview')}</a>
-          <a href="#story" className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.story')}</a>
-          <a href="#milestones" className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.milestones')}</a>
-          <a href="#capabilities" className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.capabilities')}</a>
-          <a href="#certifications" className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.certifications')}</a>
-          <a href="#downloads" className="inline-block px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal">{t('about.downloads')}</a>
+          <a 
+            href="#overview" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('overview');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.overview')}
+          </a>
+          <a 
+            href="#story" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('story');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.story')}
+          </a>
+          <a 
+            href="#milestones" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('milestones');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.milestones')}
+          </a>
+          <a 
+            href="#capabilities" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('capabilities');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.capabilities')}
+          </a>
+          <a 
+            href="#certifications" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('certifications');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block mr-3 px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.certifications')}
+          </a>
+          <a 
+            href="#downloads" 
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById('downloads');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}
+            className="inline-block px-3 py-1.5 rounded-full border border-neutral-stone/40 text-sm text-neutral-charcoal hover:border-luxury-gold hover:text-luxury-gold transition-colors"
+          >
+            {t('about.downloads')}
+          </a>
         </div>
       </nav>
 
