@@ -155,12 +155,12 @@
 
 .staggered-menu-panel {
   position: fixed;
-  top: 110px; /* Start below header with extra spacing */
+  top: 90px; /* Start below header with less spacing */
   right: 0;
   width: 50vw; /* تا وسط صفحه */
   max-width: 600px;
   min-width: 300px;
-  height: calc(100vh - 110px); /* Full height minus header and spacing */
+  height: calc(100vh - 90px); /* Full height minus header and spacing */
   background: white;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -178,8 +178,8 @@
 
 @media (min-width: 1024px) {
   .staggered-menu-panel {
-    top: 130px; /* lg:h-24 = 96px + extra spacing */
-    height: calc(100vh - 130px);
+    top: 100px; /* lg:h-24 = 96px + small spacing */
+    height: calc(100vh - 100px);
   }
 }
 
@@ -191,7 +191,7 @@
 
 .sm-prelayers {
   position: fixed;
-  top: 110px; /* Start below header with extra spacing */
+  top: 90px; /* Start below header with less spacing */
   right: 0;
   bottom: 0;
   width: 50vw; /* تا وسط صفحه */
@@ -205,7 +205,7 @@
 
 @media (min-width: 1024px) {
   .sm-prelayers {
-    top: 130px; /* lg:h-24 = 96px + extra spacing */
+    top: 100px; /* lg:h-24 = 96px + small spacing */
   }
 }
 
