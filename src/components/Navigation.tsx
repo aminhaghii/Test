@@ -309,21 +309,20 @@ export function Navigation() {
                   {t('nav.products')}
                 </button>
                 {isProductsOpen && (
-                  <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-md z-[99]">
-                    <div className="container mx-auto px-6 lg:px-20 py-16 h-full flex items-center">
+                  <div className="fixed inset-x-0 top-20 lg:top-24 bottom-0 bg-white z-[99] shadow-2xl">
+                    <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
                         {/* All Products */}
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                          className="group relative h-96 bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
                         >
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
-                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
+                            <h3 className="text-3xl font-bold mb-3 text-neutral-charcoal group-hover:text-luxury-gold transition-colors">
                               {t('nav.allProducts') || 'All Products'}
                             </h3>
-                            <p className="text-white/80 text-lg mb-6">
+                            <p className="text-neutral-600 text-lg mb-6">
                               {t('products.allProductsDesc') || 'Explore our complete collection of premium ceramic tiles'}
                             </p>
                             <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
@@ -336,14 +335,13 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=dimension');
                           }}
-                          className="group relative h-96 bg-gradient-to-br from-stone-700 to-stone-800 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                          className="group relative h-96 bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
                         >
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
-                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
+                            <h3 className="text-3xl font-bold mb-3 text-neutral-charcoal group-hover:text-luxury-gold transition-colors">
                               {t('products.byDimension') || 'By Dimension'}
                             </h3>
-                            <p className="text-white/80 text-lg mb-6">
+                            <p className="text-neutral-600 text-lg mb-6">
                               {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
                             </p>
                             <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
@@ -356,14 +354,13 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=material');
                           }}
-                          className="group relative h-96 bg-gradient-to-br from-stone-600 to-stone-700 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                          className="group relative h-96 bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
                         >
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
-                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
+                            <h3 className="text-3xl font-bold mb-3 text-neutral-charcoal group-hover:text-luxury-gold transition-colors">
                               {t('products.byMaterial') || 'By Material'}
                             </h3>
-                            <p className="text-white/80 text-lg mb-6">
+                            <p className="text-neutral-600 text-lg mb-6">
                               {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
                             </p>
                             <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
