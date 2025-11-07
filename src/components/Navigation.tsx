@@ -237,16 +237,7 @@ export function Navigation() {
             </Link>
 
             {/* Desktop Navigation - minimal right-side links */}
-            <div className="hidden lg:flex items-center justify-end gap-4">
-              <Link
-                to="/collections"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isScrolled ? 'text-neutral-charcoal hover:bg-neutral-100' : 'text-neutral-charcoal hover:bg-neutral-100/70'
-                }`}
-              >
-                {t('collections.featured') || 'Collections'}
-              </Link>
-            </div>
+            <div className="hidden lg:flex items-center justify-end" />
 
             {/* Right Side - Products Dropdown, Hamburger Menu and Mobile Button */}
             <div className="flex items-center gap-6">
