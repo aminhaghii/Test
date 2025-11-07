@@ -657,14 +657,28 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         </Link>
                       </li>
                       <li className="sm-panel-itemWrap">
-                        <Link className="sm-panel-item" to="/products" onClick={toggleMenu} aria-label="By Dimension">
+                        <button
+                          className="sm-panel-item"
+                          onClick={() => {
+                            navigate('/products?openFilter=dimension');
+                            toggleMenu();
+                          }}
+                          aria-label="By Dimension"
+                        >
                           <span className="sm-panel-itemLabel">By Dimension</span>
-                        </Link>
+                        </button>
                       </li>
                       <li className="sm-panel-itemWrap">
-                        <Link className="sm-panel-item" to="/products" onClick={toggleMenu} aria-label="By Material">
+                        <button
+                          className="sm-panel-item"
+                          onClick={() => {
+                            navigate('/products?openFilter=material');
+                            toggleMenu();
+                          }}
+                          aria-label="By Material"
+                        >
                           <span className="sm-panel-itemLabel">By Material</span>
-                        </Link>
+                        </button>
                       </li>
                     </ul>
                   )}

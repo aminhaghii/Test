@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ProductDetailModal from "@/components/ProductDetailModal";
 import { Filter, Grid, Search, X } from 'lucide-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { productService, Product } from '@/services/productServiceBackend';
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -36,6 +36,7 @@ const Products = () => {
   };
   // Get dimension from URL params
   const { dimension } = useParams<{ dimension?: string }>();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Filter state - initialize with dimension from URL if present
   const [filters, setFilters] = useState<FilterState>({
@@ -77,6 +78,23 @@ const Products = () => {
       }));
     }
   }, [dimension]);
+
+  // Open sidebar and scroll to filter section when openFilter query param is present
+  useEffect(() => {
+    const openFilter = searchParams.get('openFilter');
+    if (openFilter) {
+      setIsSidebarOpen(true);
+      // Scroll to filter section after a short delay
+      setTimeout(() => {
+        const filterSection = document.getElementById(`filter-${openFilter}`);
+        if (filterSection) {
+          filterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Remove the query param after opening
+          setSearchParams({});
+        }
+      }, 300);
+    }
+  }, [searchParams, setSearchParams]);
 
   // Auto-hide header functionality
   useEffect(() => {
@@ -312,7 +330,7 @@ const Products = () => {
               </div>
 
               {/* Dimensions Filter */}
-              <div>
+              <div id="filter-dimension" className="scroll-mt-4">
                 <h3 className="text-sm font-semibold text-stone-700 mb-3">{t('products.dimensions')}</h3>
                 <div className="grid grid-cols-2 gap-2">
                   {filterOptions.dimensions.map(dimension => (
@@ -348,7 +366,7 @@ const Products = () => {
               </div>
 
               {/* Body Type Filter */}
-              <div>
+              <div id="filter-material" className="scroll-mt-4">
                 <h3 className="text-sm font-semibold text-stone-700 mb-3">{t('products.material')}</h3>
                 <div className="space-y-2">
                   {filterOptions.bodyTypes.map(bodyType => (
