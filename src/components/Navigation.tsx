@@ -2,30 +2,21 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Square, Maximize2, LogIn, LogOut, User, Boxes, LayoutGrid } from "lucide-react";
-import FlowingMenu from "./FlowingMenu";
-import kitchenImg from "@/assets/inspiration-kitchen.jpg";
-import bathroomImg from "@/assets/hero-luxury-bathroom.jpg";
-import interiorsImg from "@/assets/inspiration-hotel-lobby.jpg";
 import { useAuth } from "@/contexts/BackendAuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
 import toast from "react-hot-toast";
-
-const wallTilesImg = "/images/wall-tiles.jpg";
-const floorTilesImg = "/images/floor-tiles.webp";
+import StaggeredMenu from "./StaggeredMenu";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
-  const aboutTimerRef = useRef<number | null>(null);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { t } = useLanguage();
+  const { t, currentLanguage, setLanguage } = useLanguage();
 
   const location = useLocation();
 
@@ -48,26 +39,27 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close overlays on outside click
+  // Close mobile menu and language dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (isProductsOpen && menuRef.current && !menuRef.current.contains(target)) {
-        setIsProductsOpen(false);
+      if (isMobileMenuOpen && mobileDrawerRef.current && !mobileDrawerRef.current.contains(target)) {
+        setIsMobileMenuOpen(false);
       }
-      if (isAboutOpen && aboutRef.current && !aboutRef.current.contains(target)) {
-        setIsAboutOpen(false);
+      // close language dropdown if clicked outside
+      if (isLangOpen && langRef.current && !langRef.current.contains(target)) {
+        setIsLangOpen(false);
       }
     };
 
-    if (isProductsOpen || isAboutOpen || isMobileMenuOpen) {
+    if (isMobileMenuOpen || isLangOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isProductsOpen, isAboutOpen, isMobileMenuOpen]);
+  }, [isMobileMenuOpen, isLangOpen]);
 
   // Lock body scroll and trap focus when mobile menu is open
   useEffect(() => {
@@ -122,42 +114,75 @@ export function Navigation() {
     };
   }, [isMobileMenuOpen]);
 
-  // ESC to close
+  // ESC to close mobile menu
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        if (isProductsOpen) setIsProductsOpen(false);
-        if (isAboutOpen) setIsAboutOpen(false);
+        if (isMobileMenuOpen) setIsMobileMenuOpen(false);
       }
     };
 
-    if (isProductsOpen || isAboutOpen) {
+    if (isMobileMenuOpen) {
       document.addEventListener('keydown', handleEscKey);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscKey);
     };
-  }, [isProductsOpen, isAboutOpen]);
+  }, [isMobileMenuOpen]);
 
-  const clearAboutTimer = () => {
-    if (aboutTimerRef.current) {
-      window.clearTimeout(aboutTimerRef.current);
-      aboutTimerRef.current = null;
+  // Build menu items for StaggeredMenu
+  const buildMenuItems = () => {
+    const items: { label: string; link: string; ariaLabel: string; onClick?: () => void }[] = [
+      { label: t('nav.products'), link: "#__products", ariaLabel: t('nav.products') },
+      { label: t('nav.inspiration'), link: "/inspiration", ariaLabel: t('nav.inspiration') },
+      { label: t('nav.catalogues'), link: "/catalogues", ariaLabel: t('nav.catalogues') },
+      { label: t('nav.about'), link: "/about", ariaLabel: t('nav.about') },
+      { label: t('about.overview'), link: "/about#overview", ariaLabel: t('about.overview') },
+      { label: t('about.story'), link: "/about#story", ariaLabel: t('about.story') },
+      { label: t('about.milestones'), link: "/about#milestones", ariaLabel: t('about.milestones') },
+      { label: t('about.capabilities'), link: "/about#capabilities", ariaLabel: t('about.capabilities') },
+      { label: t('about.certifications'), link: "/about#certifications", ariaLabel: t('about.certifications') },
+      { label: t('about.exportServices'), link: "/about/export", ariaLabel: t('about.exportServices') },
+      { label: t('about.smartCombinations'), link: "/about/combination", ariaLabel: t('about.smartCombinations') },
+      { label: t('nav.contact'), link: "/contact", ariaLabel: t('nav.contact') },
+    ];
+
+    // Language options moved to header (compact)
+
+    // Add login/admin/logout
+    if (user) {
+      if (user.role === 'admin') {
+        items.push({
+          label: t('nav.admin'),
+          link: "/admin",
+          ariaLabel: t('nav.goToAdmin')
+        });
+      }
+      items.push({
+        label: t('common.logout'),
+        link: "#",
+        ariaLabel: t('common.logout'),
+        onClick: handleLogout
+      });
+    } else {
+      items.push({
+        label: t('common.login'),
+        link: "/login",
+        ariaLabel: t('common.login')
+      });
     }
+
+    return items;
   };
 
-  const startAboutCloseDelay = () => {
-    clearAboutTimer();
-    aboutTimerRef.current = window.setTimeout(() => setIsAboutOpen(false), 150);
-  };
-
-  const navItems = [
+  // Simple mobile items (no submenu)
+  const mobileNavItems = [
     { label: t('nav.products'), href: "/products" },
     { label: t('nav.inspiration'), href: "/inspiration" },
-    { label: t('nav.contact'), href: "/contact" },
     { label: t('nav.catalogues'), href: "/catalogues" },
     { label: t('nav.about'), href: "/about" },
+    { label: t('nav.contact'), href: "/contact" },
   ];
 
   return (
@@ -184,11 +209,59 @@ export function Navigation() {
                 </span>
                 <span className="hidden md:block"></span>
               </div>
-              <div className="flex items-center gap-5 text-white/80">
+              <div className="flex items-center gap-2 text-white/80">
                 <span className="hidden md:block">|</span>
                 <a href="tel:021-88218520" className="hidden md:block hover:text-luxury-gold transition-smooth">
                   021-88218520
                 </a>
+                {/* Language dropdown (top bar, right) */}
+                <div ref={langRef} className="relative ml-2 z-[100]">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsLangOpen(v=>!v);
+                    }}
+                    aria-haspopup="listbox"
+                    aria-expanded={isLangOpen}
+                    className="px-2.5 py-1.5 rounded-md text-[11px] font-semibold border border-white/40 text-white hover:bg-white/10 transition-colors cursor-pointer pointer-events-auto"
+                    title="Select language"
+                  >
+                    {currentLanguage?.toUpperCase() || 'EN'}
+                  </button>
+                  {isLangOpen && (
+                    <ul
+                      role="listbox"
+                      className="absolute right-0 mt-2 w-36 rounded-md border border-white/20 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {[
+                        { code: 'en', label: 'EN — English' },
+                        { code: 'fa', label: 'FA — فارسی' },
+                        { code: 'ar', label: 'AR — العربية' },
+                        { code: 'es', label: 'ES — Español' },
+                        { code: 'it', label: 'IT — Italiano' },
+                      ].map(lang => (
+                        <li 
+                          key={lang.code} 
+                          role="option" 
+                          aria-selected={currentLanguage===lang.code}
+                          className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-50' : ''}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setLanguage(lang.code as any);
+                            setIsLangOpen(false);
+                          }}
+                        >
+                          {lang.label}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                {/* Hamburger menu - removed from top bar */}
               </div>
             </div>
           </div>
@@ -197,266 +270,52 @@ export function Navigation() {
         {/* Main Navigation */}
         <div className="container mx-auto px-6 lg:px-20">
           <div className="flex items-center justify-between h-20 lg:h-24 relative">
-            {/* Logo */}
-            <Link to="/" className="flex items-center z-50 group">
-              <span
-                className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 ${
-                  isScrolled ? "text-neutral-charcoal" : "text-white"
-                }`}
-                style={{ letterSpacing: "-0.04em" }}
-              >
-                Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
-              </span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-10">
-              {navItems.filter(n=>n.label !== t('nav.about')).map((item) => (
-                <button
-                  key={item.href}
-                  type="button"
-                  onMouseEnter={() => {
-                    if (item.href === '/products') {
-                      setIsAboutOpen(false);
-                    }
-                  }}
-                  onMouseDown={(e) => {
-                    if (item.href === "/products") {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsProductsOpen(true);
-                      setIsAboutOpen(false);
-                    }
-                  }}
-                  onClick={(e) => {
-                    if (item.href === "/products") {
-                      e.preventDefault();
-                      setIsProductsOpen(true);
-                      setIsAboutOpen(false);
-                    } else {
-                      navigate(item.href);
-                    }
-                  }}
-                  aria-expanded={item.href === '/products' ? isProductsOpen : undefined}
-                  className={`text-[15px] font-medium tracking-wide relative group py-2 transition-all duration-300 ${
-                    isScrolled 
-                      ? "text-neutral-graphite hover:text-luxury-gold" 
-                      : "text-white/95 hover:text-luxury-gold"
+            {/* Logo and Hamburger Menu */}
+            <div className="flex items-center gap-6">
+              {/* Logo */}
+              <Link to="/" className="flex items-center z-50 group">
+                <span
+                  className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 ${
+                    isScrolled ? "text-neutral-charcoal" : "text-white"
                   }`}
+                  style={{ letterSpacing: "-0.04em" }}
                 >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-luxury-gold to-luxury-bronze transition-all duration-400 group-hover:w-full rounded-full" />
-                  <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-luxury-gold/30 blur-sm transition-all duration-400 group-hover:w-full" />
-                </button>
-              ))}
-
-              {/* About with dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => { clearAboutTimer(); setIsAboutOpen(true); setIsProductsOpen(false); }}
-                onMouseLeave={startAboutCloseDelay}
-              >
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    clearAboutTimer();
-                    setIsAboutOpen((v)=>!v);
-                    setIsProductsOpen(false);
-                  }}
-                  className={`text-[15px] font-medium tracking-wide relative group py-2 transition-all duration-300 ${
-                    isScrolled 
-                      ? "text-neutral-graphite hover:text-luxury-gold" 
-                      : "text-white/95 hover:text-luxury-gold"
-                  }`}
-                >
-                  {t('nav.about')}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-gradient-to-r from-luxury-gold to-luxury-bronze transition-all duration-400 group-hover:w-full rounded-full" />
-                  <span className="absolute -bottom-1 left-0 w-0 h-[3px] bg-luxury-gold/30 blur-sm transition-all duration-400 group-hover:w-full" />
-                </button>
-
-                {isAboutOpen && (
-                  <div
-                    ref={aboutRef}
-                    className={`absolute left-0 top-full mt-0 origin-top-left transform transition-all duration-150 ease-out`}
-                    onMouseEnter={clearAboutTimer}
-                    onMouseLeave={startAboutCloseDelay}
-                  >
-                    <div className="bg-background/95 backdrop-blur-md border border-neutral-stone/40 shadow-2xl rounded-xl p-3 min-w-[360px] scale-100 opacity-100 ring-1 ring-luxury-gold/10">
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          onClick={() => {
-                            setIsAboutOpen(false);
-                            if (location.pathname !== '/about') {
-                              navigate('/about');
-                              window.location.hash = 'overview';
-                            } else {
-                              window.location.hash = 'overview';
-                              const element = document.getElementById('overview');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              }
-                            }
-                          }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
-                        >
-                          {t('about.overview')}
-                        </button>
-                        <button
-                          onClick={() => {
-                            setIsAboutOpen(false);
-                            if (location.pathname !== '/about') {
-                              navigate('/about');
-                              window.location.hash = 'story';
-                            } else {
-                              window.location.hash = 'story';
-                              const element = document.getElementById('story');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              }
-                            }
-                          }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
-                        >
-                          {t('about.story')}
-                        </button>
-                        <button
-                          onClick={() => {
-                            setIsAboutOpen(false);
-                            if (location.pathname !== '/about') {
-                              navigate('/about');
-                              window.location.hash = 'milestones';
-                            } else {
-                              window.location.hash = 'milestones';
-                              const element = document.getElementById('milestones');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              }
-                            }
-                          }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
-                        >
-                          {t('about.milestones')}
-                        </button>
-                        <button
-                          onClick={() => {
-                            setIsAboutOpen(false);
-                            if (location.pathname !== '/about') {
-                              navigate('/about');
-                              window.location.hash = 'capabilities';
-                            } else {
-                              window.location.hash = 'capabilities';
-                              const element = document.getElementById('capabilities');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              }
-                            }
-                          }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
-                        >
-                          {t('about.capabilities')}
-                        </button>
-                        <button
-                          onClick={() => {
-                            setIsAboutOpen(false);
-                            if (location.pathname !== '/about') {
-                              navigate('/about');
-                              window.location.hash = 'certifications';
-                            } else {
-                              window.location.hash = 'certifications';
-                              const element = document.getElementById('certifications');
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                              }
-                            }
-                          }}
-                          className="px-3 py-2 rounded-lg transition-all duration-200 hover:bg-gradient-to-r hover:from-luxury-gold/15 hover:to-luxury-bronze/15 hover:text-neutral-charcoal hover:border hover:border-luxury-gold/40 text-left"
-                        >
-                          {t('about.certifications')}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-            </nav>
-
-            {/* Right Actions */}
-            <div className="hidden lg:flex items-center gap-4">
-              <button className={`p-2.5 rounded-full transition-all duration-300 group hover:scale-110 ${
-                isScrolled 
-                  ? "text-neutral-graphite hover:bg-luxury-gold/10" 
-                  : "text-white/90 hover:bg-white/10"
-              }`}>
-                <Search className="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" />
-              </button>
-              
-              <LanguageSelector />
-              
-              <Link to="/contact">
-                <Button
-                  className={`px-6 py-5 rounded-full font-semibold text-sm tracking-widest transition-all duration-400 shadow-lg hover:shadow-2xl hover:scale-105 ${
-                    isScrolled
-                      ? "bg-luxury-gold text-neutral-charcoal hover:bg-luxury-bronze border-2 border-luxury-gold hover:border-luxury-bronze"
-                      : "bg-luxury-gold/95 text-neutral-charcoal hover:bg-luxury-gold backdrop-blur-sm border-2 border-luxury-gold"
-                  }`}
-                >
-                  {t('nav.contact').toUpperCase()}
-                </Button>
+                  Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
+                </span>
               </Link>
 
-              {user ? (
-                <div className="flex items-center gap-3">
-                  {/* User/Admin Display */}
-                  <div className="flex items-center gap-2 text-sm">
-                    {user.role === 'admin' ? (
-                      <button
-                        onClick={() => navigate('/admin')}
-                        className="px-3 py-1.5 rounded-full bg-transparent border border-white/30 text-white text-xs font-semibold hover:bg-white/10 transition-colors cursor-pointer"
-                        title={t('nav.goToAdmin')}
-                      >
-                        {t('nav.admin')}
-                      </button>
-                    ) : (
-                      <>
-                        <User className="w-4 h-4 text-luxury-gold" />
-                        <span className="text-neutral-charcoal font-medium">
-                          {user.name || user.email}
-                        </span>
-                      </>
-                    )}
-                  </div>
+              {/* Decorative Hash Line - thinner but longer */}
+              <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
+                isScrolled ? "bg-neutral-300/40" : "bg-white/30"
+              }`} />
 
-                  {/* Logout Button */}
-                  <Button
-                    onClick={handleLogout}
-                    className={`px-6 py-5 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 ${
-                      isScrolled
-                        ? "bg-transparent text-neutral-charcoal border border-neutral-300 hover:bg-neutral-100"
-                        : "bg-transparent text-white border border-white/60 hover:bg-white/10"
-                    }`}
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    {t('common.logout').toUpperCase()}
-                  </Button>
-                </div>
-              ) : (
-                <Link to="/login">
-                  <Button
-                    className={`px-6 py-5 rounded-full font-semibold text-sm tracking-wide transition-all duration-400 shadow-lg hover:shadow-xl hover:scale-105 ${
-                      isScrolled
-                        ? "bg-gradient-to-r from-luxury-bronze to-luxury-brass text-white hover:from-luxury-brass hover:to-luxury-gold"
-                        : "bg-gradient-to-r from-luxury-gold to-luxury-bronze text-neutral-charcoal hover:from-luxury-brass hover:to-luxury-gold backdrop-blur-sm"
-                    }`}
-                  >
-                    <LogIn className="w-4 h-4 mr-2" />
-                    {t('common.login').toUpperCase()}
-                  </Button>
-                </Link>
-              )}
+              {/* Hamburger Menu - StaggeredMenu */}
+              <div className="relative z-[101]">
+                <StaggeredMenu
+                  position="right"
+                  colors={['#1e1e22', '#35353c']}
+                  items={buildMenuItems()}
+                  displaySocials={false}
+                  displayItemNumbering={true}
+                  menuButtonColor={isScrolled ? '#1e1e22' : '#fff'}
+                  openMenuButtonColor={isScrolled ? '#1e1e22' : '#fff'}
+                  accentColor="#D4AF37"
+                  changeMenuColorOnOpen={false}
+                  isFixed={false}
+                  inline={true}
+                  onMenuOpen={() => { 
+                    setIsMobileMenuOpen(false);
+                    setIsLangOpen(false);
+                  }}
+                  onMenuClose={() => {}}
+                />
+              </div>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Desktop Navigation - empty */}
+            <div className="hidden lg:flex items-center justify-end" />
+
+            {/* Mobile Menu Button - fallback for small screens */}
             <button
               aria-label="Toggle navigation"
               className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
@@ -464,8 +323,6 @@ export function Navigation() {
               }`}
               onClick={() => {
                 setIsMobileMenuOpen((v)=>!v);
-                setIsProductsOpen(false);
-                setIsAboutOpen(false);
               }}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -500,7 +357,7 @@ export function Navigation() {
             className="absolute top-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-xl rounded-b-2xl p-4 pt-[calc(80px+env(safe-area-inset-top))] pb-[env(safe-area-inset-bottom)]"
           >
             <nav className="space-y-2" aria-label="Primary">
-              {navItems.filter(n=>n.href !== '/about').map((item) => (
+              {mobileNavItems.map((item) => (
                 <button
                   key={item.href}
                   className="w-full text-left px-4 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition-colors text-white"
@@ -659,116 +516,6 @@ export function Navigation() {
           </div>
         </div>
       )}
-      {/* Products Flowing Menu Overlay (moved outside header) */}
-      {isProductsOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/50">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setIsProductsOpen(false)}
-          />
-          {/* Content wrapper */}
-          <div className="relative w-full max-w-5xl mx-6">
-            {/* Panel */}
-            <div ref={menuRef} className="w-full max-h-[85vh] bg-black/90 backdrop-blur-md rounded-3xl overflow-y-auto overflow-x-hidden border border-neutral-stone/40 shadow-2xl p-6 md:p-8">
-              {/* FlowingMenu */}
-              <FlowingMenu
-                items={[
-                  {
-                    link: "/products",
-                    text: t('nav.allProducts'),
-                    image: floorTilesImg,
-                  },
-                  { 
-                    link: "/products", 
-                    text: t('nav.byDimension'), 
-                    image: wallTilesImg,
-                    subsections: [
-                      {
-                        title: "30x30",
-                        items: [
-                          { label: "30x30 cm", icon: <LayoutGrid size={16} />, link: "/products/dimension/30x30" },
-                        ],
-                      },
-                      {
-                        title: "30x90",
-                        items: [
-                          { label: "30x90 cm", icon: <LayoutGrid size={16} className="rotate-90" />, link: "/products/dimension/30x90" },
-                        ],
-                      },
-                      {
-                        title: "40x40",
-                        items: [
-                          { label: "40x40 cm", icon: <LayoutGrid size={18} />, link: "/products/dimension/40x40" },
-                        ],
-                      },
-                      {
-                        title: "40x100",
-                        items: [
-                          { label: "40x100 cm", icon: <LayoutGrid size={16} className="rotate-90" />, link: "/products/dimension/40x100" },
-                        ],
-                      },
-                      {
-                        title: "60x60",
-                        items: [
-                          { label: "60x60 cm", icon: <LayoutGrid size={20} />, link: "/products/dimension/60x60" },
-                        ],
-                      },
-                      {
-                        title: "60x120",
-                        items: [
-                          { label: "60x120 cm", icon: <LayoutGrid size={18} className="rotate-90" />, link: "/products/dimension/60x120" },
-                        ],
-                      },
-                      {
-                        title: "80x80",
-                        items: [
-                          { label: "80x80 cm", icon: <LayoutGrid size={22} />, link: "/products/dimension/80x80" },
-                        ],
-                      },
-                      {
-                        title: "100x100",
-                        items: [
-                          { label: "100x100 cm", icon: <LayoutGrid size={24} />, link: "/products/dimension/100x100" },
-                        ],
-                      },
-                    ],
-                  },
-                  { 
-                    link: "/products", 
-                    text: t('nav.byMaterial'), 
-                    image: kitchenImg,
-                    subsections: [
-                      {
-                        title: t('products.filterBySurface'),
-                        items: [
-                          { label: "Matt" },
-                          { label: "Polished" },
-                          { label: "Textured" },
-                          { label: "Glossy" },
-                          { label: "Satin" },
-                        ],
-                      },
-                      {
-                        title: t('products.bodyMaterial'),
-                        items: [
-                          { label: "Ceramic" },
-                          { label: "Porcelain" },
-                          { label: "Marble" },
-                          { label: "Granite" },
-                          { label: "Quartz" },
-                        ],
-                      },
-                    ],
-                  },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-
     </>
   );
 }
