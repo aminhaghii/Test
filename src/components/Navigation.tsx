@@ -270,20 +270,23 @@ export function Navigation() {
         {/* Main Navigation */}
         <div className="container mx-auto px-6 lg:px-20">
           <div className="flex items-center justify-between h-20 lg:h-24 relative">
-            {/* Logo and Hamburger Menu */}
-            <div className="flex items-center gap-6">
-              {/* Logo */}
-              <Link to="/" className="flex items-center z-50 group">
-                <span
-                  className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 ${
-                    isScrolled ? "text-neutral-charcoal" : "text-white"
-                  }`}
-                  style={{ letterSpacing: "-0.04em" }}
-                >
-                  Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
-                </span>
-              </Link>
+            {/* Logo */}
+            <Link to="/" className="flex items-center z-50 group">
+              <span
+                className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 ${
+                  isScrolled ? "text-neutral-charcoal" : "text-white"
+                }`}
+                style={{ letterSpacing: "-0.04em" }}
+              >
+                Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
+              </span>
+            </Link>
 
+            {/* Desktop Navigation - empty */}
+            <div className="hidden lg:flex items-center justify-end" />
+
+            {/* Right Side - Hamburger Menu and Mobile Button */}
+            <div className="flex items-center gap-6">
               {/* Decorative Hash Line - thinner but longer */}
               <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
                 isScrolled ? "bg-neutral-300/40" : "bg-white/30"
@@ -310,33 +313,30 @@ export function Navigation() {
                   onMenuClose={() => {}}
                 />
               </div>
+
+              {/* Mobile Menu Button - fallback for small screens */}
+              <button
+                aria-label="Toggle navigation"
+                className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
+                  isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-white/70 text-white'
+                }`}
+                onClick={() => {
+                  setIsMobileMenuOpen((v)=>!v);
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {isMobileMenuOpen ? (
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  ) : (
+                    <>
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <line x1="3" y1="12" x2="21" y2="12" />
+                      <line x1="3" y1="18" x2="21" y2="18" />
+                    </>
+                  )}
+                </svg>
+              </button>
             </div>
-
-            {/* Desktop Navigation - empty */}
-            <div className="hidden lg:flex items-center justify-end" />
-
-            {/* Mobile Menu Button - fallback for small screens */}
-            <button
-              aria-label="Toggle navigation"
-              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
-                isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-white/70 text-white'
-              }`}
-              onClick={() => {
-                setIsMobileMenuOpen((v)=>!v);
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {isMobileMenuOpen ? (
-                  <path d="M18 6L6 18M6 6l12 12" />
-                ) : (
-                  <>
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </>
-                )}
-              </svg>
-            </button>
 
           </div>
         </div>
