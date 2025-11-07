@@ -181,11 +181,11 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       });
     }
     
-    const lastTime = layerStates.length > 0 ? (layerStates.length - 1) * 0.07 + 0.5 : 0;
-    const panelInsertTime = lastTime + (layerStates.length > 0 ? 0.02 : 0); // Reduced delay from 0.08 to 0.02
+    // Start panel animation immediately (no delay)
     const panelDuration = 0.65;
     
     // Animate panel - use x with pixel values to move from off-screen to on-screen
+    // Start immediately, not waiting for layers
     tl.fromTo(
       panel,
       { 
@@ -203,12 +203,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           gsap.set(panel, { display: 'flex', visibility: 'visible' });
         }
       },
-      panelInsertTime
+      0 // Start immediately at time 0
     );
 
     if (itemEls.length) {
       const itemsStartRatio = 0.15;
-      const itemsStart = panelInsertTime + panelDuration * itemsStartRatio;
+      const itemsStart = panelDuration * itemsStartRatio; // Start earlier, no panelInsertTime delay
       tl.to(
         itemEls,
         {
@@ -235,7 +235,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }
 
     if (socialTitle || socialLinks.length) {
-      const socialsStart = panelInsertTime + panelDuration * 0.4;
+      const socialsStart = panelDuration * 0.4; // Start earlier, no panelInsertTime delay
       if (socialTitle) {
         tl.to(
           socialTitle,
@@ -358,7 +358,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
         colorTweenRef.current = gsap.to(btn, {
           color: targetColor,
-          delay: 0.18,
+          delay: 0, // No delay
           duration: 0.3,
           ease: 'power2.out'
         });
