@@ -506,8 +506,8 @@ export function Navigation() {
                   items={buildMenuItems()}
                   displaySocials={false}
                   displayItemNumbering={true}
-                  menuButtonColor={isScrolled ? '#1e1e22' : '#fff'}
-                  openMenuButtonColor={isScrolled ? '#1e1e22' : '#fff'}
+                  menuButtonColor="#1e1e22"
+                  openMenuButtonColor="#1e1e22"
                   accentColor="#D4AF37"
                   changeMenuColorOnOpen={false}
                   isFixed={false}
