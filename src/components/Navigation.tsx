@@ -499,7 +499,7 @@ export function Navigation() {
                 isScrolled ? "bg-neutral-300/40" : "bg-neutral-200"
               }`} />
               {/* Hamburger Menu - StaggeredMenu */}
-              <div className="relative z-[101]">
+              <div className="relative z-[102]">
                 <StaggeredMenu
                   position="right"
                   colors={['#1e1e22', '#35353c']}

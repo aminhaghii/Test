@@ -140,12 +140,12 @@
 
 .staggered-menu-panel {
   position: fixed;
-  top: 0;
+  top: 80px; /* Start below header (h-20 = 80px) */
   right: 0;
   width: 50vw; /* تا وسط صفحه */
   max-width: 600px;
   min-width: 300px;
-  height: 100vh;
+  height: calc(100vh - 80px); /* Full height minus header */
   background: white;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -161,6 +161,13 @@
   opacity: 1;
 }
 
+@media (min-width: 1024px) {
+  .staggered-menu-panel {
+    top: 96px; /* lg:h-24 = 96px */
+    height: calc(100vh - 96px);
+  }
+}
+
 [data-position='left'] .staggered-menu-panel {
   right: auto;
   left: 0;
@@ -169,7 +176,7 @@
 
 .sm-prelayers {
   position: fixed;
-  top: 0;
+  top: 80px; /* Start below header */
   right: 0;
   bottom: 0;
   width: 50vw; /* تا وسط صفحه */
@@ -179,6 +186,12 @@
   z-index: 9998;
   /* Initial position will be set by GSAP */
   transform: translateX(100%);
+}
+
+@media (min-width: 1024px) {
+  .sm-prelayers {
+    top: 96px; /* lg:h-24 = 96px */
+  }
 }
 
 [data-position='left'] .sm-prelayers {
