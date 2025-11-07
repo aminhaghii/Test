@@ -345,7 +345,7 @@
   content: counter(smItem, decimal-leading-zero);
   position: absolute;
   top: 0.1em;
-  right: 0.5em;
+  right: 0;
   font-size: 18px;
   font-weight: 400;
   color: var(--sm-accent, #5227ff);
@@ -354,8 +354,9 @@
   user-select: none;
   opacity: var(--sm-num-opacity, 0);
   white-space: nowrap;
-  min-width: 2ch;
+  width: 2.5em;
   text-align: right;
+  padding-right: 0.5em;
 }
 
 /* Exit button styles */
