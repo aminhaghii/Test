@@ -304,7 +304,10 @@ export function Navigation() {
                 ref={productsRef} 
                 className="relative z-[100]"
                 onMouseEnter={() => setIsProductsOpen(true)}
-                onMouseLeave={() => setIsProductsOpen(false)}
+                onMouseLeave={() => {
+                  setIsProductsOpen(false);
+                  setShowDimensions(false);
+                }}
               >
                 <button
                   className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
