@@ -8,6 +8,9 @@ import LanguageSelector from "@/components/LanguageSelector";
 import toast from "react-hot-toast";
 import StaggeredMenu from "./StaggeredMenu";
 
+// API URL for backend resources
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -325,13 +328,22 @@ export function Navigation() {
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 bg-gradient-to-br from-neutral-50 to-neutral-100 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
+                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
                         >
+                          {/* Background Image */}
+                          <img
+                            src={`${API_URL}/ALMAS/505d109c-c3ce-42ef-8cc1-9499265a2d7d.png`}
+                            alt="All Products"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                          {/* Gradient Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                          {/* Content */}
                           <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                            <h3 className="text-3xl font-bold mb-3 text-neutral-charcoal group-hover:text-luxury-gold transition-colors">
+                            <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
                               {t('nav.allProducts') || 'All Products'}
                             </h3>
-                            <p className="text-neutral-600 text-lg mb-6">
+                            <p className="text-white/90 text-lg mb-6">
                               {t('products.allProductsDesc') || 'Explore our complete collection of premium ceramic tiles'}
                             </p>
                             <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
