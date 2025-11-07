@@ -56,7 +56,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
-  const [showProductsSubmenu, setShowProductsSubmenu] = useState(false);
   const navigate = useNavigate();
 
   const openTlRef = useRef<gsap.core.Timeline | null>(null);
