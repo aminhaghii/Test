@@ -210,78 +210,6 @@ export function Navigation() {
             : "bg-white"
         }`}
       >
-        {/* Top Bar - Only visible when not scrolled */}
-        <div
-          className={`border-b border-neutral-200 transition-all duration-500 ${
-            isScrolled ? "h-0 opacity-0 overflow-hidden" : "h-auto opacity-100"
-          }`}
-        >
-          <div className="container mx-auto px-6 lg:px-20">
-            <div className="flex items-center justify-between h-10 text-xs">
-              <div className="flex items-center gap-6 text-neutral-600">
-                <span className="flex items-center gap-2 hover:text-neutral-charcoal transition-smooth cursor-pointer">
-                  <MapPin className="w-3.5 h-3.5" />
-                  {t('nav.showroom')}
-                </span>
-                <span className="hidden md:block"></span>
-              </div>
-              <div className="flex items-center gap-2 text-neutral-600">
-                <span className="hidden md:block">|</span>
-                <a href="tel:021-88218520" className="hidden md:block hover:text-neutral-charcoal transition-smooth">
-                  021-88218520
-                </a>
-                {/* Language dropdown (top bar, right) */}
-                <div ref={langRef} className="relative ml-2 z-[100]">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsLangOpen(v=>!v);
-                    }}
-                    aria-haspopup="listbox"
-                    aria-expanded={isLangOpen}
-                    className="px-2.5 py-1.5 rounded-md text-[11px] font-semibold border border-neutral-300 text-neutral-charcoal hover:bg-neutral-100 transition-colors cursor-pointer pointer-events-auto"
-                    title="Select language"
-                  >
-                    {currentLanguage?.toUpperCase() || 'EN'}
-                  </button>
-                  {isLangOpen && (
-                    <ul
-                      role="listbox"
-                      className="absolute right-0 mt-2 w-36 rounded-md border border-neutral-200 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {[
-                        { code: 'en', label: 'EN — English' },
-                        { code: 'fa', label: 'FA — فارسی' },
-                        { code: 'ar', label: 'AR — العربية' },
-                        { code: 'es', label: 'ES — Español' },
-                        { code: 'it', label: 'IT — Italiano' },
-                      ].map(lang => (
-                        <li 
-                          key={lang.code} 
-                          role="option" 
-                          aria-selected={currentLanguage===lang.code}
-                          className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-100' : ''}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setLanguage(lang.code as any);
-                            setIsLangOpen(false);
-                          }}
-                        >
-                          {lang.label}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                {/* Hamburger menu - removed from top bar */}
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Main Navigation */}
         <div className="container mx-auto px-6 lg:px-20">
@@ -493,6 +421,58 @@ export function Navigation() {
                   >
                 {t('nav.contact')}
                 </Link>
+
+              {/* Language dropdown - moved next to hamburger */}
+              <div ref={langRef} className="relative z-[100]">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setIsLangOpen(v=>!v);
+                  }}
+                  aria-haspopup="listbox"
+                  aria-expanded={isLangOpen}
+                  className={`px-3 py-2 rounded-md text-xs font-semibold border transition-colors cursor-pointer pointer-events-auto ${
+                    isScrolled
+                      ? 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100'
+                      : 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100/70'
+                  }`}
+                  title="Select language"
+                >
+                  {currentLanguage?.toUpperCase() || 'EN'}
+                </button>
+                {isLangOpen && (
+                  <ul
+                    role="listbox"
+                    className="absolute right-0 mt-2 w-36 rounded-md border border-neutral-200 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {[
+                      { code: 'en', label: 'EN — English' },
+                      { code: 'fa', label: 'FA — فارسی' },
+                      { code: 'ar', label: 'AR — العربية' },
+                      { code: 'es', label: 'ES — Español' },
+                      { code: 'it', label: 'IT — Italiano' },
+                    ].map(lang => (
+                      <li 
+                        key={lang.code} 
+                        role="option" 
+                        aria-selected={currentLanguage===lang.code}
+                        className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-100' : ''}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setLanguage(lang.code as any);
+                          setIsLangOpen(false);
+                        }}
+                      >
+                        {lang.label}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
               {/* Decorative Hash Line - thinner but longer */}
               <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
