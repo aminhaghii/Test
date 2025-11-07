@@ -415,12 +415,12 @@ export function Navigation() {
                                       {dim}
                                     </button>
                                   ))}
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
                         {/* By Material */}
                         <div 
                           className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
@@ -457,7 +457,7 @@ export function Navigation() {
                                 </h3>
                                 <div className="grid grid-cols-2 gap-4">
                                   {materials.map((material, index) => (
-                                    <button
+                      <button
                                       key={material}
                                       onClick={(e) => {
                                         e.stopPropagation();
@@ -472,7 +472,7 @@ export function Navigation() {
                                       }}
                                     >
                                       {material}
-                                    </button>
+                      </button>
                                   ))}
                                 </div>
                               </div>
@@ -484,11 +484,22 @@ export function Navigation() {
                 </div>
               </div>
 
+              {/* Contact CTA */}
+              <Link
+                to="/contact"
+                className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${
+                      isScrolled
+                    ? 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100'
+                    : 'border-white/60 text-white hover:bg-white/15'
+                    }`}
+                  >
+                {t('nav.contact')}
+                </Link>
+
               {/* Decorative Hash Line - thinner but longer */}
               <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
                 isScrolled ? "bg-neutral-300/40" : "bg-white/30"
               }`} />
-
               {/* Hamburger Menu - StaggeredMenu */}
               <div className="relative z-[101]">
                 <StaggeredMenu
@@ -510,30 +521,30 @@ export function Navigation() {
                   }}
                   onMenuClose={() => {}}
                 />
-              </div>
+            </div>
 
               {/* Mobile Menu Button - fallback for small screens */}
-              <button
-                aria-label="Toggle navigation"
-                className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
-                  isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-white/70 text-white'
-                }`}
-                onClick={() => {
-                  setIsMobileMenuOpen((v)=>!v);
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  {isMobileMenuOpen ? (
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  ) : (
-                    <>
-                      <line x1="3" y1="6" x2="21" y2="6" />
-                      <line x1="3" y1="12" x2="21" y2="12" />
-                      <line x1="3" y1="18" x2="21" y2="18" />
-                    </>
-                  )}
-                </svg>
-              </button>
+            <button
+              aria-label="Toggle navigation"
+              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
+                isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-white/70 text-white'
+              }`}
+              onClick={() => {
+                setIsMobileMenuOpen((v)=>!v);
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {isMobileMenuOpen ? (
+                  <path d="M18 6L6 18M6 6l12 12" />
+                ) : (
+                  <>
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                  </>
+                )}
+              </svg>
+            </button>
             </div>
 
           </div>
