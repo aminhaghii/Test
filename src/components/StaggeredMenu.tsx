@@ -1,76 +1,101 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
+import './StaggeredMenu.css';
 
-export const StaggeredMenu = ({
+interface MenuItem {
+  label: string;
+  ariaLabel?: string;
+  link: string;
+  onClick?: () => void;
+}
+
+interface StaggeredMenuProps {
+  position?: 'left' | 'right';
+  colors?: string[];
+  items?: MenuItem[];
+  displaySocials?: boolean;
+  displayItemNumbering?: boolean;
+  className?: string;
+  logoUrl?: string;
+  menuButtonColor?: string;
+  openMenuButtonColor?: string;
+  accentColor?: string;
+  changeMenuColorOnOpen?: boolean;
+  isFixed?: boolean;
+  inline?: boolean; // render toggle inline (for header alignment)
+  onMenuOpen?: () => void;
+  onMenuClose?: () => void;
+}
+
+export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
-  colors = ['#B19EEF', '#5227FF'],
+  colors = ['#1e1e22', '#35353c'],
   items = [],
-  socialItems = [],
-  displaySocials = true,
+  displaySocials = false,
   displayItemNumbering = true,
   className,
-  logoUrl = '/src/assets/logos/reactbits-gh-white.svg',
+  logoUrl,
   menuButtonColor = '#fff',
   openMenuButtonColor = '#fff',
+  accentColor = '#D4AF37',
   changeMenuColorOnOpen = true,
   isFixed = false,
-  accentColor = '#5227FF',
+  inline = false,
   onMenuOpen,
   onMenuClose
 }) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
-
-  const panelRef = useRef(null);
-  const preLayersRef = useRef(null);
-  const preLayerElsRef = useRef([]);
-
-  const plusHRef = useRef(null);
-  const plusVRef = useRef(null);
-  const iconRef = useRef(null);
-
-  const textInnerRef = useRef(null);
-  const textWrapRef = useRef(null);
+  const panelRef = useRef<HTMLElement>(null);
+  const preLayersRef = useRef<HTMLDivElement>(null);
+  const preLayerElsRef = useRef<HTMLElement[]>([]);
+  const plusHRef = useRef<HTMLSpanElement>(null);
+  const plusVRef = useRef<HTMLSpanElement>(null);
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const textInnerRef = useRef<HTMLSpanElement>(null);
+  const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
+  const [showProductsSubmenu, setShowProductsSubmenu] = useState(false);
 
-  const openTlRef = useRef(null);
-  const closeTweenRef = useRef(null);
-  const spinTweenRef = useRef(null);
-  const textCycleAnimRef = useRef(null);
-  const colorTweenRef = useRef(null);
-
-  const toggleBtnRef = useRef(null);
+  const openTlRef = useRef<gsap.core.Timeline | null>(null);
+  const closeTweenRef = useRef<gsap.core.Tween | null>(null);
+  const spinTweenRef = useRef<gsap.core.Tween | null>(null);
+  const textCycleAnimRef = useRef<gsap.core.Tween | null>(null);
+  const colorTweenRef = useRef<gsap.core.Tween | null>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
   const busyRef = useRef(false);
-
-  const itemEntranceTweenRef = useRef(null);
+  const itemEntranceTweenRef = useRef<gsap.core.Tween | null>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
       const preContainer = preLayersRef.current;
-
       const plusH = plusHRef.current;
       const plusV = plusVRef.current;
       const icon = iconRef.current;
       const textInner = textInnerRef.current;
+      if (!panel || !icon) return;
 
-      if (!panel || !plusH || !plusV || !icon || !textInner) return;
-
-      let preLayers = [];
+      let preLayers: HTMLElement[] = [];
       if (preContainer) {
-        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
+        preLayers = Array.from(preContainer.querySelectorAll<HTMLElement>('.sm-prelayer'));
       }
       preLayerElsRef.current = preLayers;
 
-      const offscreen = position === 'left' ? -100 : 100;
-      gsap.set([panel, ...preLayers], { xPercent: offscreen });
-
-      gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-      gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
+      // Use x with pixel value based on viewport width to move panel completely off-screen
+      const viewportWidth = window.innerWidth;
+      const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
+      // Set initial transform position using x with pixel value
+      gsap.set([panel, ...preLayers], { 
+        x: offscreenX
+      });
+      
+      // Only set plusH/plusV if they exist (non-inline mode)
+      if (plusH) gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
+      if (plusV) gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
       gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-
-      gsap.set(textInner, { yPercent: 0 });
-
+      if (textInner) gsap.set(textInner, { yPercent: 0 });
       if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
     });
     return () => ctx.revert();
@@ -79,7 +104,10 @@ export const StaggeredMenu = ({
   const buildOpenTimeline = useCallback(() => {
     const panel = panelRef.current;
     const layers = preLayerElsRef.current;
-    if (!panel) return null;
+    if (!panel) {
+      console.warn('Panel ref not found');
+      return null;
+    }
 
     openTlRef.current?.kill();
     if (closeTweenRef.current) {
@@ -88,50 +116,119 @@ export const StaggeredMenu = ({
     }
     itemEntranceTweenRef.current?.kill();
 
-    const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
-    const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
-    const socialTitle = panel.querySelector('.sm-socials-title');
-    const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
+    // Make sure panel is visible before animating
+    gsap.set(panel, { display: 'flex', visibility: 'visible', opacity: 1 });
 
-    const layerStates = layers.map(el => ({ el, start: Number(gsap.getProperty(el, 'xPercent')) }));
-    const panelStart = Number(gsap.getProperty(panel, 'xPercent'));
+    const itemEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-itemLabel'));
+    const numberEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-list[data-numbering] .sm-panel-item'));
+    const socialTitle = panel.querySelector<HTMLElement>('.sm-socials-title');
+    const socialLinks = Array.from(panel.querySelectorAll<HTMLElement>('.sm-socials-link'));
 
-    if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
-    if (numberEls.length) gsap.set(numberEls, { ['--sm-num-opacity']: 0 });
-    if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
-    if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
+    // Get current x position in pixels
+    const getX = (el: HTMLElement): number => {
+      const current = gsap.getProperty(el, 'x');
+      if (current !== undefined && current !== null) {
+        return Number(current);
+      }
+      // Fallback: check computed style
+      const style = window.getComputedStyle(el);
+      const transform = style.transform;
+      if (transform && transform !== 'none') {
+        const matrix = new DOMMatrix(transform);
+        return matrix.m41; // x translation in pixels
+      }
+      // Default: off-screen position
+      const viewportWidth = window.innerWidth;
+      return position === 'left' ? -viewportWidth : viewportWidth;
+    };
+
+    const layerStates = layers.map(el => ({ el, start: getX(el) }));
+    const panelStart = getX(panel);
+
+    if (itemEls.length) {
+      gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+    }
+    if (numberEls.length) {
+      gsap.set(numberEls, { '--sm-num-opacity': 0 });
+    }
+    if (socialTitle) {
+      gsap.set(socialTitle, { opacity: 0 });
+    }
+    if (socialLinks.length) {
+      gsap.set(socialLinks, { y: 25, opacity: 0 });
+    }
 
     const tl = gsap.timeline({ paused: true });
 
-    layerStates.forEach((ls, i) => {
-      tl.fromTo(ls.el, { xPercent: ls.start }, { xPercent: 0, duration: 0.5, ease: 'power4.out' }, i * 0.07);
-    });
-
-    const lastTime = layerStates.length ? (layerStates.length - 1) * 0.07 : 0;
-    const panelInsertTime = lastTime + (layerStates.length ? 0.08 : 0);
+    // Animate layers first
+    if (layerStates.length > 0) {
+      layerStates.forEach((ls, i) => {
+        tl.fromTo(
+          ls.el, 
+          { 
+            x: ls.start,
+            display: 'block',
+            visibility: 'visible'
+          }, 
+          { 
+            x: 0, 
+            duration: 0.5, 
+            ease: 'power4.out',
+            force3D: true
+          }, 
+          i * 0.07
+        );
+      });
+    }
+    
+    const lastTime = layerStates.length > 0 ? (layerStates.length - 1) * 0.07 + 0.5 : 0;
+    const panelInsertTime = lastTime + (layerStates.length > 0 ? 0.02 : 0); // Reduced delay from 0.08 to 0.02
     const panelDuration = 0.65;
-
+    
+    // Animate panel - use x with pixel values to move from off-screen to on-screen
     tl.fromTo(
       panel,
-      { xPercent: panelStart },
-      { xPercent: 0, duration: panelDuration, ease: 'power4.out' },
+      { 
+        x: panelStart,
+        display: 'flex',
+        visibility: 'visible',
+        immediateRender: false
+      },
+      { 
+        x: 0, 
+        duration: panelDuration, 
+        ease: 'power4.out',
+        force3D: true,
+        onStart: () => {
+          gsap.set(panel, { display: 'flex', visibility: 'visible' });
+        }
+      },
       panelInsertTime
     );
 
     if (itemEls.length) {
       const itemsStartRatio = 0.15;
       const itemsStart = panelInsertTime + panelDuration * itemsStartRatio;
-
       tl.to(
         itemEls,
-        { yPercent: 0, rotate: 0, duration: 1, ease: 'power4.out', stagger: { each: 0.1, from: 'start' } },
+        {
+          yPercent: 0,
+          rotate: 0,
+          duration: 1,
+          ease: 'power4.out',
+          stagger: { each: 0.1, from: 'start' }
+        },
         itemsStart
       );
-
       if (numberEls.length) {
         tl.to(
           numberEls,
-          { duration: 0.6, ease: 'power2.out', ['--sm-num-opacity']: 1, stagger: { each: 0.08, from: 'start' } },
+          {
+            duration: 0.6,
+            ease: 'power2.out',
+            '--sm-num-opacity': 1,
+            stagger: { each: 0.08, from: 'start' }
+          },
           itemsStart + 0.1
         );
       }
@@ -139,8 +236,17 @@ export const StaggeredMenu = ({
 
     if (socialTitle || socialLinks.length) {
       const socialsStart = panelInsertTime + panelDuration * 0.4;
-
-      if (socialTitle) tl.to(socialTitle, { opacity: 1, duration: 0.5, ease: 'power2.out' }, socialsStart);
+      if (socialTitle) {
+        tl.to(
+          socialTitle,
+          {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out'
+          },
+          socialsStart
+        );
+      }
       if (socialLinks.length) {
         tl.to(
           socialLinks,
@@ -150,7 +256,9 @@ export const StaggeredMenu = ({
             duration: 0.55,
             ease: 'power3.out',
             stagger: { each: 0.08, from: 'start' },
-            onComplete: () => gsap.set(socialLinks, { clearProps: 'opacity' })
+            onComplete: () => {
+              gsap.set(socialLinks, { clearProps: 'opacity' });
+            }
           },
           socialsStart + 0.04
         );
@@ -159,21 +267,40 @@ export const StaggeredMenu = ({
 
     openTlRef.current = tl;
     return tl;
-  }, []);
+  }, [position]);
 
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
     busyRef.current = true;
+    
+    const panel = panelRef.current;
+    if (!panel) {
+      busyRef.current = false;
+      return;
+    }
+    
+    // Force panel to be visible and in correct position
+    panel.style.display = 'flex';
+    panel.style.visibility = 'visible';
+    panel.style.opacity = '1';
+    panel.style.pointerEvents = 'auto';
+    
+    // Set initial position using x with pixel value
+    const viewportWidth = window.innerWidth;
+    const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
+    gsap.set(panel, { x: offscreenX });
+    
     const tl = buildOpenTimeline();
     if (tl) {
       tl.eventCallback('onComplete', () => {
         busyRef.current = false;
       });
+      // Play immediately without delay
       tl.play(0);
     } else {
       busyRef.current = false;
     }
-  }, [buildOpenTimeline]);
+  }, [buildOpenTimeline, position]);
 
   const playClose = useCallback(() => {
     openTlRef.current?.kill();
@@ -186,62 +313,55 @@ export const StaggeredMenu = ({
 
     const all = [...layers, panel];
     closeTweenRef.current?.kill();
-
-    const offscreen = position === 'left' ? -100 : 100;
-
+    const viewportWidth = window.innerWidth;
+    const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
     closeTweenRef.current = gsap.to(all, {
-      xPercent: offscreen,
+      x: offscreenX,
       duration: 0.32,
       ease: 'power3.in',
       overwrite: 'auto',
       onComplete: () => {
-        const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
-        if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 });
-
-        const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
-        if (numberEls.length) gsap.set(numberEls, { ['--sm-num-opacity']: 0 });
-
-        const socialTitle = panel.querySelector('.sm-socials-title');
-        const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
+        const itemEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-itemLabel'));
+        if (itemEls.length) {
+          gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+        }
+        const numberEls = Array.from(panel.querySelectorAll<HTMLElement>('.sm-panel-list[data-numbering] .sm-panel-item'));
+        if (numberEls.length) {
+          gsap.set(numberEls, { '--sm-num-opacity': 0 });
+        }
+        const socialTitle = panel.querySelector<HTMLElement>('.sm-socials-title');
+        const socialLinks = Array.from(panel.querySelectorAll<HTMLElement>('.sm-socials-link'));
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-
         busyRef.current = false;
       }
     });
   }, [position]);
 
-  const animateIcon = useCallback(opening => {
+  const animateIcon = useCallback((opening: boolean) => {
     const icon = iconRef.current;
-    const h = plusHRef.current;
-    const v = plusVRef.current;
-    if (!icon || !h || !v) return;
-
+    if (!icon) return;
     spinTweenRef.current?.kill();
-
     if (opening) {
-      gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-      spinTweenRef.current = gsap
-        .timeline({ defaults: { ease: 'power4.out' } })
-        .to(h, { rotate: 45, duration: 0.5 }, 0)
-        .to(v, { rotate: -45, duration: 0.5 }, 0);
+      spinTweenRef.current = gsap.to(icon, { rotate: 180, duration: 0.8, ease: 'power4.out', overwrite: 'auto' });
     } else {
-      spinTweenRef.current = gsap
-        .timeline({ defaults: { ease: 'power3.inOut' } })
-        .to(h, { rotate: 0, duration: 0.35 }, 0)
-        .to(v, { rotate: 90, duration: 0.35 }, 0)
-        .to(icon, { rotate: 0, duration: 0.001 }, 0);
+      spinTweenRef.current = gsap.to(icon, { rotate: 0, duration: 0.35, ease: 'power3.inOut', overwrite: 'auto' });
     }
   }, []);
 
   const animateColor = useCallback(
-    opening => {
+    (opening: boolean) => {
       const btn = toggleBtnRef.current;
       if (!btn) return;
       colorTweenRef.current?.kill();
       if (changeMenuColorOnOpen) {
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
-        colorTweenRef.current = gsap.to(btn, { color: targetColor, delay: 0.18, duration: 0.3, ease: 'power2.out' });
+        colorTweenRef.current = gsap.to(btn, {
+          color: targetColor,
+          delay: 0.18,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
       } else {
         gsap.set(btn, { color: menuButtonColor });
       }
@@ -260,16 +380,14 @@ export const StaggeredMenu = ({
     }
   }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
 
-  const animateText = useCallback(opening => {
+  const animateText = useCallback((opening: boolean) => {
     const inner = textInnerRef.current;
     if (!inner) return;
-
     textCycleAnimRef.current?.kill();
 
     const currentLabel = opening ? 'Menu' : 'Close';
     const targetLabel = opening ? 'Close' : 'Menu';
     const cycles = 3;
-
     const seq = [currentLabel];
     let last = currentLabel;
     for (let i = 0; i < cycles; i++) {
@@ -278,13 +396,11 @@ export const StaggeredMenu = ({
     }
     if (last !== targetLabel) seq.push(targetLabel);
     seq.push(targetLabel);
-
     setTextLines(seq);
-    gsap.set(inner, { yPercent: 0 });
 
+    gsap.set(inner, { yPercent: 0 });
     const lineCount = seq.length;
     const finalShift = ((lineCount - 1) / lineCount) * 100;
-
     textCycleAnimRef.current = gsap.to(inner, {
       yPercent: -finalShift,
       duration: 0.5 + lineCount * 0.07,
@@ -292,11 +408,14 @@ export const StaggeredMenu = ({
     });
   }, []);
 
-  const toggleMenu = useCallback(() => {
+  const toggleMenu = useCallback((e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const target = !openRef.current;
     openRef.current = target;
     setOpen(target);
-
     if (target) {
       onMenuOpen?.();
       playOpen();
@@ -304,198 +423,239 @@ export const StaggeredMenu = ({
       onMenuClose?.();
       playClose();
     }
-
     animateIcon(target);
     animateColor(target);
-    animateText(target);
-  }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
+    if (!inline) animateText(target);
+  }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose, inline]);
+
+  // Handle ESC key to close menu (do not lock page scroll)
+  React.useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && openRef.current) {
+        toggleMenu();
+      }
+    };
+    if (openRef.current) {
+      document.addEventListener('keydown', handleEsc);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [open, toggleMenu]);
+
+  // Close on outside click only (keep menu on scroll)
+  React.useEffect(() => {
+    if (!openRef.current) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      const panel = panelRef.current as unknown as Node | null;
+      const btn = toggleBtnRef.current as unknown as Node | null;
+      const target = e.target as Node;
+      if (panel && panel.contains(target)) return;
+      if (btn && btn.contains(target)) return;
+      // clicked outside panel and button
+      if (openRef.current) toggleMenu();
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open, toggleMenu]);
 
   return (
     <div
-      className={`sm-scope z-40 ${isFixed ? 'fixed top-0 left-0 w-screen h-screen overflow-hidden' : 'w-full h-full'}`}
+      className={(className ? className + ' ' : '') + 'staggered-menu-wrapper' + (isFixed && !inline ? ' fixed-wrapper' : '') + (inline ? ' inline-wrapper' : '')}
+      style={{
+        ...(accentColor ? { ['--sm-accent' as string]: accentColor } : {}),
+        ...(inline ? { position: 'relative', zIndex: 100 } : {})
+      }}
+      data-position={position}
+      data-open={open || undefined}
     >
-      <div
-        className={(className ? className + ' ' : '') + 'staggered-menu-wrapper relative w-full h-full'}
-        style={accentColor ? { ['--sm-accent']: accentColor } : undefined}
-        data-position={position}
-        data-open={open || undefined}
-      >
-        <div
-          ref={preLayersRef}
-          className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[5]"
-          aria-hidden="true"
+      {inline ? (
+        // Inline compact hamburger toggle (no header wrapper)
+        <button
+          ref={toggleBtnRef}
+          className="sm-toggle p-3 rounded-md hover:bg-white/10 transition-colors"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="staggered-menu-panel"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu(e);
+          }}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+          }}
+          type="button"
+          style={{ 
+            position: 'relative', 
+            zIndex: 10001,
+            cursor: 'pointer',
+            border: '1px solid rgba(255,255,255,0.3)'
+          }}
         >
-          {(() => {
-            const raw = colors && colors.length ? colors.slice(0, 4) : ['#1e1e22', '#35353c'];
-            const arr = [...raw];
-            if (arr.length >= 3) {
-              const mid = Math.floor(arr.length / 2);
-              arr.splice(mid, 1);
-            }
-            return arr.map((c, i) => (
-              <div
-                key={i}
-                className="sm-prelayer absolute top-0 right-0 h-full w-full translate-x-0"
-                style={{ background: c }}
+          <span ref={iconRef} className="sm-icon" aria-hidden="true" style={{ width: 32, height: 24 }}>
+            <span className="sm-icon-line" style={{ top: '26%', height: 3.5, width: '100%' }} />
+            <span className="sm-icon-line" style={{ top: '50%', height: 3.5, width: '100%' }} />
+            <span className="sm-icon-line" style={{ top: '74%', height: 3.5, width: '100%' }} />
+          </span>
+        </button>
+      ) : (
+        <header className="staggered-menu-header" aria-label="Main navigation header">
+          {logoUrl && (
+            <div className="sm-logo" aria-label="Logo">
+              <img
+                src={logoUrl}
+                alt="Logo"
+                className="sm-logo-img"
+                draggable={false}
+                width={110}
+                height={24}
               />
-            ));
-          })()}
-        </div>
-
-        <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-auto z-[60]"
-          aria-label="Main navigation header"
-        >
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
-            <img
-              src={logoUrl || '/src/assets/logos/reactbits-gh-white.svg'}
-              alt="Logo"
-              className="sm-logo-img block h-8 w-auto object-contain"
-              draggable={false}
-              width={110}
-              height={24}
-            />
-          </div>
-
+            </div>
+          )}
           <button
             ref={toggleBtnRef}
-            className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer text-[#e9e9ef] font-medium leading-none overflow-visible pointer-events-auto"
+            className="sm-toggle"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             aria-controls="staggered-menu-panel"
             onClick={toggleMenu}
             type="button"
           >
-            <span
-              ref={textWrapRef}
-              className="sm-toggle-textWrap relative inline-block h-[1em] overflow-hidden whitespace-nowrap w-[var(--sm-toggle-width,auto)] min-w-[var(--sm-toggle-width,auto)]"
-              aria-hidden="true"
-            >
-              <span ref={textInnerRef} className="sm-toggle-textInner flex flex-col leading-none">
+            <span ref={textWrapRef} className="sm-toggle-textWrap" aria-hidden="true">
+              <span ref={textInnerRef} className="sm-toggle-textInner">
                 {textLines.map((l, i) => (
-                  <span className="sm-toggle-line block h-[1em] leading-none" key={i}>
+                  <span className="sm-toggle-line" key={i}>
                     {l}
                   </span>
                 ))}
               </span>
             </span>
-
-            <span
-              ref={iconRef}
-              className="sm-icon relative w-[14px] h-[14px] shrink-0 inline-flex items-center justify-center [will-change:transform]"
-              aria-hidden="true"
-            >
-              <span
-                ref={plusHRef}
-                className="sm-icon-line absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
-              />
-              <span
-                ref={plusVRef}
-                className="sm-icon-line sm-icon-line-v absolute left-1/2 top-1/2 w-full h-[2px] bg-current rounded-[2px] -translate-x-1/2 -translate-y-1/2 [will-change:transform]"
-              />
+            <span ref={iconRef} className="sm-icon" aria-hidden="true">
+              <span ref={plusHRef} className="sm-icon-line" />
+              <span ref={plusVRef} className="sm-icon-line sm-icon-line-v" />
             </span>
           </button>
         </header>
+      )}
 
-        <aside
-          id="staggered-menu-panel"
-          ref={panelRef}
-          className="staggered-menu-panel absolute top-0 right-0 h-full bg-white flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 backdrop-blur-[12px]"
-          style={{ WebkitBackdropFilter: 'blur(12px)' }}
-          aria-hidden={!open}
-        >
-          <div className="sm-panel-inner flex-1 flex flex-col gap-5">
-            <ul
-              className="sm-panel-list list-none m-0 p-0 flex flex-col gap-2"
-              role="list"
-              data-numbering={displayItemNumbering || undefined}
-            >
-              {items && items.length ? (
-                items.map((it, idx) => (
-                  <li className="sm-panel-itemWrap relative overflow-hidden leading-none" key={it.label + idx}>
-                    <a
-                      className="sm-panel-item relative text-black font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
-                      href={it.link}
-                      aria-label={it.ariaLabel}
-                      data-index={idx + 1}
-                    >
-                      <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
-                        {it.label}
-                      </span>
-                    </a>
-                  </li>
-                ))
-              ) : (
-                <li className="sm-panel-itemWrap relative overflow-hidden leading-none" aria-hidden="true">
-                  <span className="sm-panel-item relative text-black font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]">
-                    <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
-                      No items
-                    </span>
-                  </span>
-                </li>
-              )}
-            </ul>
-
-            {displaySocials && socialItems && socialItems.length > 0 && (
-              <div className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Social links">
-                <h3 className="sm-socials-title m-0 text-base font-medium [color:var(--sm-accent,#ff0000)]">Socials</h3>
-                <ul
-                  className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap"
-                  role="list"
-                >
-                  {socialItems.map((s, i) => (
-                    <li key={s.label + i} className="sm-socials-item">
-                      <a
-                        href={s.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="sm-socials-link text-[1.2rem] font-medium text-[#111] no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
-                      >
-                        {s.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </aside>
+      {/* Prelayers and Panel - rendered as siblings to the toggle/header */}
+      <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
+        {(() => {
+          const raw = colors && colors.length ? colors.slice(0, 4) : ['#1e1e22', '#35353c'];
+          let arr = [...raw];
+          if (arr.length >= 3) {
+            const mid = Math.floor(arr.length / 2);
+            arr.splice(mid, 1);
+          }
+          return arr.map((c, i) => <div key={i} className="sm-prelayer" style={{ background: c }} />);
+        })()}
       </div>
 
-      <style>{`
-.sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 40; }
-.sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 2em; background: transparent; pointer-events: none; z-index: 20; }
-.sm-scope .staggered-menu-header > * { pointer-events: auto; }
-.sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
-.sm-scope .sm-logo-img { display: block; height: 32px; width: auto; object-fit: contain; }
-.sm-scope .sm-toggle { position: relative; display: inline-flex; align-items: center; gap: 0.3rem; background: transparent; border: none; cursor: pointer; color: #e9e9ef; font-weight: 500; line-height: 1; overflow: visible; }
-.sm-scope .sm-toggle:focus-visible { outline: 2px solid #ffffffaa; outline-offset: 4px; border-radius: 4px; }
-.sm-scope .sm-line:last-of-type { margin-top: 6px; }
-.sm-scope .sm-toggle-textWrap { position: relative; margin-right: 0.5em; display: inline-block; height: 1em; overflow: hidden; white-space: nowrap; width: var(--sm-toggle-width, auto); min-width: var(--sm-toggle-width, auto); }
-.sm-scope .sm-toggle-textInner { display: flex; flex-direction: column; line-height: 1; }
-.sm-scope .sm-toggle-line { display: block; height: 1em; line-height: 1; }
-.sm-scope .sm-icon { position: relative; width: 14px; height: 14px; flex: 0 0 14px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
-.sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
-.sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); will-change: transform; }
-.sm-scope .sm-line { display: none !important; }
-.sm-scope .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(260px, 38vw, 420px); height: 100%; background: white; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; padding: 6em 2em 2em 2em; overflow-y: auto; z-index: 10; }
-.sm-scope [data-position='left'] .staggered-menu-panel { right: auto; left: 0; }
-.sm-scope .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(260px, 38vw, 420px); pointer-events: none; z-index: 5; }
-.sm-scope [data-position='left'] .sm-prelayers { right: auto; left: 0; }
-.sm-scope .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); }
-.sm-scope .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
-.sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.sm-scope .sm-panel-list[data-numbering] .sm-panel-item::before { content: '0' counter(sm-item-counter) '.'; counter-increment: sm-item-counter; position: absolute; left: -1.4em; top: 0; font-size: 0.5em; line-height: 1.2; color: #999; opacity: var(--sm-num-opacity, 0); transition: opacity 0.3s ease; }
-.sm-scope .sm-panel-list[data-numbering] { counter-reset: sm-item-counter; }
-.sm-scope .sm-panel-item { position: relative; color: #000; font-weight: 600; font-size: 4rem; cursor: pointer; line-height: 1; letter-spacing: -2px; text-transform: uppercase; transition: background-color 0.15s linear, color 0.15s linear; display: inline-block; text-decoration: none; padding-right: 1.4em; }
-.sm-scope .sm-panel-item:hover { background-color: var(--sm-accent, #ff0000); color: white; }
-.sm-scope .sm-panel-itemLabel { display: inline-block; transform-origin: 50% 100%; will-change: transform; }
-.sm-scope .sm-socials { margin-top: auto; padding-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-.sm-scope .sm-socials-title { margin: 0; font-size: 1rem; font-weight: 500; color: var(--sm-accent, #ff0000); }
-.sm-scope .sm-socials-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; align-items: center; gap: 1rem; flex-wrap: wrap; }
-.sm-scope .sm-socials-link { font-size: 1.2rem; font-weight: 500; color: #111; text-decoration: none; position: relative; display: inline-block; padding: 2px 0; transition: color 0.3s linear, opacity 0.3s linear; }
-.sm-scope .sm-socials-link:hover { color: var(--sm-accent, #ff0000); }
-      `}</style>
+      <aside 
+        id="staggered-menu-panel" 
+        ref={panelRef} 
+        className="staggered-menu-panel" 
+        aria-hidden={!open}
+        style={{ 
+          display: open ? 'flex' : 'flex',
+          visibility: open ? 'visible' : 'hidden'
+        }}
+      >
+        <div className="sm-panel-inner">
+          <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
+            {items && items.length ? (
+              items.map((it, idx) => (
+                <li className="sm-panel-itemWrap" key={it.label + idx}>
+                  {/* Special handler for Products submenu trigger */}
+                  {it.link === '#__products' ? (
+                    <button
+                      className="sm-panel-item"
+                      aria-label={it.ariaLabel || it.label}
+                      data-index={idx + 1}
+                      onClick={() => setShowProductsSubmenu(v => !v)}
+                    >
+                      <span className="sm-panel-itemLabel">{it.label}</span>
+                    </button>
+                  ) : it.onClick ? (
+                    <button
+                      className="sm-panel-item"
+                      aria-label={it.ariaLabel || it.label}
+                      data-index={idx + 1}
+                      onClick={() => {
+                        it.onClick?.();
+                        toggleMenu();
+                      }}
+                    >
+                      <span className="sm-panel-itemLabel">{it.label}</span>
+                    </button>
+                  ) : it.link.includes('#') ? (
+                    <a
+                      className="sm-panel-item"
+                      href={it.link}
+                      aria-label={it.ariaLabel || it.label}
+                      data-index={idx + 1}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const [path, hash] = it.link.split('#');
+                        if (path && path !== window.location.pathname) {
+                          window.location.href = it.link;
+                        } else if (hash) {
+                          const element = document.getElementById(hash);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                          toggleMenu();
+                        } else {
+                          toggleMenu();
+                        }
+                      }}
+                    >
+                      <span className="sm-panel-itemLabel">{it.label}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      className="sm-panel-item"
+                      to={it.link}
+                      aria-label={it.ariaLabel || it.label}
+                      data-index={idx + 1}
+                      onClick={toggleMenu}
+                    >
+                      <span className="sm-panel-itemLabel">{it.label}</span>
+                    </Link>
+                  )}
+                  {/* Inline submenu for Products */}
+                  {it.link === '#__products' && showProductsSubmenu && (
+                    <ul role="list" className="mt-2 pl-4">
+                      <li className="sm-panel-itemWrap">
+                        <Link className="sm-panel-item" to="/products" onClick={toggleMenu} aria-label="All Products">
+                          <span className="sm-panel-itemLabel">All Products</span>
+                        </Link>
+                      </li>
+                      <li className="sm-panel-itemWrap">
+                        <Link className="sm-panel-item" to="/products/dimension" onClick={toggleMenu} aria-label="By Dimension">
+                          <span className="sm-panel-itemLabel">By Dimension</span>
+                        </Link>
+                      </li>
+                      <li className="sm-panel-itemWrap">
+                        <Link className="sm-panel-item" to="/products/material" onClick={toggleMenu} aria-label="By Material">
+                          <span className="sm-panel-itemLabel">By Material</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+              ))
+            ) : (
+              <li className="sm-panel-itemWrap" aria-hidden="true">
+                <span className="sm-panel-item">
+                  <span className="sm-panel-itemLabel">No items</span>
+                </span>
+              </li>
+            )}
+          </ul>
+        </div>
+      </aside>
     </div>
   );
 };
