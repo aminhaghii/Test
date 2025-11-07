@@ -44,7 +44,12 @@
     "featured": "ویژه",
     "environmentView": "نمای محیط",
     "previous": "قبلی",
-    "next": "بعدی"
+    "next": "بعدی",
+    "byDimension": "بر اساس ابعاد",
+    "byMaterial": "بر اساس متریال",
+    "allProductsDesc": "کاوش در مجموعه کامل کاشی‌های سرامیکی پریمیوم ما",
+    "byDimensionDesc": "یافتن کاشی بر اساس اندازه: 30x30، 60x60، 60x120 و بیشتر",
+    "byMaterialDesc": "مرور بر اساس نوع متریال: پرسلان، بدنه سفید و بیشتر"
   },
   "collections": {
     "featured": "کلکشن‌های ویژه",

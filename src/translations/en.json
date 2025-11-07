@@ -44,7 +44,12 @@
     "featured": "Featured",
     "environmentView": "Environment View",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "byDimension": "By Dimension",
+    "byMaterial": "By Material",
+    "allProductsDesc": "Explore our complete collection of premium ceramic tiles",
+    "byDimensionDesc": "Find tiles by size: 30x30, 60x60, 60x120 and more",
+    "byMaterialDesc": "Browse by material type: Porcelain, White Body and more"
   },
   "collections": {
     "featured": "Featured Collections",
@@ -166,7 +171,67 @@
     "logoutFailed": "Failed to logout",
     "required": "Required",
     "invalidEmail": "Invalid email",
-    "minChars": "Min 10 characters"
+    "minChars": "Min 10 characters",
+    "lifestyleSolutions": "Lifestyle Solutions",
+    "surfaces": "Surfaces",
+    "surfacesSub": "Inspired by colors and textures",
+    "bigSlabs": "Big slabs",
+    "bigSlabsSub": "Big slabs for big ideas",
+    "bathKitchen": "Bathroom & kitchen",
+    "bathKitchenSub": "Designer collections",
+    "signature": "Signature collections",
+    "signatureSub": "Capturing the essence of luxury",
+    "productSpotlight": "Product Spotlight",
+    "productSpotlightDesc": "Discover selected premium surfaces crafted for modern living.",
+    "discoverMore": "Discover more",
+    "premiumSurface": "Premium surface for modern spaces",
+    "explore": "Explore",
+    "latestNews": "Latest News",
+    "excellenceBanner": "14+ Years of Excellence in Iranian Ceramic Manufacturing",
+    "readMore": "Read more",
+    "designStories": "Design Stories",
+    "discoverAll": "Discover all",
+    "latestProjects": "Our Latest Projects",
+    "viewAll": "View all"
+  },
+  "innovative": {
+    "title": "Innovative Solutions",
+    "iso": "Certified Quality Standards",
+    "isoDesc": "ISO 9001, 14001 and 45001 ensuring quality, environment and safety.",
+    "environment": "Environmental Commitment",
+    "environmentDesc": "Responsible processes and sustainable materials.",
+    "export": "Global Export",
+    "exportDesc": "Supplying premium tiles to 13+ countries."
+  },
+  "stories": {
+    "subtitle": "Inspiration from real-world applications and spaces.",
+    "residential": "Residential Spaces",
+    "residentialDesc": "Warm, elegant and durable surfaces for homes.",
+    "commercial": "Commercial Projects",
+    "commercialDesc": "Reliable performance for retail and hospitality.",
+    "interior": "Modern Interiors",
+    "interiorDesc": "Refined looks for contemporary design."
+  },
+  "digital": {
+    "experiences": "Digital Product Experiences",
+    "visualizer": "3D Room Visualizer",
+    "visualizerDesc": "Design your space and preview tiles in real-time.",
+    "catalog": "Product Catalog",
+    "catalogDesc": "Browse and download our latest catalogues.",
+    "showroom": "Virtual Showroom Tour",
+    "showroomDesc": "Take a digital tour of our showroom."
+  },
+  "community": {
+    "title": "Join our Community",
+    "subtitle": "Subscribe to receive updates about products, projects and news.",
+    "email": "Enter your email",
+    "subscribe": "Subscribe",
+    "thanks": "Thanks for subscribing!"
+  },
+  "blog": {
+    "subtitle": "Latest insights, trends, and inspiration from the world of ceramic tiles",
+    "viewAll": "View all posts",
+    "readMore": "Read more"
   },
   "bento": {
     "experience": "Experience",

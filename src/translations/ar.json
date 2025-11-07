@@ -44,7 +44,12 @@
     "featured": "مميز",
     "environmentView": "عرض البيئة",
     "previous": "السابق",
-    "next": "التالي"
+    "next": "التالي",
+    "byDimension": "حسب الأبعاد",
+    "byMaterial": "حسب المادة",
+    "allProductsDesc": "استكشف مجموعتنا الكاملة من البلاط السيراميكي المتميز",
+    "byDimensionDesc": "ابحث عن البلاط حسب الحجم: 30x30، 60x60، 60x120 والمزيد",
+    "byMaterialDesc": "تصفح حسب نوع المادة: البورسلين، الجسم الأبيض والمزيد"
   },
   "collections": {
     "featured": "المجموعات المميزة",

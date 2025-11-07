@@ -44,7 +44,12 @@
     "featured": "Destacado",
     "environmentView": "Vista de Entorno",
     "previous": "Anterior",
-    "next": "Siguiente"
+    "next": "Siguiente",
+    "byDimension": "Por Dimensión",
+    "byMaterial": "Por Material",
+    "allProductsDesc": "Explora nuestra colección completa de baldosas cerámicas premium",
+    "byDimensionDesc": "Encuentra baldosas por tamaño: 30x30, 60x60, 60x120 y más",
+    "byMaterialDesc": "Navega por tipo de material: Porcelana, Cuerpo Blanco y más"
   },
   "collections": {
     "featured": "Colecciones Destacadas",
