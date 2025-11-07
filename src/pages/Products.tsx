@@ -92,7 +92,7 @@ const Products = () => {
           // Remove the query param after opening
           setSearchParams({});
         }
-      }, 500);
+      }, 300);
     }
   }, [searchParams, setSearchParams]);
 
@@ -254,65 +254,8 @@ const Products = () => {
       </div>
 
       {/* Main Content */}
-      {/* Products Menu Bar - Center of page */}
-      <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-y border-stone-200 shadow-sm">
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="flex items-center justify-center gap-4 py-4">
-            <button
-              onClick={() => {
-                clearAllFilters();
-                setCurrentPage(1);
-              }}
-              className={`px-6 py-2 rounded-lg font-medium transition-all ${
-                filters.dimensions.length === 0 && filters.surfaces.length === 0 && filters.bodyTypes.length === 0
-                  ? 'bg-stone-900 text-white'
-                  : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
-              }`}
-            >
-              {t('nav.allProducts') || 'All Products'}
-            </button>
-            <button
-              onClick={() => {
-                setIsSidebarOpen(true);
-                setTimeout(() => {
-                  const filterSection = document.getElementById('filter-dimension');
-                  if (filterSection) {
-                    filterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }, 300);
-              }}
-              className={`px-6 py-2 rounded-lg font-medium transition-all ${
-                filters.dimensions.length > 0
-                  ? 'bg-stone-900 text-white'
-                  : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
-              }`}
-            >
-              {t('products.byDimension') || 'By Dimension'}
-            </button>
-            <button
-              onClick={() => {
-                setIsSidebarOpen(true);
-                setTimeout(() => {
-                  const filterSection = document.getElementById('filter-material');
-                  if (filterSection) {
-                    filterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }, 300);
-              }}
-              className={`px-6 py-2 rounded-lg font-medium transition-all ${
-                filters.bodyTypes.length > 0
-                  ? 'bg-stone-900 text-white'
-                  : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
-              }`}
-            >
-              {t('products.byMaterial') || 'By Material'}
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Mobile quick filters (chips) */}
-      <div className="lg:hidden sticky top-[calc(4rem+73px)] z-30 bg-white/95 backdrop-blur-md border-y border-stone-200">
+      <div className="lg:hidden sticky top-16 z-30 bg-white/95 backdrop-blur-md border-y border-stone-200">
         <div className="px-4 py-3 space-y-2">
           <div className="flex items-center gap-2 overflow-x-auto whitespace-nowrap">
             {filterOptions.dimensions.map(d => (

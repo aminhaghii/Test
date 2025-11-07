@@ -56,6 +56,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
+  const [showProductsSubmenu, setShowProductsSubmenu] = useState(false);
   const navigate = useNavigate();
 
   const openTlRef = useRef<gsap.core.Timeline | null>(null);
@@ -582,17 +583,16 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             {items && items.length ? (
               items.map((it, idx) => (
                 <li className="sm-panel-itemWrap" key={it.label + idx}>
-                  {/* Products - navigate directly to /products (submenu shown in page) */}
+                  {/* Special handler for Products submenu trigger */}
                   {it.link === '#__products' ? (
-                    <Link
+                    <button
                       className="sm-panel-item"
-                      to="/products"
                       aria-label={it.ariaLabel || it.label}
                       data-index={idx + 1}
-                      onClick={toggleMenu}
+                      onClick={() => setShowProductsSubmenu(v => !v)}
                     >
                       <span className="sm-panel-itemLabel">{it.label}</span>
-                    </Link>
+                    </button>
                   ) : it.onClick ? (
                     <button
                       className="sm-panel-item"
@@ -647,6 +647,51 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                     >
                       <span className="sm-panel-itemLabel">{it.label}</span>
                     </Link>
+                  )}
+                  {/* Inline submenu for Products */}
+                  {it.link === '#__products' && showProductsSubmenu && (
+                    <ul role="list" className="mt-2 pl-4">
+                      <li className="sm-panel-itemWrap">
+                        <Link 
+                          className="sm-panel-item sm-panel-subitem" 
+                          to="/products" 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigate('/products');
+                            toggleMenu();
+                          }}
+                          aria-label="All Products"
+                        >
+                          <span className="sm-panel-itemLabel">All Products</span>
+                        </Link>
+                      </li>
+                      <li className="sm-panel-itemWrap">
+                        <button
+                          className="sm-panel-item sm-panel-subitem"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigate('/products?openFilter=dimension');
+                            toggleMenu();
+                          }}
+                          aria-label="By Dimension"
+                        >
+                          <span className="sm-panel-itemLabel">By Dimension</span>
+                        </button>
+                      </li>
+                      <li className="sm-panel-itemWrap">
+                        <button
+                          className="sm-panel-item sm-panel-subitem"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigate('/products?openFilter=material');
+                            toggleMenu();
+                          }}
+                          aria-label="By Material"
+                        >
+                          <span className="sm-panel-itemLabel">By Material</span>
+                        </button>
+                      </li>
+                    </ul>
                   )}
                 </li>
               ))

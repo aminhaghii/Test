@@ -308,6 +308,14 @@
   font-family: inherit;
 }
 
+/* Submenu items - smaller font */
+.sm-panel-subitem {
+  font-size: 1.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: -1px !important;
+  padding-right: 1em !important;
+}
+
 .staggered-menu-panel .sm-socials-list .sm-socials-link {
   opacity: 1;
   transition: opacity 0.3s ease;
