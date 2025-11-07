@@ -83,9 +83,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       }
       preLayerElsRef.current = preLayers;
 
-      // Use x with pixel value based on viewport width to move panel completely off-screen
-      const viewportWidth = window.innerWidth;
-      const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
+      // Use x with pixel value based on panel width (50vw) to move panel off-screen
+      const panelWidth = window.innerWidth * 0.5; // 50vw
+      const offscreenX = position === 'left' ? -panelWidth : panelWidth;
       // Set initial transform position using x with pixel value
       gsap.set([panel, ...preLayers], { 
         x: offscreenX
@@ -137,9 +137,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const matrix = new DOMMatrix(transform);
         return matrix.m41; // x translation in pixels
       }
-      // Default: off-screen position
-      const viewportWidth = window.innerWidth;
-      return position === 'left' ? -viewportWidth : viewportWidth;
+      // Default: off-screen position (50vw)
+      const panelWidth = window.innerWidth * 0.5;
+      return position === 'left' ? -panelWidth : panelWidth;
     };
 
     const layerStates = layers.map(el => ({ el, start: getX(el) }));
@@ -285,9 +285,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     panel.style.opacity = '1';
     panel.style.pointerEvents = 'auto';
     
-    // Set initial position using x with pixel value
-    const viewportWidth = window.innerWidth;
-    const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
+    // Set initial position using x with pixel value (50vw)
+    const panelWidth = window.innerWidth * 0.5; // 50vw
+    const offscreenX = position === 'left' ? -panelWidth : panelWidth;
     gsap.set(panel, { x: offscreenX });
     
     const tl = buildOpenTimeline();
@@ -313,8 +313,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
     const all = [...layers, panel];
     closeTweenRef.current?.kill();
-    const viewportWidth = window.innerWidth;
-    const offscreenX = position === 'left' ? -viewportWidth : viewportWidth;
+    const panelWidth = window.innerWidth * 0.5; // 50vw
+    const offscreenX = position === 'left' ? -panelWidth : panelWidth;
     closeTweenRef.current = gsap.to(all, {
       x: offscreenX,
       duration: 0.32,
@@ -443,15 +443,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [open, toggleMenu]);
 
-  // Close on outside click only (keep menu on scroll)
+  // Close on outside click only (keep menu open on scroll - no scroll listener)
   React.useEffect(() => {
     if (!openRef.current) return;
     const handleClickOutside = (e: MouseEvent) => {
       const panel = panelRef.current as unknown as Node | null;
       const btn = toggleBtnRef.current as unknown as Node | null;
+      const exitBtn = (e.target as HTMLElement)?.closest('.sm-exit-button');
       const target = e.target as Node;
       if (panel && panel.contains(target)) return;
       if (btn && btn.contains(target)) return;
+      if (exitBtn) return; // Exit button handles its own click
       // clicked outside panel and button
       if (openRef.current) toggleMenu();
     };
@@ -562,6 +564,19 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           visibility: open ? 'visible' : 'hidden'
         }}
       >
+        {/* Exit button */}
+        <button
+          className="sm-exit-button"
+          aria-label="Close menu"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+          }}
+          type="button"
+        >
+          ×
+        </button>
         <div className="sm-panel-inner">
           <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
             {items && items.length ? (
