@@ -11,6 +11,9 @@ import StaggeredMenu from "./StaggeredMenu";
 // API URL for backend resources
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+// Available dimensions
+const dimensions = ['30x30', '30x90', '40x40', '40x100', '60x60', '60x120', '80x80', '100x100'];
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -351,13 +354,7 @@ export function Navigation() {
                         </Link>
 
                         {/* By Dimension */}
-                        <button
-                          onClick={() => {
-                            setIsProductsOpen(false);
-                            navigate('/products?openFilter=dimension');
-                          }}
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                        >
+                        <div className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
                           {/* Background Image */}
                           <img
                             src={`${API_URL}/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png`}
@@ -371,12 +368,29 @@ export function Navigation() {
                             <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
                               {t('products.byDimension') || 'By Dimension'}
                             </h3>
-                            <p className="text-white/90 text-lg mb-6">
-                              {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
+                            <p className="text-white/90 text-lg mb-4">
+                              {t('products.byDimensionDesc') || 'Find tiles by size'}
                             </p>
+                            {/* Dimensions Grid */}
+                            <div className="grid grid-cols-4 gap-2 mb-4">
+                              {dimensions.map((dim, index) => (
+                                <button
+                                  key={dim}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsProductsOpen(false);
+                                    navigate(`/products?dimension=${dim}`);
+                                  }}
+                                  className="px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-xs font-medium hover:bg-white/20 hover:scale-105 hover:border-white/40 transition-all duration-200 transform"
+                                  style={{ animationDelay: `${index * 50}ms` }}
+                                >
+                                  {dim}
+                                </button>
+                              ))}
+                            </div>
                             <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
-                        </button>
+                        </div>
 
                         {/* By Material */}
                         <button

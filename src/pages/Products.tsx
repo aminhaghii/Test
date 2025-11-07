@@ -82,6 +82,8 @@ const Products = () => {
   // Open sidebar and scroll to filter section when openFilter query param is present
   useEffect(() => {
     const openFilter = searchParams.get('openFilter');
+    const dimensionParam = searchParams.get('dimension');
+    
     if (openFilter) {
       setIsSidebarOpen(true);
       // Scroll to filter section after a short delay
@@ -93,6 +95,19 @@ const Products = () => {
           setSearchParams({});
         }
       }, 300);
+    }
+    
+    // Handle dimension query parameter
+    if (dimensionParam) {
+      setFilters(prev => ({
+        ...prev,
+        dimensions: [dimensionParam]
+      }));
+      setIsSidebarOpen(true);
+      // Remove the query param after applying filter
+      setTimeout(() => {
+        setSearchParams({});
+      }, 100);
     }
   }, [searchParams, setSearchParams]);
 
