@@ -328,7 +328,12 @@ export function Navigation() {
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
+                          style={{
+                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
+                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
+                            transitionDelay: isProductsOpen ? '0.1s' : '0s'
+                          }}
                         >
                           {/* Background Image */}
                           <img
@@ -356,7 +361,12 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=dimension');
                           }}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
+                          style={{
+                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
+                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
+                            transitionDelay: isProductsOpen ? '0.2s' : '0s'
+                          }}
                         >
                           {/* Background Image */}
                           <img
@@ -384,7 +394,12 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=material');
                           }}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
+                          style={{
+                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
+                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
+                            transitionDelay: isProductsOpen ? '0.3s' : '0s'
+                          }}
                         >
                           {/* Background Image */}
                           <img
