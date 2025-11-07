@@ -24,6 +24,21 @@
   overflow: visible !important;
 }
 
+/* Backdrop overlay - prevents interaction with page when menu is open */
+.sm-backdrop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  pointer-events: auto;
+  z-index: 9997; /* Behind menu (9999) but above page content */
+  cursor: default;
+}
+
 .staggered-menu-header {
   position: absolute;
   top: 0;

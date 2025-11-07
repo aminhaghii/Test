@@ -541,6 +541,15 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </header>
       )}
 
+      {/* Backdrop overlay - prevents interaction with page when menu is open */}
+      {open && (
+        <div 
+          className="sm-backdrop-overlay"
+          onClick={toggleMenu}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Prelayers and Panel - rendered as siblings to the toggle/header */}
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
