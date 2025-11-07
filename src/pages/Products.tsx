@@ -92,7 +92,7 @@ const Products = () => {
           // Remove the query param after opening
           setSearchParams({});
         }
-      }, 300);
+      }, 500);
     }
   }, [searchParams, setSearchParams]);
 
