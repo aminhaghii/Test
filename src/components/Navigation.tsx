@@ -19,6 +19,7 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [showDimensions, setShowDimensions] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
@@ -354,7 +355,10 @@ export function Navigation() {
                         </Link>
 
                         {/* By Dimension */}
-                        <div className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <div 
+                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          onClick={() => setShowDimensions(!showDimensions)}
+                        >
                           {/* Background Image */}
                           <img
                             src={`${API_URL}/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png`}
@@ -363,33 +367,48 @@ export function Navigation() {
                           />
                           {/* Gradient Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                          {/* Content */}
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                            <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
-                              {t('products.byDimension') || 'By Dimension'}
-                            </h3>
-                            <p className="text-white/90 text-lg mb-4">
-                              {t('products.byDimensionDesc') || 'Find tiles by size'}
-                            </p>
-                            {/* Dimensions Grid */}
-                            <div className="grid grid-cols-4 gap-2 mb-4">
-                              {dimensions.map((dim, index) => (
-                                <button
-                                  key={dim}
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsProductsOpen(false);
-                                    navigate(`/products?dimension=${dim}`);
-                                  }}
-                                  className="px-3 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-xs font-medium hover:bg-white/20 hover:scale-105 hover:border-white/40 transition-all duration-200 transform"
-                                  style={{ animationDelay: `${index * 50}ms` }}
-                                >
-                                  {dim}
-                                </button>
-                              ))}
+                          
+                          {/* Default Content */}
+                          {!showDimensions && (
+                            <div className="absolute inset-0 flex flex-col justify-end p-8 z-10 transition-opacity duration-300">
+                              <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
+                                {t('products.byDimension') || 'By Dimension'}
+                              </h3>
+                              <p className="text-white/90 text-lg mb-6">
+                                {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
+                              </p>
+                              <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                             </div>
-                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
-                          </div>
+                          )}
+                          
+                          {/* Dimensions Grid - appears on click */}
+                          {showDimensions && (
+                            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 z-10">
+                              <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
+                                {t('products.byDimension') || 'By Dimension'}
+                              </h3>
+                              <div className="grid grid-cols-4 gap-3 w-full max-w-md">
+                                {dimensions.map((dim, index) => (
+                                  <button
+                                    key={dim}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setIsProductsOpen(false);
+                                      setShowDimensions(false);
+                                      navigate(`/products?dimension=${dim}`);
+                                    }}
+                                    className="px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
+                                    style={{ 
+                                      animationDelay: `${index * 50}ms`,
+                                      animationFillMode: 'forwards'
+                                    }}
+                                  >
+                                    {dim}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
 
                         {/* By Material */}
