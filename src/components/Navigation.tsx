@@ -392,7 +392,7 @@ export function Navigation() {
                           {/* Dimensions Grid - appears on click */}
                           {showDimensions && (
                             <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                              <div className="w-full max-w-lg bg-black/65 backdrop-blur-md rounded-2xl border border-white/15 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                              <div className="w-full max-w-lg bg-white/10 backdrop-blur-xl rounded-2xl border border-white/40 p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)]">
                                 <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
                                   {t('products.byDimension') || 'By Dimension'}
                                 </h3>
@@ -451,7 +451,7 @@ export function Navigation() {
                           {/* Materials Grid - appears on click */}
                           {showMaterials && (
                             <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                              <div className="w-full max-w-md bg-black/65 backdrop-blur-md rounded-2xl border border-white/15 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                              <div className="w-full max-w-md bg-white/10 backdrop-blur-xl rounded-2xl border border-white/40 p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)]">
                                 <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
                                   {t('products.byMaterial') || 'By Material'}
                                 </h3>
