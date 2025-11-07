@@ -83,6 +83,7 @@ const Products = () => {
   useEffect(() => {
     const openFilter = searchParams.get('openFilter');
     const dimensionParam = searchParams.get('dimension');
+    const bodyTypeParam = searchParams.get('bodyType');
     
     if (openFilter) {
       setIsSidebarOpen(true);
@@ -102,6 +103,19 @@ const Products = () => {
       setFilters(prev => ({
         ...prev,
         dimensions: [dimensionParam]
+      }));
+      setIsSidebarOpen(true);
+      // Remove the query param after applying filter
+      setTimeout(() => {
+        setSearchParams({});
+      }, 100);
+    }
+    
+    // Handle bodyType query parameter
+    if (bodyTypeParam) {
+      setFilters(prev => ({
+        ...prev,
+        bodyTypes: [bodyTypeParam]
       }));
       setIsSidebarOpen(true);
       // Remove the query param after applying filter

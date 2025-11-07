@@ -14,12 +14,16 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 // Available dimensions
 const dimensions = ['30x30', '30x90', '40x40', '40x100', '60x60', '60x120', '80x80', '100x100'];
 
+// Available materials
+const materials = ['White Body', 'Porcelain'];
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [showDimensions, setShowDimensions] = useState(false);
+  const [showMaterials, setShowMaterials] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
@@ -307,6 +311,7 @@ export function Navigation() {
                 onMouseLeave={() => {
                   setIsProductsOpen(false);
                   setShowDimensions(false);
+                  setShowMaterials(false);
                 }}
               >
                 <button
@@ -415,32 +420,65 @@ export function Navigation() {
                         </div>
 
                         {/* By Material */}
-                        <button
-                          onClick={() => {
-                            setIsProductsOpen(false);
-                            navigate('/products?openFilter=material');
-                          }}
+                        <div 
                           className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          onClick={() => setShowMaterials(!showMaterials)}
                         >
-                          {/* Background Image */}
+                          {/* Background Image - fades out when materials are shown */}
                           <img
                             src={`${API_URL}/ALMAS/f65620a0-45d0-411c-bc06-fa01ae497157.png`}
                             alt="By Material"
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                              showMaterials ? 'opacity-0' : 'opacity-100 group-hover:scale-110'
+                            }`}
                           />
-                          {/* Gradient Overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                          {/* Content */}
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                            <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
-                              {t('products.byMaterial') || 'By Material'}
-                            </h3>
-                            <p className="text-white/90 text-lg mb-6">
-                              {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
-                            </p>
-                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
-                          </div>
-                        </button>
+                          {/* Gradient Overlay - fades out when materials are shown */}
+                          <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ${
+                            showMaterials ? 'opacity-0' : 'opacity-100'
+                          }`} />
+                          
+                          {/* Default Content */}
+                          {!showMaterials && (
+                            <div className="absolute inset-0 flex flex-col justify-end p-8 z-10 transition-opacity duration-300">
+                              <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
+                                {t('products.byMaterial') || 'By Material'}
+                              </h3>
+                              <p className="text-white/90 text-lg mb-6">
+                                {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
+                              </p>
+                              <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
+                            </div>
+                          )}
+                          
+                          {/* Materials Grid - appears on click with clean background */}
+                          {showMaterials && (
+                            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 z-10">
+                              <h3 className="text-2xl font-bold mb-8 text-white text-center animate-fade-in-up">
+                                {t('products.byMaterial') || 'By Material'}
+                              </h3>
+                              <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+                                {materials.map((material, index) => (
+                                  <button
+                                    key={material}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setIsProductsOpen(false);
+                                      setShowMaterials(false);
+                                      navigate(`/products?bodyType=${material}`);
+                                    }}
+                                    className="w-full aspect-square flex items-center justify-center px-4 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-base font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
+                                    style={{ 
+                                      animationDelay: `${index * 50}ms`,
+                                      animationFillMode: 'forwards'
+                                    }}
+                                  >
+                                    {material}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
                     </div>
                   </div>
                 </div>
