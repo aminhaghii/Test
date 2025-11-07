@@ -1,5 +1,5 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
 
@@ -57,6 +57,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
   const [showProductsSubmenu, setShowProductsSubmenu] = useState(false);
+  const navigate = useNavigate();
 
   const openTlRef = useRef<gsap.core.Timeline | null>(null);
   const closeTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -605,29 +606,37 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       <span className="sm-panel-itemLabel">{it.label}</span>
                     </button>
                   ) : it.link.includes('#') ? (
-                    <a
+                    <button
                       className="sm-panel-item"
-                      href={it.link}
                       aria-label={it.ariaLabel || it.label}
                       data-index={idx + 1}
                       onClick={(e) => {
                         e.preventDefault();
                         const [path, hash] = it.link.split('#');
                         if (path && path !== window.location.pathname) {
-                          window.location.href = it.link;
+                          // Navigate to new page with hash
+                          navigate(path);
+                          if (hash) {
+                            // Wait for page to load, then scroll to hash
+                            setTimeout(() => {
+                              const element = document.getElementById(hash);
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              }
+                            }, 100);
+                          }
                         } else if (hash) {
+                          // Same page, just scroll to hash
                           const element = document.getElementById(hash);
                           if (element) {
                             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           }
-                          toggleMenu();
-                        } else {
-                          toggleMenu();
                         }
+                        toggleMenu();
                       }}
                     >
                       <span className="sm-panel-itemLabel">{it.label}</span>
-                    </a>
+                    </button>
                   ) : (
                     <Link
                       className="sm-panel-item"
@@ -648,12 +657,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                         </Link>
                       </li>
                       <li className="sm-panel-itemWrap">
-                        <Link className="sm-panel-item" to="/products/dimension" onClick={toggleMenu} aria-label="By Dimension">
+                        <Link className="sm-panel-item" to="/products" onClick={toggleMenu} aria-label="By Dimension">
                           <span className="sm-panel-itemLabel">By Dimension</span>
                         </Link>
                       </li>
                       <li className="sm-panel-itemWrap">
-                        <Link className="sm-panel-item" to="/products/material" onClick={toggleMenu} aria-label="By Material">
+                        <Link className="sm-panel-item" to="/products" onClick={toggleMenu} aria-label="By Material">
                           <span className="sm-panel-itemLabel">By Material</span>
                         </Link>
                       </li>
