@@ -292,10 +292,14 @@ export function Navigation() {
 
             {/* Right Side - Products Dropdown, Hamburger Menu and Mobile Button */}
             <div className="flex items-center gap-6">
-              {/* Products Dropdown */}
-              <div ref={productsRef} className="relative z-[100]">
+              {/* Products Full-Screen Overlay */}
+              <div 
+                ref={productsRef} 
+                className="relative z-[100]"
+                onMouseEnter={() => setIsProductsOpen(true)}
+                onMouseLeave={() => setIsProductsOpen(false)}
+              >
                 <button
-                  onClick={() => setIsProductsOpen(!isProductsOpen)}
                   className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                     isScrolled 
                       ? "text-neutral-charcoal hover:bg-neutral-100" 
@@ -305,35 +309,68 @@ export function Navigation() {
                   {t('nav.products')}
                 </button>
                 {isProductsOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-white/95 backdrop-blur-md border border-neutral-stone/40 shadow-xl rounded-lg overflow-hidden">
-                    <Link
-                      to="/products"
-                      onClick={() => {
-                        setIsProductsOpen(false);
-                        navigate('/products');
-                      }}
-                      className="block px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
-                    >
-                      {t('nav.allProducts') || 'All Products'}
-                    </Link>
-                    <button
-                      onClick={() => {
-                        setIsProductsOpen(false);
-                        navigate('/products?openFilter=dimension');
-                      }}
-                      className="w-full text-left px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
-                    >
-                      {t('products.byDimension') || 'By Dimension'}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsProductsOpen(false);
-                        navigate('/products?openFilter=material');
-                      }}
-                      className="w-full text-left px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
-                    >
-                      {t('products.byMaterial') || 'By Material'}
-                    </button>
+                  <div className="fixed inset-0 top-16 bg-black/95 backdrop-blur-md z-[99]">
+                    <div className="container mx-auto px-6 lg:px-20 py-16 h-full flex items-center">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
+                        {/* All Products */}
+                        <Link
+                          to="/products"
+                          onClick={() => setIsProductsOpen(false)}
+                          className="group relative h-96 bg-gradient-to-br from-stone-800 to-stone-900 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
+                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                              {t('nav.allProducts') || 'All Products'}
+                            </h3>
+                            <p className="text-white/80 text-lg mb-6">
+                              {t('products.allProductsDesc') || 'Explore our complete collection of premium ceramic tiles'}
+                            </p>
+                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                          </div>
+                        </Link>
+
+                        {/* By Dimension */}
+                        <button
+                          onClick={() => {
+                            setIsProductsOpen(false);
+                            navigate('/products?openFilter=dimension');
+                          }}
+                          className="group relative h-96 bg-gradient-to-br from-stone-700 to-stone-800 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
+                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                              {t('products.byDimension') || 'By Dimension'}
+                            </h3>
+                            <p className="text-white/80 text-lg mb-6">
+                              {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
+                            </p>
+                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                          </div>
+                        </button>
+
+                        {/* By Material */}
+                        <button
+                          onClick={() => {
+                            setIsProductsOpen(false);
+                            navigate('/products?openFilter=material');
+                          }}
+                          className="group relative h-96 bg-gradient-to-br from-stone-600 to-stone-700 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white z-10">
+                            <h3 className="text-3xl font-bold mb-3 group-hover:text-luxury-gold transition-colors">
+                              {t('products.byMaterial') || 'By Material'}
+                            </h3>
+                            <p className="text-white/80 text-lg mb-6">
+                              {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
+                            </p>
+                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                          </div>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
