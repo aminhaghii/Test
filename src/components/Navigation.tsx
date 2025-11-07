@@ -206,28 +206,28 @@ export function Navigation() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-background/98 backdrop-blur-xl shadow-elegant border-b border-neutral-stone/40"
-            : "bg-gradient-to-b from-black/40 via-black/20 to-transparent"
+            ? "bg-white backdrop-blur-xl shadow-elegant border-b border-neutral-stone/40"
+            : "bg-white"
         }`}
       >
         {/* Top Bar - Only visible when not scrolled */}
         <div
-          className={`border-b border-white/10 transition-all duration-500 ${
+          className={`border-b border-neutral-200 transition-all duration-500 ${
             isScrolled ? "h-0 opacity-0 overflow-hidden" : "h-auto opacity-100"
           }`}
         >
           <div className="container mx-auto px-6 lg:px-20">
             <div className="flex items-center justify-between h-10 text-xs">
-              <div className="flex items-center gap-6 text-white/80">
-                <span className="flex items-center gap-2 hover:text-luxury-gold transition-smooth cursor-pointer">
+              <div className="flex items-center gap-6 text-neutral-600">
+                <span className="flex items-center gap-2 hover:text-neutral-charcoal transition-smooth cursor-pointer">
                   <MapPin className="w-3.5 h-3.5" />
                   {t('nav.showroom')}
                 </span>
                 <span className="hidden md:block"></span>
               </div>
-              <div className="flex items-center gap-2 text-white/80">
+              <div className="flex items-center gap-2 text-neutral-600">
                 <span className="hidden md:block">|</span>
-                <a href="tel:021-88218520" className="hidden md:block hover:text-luxury-gold transition-smooth">
+                <a href="tel:021-88218520" className="hidden md:block hover:text-neutral-charcoal transition-smooth">
                   021-88218520
                 </a>
                 {/* Language dropdown (top bar, right) */}
@@ -241,7 +241,7 @@ export function Navigation() {
                     }}
                     aria-haspopup="listbox"
                     aria-expanded={isLangOpen}
-                    className="px-2.5 py-1.5 rounded-md text-[11px] font-semibold border border-white/40 text-white hover:bg-white/10 transition-colors cursor-pointer pointer-events-auto"
+                    className="px-2.5 py-1.5 rounded-md text-[11px] font-semibold border border-neutral-300 text-neutral-charcoal hover:bg-neutral-100 transition-colors cursor-pointer pointer-events-auto"
                     title="Select language"
                   >
                     {currentLanguage?.toUpperCase() || 'EN'}
@@ -249,7 +249,7 @@ export function Navigation() {
                   {isLangOpen && (
                     <ul
                       role="listbox"
-                      className="absolute right-0 mt-2 w-36 rounded-md border border-white/20 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
+                      className="absolute right-0 mt-2 w-36 rounded-md border border-neutral-200 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {[
@@ -263,7 +263,7 @@ export function Navigation() {
                           key={lang.code} 
                           role="option" 
                           aria-selected={currentLanguage===lang.code}
-                          className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-50' : ''}`}
+                          className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-100' : ''}`}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -289,9 +289,7 @@ export function Navigation() {
             {/* Logo */}
             <Link to="/" className="flex items-center z-50 group">
               <span
-                className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 ${
-                  isScrolled ? "text-neutral-charcoal" : "text-white"
-                }`}
+                className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 text-neutral-charcoal`}
                 style={{ letterSpacing: "-0.04em" }}
               >
                 Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
@@ -318,7 +316,7 @@ export function Navigation() {
                   className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                     isScrolled 
                       ? "text-neutral-charcoal hover:bg-neutral-100" 
-                      : "text-white/95 hover:bg-white/10"
+                      : "text-neutral-charcoal hover:bg-neutral-100/70"
                   }`}
                 >
                   {t('nav.products')}
@@ -490,7 +488,7 @@ export function Navigation() {
                 className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${
                       isScrolled
                     ? 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100'
-                    : 'border-white/60 text-white hover:bg-white/15'
+                    : 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100/70'
                     }`}
                   >
                 {t('nav.contact')}
@@ -498,7 +496,7 @@ export function Navigation() {
 
               {/* Decorative Hash Line - thinner but longer */}
               <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
-                isScrolled ? "bg-neutral-300/40" : "bg-white/30"
+                isScrolled ? "bg-neutral-300/40" : "bg-neutral-200"
               }`} />
               {/* Hamburger Menu - StaggeredMenu */}
               <div className="relative z-[101]">
@@ -526,9 +524,7 @@ export function Navigation() {
               {/* Mobile Menu Button - fallback for small screens */}
             <button
               aria-label="Toggle navigation"
-              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${
-                isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-white/70 text-white'
-              }`}
+              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-neutral-300 text-neutral-700'}`}
               onClick={() => {
                 setIsMobileMenuOpen((v)=>!v);
               }}
