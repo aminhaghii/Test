@@ -312,24 +312,23 @@ export function Navigation() {
                   {t('nav.products')}
                 </button>
                 <div 
-                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] bg-background/98 backdrop-blur-xl transition-all duration-500 ease-out ${
+                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] transition-all duration-500 ease-out ${
                     isProductsOpen 
                       ? 'opacity-100 translate-y-0 pointer-events-auto' 
                       : 'opacity-0 -translate-y-4 pointer-events-none'
                   }`}
                 >
                   <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
-                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out`} style={{ perspective: '1000px' }}>
+                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out ${
+                      isProductsOpen 
+                        ? 'opacity-100 translate-y-0' 
+                        : 'opacity-0 translate-y-8'
+                    }`}>
                         {/* All Products */}
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
-                          style={{
-                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
-                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
-                            transitionDelay: isProductsOpen ? '0.1s' : '0s'
-                          }}
+                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
@@ -357,12 +356,7 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=dimension');
                           }}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
-                          style={{
-                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
-                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
-                            transitionDelay: isProductsOpen ? '0.2s' : '0s'
-                          }}
+                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
@@ -390,12 +384,7 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=material');
                           }}
-                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:rotate-2"
-                          style={{
-                            transform: isProductsOpen ? 'rotateY(0deg)' : 'rotateY(90deg)',
-                            transition: 'transform 0.6s ease-out, opacity 0.6s ease-out',
-                            transitionDelay: isProductsOpen ? '0.3s' : '0s'
-                          }}
+                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
