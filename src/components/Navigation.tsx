@@ -26,6 +26,7 @@ export function Navigation() {
   const [showMaterials, setShowMaterials] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
+  const productsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -65,7 +66,14 @@ export function Navigation() {
       }
       // close products dropdown if clicked outside
       if (isProductsOpen && productsRef.current && !productsRef.current.contains(target)) {
+        // Clear timeout and close immediately on click outside
+        if (productsTimeoutRef.current) {
+          clearTimeout(productsTimeoutRef.current);
+          productsTimeoutRef.current = null;
+        }
         setIsProductsOpen(false);
+        setShowDimensions(false);
+        setShowMaterials(false);
       }
     };
 
@@ -75,6 +83,10 @@ export function Navigation() {
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      // Cleanup timeout on unmount
+      if (productsTimeoutRef.current) {
+        clearTimeout(productsTimeoutRef.current);
+      }
     };
   }, [isMobileMenuOpen, isLangOpen, isProductsOpen]);
 
@@ -233,11 +245,21 @@ export function Navigation() {
               <div 
                 ref={productsRef} 
                 className="relative z-[100]"
-                onMouseEnter={() => setIsProductsOpen(true)}
+                  onMouseEnter={() => {
+                  // Clear any pending close timeout
+                  if (productsTimeoutRef.current) {
+                    clearTimeout(productsTimeoutRef.current);
+                    productsTimeoutRef.current = null;
+                  }
+                      setIsProductsOpen(true);
+                }}
                 onMouseLeave={() => {
-                  setIsProductsOpen(false);
-                  setShowDimensions(false);
-                  setShowMaterials(false);
+                  // Add delay before closing to allow user to move mouse to overlay
+                  productsTimeoutRef.current = setTimeout(() => {
+                    setIsProductsOpen(false);
+                    setShowDimensions(false);
+                    setShowMaterials(false);
+                  }, 200); // 200ms delay
                 }}
               >
                 <button
@@ -255,6 +277,22 @@ export function Navigation() {
                       ? 'opacity-100 translate-y-0 pointer-events-auto' 
                       : 'opacity-0 -translate-y-4 pointer-events-none'
                   }`}
+                  onMouseEnter={() => {
+                    // Clear timeout when mouse enters overlay
+                    if (productsTimeoutRef.current) {
+                      clearTimeout(productsTimeoutRef.current);
+                      productsTimeoutRef.current = null;
+                    }
+                    setIsProductsOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    // Add delay before closing
+                    productsTimeoutRef.current = setTimeout(() => {
+                    setIsProductsOpen(false);
+                      setShowDimensions(false);
+                      setShowMaterials(false);
+                    }, 200);
+                  }}
                 >
                   <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
                     <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out ${
