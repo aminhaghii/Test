@@ -308,10 +308,19 @@ export function Navigation() {
                 >
                   {t('nav.products')}
                 </button>
-                {isProductsOpen && (
-                  <div className="fixed inset-x-0 top-20 lg:top-24 bottom-0 bg-white z-[99] shadow-2xl">
-                    <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
+                <div 
+                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] transition-all duration-500 ease-out ${
+                    isProductsOpen 
+                      ? 'opacity-100 translate-y-0 pointer-events-auto' 
+                      : 'opacity-0 -translate-y-4 pointer-events-none'
+                  }`}
+                >
+                  <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
+                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out ${
+                      isProductsOpen 
+                        ? 'opacity-100 translate-y-0' 
+                        : 'opacity-0 translate-y-8'
+                    }`}>
                         {/* All Products */}
                         <Link
                           to="/products"
@@ -366,10 +375,9 @@ export function Navigation() {
                             <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
                         </button>
-                      </div>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Decorative Hash Line - thinner but longer */}
