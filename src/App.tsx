@@ -26,6 +26,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const ProfessionalServices = lazy(() => import("./pages/ProfessionalServices"));
 const Inspiration = lazy(() => import("./pages/Inspiration"));
 const Catalogues = lazy(() => import("./pages/Catalogues"));
+const Collections = lazy(() => import("./pages/Collections"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
 const Logout = lazy(() => import("./pages/Logout"));
@@ -37,6 +38,8 @@ const ProductForm = lazy(() => import("./pages/admin/ProductForm"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
+const BlogManagement = lazy(() => import("./pages/admin/BlogManagement"));
+const BlogPostForm = lazy(() => import("./pages/admin/BlogPostForm"));
 const ExportPage = lazy(() => import("./pages/about/Export"));
 const CombinationPage = lazy(() => import("./pages/about/Combination"));
 
@@ -80,6 +83,7 @@ const App = () => (
                 <Route path="/services" element={<AuthGuard><ProfessionalServices /></AuthGuard>} />
                 <Route path="/inspiration" element={<AuthGuard><Inspiration /></AuthGuard>} />
                 <Route path="/catalogues" element={<AuthGuard><Catalogues /></AuthGuard>} />
+                <Route path="/collections" element={<AuthGuard><Collections /></AuthGuard>} />
                 
                 {/* Legal Pages */}
                 <Route path="/terms" element={<AuthGuard><TermsOfService /></AuthGuard>} />
@@ -97,6 +101,9 @@ const App = () => (
                 <Route path="/admin/products" element={<AuthGuard requireAdmin><ProductList /></AuthGuard>} />
                 <Route path="/admin/products/new" element={<AuthGuard requireAdmin><ProductForm /></AuthGuard>} />
                 <Route path="/admin/products/:id" element={<AuthGuard requireAdmin><ProductForm /></AuthGuard>} />
+                <Route path="/admin/blog" element={<AuthGuard requireAdmin><BlogManagement /></AuthGuard>} />
+                <Route path="/admin/blog/new" element={<AuthGuard requireAdmin><BlogPostForm /></AuthGuard>} />
+                <Route path="/admin/blog/:id" element={<AuthGuard requireAdmin><BlogPostForm /></AuthGuard>} />
                 <Route path="/admin/users" element={<AuthGuard requireAdmin><UserManagement /></AuthGuard>} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
