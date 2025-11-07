@@ -362,18 +362,14 @@ export function Navigation() {
                           className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                           onClick={() => setShowDimensions(!showDimensions)}
                         >
-                          {/* Background Image - fades out when dimensions are shown */}
+                          {/* Background Image */}
                           <img
                             src={`${API_URL}/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png`}
                             alt="By Dimension"
-                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                              showDimensions ? 'opacity-0' : 'opacity-100 group-hover:scale-110'
-                            }`}
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
-                          {/* Gradient Overlay - fades out when dimensions are shown */}
-                          <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-500 ${
-                            showDimensions ? 'opacity-0' : 'opacity-100'
-                          }`} />
+                          {/* Gradient Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                           
                           {/* Default Content */}
                           {!showDimensions && (
@@ -388,9 +384,9 @@ export function Navigation() {
                             </div>
                           )}
                           
-                          {/* Dimensions Grid - appears on click with clean background */}
+                          {/* Dimensions Grid - appears on click */}
                           {showDimensions && (
-                            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 z-10 bg-neutral-900/95 backdrop-blur-md">
+                            <div className="absolute inset-0 flex flex-col justify-center items-center p-8 z-10">
                               <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
                                 {t('products.byDimension') || 'By Dimension'}
                               </h3>
