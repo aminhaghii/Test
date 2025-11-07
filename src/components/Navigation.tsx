@@ -319,11 +319,7 @@ export function Navigation() {
                   }`}
                 >
                   <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
-                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out ${
-                      isProductsOpen 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-8'
-                    }`}>
+                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out`} style={{ perspective: '1000px' }}>
                         {/* All Products */}
                         <Link
                           to="/products"
