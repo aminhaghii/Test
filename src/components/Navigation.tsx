@@ -328,7 +328,7 @@ export function Navigation() {
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
@@ -346,7 +346,7 @@ export function Navigation() {
                             <p className="text-white/90 text-lg mb-6">
                               {t('products.allProductsDesc') || 'Explore our complete collection of premium ceramic tiles'}
                             </p>
-                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
                         </Link>
 
@@ -356,7 +356,7 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=dimension');
                           }}
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
@@ -374,7 +374,7 @@ export function Navigation() {
                             <p className="text-white/90 text-lg mb-6">
                               {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
                             </p>
-                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
                         </button>
 
@@ -384,7 +384,7 @@ export function Navigation() {
                             setIsProductsOpen(false);
                             navigate('/products?openFilter=material');
                           }}
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-luxury-gold"
+                          className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
                         >
                           {/* Background Image */}
                           <img
@@ -402,7 +402,7 @@ export function Navigation() {
                             <p className="text-white/90 text-lg mb-6">
                               {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
                             </p>
-                            <div className="w-16 h-1 bg-luxury-gold transform group-hover:scale-x-125 transition-transform origin-left" />
+                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
                         </button>
                     </div>
