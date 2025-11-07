@@ -387,10 +387,10 @@ export function Navigation() {
                           {/* Dimensions Grid - appears on click */}
                           {showDimensions && (
                             <div className="absolute inset-0 flex flex-col justify-center items-center p-8 z-10">
-                              <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
+                              <h3 className="text-2xl font-bold mb-8 text-white text-center animate-fade-in-up">
                                 {t('products.byDimension') || 'By Dimension'}
                               </h3>
-                              <div className="grid grid-cols-4 gap-3 w-full max-w-md">
+                              <div className="grid grid-cols-4 gap-3 w-full max-w-lg">
                                 {dimensions.map((dim, index) => (
                                   <button
                                     key={dim}
@@ -400,7 +400,7 @@ export function Navigation() {
                                       setShowDimensions(false);
                                       navigate(`/products?dimension=${dim}`);
                                     }}
-                                    className="px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
+                                    className="w-full aspect-square flex items-center justify-center px-2 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
                                     style={{ 
                                       animationDelay: `${index * 50}ms`,
                                       animationFillMode: 'forwards'
