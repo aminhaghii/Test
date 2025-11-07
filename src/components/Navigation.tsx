@@ -12,7 +12,9 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
   const mobileDrawerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -39,7 +41,7 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu and language dropdown on outside click
+  // Close mobile menu, language dropdown, and products dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -50,16 +52,20 @@ export function Navigation() {
       if (isLangOpen && langRef.current && !langRef.current.contains(target)) {
         setIsLangOpen(false);
       }
+      // close products dropdown if clicked outside
+      if (isProductsOpen && productsRef.current && !productsRef.current.contains(target)) {
+        setIsProductsOpen(false);
+      }
     };
 
-    if (isMobileMenuOpen || isLangOpen) {
+    if (isMobileMenuOpen || isLangOpen || isProductsOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isMobileMenuOpen, isLangOpen]);
+  }, [isMobileMenuOpen, isLangOpen, isProductsOpen]);
 
   // Lock body scroll and trap focus when mobile menu is open
   useEffect(() => {
@@ -134,7 +140,6 @@ export function Navigation() {
   // Build menu items for StaggeredMenu
   const buildMenuItems = () => {
     const items: { label: string; link: string; ariaLabel: string; onClick?: () => void }[] = [
-      { label: t('nav.products'), link: "#__products", ariaLabel: t('nav.products') },
       { label: t('nav.inspiration'), link: "/inspiration", ariaLabel: t('nav.inspiration') },
       { label: t('nav.catalogues'), link: "/catalogues", ariaLabel: t('nav.catalogues') },
       { label: t('nav.about'), link: "/about", ariaLabel: t('nav.about') },
@@ -285,8 +290,54 @@ export function Navigation() {
             {/* Desktop Navigation - empty */}
             <div className="hidden lg:flex items-center justify-end" />
 
-            {/* Right Side - Hamburger Menu and Mobile Button */}
+            {/* Right Side - Products Dropdown, Hamburger Menu and Mobile Button */}
             <div className="flex items-center gap-6">
+              {/* Products Dropdown */}
+              <div ref={productsRef} className="relative z-[100]">
+                <button
+                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                    isScrolled 
+                      ? "text-neutral-charcoal hover:bg-neutral-100" 
+                      : "text-white/95 hover:bg-white/10"
+                  }`}
+                >
+                  {t('nav.products')}
+                </button>
+                {isProductsOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white/95 backdrop-blur-md border border-neutral-stone/40 shadow-xl rounded-lg overflow-hidden">
+                    <Link
+                      to="/products"
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        navigate('/products');
+                      }}
+                      className="block px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
+                    >
+                      {t('nav.allProducts') || 'All Products'}
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        navigate('/products?openFilter=dimension');
+                      }}
+                      className="w-full text-left px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
+                    >
+                      {t('products.byDimension') || 'By Dimension'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        navigate('/products?openFilter=material');
+                      }}
+                      className="w-full text-left px-4 py-3 text-sm text-neutral-charcoal hover:bg-neutral-100 transition-colors"
+                    >
+                      {t('products.byMaterial') || 'By Material'}
+                    </button>
+                  </div>
+                )}
+              </div>
+
               {/* Decorative Hash Line - thinner but longer */}
               <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
                 isScrolled ? "bg-neutral-300/40" : "bg-white/30"
@@ -309,6 +360,7 @@ export function Navigation() {
                   onMenuOpen={() => { 
                     setIsMobileMenuOpen(false);
                     setIsLangOpen(false);
+                    setIsProductsOpen(false);
                   }}
                   onMenuClose={() => {}}
                 />
