@@ -312,7 +312,7 @@ export function Navigation() {
                   {t('nav.products')}
                 </button>
                 <div 
-                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] transition-all duration-500 ease-out ${
+                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] bg-background/98 backdrop-blur-xl transition-all duration-500 ease-out ${
                     isProductsOpen 
                       ? 'opacity-100 translate-y-0 pointer-events-auto' 
                       : 'opacity-0 -translate-y-4 pointer-events-none'
