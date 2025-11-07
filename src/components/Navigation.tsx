@@ -451,10 +451,10 @@ export function Navigation() {
               {/* Contact CTA */}
               <Link
                 to="/contact"
-                className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${
+                className={`hidden lg:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold transition-colors duration-200 ${
                       isScrolled
-                    ? 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100'
-                    : 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100/70'
+                    ? 'text-neutral-charcoal hover:text-neutral-600'
+                    : 'text-neutral-charcoal hover:text-neutral-600'
                     }`}
                   >
                 {t('nav.contact')}
@@ -471,10 +471,10 @@ export function Navigation() {
                   }}
                   aria-haspopup="listbox"
                   aria-expanded={isLangOpen}
-                  className={`px-3 py-2 rounded-md text-xs font-semibold border transition-colors cursor-pointer pointer-events-auto ${
+                  className={`px-3 py-2 rounded-md text-xs font-semibold transition-colors cursor-pointer pointer-events-auto ${
                     isScrolled
-                      ? 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100'
-                      : 'border-neutral-300 text-neutral-charcoal hover:bg-neutral-100/70'
+                      ? 'text-neutral-charcoal hover:text-neutral-600'
+                      : 'text-neutral-charcoal hover:text-neutral-600'
                   }`}
                   title="Select language"
                 >
