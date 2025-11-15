@@ -65,7 +65,7 @@ const ProductForm = () => {
       name: '',
       dimension: '60x60',
       surface: 'Matt',
-      body_type: 'Porcelain',
+      body_type: 'Porcelain', // Default to Porcelain
       color: 'White',
       category: 'Floor Tiles',
       price: 0,
@@ -81,7 +81,7 @@ const ProductForm = () => {
   // Dropdown options matching the seeded products
   const dimensions = ['30x30', '30x90', '40x40', '40x100', '60x60', '60x120', '80x80', '100x100'];
   const surfaces = ['Matt', 'Polished', 'Glossy', 'Textured', 'Satin'];
-  const bodyTypes = ['Ceramic', 'Porcelain', 'Marble', 'Granite', 'Quartz'];
+  const bodyTypes = ['Porcelain', 'White Body']; // Only Porcelain and White Body allowed
   const categories = ['Wall Tiles', 'Floor Tiles', 'Bathroom', 'Kitchen', 'Living Room'];
   const colors = ['White', 'Gray', 'Cream', 'Brown', 'Black', 'Beige', 'Green', 'Red', 'Yellow', 'Blue', 'Multi'];
 
@@ -450,7 +450,7 @@ const ProductForm = () => {
 
                 <div className="sm:col-span-2 lg:col-span-1">
                   <label className="block text-xs sm:text-sm font-semibold text-neutral-charcoal mb-1.5 sm:mb-2">
-                    Body Type *
+                    Material *
                   </label>
                   <select
                     {...register('body_type')}

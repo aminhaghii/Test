@@ -323,10 +323,10 @@ const ProductList = () => {
                   </div>
                 </div>
 
-                {/* Body Types */}
+                {/* Material */}
                 <div>
                   <label className="block text-sm font-semibold text-neutral-charcoal mb-2">
-                    Body Types
+                    Material
                   </label>
                   <div className="space-y-2">
                     {filterOptions.bodyTypes.map(type => (
@@ -447,6 +447,9 @@ const ProductList = () => {
                     Surface
                   </th>
                   <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal hidden lg:table-cell">
+                    Material
+                  </th>
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal hidden lg:table-cell">
                     Category
                   </th>
                   <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal">
@@ -460,7 +463,7 @@ const ProductList = () => {
               <tbody>
                 {isLoading ? (
                   <tr>
-                    <td colSpan={8} className="px-6 py-12 text-center">
+                    <td colSpan={9} className="px-6 py-12 text-center">
                       <div className="flex items-center justify-center">
                         <div className="w-12 h-12 border-4 border-luxury-gold border-t-transparent rounded-full animate-spin" />
                       </div>
@@ -468,7 +471,7 @@ const ProductList = () => {
                   </tr>
                 ) : products.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="px-6 py-12 text-center text-neutral-slate">
+                    <td colSpan={9} className="px-6 py-12 text-center text-neutral-slate">
                       No products found
                     </td>
                   </tr>
@@ -503,7 +506,7 @@ const ProductList = () => {
                           </span>
                         )}
                         <div className="md:hidden text-xs text-neutral-slate mt-1">
-                          {product.dimension} • {product.surface}
+                          {product.dimension} • {product.surface} • {product.body_type}
                         </div>
                       </td>
                       <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden md:table-cell">
@@ -511,6 +514,9 @@ const ProductList = () => {
                       </td>
                       <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden lg:table-cell">
                         {product.surface}
+                      </td>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden lg:table-cell">
+                        {product.body_type || '-'}
                       </td>
                       <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden lg:table-cell">
                         {product.category || '-'}

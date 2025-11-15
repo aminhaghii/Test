@@ -163,7 +163,7 @@ const ProductCard = memo<ProductCardProps>(({
               <h3 className="text-white font-semibold text-xs sm:text-sm md:text-base lg:text-lg mb-0.5 sm:mb-1 line-clamp-2 transition-transform duration-300 group-hover:translate-y-[-2px]" style={{ willChange: 'transform' }}>
                 {extractProductName(product.name)}
               </h3>
-              <p className="text-white/80 text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1 md:mb-2">{product.dimension} • {product.surface}</p>
+              <p className="text-white/80 text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1 md:mb-2">{product.dimension} • {product.surface} • {product.body_type}</p>
               {product.price && (
                 <p className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg mb-0.5 sm:mb-1 md:mb-2">${product.price}</p>
               )}
