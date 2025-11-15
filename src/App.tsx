@@ -43,7 +43,6 @@ const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
 const BlogManagement = lazy(() => import("./pages/admin/BlogManagement"));
 const BlogPostForm = lazy(() => import("./pages/admin/BlogPostForm"));
 const ExportPage = lazy(() => import("./pages/about/Export"));
-const CombinationPage = lazy(() => import("./pages/about/Combination"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -75,7 +74,6 @@ const App = () => (
                 <Route path="/" element={<AuthGuard><Index /></AuthGuard>} />
                 <Route path="/about" element={<AuthGuard><About /></AuthGuard>} />
                 <Route path="/about/export" element={<AuthGuard><ExportPage /></AuthGuard>} />
-                <Route path="/about/combination" element={<AuthGuard><CombinationPage /></AuthGuard>} />
                 <Route path="/products" element={<AuthGuard><Products /></AuthGuard>} />
                 <Route path="/products/dimension/:dimension" element={<AuthGuard><Products /></AuthGuard>} />
                 <Route path="/projects" element={<AuthGuard><Projects /></AuthGuard>} />

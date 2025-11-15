@@ -125,7 +125,6 @@ export function Navigation() {
       { label: t('nav.blog') || 'Blog', link: "/blog", ariaLabel: t('nav.blog') || 'Blog', onClick: () => navigate('/blog') },
       { label: t('nav.about'), link: "/about", ariaLabel: t('nav.about'), onClick: () => navigate('/about') },
       { label: t('about.exportServices'), link: "/about/export", ariaLabel: t('about.exportServices') },
-      { label: t('about.smartCombinations'), link: "/about/combination", ariaLabel: t('about.smartCombinations') },
       { label: t('nav.contact'), link: "/contact", ariaLabel: t('nav.contact') },
     ];
 

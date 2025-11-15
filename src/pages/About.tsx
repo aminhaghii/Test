@@ -895,10 +895,6 @@ const About = () => {
       headingHtml: t('about.impact.exportServices.heading'),
       bodyHtml: t('about.impact.exportServices.body'),
     },
-    {
-      headingHtml: t('about.impact.smartCombination.heading'),
-      bodyHtml: t('about.impact.smartCombination.body'),
-    },
   ];
 
   const SOLUTIONS_INTRO = {
