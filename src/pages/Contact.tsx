@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const Contact = () => {
@@ -78,7 +79,7 @@ const Contact = () => {
       <section className="relative h-[40vh] min-h-[300px] sm:h-[45vh] sm:min-h-[350px] md:h-[50vh] md:min-h-[400px] lg:h-[60vh] lg:min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={`${API_URL}/ALMAS/PORPJA.jpg`}
+            src={`getImageUrl('/ALMAS/PORPJA.jpg')`}
             alt="Contact Us"
             className="w-full h-full object-cover"
             loading="eager"

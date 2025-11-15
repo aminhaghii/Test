@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const stories = [
-  { titleKey: 'stories.residential', descKey: 'stories.residentialDesc', image: `${API_URL}/ALMAS/rico2.jpg` },
-  { titleKey: 'stories.commercial', descKey: 'stories.commercialDesc', image: `${API_URL}/ALMAS/victoria.jpg` },
-  { titleKey: 'stories.interior', descKey: 'stories.interiorDesc', image: `${API_URL}/ALMAS/ROJINA.jpg` },
+  { titleKey: 'stories.residential', descKey: 'stories.residentialDesc', image: `getImageUrl('/ALMAS/rico2.jpg')` },
+  { titleKey: 'stories.commercial', descKey: 'stories.commercialDesc', image: `getImageUrl('/ALMAS/victoria.jpg')` },
+  { titleKey: 'stories.interior', descKey: 'stories.interiorDesc', image: `getImageUrl('/ALMAS/ROJINA.jpg')` },
 ];
 
 const DesignStories = () => {

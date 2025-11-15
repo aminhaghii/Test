@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { getApiUrl } from '@/lib/getApiUrl';
 
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const ExportPage = () => {
@@ -28,17 +29,17 @@ const ExportPage = () => {
     {
       title: "End-to-End Consulting",
       description: "From product selection to on-site installation guidance—professional partnership for long-term success and the global promotion of Iranian architectural heritage.",
-      image: `${API_URL}/DECORED/60 x 60/gloria.jpg`
+      image: `getImageUrl('/DECORED/60') x 60/gloria.jpg`
     },
     {
       title: "Global Logistics & Documentation",
       description: "Professional international transport logistics, complete handling of all legal documentation and global agreements, and customs paperwork.",
-      image: `${API_URL}/DECORED/60X120/FRANCO 1.jpg`
+      image: `getImageUrl('/DECORED/60X120/FRANCO') 1.jpg`
     },
     {
       title: "Post-Delivery Support",
       description: "Committed after-sales assistance with technical guidance, maintenance, and performance assurance.",
-      image: `${API_URL}/DECORED/40 x 40/berlin.jpg`
+      image: `getImageUrl('/DECORED/40') x 40/berlin.jpg`
     }
   ];
 
@@ -261,7 +262,7 @@ const ExportPage = () => {
             >
               <div className="relative aspect-[4/3] rounded-sm overflow-hidden bg-neutral-alabaster">
                 <img
-                  src={`${API_URL}/DECORED/60 x 60/parma.jpg`}
+                  src={`getImageUrl('/DECORED/60') x 60/parma.jpg`}
                   alt="Customization capabilities"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -301,7 +302,7 @@ const ExportPage = () => {
             >
               <div className="relative aspect-[4/3] rounded-sm overflow-hidden bg-neutral-alabaster">
                 <img
-                  src={`${API_URL}/DECORED/60X120/RAKU.jpg`}
+                  src={`getImageUrl('/DECORED/60X120/RAKU.jpg')`}
                   alt="Large-volume orders"
                   className="w-full h-full object-cover"
                   loading="lazy"

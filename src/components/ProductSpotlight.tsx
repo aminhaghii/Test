@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getApiUrl } from '@/lib/getApiUrl';
 
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 type Tile = {
@@ -17,7 +18,7 @@ type Tile = {
 };
 
 const decorPath = (path: string) =>
-  `${API_URL}/DECORED/${path.split('/').map(segment => encodeURIComponent(segment)).join('/')}`;
+  `getImageUrl('/DECORED/${path.split(')'/').map(segment => encodeURIComponent(segment)).join('/')}`;
 
 // tiles will be created dynamically using translations
 

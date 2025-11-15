@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getApiUrl } from '@/lib/getApiUrl';
 
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 type Card = { title: string; subtitle: string; image: string; to: string };

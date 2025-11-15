@@ -3,9 +3,10 @@ import type { ImgHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 const LOGO_FILENAME = "ALMAS CERAM.png";
-const LOGO_URL = `${API_URL}/ALMAS/${encodeURIComponent(LOGO_FILENAME)}`;
+const LOGO_URL = `getImageUrl('/ALMAS/${encodeURIComponent(LOGO_FILENAME'))}`;
 
 export const brandLogoUrl = LOGO_URL;
 

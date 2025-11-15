@@ -28,6 +28,7 @@ const filterOptions = {
 
 // API URL for backend resources
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const Products = () => {
@@ -395,7 +396,7 @@ const Products = () => {
       {/* Large Hero Image */}
       <div className="relative h-[200px] sm:h-[280px] md:h-[360px] lg:h-[500px] xl:h-[600px] overflow-hidden">
         <img 
-          src={`${API_URL}/ALMAS/PORPJA.jpg`}
+          src={`getImageUrl('/ALMAS/PORPJA.jpg')`}
           alt="Premium Ceramics Collection"
           className="w-full h-full object-cover scale-105"
           width={1920}

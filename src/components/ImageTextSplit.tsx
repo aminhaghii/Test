@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 // API URL for backend resources
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const ImageTextSplit = () => {
@@ -51,7 +52,7 @@ const ImageTextSplit = () => {
               {/* Main Image */}
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src={`${API_URL}/ALMAS/victoria.jpg`}
+                  src={`getImageUrl('/ALMAS/victoria.jpg')`}
                   alt="Luxury ceramic installation"
                   className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                 />

@@ -13,8 +13,9 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import BrandLogo from '@/components/BrandLogo';
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
-const SHOWCASE_IMAGE = `${API_URL}/DECORED/40%20x%2040/alborz3.jpg`;
+const SHOWCASE_IMAGE = `getImageUrl('/DECORED/40%20x%2040/alborz3.jpg')`;
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),

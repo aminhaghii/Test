@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 // API URL for backend resources
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const BentoShowcase = () => {
@@ -15,7 +16,7 @@ const BentoShowcase = () => {
       id: 1,
       title: t('bento.iranianExcellence'),
       description: t('bento.discover'),
-      image: `${API_URL}/ALMAS/victoria.jpg`,
+      image: `getImageUrl('/ALMAS/victoria.jpg')`,
       span: "col-span-2 row-span-2",
       link: "/products",
       gradient: "from-amber-500/20 to-transparent"
@@ -33,7 +34,7 @@ const BentoShowcase = () => {
       id: 3,
       title: t('bento.isoCertified'),
       description: t('bento.isoDesc'),
-      image: `${API_URL}/ALMAS/ROJINA.jpg`,
+      image: `getImageUrl('/ALMAS/ROJINA.jpg')`,
       span: "col-span-1 row-span-1",
       link: "/technical",
       gradient: "from-purple-500/20 to-transparent"
@@ -51,7 +52,7 @@ const BentoShowcase = () => {
       id: 5,
       title: t('bento.factory'),
       description: t('bento.factoryDesc'),
-      image: `${API_URL}/ALMAS/PORPJA.jpg`,
+      image: `getImageUrl('/ALMAS/PORPJA.jpg')`,
       span: "col-span-1 row-span-1",
       link: "/contact",
       gradient: "from-red-500/20 to-transparent"

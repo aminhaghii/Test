@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const images = [
-  `${API_URL}/ALMAS/victoria.jpg`,
-  `${API_URL}/ALMAS/ROJINA.jpg`,
-  `${API_URL}/ALMAS/PORPJA.jpg`,
-  `${API_URL}/ALMAS/rico.jpg`,
-  `${API_URL}/ALMAS/rico2.jpg`,
-  `${API_URL}/ALMAS/victoria.jpg`,
+  `getImageUrl('/ALMAS/victoria.jpg')`,
+  `getImageUrl('/ALMAS/ROJINA.jpg')`,
+  `getImageUrl('/ALMAS/PORPJA.jpg')`,
+  `getImageUrl('/ALMAS/rico.jpg')`,
+  `getImageUrl('/ALMAS/rico2.jpg')`,
+  `getImageUrl('/ALMAS/victoria.jpg')`,
 ];
 
 const ProjectsGallery = () => {

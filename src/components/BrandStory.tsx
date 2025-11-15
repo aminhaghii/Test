@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 // API URL for backend resources
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const BrandStory = () => {
@@ -105,7 +106,7 @@ const BrandStory = () => {
               {/* Large Image */}
               <div className="col-span-2 aspect-[16/10] rounded-2xl overflow-hidden shadow-elegant">
                 <img
-                  src={`${API_URL}/ALMAS/victoria.jpg`}
+                  src={`getImageUrl('/ALMAS/victoria.jpg')`}
                   alt="Luxury ceramic tiles showcase"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -114,7 +115,7 @@ const BrandStory = () => {
               {/* Two Small Images */}
               <div className="aspect-square rounded-2xl overflow-hidden shadow-elegant">
                 <img
-                  src={`${API_URL}/ALMAS/ROJINA.jpg`}
+                  src={`getImageUrl('/ALMAS/ROJINA.jpg')`}
                   alt="Italian craftsmanship detail"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -122,7 +123,7 @@ const BrandStory = () => {
               
               <div className="aspect-square rounded-2xl overflow-hidden shadow-elegant">
                 <img
-                  src={`${API_URL}/ALMAS/PORPJA.jpg`}
+                  src={`getImageUrl('/ALMAS/PORPJA.jpg')`}
                   alt="Modern tile installation"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />

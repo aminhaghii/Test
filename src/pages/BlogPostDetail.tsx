@@ -8,6 +8,7 @@ import { Calendar, ArrowLeft, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const BlogPostDetail = () => {
@@ -53,7 +54,7 @@ const BlogPostDetail = () => {
   };
 
   const getImageUrl = (imageUrl?: string) => {
-    if (!imageUrl) return `${API_URL}/ALMAS/victoria.jpg`;
+    if (!imageUrl) return `getImageUrl('/ALMAS/victoria.jpg')`;
     if (imageUrl.startsWith('http')) return imageUrl;
     return `${API_URL}${imageUrl}`;
   };

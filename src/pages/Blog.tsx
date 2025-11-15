@@ -8,6 +8,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 const Blog = () => {
@@ -41,7 +42,7 @@ const Blog = () => {
   };
 
   const getImageUrl = (imageUrl?: string) => {
-    if (!imageUrl) return `${API_URL}/ALMAS/victoria.jpg`;
+    if (!imageUrl) return `getImageUrl('/ALMAS/victoria.jpg')`;
     if (imageUrl.startsWith('http')) return imageUrl;
     return `${API_URL}${imageUrl}`;
   };
@@ -62,7 +63,7 @@ const Blog = () => {
       {/* Hero Section */}
       <section className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
         <img 
-          src={`${API_URL}/ALMAS/victoria.jpg`}
+          src={`getImageUrl('/ALMAS/victoria.jpg')`}
           alt="Blog Hero"
           className="w-full h-full object-cover scale-105"
           loading="eager"

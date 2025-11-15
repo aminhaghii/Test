@@ -23,8 +23,9 @@ import BrandLogo from '@/components/BrandLogo';
 import { cn } from '@/lib/utils';
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
-const REGISTER_IMAGE = `${API_URL}/DECORED/60X120/CARLO%20dark%202.jpg`;
+const REGISTER_IMAGE = `getImageUrl('/DECORED/60X120/CARLO%20dark%202.jpg')`;
 
 const registerSchema = z
   .object({
