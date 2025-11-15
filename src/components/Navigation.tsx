@@ -11,6 +11,7 @@ import BrandLogo from "@/components/BrandLogo";
 
 // API URL for backend resources
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 // Available dimensions
@@ -272,7 +273,7 @@ export function Navigation() {
                         >
                           {/* Background Image */}
                           <img
-                            src={`${API_URL}/ALMAS/505d109c-c3ce-42ef-8cc1-9499265a2d7d.png`}
+                            src={getImageUrl('/ALMAS/505d109c-c3ce-42ef-8cc1-9499265a2d7d.png')}
                             alt="All Products"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
@@ -297,7 +298,7 @@ export function Navigation() {
                         >
                           {/* Background Image */}
                           <img
-                            src={`${API_URL}/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png`}
+                            src={getImageUrl('/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png')}
                             alt="By Dimension"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
@@ -356,7 +357,7 @@ export function Navigation() {
                         >
                           {/* Background Image */}
                           <img
-                            src={`${API_URL}/ALMAS/f65620a0-45d0-411c-bc06-fa01ae497157.png`}
+                            src={getImageUrl('/ALMAS/f65620a0-45d0-411c-bc06-fa01ae497157.png')}
                             alt="By Material"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />

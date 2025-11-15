@@ -5,8 +5,7 @@ import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { blogService, BlogPost } from "@/services/blogService";
 
-import { getApiUrl } from '@/lib/getApiUrl';
-const API_URL = getApiUrl();
+import { getImageUrl } from '@/lib/getImageUrl';
 
 // Random widths and heights for visual variety
 const sizes = [
@@ -96,10 +95,10 @@ const BlogSection = () => {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
-  const getImageUrl = (imageUrl?: string) => {
-    if (!imageUrl) return `${API_URL}/ALMAS/victoria.jpg`;
+  const getImageUrlForPost = (imageUrl?: string) => {
+    if (!imageUrl) return getImageUrl('/ALMAS/victoria.jpg');
     if (imageUrl.startsWith('http')) return imageUrl;
-    return `${API_URL}${imageUrl}`;
+    return getImageUrl(imageUrl);
   };
 
   // Calculate responsive scroll amount
@@ -209,7 +208,7 @@ const BlogSection = () => {
                       }}
                     >
                       <img
-                        src={getImageUrl(post.image_url)}
+                        src={getImageUrlForPost(post.image_url)}
                         alt={post.title}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                         loading="lazy"

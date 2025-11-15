@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import { getApiUrl } from '@/lib/getApiUrl';
+import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 
 type CollectionCard = {
@@ -24,7 +25,7 @@ const Collections = () => {
       id: 'surfaces',
       title: 'Creative Concrete P',
       subtitle: t('common.surfacesSub') || 'Premium ceramic surfaces inspired by natural colors and textures',
-      image: `${API_URL}/ALMAS/505d109c-c3ce-42ef-8cc1-9499265a2d7d.png`,
+      image: getImageUrl('/ALMAS/505d109c-c3ce-42ef-8cc1-9499265a2d7d.png'),
       link: '/products',
       isNew: true,
       span: 'wide',
@@ -33,7 +34,7 @@ const Collections = () => {
       id: 'big-slabs',
       title: 'Creative Concrete P Brick',
       subtitle: t('common.bigSlabsSub') || 'Large-format porcelain slabs for seamless, modern spaces',
-      image: `${API_URL}/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png`,
+      image: getImageUrl('/ALMAS/08c067af-77ef-48f5-a51a-2fe5256da93e.png'),
       link: '/products?dimension=60x120',
       isNew: true,
     },
@@ -41,7 +42,7 @@ const Collections = () => {
       id: 'bathroom-kitchen',
       title: 'Creative Concrete P Stone',
       subtitle: t('common.bathKitchenSub') || 'Designer bathroom and kitchen tile collections crafted for everyday living',
-      image: `${API_URL}/ALMAS/f65620a0-45d0-411c-bc06-fa01ae497157.png`,
+      image: getImageUrl('/ALMAS/f65620a0-45d0-411c-bc06-fa01ae497157.png'),
       link: '/products?openFilter=material',
       isNew: true,
     },
@@ -49,14 +50,14 @@ const Collections = () => {
       id: 'crystal-white',
       title: 'Crystal White',
       subtitle: 'Marble-inspired surfaces with crystalline clarity for luminous interiors.',
-      image: `${API_URL}/ALMAS/eb3303f6-b8bf-4221-adb1-7a883c17c666.png`,
+      image: getImageUrl('/ALMAS/eb3303f6-b8bf-4221-adb1-7a883c17c666.png'),
       link: '/products',
     },
     {
       id: 'maximus-granito',
       title: 'Maximus Granito White Andes',
       subtitle: 'Large-format slabs with the timeless elegance of natural stone.',
-      image: `${API_URL}/ALMAS/victoria.jpg`,
+      image: getImageUrl('/ALMAS/victoria.jpg'),
       link: '/products?dimension=80x80',
       isNew: true,
     },
@@ -64,21 +65,21 @@ const Collections = () => {
       id: 'moon-stone',
       title: 'Moon Stone',
       subtitle: 'Outdoor-ready porcelain surfaces with refined textures and neutral palettes.',
-      image: `${API_URL}/ALMAS/rico.jpg`,
+      image: getImageUrl('/ALMAS/rico.jpg'),
       link: '/products',
     },
     {
       id: 'maximus-grey',
       title: 'Maximus Grey Antique',
       subtitle: 'Award-winning veined marble designs for statement kitchens and hospitality spaces.',
-      image: `${API_URL}/ALMAS/PORPJA.jpg`,
+      image: getImageUrl('/ALMAS/PORPJA.jpg'),
       link: '/products?dimension=100x100',
     },
     {
       id: 'marakkesh',
       title: 'Marakkesh',
       subtitle: 'Glazed wall tiles celebrating color, geometry, and handcrafted character.',
-      image: `${API_URL}/ALMAS/ROJINA.jpg`,
+      image: getImageUrl('/ALMAS/ROJINA.jpg'),
       link: '/products?openFilter=material',
       isNew: true,
     },

@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 
-import { getApiUrl } from '@/lib/getApiUrl';
-const API_URL = getApiUrl();
+import { getImageUrl } from '@/lib/getImageUrl';
 
 const heroImagePath = '/ALMAS/rico2.jpg';
 const heroVideoSrc = new URL("../../Content/almas 01.mp4", import.meta.url).href;
@@ -65,7 +64,7 @@ const Hero = () => {
   }, [isVideoOpen]);
 
   const parallaxOffset = (prefersReducedMotion || isTouch) ? 0 : scrollY * 0.3; // Disable parallax on touch/reduced motion
-  const currentImage = `${API_URL}${heroImagePath}`;
+  const currentImage = getImageUrl(heroImagePath);
 
   return (
     <section 
