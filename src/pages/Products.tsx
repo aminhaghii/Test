@@ -34,10 +34,12 @@ const API_URL = getApiUrl();
 const Products = () => {
   const { t } = useLanguage();
   
-  // Helper function to get image URL
-  const getImageUrl = (url: string) => {
+  // Helper function to get image URL - use getImageUrl helper for static assets
+  const getImageUrlForProduct = (url: string) => {
     if (!url) return '';
-    return url.startsWith('http') ? url : `${API_URL}${url}`;
+    if (url.startsWith('http')) return url;
+    // Use the helper function from lib/getImageUrl for static assets
+    return getImageUrl(url);
   };
   // Get dimension from URL params
   const { dimension } = useParams<{ dimension?: string }>();
@@ -396,7 +398,7 @@ const Products = () => {
       {/* Large Hero Image */}
       <div className="relative h-[200px] sm:h-[280px] md:h-[360px] lg:h-[500px] xl:h-[600px] overflow-hidden">
         <img 
-          src={`getImageUrl('/ALMAS/PORPJA.jpg')`}
+          src={getImageUrl('/ALMAS/PORPJA.jpg')}
           alt="Premium Ceramics Collection"
           className="w-full h-full object-cover scale-105"
           width={1920}

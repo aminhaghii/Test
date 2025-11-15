@@ -2,8 +2,7 @@ import React, { memo, useState, useCallback, useMemo, useRef, useEffect } from '
 import { Product } from '@/services/productServiceBackend';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-import { getApiUrl } from '@/lib/getApiUrl';
-const API_URL = getApiUrl();
+import { getImageUrl } from '@/lib/getImageUrl';
 
 interface ProductCardProps {
   product: Product;
@@ -35,9 +34,7 @@ const ProductCard = memo<ProductCardProps>(({
     if (product.image_url && product.image_url.trim()) {
       const mainImage = product.image_url.startsWith('http') 
         ? product.image_url 
-        : product.image_url.startsWith('/')
-        ? `${API_URL}${product.image_url}`
-        : `${API_URL}/${product.image_url}`;
+        : getImageUrl(product.image_url);
       images.push(mainImage);
     }
     
@@ -47,9 +44,7 @@ const ProductCard = memo<ProductCardProps>(({
         if (img && img.trim()) {
           const processedImg = img.startsWith('http') 
             ? img 
-            : img.startsWith('/')
-            ? `${API_URL}${img}`
-            : `${API_URL}/${img}`;
+            : getImageUrl(img);
           images.push(processedImg);
         }
       });
@@ -61,9 +56,7 @@ const ProductCard = memo<ProductCardProps>(({
         if (img && img.trim()) {
           const processedImg = img.startsWith('http') 
             ? img 
-            : img.startsWith('/')
-            ? `${API_URL}${img}`
-            : `${API_URL}/${img}`;
+            : getImageUrl(img);
           images.push(processedImg);
         }
       });

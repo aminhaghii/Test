@@ -31,20 +31,37 @@ export function getApiUrl(): string {
   // In browser environment, detect the server IP from current location
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
-    const port = '3001';
+    const protocol = window.location.protocol;
+    
+    // If accessing via ngrok or other tunnel (not localhost)
+    if (hostname.includes('.ngrok') || 
+        hostname.includes('.loca.lt') || 
+        hostname.includes('.trycloudflare.com') ||
+        hostname.includes('.localhost.run')) {
+      // For tunnels, backend should be tunneled separately or use localhost
+      // Try to use localhost first (if backend is running locally)
+      // User should tunnel backend separately and set VITE_API_URL
+      const tunnelBackendUrl = import.meta.env.VITE_API_URL;
+      if (tunnelBackendUrl) {
+        console.log('[getApiUrl] Using tunnel backend URL:', tunnelBackendUrl);
+        return tunnelBackendUrl;
+      }
+      // Fallback: try to use same tunnel domain (won't work unless backend is tunneled)
+      console.warn('[getApiUrl] Using tunnel but backend URL not set. Tunnel backend separately or set VITE_API_URL');
+      // Return localhost - won't work but at least won't break
+      return 'http://localhost:3001';
+    }
     
     // If we're accessing via IP address (not localhost), use that IP for API too
     // This is crucial for mobile devices on the same network
-    if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      const apiUrl = `http://${hostname}:${port}`;
+    if (hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.includes('.')) {
+      const apiUrl = `http://${hostname}:3001`;
       console.log('[getApiUrl] Detected IP from hostname:', apiUrl);
       return apiUrl;
     }
     
-    // If on localhost, check if we can get the actual network IP
-    // For development, you might want to set VITE_API_URL to your local IP
-    // Example: VITE_API_URL=http://192.168.1.100:3001
-    console.warn('[getApiUrl] Using localhost. For mobile access, use IP address or set VITE_API_URL');
+    // If on localhost, use localhost for API
+    console.log('[getApiUrl] Using localhost for API');
   }
 
   // Fallback to environment variable or default localhost
