@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getApiUrl } from '@/lib/getApiUrl';
 
 export interface Product {
   id: string;
@@ -56,18 +57,7 @@ class ProductService {
   private baseURL: string;
 
   constructor() {
-    // Use dynamic API URL detection for mobile compatibility
-    if (typeof window !== 'undefined') {
-      const hostname = window.location.hostname;
-      const port = '3001';
-      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-        this.baseURL = `http://${hostname}:${port}`;
-      } else {
-        this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      }
-    } else {
-      this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-    }
+    this.baseURL = getApiUrl();
   }
 
   private getAuthHeaders() {
@@ -118,6 +108,17 @@ class ProductService {
       return response.data;
     } catch (error) {
       console.error('Error fetching products:', error);
+      // Fallback: return empty result if API is not available
+      if (axios.isAxiosError(error) && (error.code === 'ERR_NETWORK' || error.response?.status === 503)) {
+        console.warn('API unavailable, returning empty products list');
+        return {
+          products: [],
+          total: 0,
+          page: pagination?.page || 1,
+          pageSize: pagination?.pageSize || 20,
+          totalPages: 0
+        };
+      }
       throw error;
     }
   }
