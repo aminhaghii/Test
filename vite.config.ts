@@ -9,6 +9,15 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Allow ngrok and other tunnel domains
+    allowedHosts: [
+      '.ngrok-free.app',
+      '.ngrok.app',
+      '.ngrok.io',
+      '.loca.lt',
+      '.trycloudflare.com',
+      '.localhost.run',
+    ],
     proxy: {
       '/ALMAS': {
         target: 'http://localhost:3001',
