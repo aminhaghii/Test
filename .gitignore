@@ -65,3 +65,5 @@ clear-storage.html
 # Large video files (exceed GitHub 100MB limit)
 Content/almas 01.mp4
 Content/almas 02.mp4
+public/Content/almas 01.mp4
+public/Content/almas 02.mp4
