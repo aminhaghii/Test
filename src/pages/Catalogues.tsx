@@ -5,9 +5,7 @@ import { getApiUrl } from '@/lib/getApiUrl';
 import { getImageUrl } from '@/lib/getImageUrl';
 const API_URL = getApiUrl();
 const WHITEBODY_FILENAME = "ALMAS-CERAM-Whitebody_Ceramics_ 2025.pdf";
-const WHITEBODY_CATALOGUE = `getImageUrl('/Content/${encodeURIComponent(')
-  WHITEBODY_FILENAME
-)}`;
+const WHITEBODY_CATALOGUE = getImageUrl(`/Content/${encodeURIComponent(WHITEBODY_FILENAME)}`);
 const INTERNAL_VIEWER_URL = `/catalogue-viewer.html?file=${encodeURIComponent(
   WHITEBODY_CATALOGUE
 )}`;

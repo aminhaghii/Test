@@ -18,7 +18,7 @@ type Tile = {
 };
 
 const decorPath = (path: string) =>
-  `getImageUrl('/DECORED/${path.split(')'/').map(segment => encodeURIComponent(segment)).join('/')}`;
+  getImageUrl(`/DECORED/${path.split('/').map(segment => encodeURIComponent(segment)).join('/')}`);
 
 // tiles will be created dynamically using translations
 
