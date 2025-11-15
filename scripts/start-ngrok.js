@@ -1,12 +1,39 @@
 // Script to start ngrok tunnel for local development
 import { spawn } from 'child_process';
 import { networkInterfaces } from 'os';
+import { join } from 'path';
+import { homedir } from 'os';
 
 const PORT = process.argv[2] || '8080';
 
 console.log('\n🚀 Starting ngrok tunnel...\n');
 console.log(`📍 Port: ${PORT}`);
 console.log('⏳ Please wait...\n');
+
+// Find ngrok executable
+function findNgrok() {
+  const possiblePaths = [
+    'ngrok', // If in PATH
+    'ngrok.cmd', // Windows cmd
+    join(homedir(), 'AppData', 'Roaming', 'npm', 'ngrok.cmd'), // npm global Windows
+    join(homedir(), 'AppData', 'Local', 'Microsoft', 'WindowsApps', 'ngrok.exe'), // Windows Store
+    'C:\\ngrok\\ngrok.exe', // Common install location
+  ];
+  
+  // Try to find ngrok in PATH first
+  for (const ngrokPath of possiblePaths) {
+    try {
+      // Just return the path, let spawn handle it with shell: true
+      return ngrokPath;
+    } catch (e) {
+      continue;
+    }
+  }
+  
+  return 'ngrok'; // Fallback
+}
+
+const ngrokPath = findNgrok();
 
 // Check if port is running
 const netstat = spawn('netstat', ['-ano'], { shell: true });
@@ -19,10 +46,14 @@ netstat.stdout.on('data', (data) => {
 });
 
 netstat.on('close', () => {
-  // Start ngrok
-  const ngrok = spawn('ngrok', ['http', PORT], {
+  // Start ngrok with shell: true so Windows can find it
+  const ngrok = spawn(ngrokPath, ['http', PORT], {
     stdio: 'inherit',
-    shell: true
+    shell: true,
+    env: {
+      ...process.env,
+      PATH: process.env.PATH + ';' + join(homedir(), 'AppData', 'Roaming', 'npm')
+    }
   });
 
   ngrok.on('error', (error) => {
