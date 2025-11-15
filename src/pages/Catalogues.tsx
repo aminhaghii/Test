@@ -1,35 +1,28 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useLanguage } from "@/contexts/LanguageContext";
+
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
+const WHITEBODY_FILENAME = "ALMAS-CERAM-Whitebody_Ceramics_ 2025.pdf";
+const WHITEBODY_CATALOGUE = `${API_URL}/Content/${encodeURIComponent(
+  WHITEBODY_FILENAME
+)}`;
+const INTERNAL_VIEWER_URL = `/catalogue-viewer.html?file=${encodeURIComponent(
+  WHITEBODY_CATALOGUE
+)}`;
 
 const Catalogues = () => {
-  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-
-      {/* Hero Section */}
-      <section className="relative h-[40vh] min-h-[320px] flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">{t('catalogues.title')}</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t('catalogues.description')}
-          </p>
-        </div>
-      </section>
-
-      {/* Content Placeholder */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-lg text-muted-foreground">
-              {t('catalogues.comingSoon')}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+      <main className="pt-20 lg:pt-24">
+        <iframe
+          src={INTERNAL_VIEWER_URL}
+          title="ALMAS CERAM Whitebody Ceramics 2025 Catalogue"
+          className="w-full border-0 h-[calc(100vh-80px)] lg:h-[calc(100vh-96px)]"
+          allowFullScreen
+        />
+      </main>
     </div>
   );
 };

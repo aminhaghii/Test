@@ -26,6 +26,8 @@ const Contact = lazy(() => import("./pages/Contact"));
 const ProfessionalServices = lazy(() => import("./pages/ProfessionalServices"));
 const Inspiration = lazy(() => import("./pages/Inspiration"));
 const Catalogues = lazy(() => import("./pages/Catalogues"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPostDetail = lazy(() => import("./pages/BlogPostDetail"));
 const Collections = lazy(() => import("./pages/Collections"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/auth/Register"));
@@ -83,6 +85,8 @@ const App = () => (
                 <Route path="/services" element={<AuthGuard><ProfessionalServices /></AuthGuard>} />
                 <Route path="/inspiration" element={<AuthGuard><Inspiration /></AuthGuard>} />
                 <Route path="/catalogues" element={<AuthGuard><Catalogues /></AuthGuard>} />
+                <Route path="/blog" element={<AuthGuard><Blog /></AuthGuard>} />
+                <Route path="/blog/:slug" element={<AuthGuard><BlogPostDetail /></AuthGuard>} />
                 <Route path="/collections" element={<AuthGuard><Collections /></AuthGuard>} />
                 
                 {/* Legal Pages */}

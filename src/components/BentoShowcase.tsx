@@ -4,7 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // API URL for backend resources
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 const BentoShowcase = () => {
   const { t } = useLanguage();
@@ -58,33 +59,33 @@ const BentoShowcase = () => {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-background relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-luxury-gold/5 rounded-full blur-3xl" />
       
-      <div className="container mx-auto px-6 lg:px-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16 lg:mb-20"
+          className="mb-10 sm:mb-12 md:mb-16 lg:mb-20"
         >
-          <h2 className="font-display text-5xl lg:text-6xl xl:text-7xl font-bold text-neutral-charcoal mb-6 tracking-tight">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-neutral-charcoal mb-3 sm:mb-4 md:mb-5 lg:mb-6 tracking-tight">
             {t('bento.experience')}
             <br />
             <span className="bg-gradient-to-r from-luxury-gold via-luxury-bronze to-luxury-brass bg-clip-text text-transparent">
               {t('bento.theDifference')}
             </span>
           </h2>
-          <p className="text-xl text-neutral-slate max-w-2xl">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-slate max-w-2xl">
             {t('bento.description')}
           </p>
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[280px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 auto-rows-[200px] sm:auto-rows-[240px] md:auto-rows-[280px]">
           {items.map((item, index) => (
             <motion.div
               key={item.id}
@@ -111,14 +112,14 @@ const BentoShowcase = () => {
                 )}
 
                 {/* Content */}
-                <div className="relative h-full p-8 flex flex-col justify-between">
+                <div className="relative h-full p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-between">
                   {item.stat && (
                     <div className="flex-1 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="font-display text-6xl lg:text-7xl font-bold bg-gradient-to-br from-luxury-gold to-luxury-bronze bg-clip-text text-transparent mb-2">
+                        <div className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-br from-luxury-gold to-luxury-bronze bg-clip-text text-transparent mb-1 sm:mb-1.5 md:mb-2">
                           {item.title.split(' ')[0]}
                         </div>
-                        <div className="text-neutral-charcoal font-semibold text-lg">
+                        <div className="text-neutral-charcoal font-semibold text-sm sm:text-base md:text-lg">
                           {item.title.split(' ').slice(1).join(' ')}
                         </div>
                       </div>
@@ -127,20 +128,20 @@ const BentoShowcase = () => {
                   
                   <div className={item.stat ? "" : "flex-1 flex flex-col justify-end"}>
                     {!item.stat && (
-                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-background mb-2 group-hover:text-luxury-gold transition-colors duration-300">
+                      <h3 className="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-background mb-1.5 sm:mb-2 group-hover:text-luxury-gold transition-colors duration-300">
                         {item.title}
                       </h3>
                     )}
-                    <p className={`${item.stat ? 'text-neutral-charcoal' : 'text-neutral-linen'} text-base mb-4`}>
+                    <p className={`${item.stat ? 'text-neutral-charcoal' : 'text-neutral-linen'} text-xs sm:text-sm md:text-base mb-3 sm:mb-3.5 md:mb-4`}>
                       {item.description}
                     </p>
                     
                     {/* Arrow Icon */}
-                    <div className="flex items-center gap-2">
-                      <span className={`${item.stat ? 'text-neutral-charcoal' : 'text-luxury-gold'} text-sm font-semibold uppercase tracking-wider`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className={`${item.stat ? 'text-neutral-charcoal' : 'text-luxury-gold'} text-xs sm:text-sm font-semibold uppercase tracking-wider`}>
                         {t('bento.explore')}
                       </span>
-                      <ArrowUpRight className={`${item.stat ? 'text-neutral-charcoal' : 'text-luxury-gold'} w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300`} />
+                      <ArrowUpRight className={`${item.stat ? 'text-neutral-charcoal' : 'text-luxury-gold'} w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300`} />
                     </div>
                   </div>
                 </div>

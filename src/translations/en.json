@@ -16,7 +16,8 @@
     "byDimension": "Products by Dimension",
     "byMaterial": "Products by Material",
     "admin": "Admin",
-    "goToAdmin": "Go to Admin Panel"
+    "goToAdmin": "Go to Admin Panel",
+    "blog": "Blog"
   },
   "products": {
     "title": "Our Products",
@@ -155,7 +156,7 @@
   },
   "common": {
     "learnMore": "Learn More",
-    "viewAll": "View All",
+    "viewAll": "View all",
     "close": "Close",
     "search": "Search",
     "filter": "Filter",
@@ -193,7 +194,7 @@
     "designStories": "Design Stories",
     "discoverAll": "Discover all",
     "latestProjects": "Our Latest Projects",
-    "viewAll": "View all"
+    "profile": "Profile"
   },
   "innovative": {
     "title": "Innovative Solutions",
@@ -223,7 +224,7 @@
     "showroomDesc": "Take a digital tour of our showroom."
   },
   "community": {
-    "title": "Join our Community",
+    "title": "JOIN OUR COMMUNITY",
     "subtitle": "Subscribe to receive updates about products, projects and news.",
     "email": "Enter your email",
     "subscribe": "Subscribe",
@@ -252,50 +253,372 @@
   },
   "heroSection": {
     "eyebrow": "Almas Kavir Rafsanjan - Iranian Ceramic Excellence",
-    "title": "Premium Iranian Ceramic & Porcelain Tiles"
+    "title": "Premium Iranian Ceramic & Porcelain Tiles",
+    "tagline": "Premium Iranian Tiles Crafted for Iconic Spaces",
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "loading": "Loading",
+    "previous": "Previous",
+    "next": "Next",
+    "craftedForLiving": "Crafted For Living",
+    "signatureSurfaces": "Signature surfaces for standout spaces",
+    "imageAlt": "Premium Iranian ceramic tiles - Almas Kavir Rafsanjan"
   },
   "about": {
-    "title": "Almas Kavir Rafsanjan",
-    "subtitle": "Excellence in Iranian Ceramic & Granite Tile Manufacturing",
-    "exploreProducts": "Explore Our Products",
-    "overview": "Overview",
-    "story": "Story",
-    "milestones": "Milestones",
-    "capabilities": "Capabilities",
-    "certifications": "Certifications",
-    "downloads": "Downloads",
+    "menu": {
+      "overview": "Overview",
+      "commitments": "Commitments",
+      "impact": "Impact Stories",
+      "metrics": "Sustainability KPIs",
+      "solutions": "Product Innovations",
+      "certifications": "Certifications",
+      "downloads": "Downloads"
+    },
     "exportServices": "Export Services",
     "smartCombinations": "Smart Combinations",
-    "account": "Account",
-    "milestonesDesc": "Key moments that shaped our journey",
-    "capabilitiesDesc": "What makes our production and service stand out",
-    "certificationsDesc": "Internationally recognized quality and management standards",
-    "downloadDocuments": "Download Official Documents",
-    "overviewCard1Title": "Who We Are",
-    "overviewCard1Desc": "A premium Iranian manufacturer of ceramic and granite tiles with 14+ years of experience, based in Rafsanjan, Kerman Province.",
-    "overviewCard2Title": "What We Stand For",
-    "overviewCard2Desc": "Certified by ISO 9001, 14001, and 45001, we deliver consistent quality, sustainable practices, and safe operations.",
-    "overviewCard3Title": "What We Offer",
-    "overviewCard3Desc": "Complete design-to-production capability across wall, ceramic, and granite tiles for residential and commercial projects.",
-    "manufacturingFacility": "Our Manufacturing Facility",
-    "manufacturingLocation": "Rafsanjan, Kerman Province",
-    "storyCard1Title": "Foundation & Excellence",
-    "storyCard1Desc": "Almas Kavir Rafsanjan stands as a distinguished manufacturer of premium ceramic and granite tiles. For over 14 years, we have specialized in the complete design and production cycle, bringing lasting quality to spaces across Iran and 13 countries.",
-    "storyCard2Title": "Standards & Vision",
-    "storyCard2Desc": "ISO 9001, 14001, and 45001 certifications demonstrate our commitment to quality, environment, and safety—supported by advanced technology and skilled craftsmanship.",
-    "pdfDocument": "PDF Document",
-    "certificate": "Certificate",
-    "clickToClose": "Click outside to close",
-    "cert1Subtitle": "Environmental Management System",
-    "cert1Description": "Environmental Management System certification",
-    "cert2Subtitle": "Occupational Health and Safety",
-    "cert2Description": "Occupational Health and Safety Management System",
-    "cert3Subtitle": "Quality Management System",
-    "cert3Description": "Quality Management System certification",
-    "cert4Title": "Integrated Management Systems",
-    "cert4Description": "Combined certification for all three management systems",
-    "pdf1Title": "ISO Certificate (Official)",
-    "pdf2Title": "Manufacturing License"
+    "media": {
+      "kicker": "Inside Our Rafsanjan Campus",
+      "caption": "Advanced kilns, digital inspection systems, and export logistics operate under one roof to deliver consistent quality for landmark projects.",
+      "imageAlt": "Aerial view of Pietra Luxe Hub’s Rafsanjan manufacturing campus"
+    },
+    "intro": {
+      "title": "Leading the Way to Sustainability Through Innovation",
+      "paragraph1": "Each collection is mapped for performance, finish, and application so architects and procurement teams can specify faster with confidence.",
+      "paragraph2": "<strong>Our promise:</strong> multi-angle imagery, real-project photography, and clear technical packaging data highlight scratch resistance, moisture control, and safety across every format.",
+      "heading": "Scaling Iranian Craftsmanship <b>for Global Specification</b>"
+    },
+    "mediaFallback": "Factory overview image",
+    "hero": {
+      "kicker": "Pietra Luxe Hub Sustainability",
+      "title": "Bridging Worlds with Iranian Ceramic & Tile",
+      "description": "Forged amid sanctions and scarcity, we turned hardship into disciplined innovation. Every batch now blends advanced material science with export-ready engineering for landmark projects across 13 countries.",
+      "primaryCta": "Explore Digital Inspiration",
+      "secondaryCta": "Download Catalogues",
+      "imageAlt": "Panoramic view of Almas Kavir Rafsanjan's manufacturing facility at dusk",
+      "lead": "We translate the resilience of Iran’s ceramics industry into trusted, globally specified surfaces.",
+      "detail": "Investments in advanced kilns, digital glazing, and export-focused production lines keep our collections ahead of international standards."
+    },
+    "stories": {
+      "ecocycle": {
+        "kicker": "Circular Production",
+        "title": "EcoCycle: Closed-Loop Water & Material Systems",
+        "body": "Our EcoCycle program reclaims natural raw materials and filters wastewater before reintroducing it into production. Purpose-built recycling facilities lower our footprint while ensuring each porcelain batch meets export-grade performance.",
+        "point1": "100% of treated wastewater is routed back into tile production lines.",
+        "point2": "Recovered minerals reinforce new bodies without degrading surface quality.",
+        "point3": "Clean development initiatives reduce carbon output across kiln cycles.",
+        "imageAlt": "Engineers monitoring the EcoCycle recycling loop in the factory"
+      },
+      "circular": {
+        "kicker": "Responsible Impact",
+        "title": "Designing Positive Outcomes for Communities",
+        "body": "Our sustainability mandate extends past material stewardship. Dedicated safety programs, community investments, and technical training keep local talent at the heart of our expansion.",
+        "point1": "Comprehensive waste hierarchy that prioritises reuse, recycling, and certified disposal.",
+        "point2": "Safety-first culture with ISO-aligned audits and site-wide monitoring.",
+        "point3": "Continuous workforce education to elevate skillsets for premium manufacturing.",
+        "imageAlt": "Team members reviewing sustainability dashboards on the production floor"
+      }
+    },
+    "commitments": {
+      "kicker": "Our Commitments",
+      "title": "Innovation, Impact, Integrity",
+      "description": "We design every process — from raw material sourcing to export-ready packaging — to exceed international expectations while protecting the communities and environments we work in.",
+      "sustainability": {
+        "title": "Sustainable Manufacturing DNA",
+        "body": "Closed-loop water systems, recycled raw materials, and clean energy initiatives reduce our footprint while certifying every tile for ecological performance."
+      },
+      "global": {
+        "title": "Global Partnership Mindset",
+        "body": "We co-create with architects, distributors, and developers, pairing bespoke production runs with logistics expertise to deliver at scale in 13+ markets."
+      },
+      "integrity": {
+        "title": "Integrity in Every Batch",
+        "body": "ISO 9001, 14001, and 45001 certifications reinforce our promise of reliable product quality, safe operations, and transparent governance."
+      },
+      "heading": "<b>World-Class</b><br>Product Portfolio",
+      "body": "<p>At Almas Kavir Rafsanjan, our product categorization is designed for more than convenience—it's about delivering a new, immersive purchasing experience. Each tile is the result of months of market research, rigorous material testing, and direct collaboration with renowned architects and expert users.</p><ul><li>High-resolution images showing every face and texture, real-life installation photography from luxury and modern projects, exhaustive material descriptions, and full technical packaging details.</li><li>Every category clearly highlights key features: exceptional scratch and impact resistance, long-lasting color and texture stability even in high-traffic areas, impermeability to moisture, stain resistance, and top safety standards.</li><li>Each batch undergoes strict QA and is shipped in robust, export-grade packaging to ensure pristine product quality upon delivery—even through the most demanding supply routes. Environmental responsibility and energy efficiency are woven into every phase of production.</li></ul>"
+    },
+    "kpis": {
+      "kicker": "Best Sustainability Practices",
+      "title": "Performance Metrics That Power Global Partnerships",
+      "description": "We continually measure and report on resource efficiency, community investment, and governance to keep our partners audit-ready.",
+      "reuse": {
+        "value": "92%",
+        "label": "Material Recovery",
+        "description": "Pre-consumer ceramic bodies are recovered, reprocessed, and reintroduced into new product lines."
+      },
+      "water": {
+        "value": "100%",
+        "label": "Wastewater Treated",
+        "description": "Closed-loop filtration captures, cleans, and recirculates process water across every kiln hall."
+      },
+      "production": {
+        "value": "100K m²",
+        "label": "Monthly Capacity",
+        "description": "Flexible lines adjust to bespoke volumes exceeding 100,000 square metres per order."
+      },
+      "people": {
+        "value": "13+",
+        "label": "Countries Served",
+        "description": "Dedicated export specialists coordinate compliance, translations, and aftercare across global markets."
+      },
+      "energy": {
+        "value": "45,000+",
+        "label": "MMBTU Saved",
+        "description": "Thermal optimisation programs cut gas consumption while stabilising kiln performance."
+      },
+      "packaging": {
+        "value": "80%",
+        "label": "Recycled Packaging",
+        "description": "Export-grade pallets and protection materials are sourced from recycled and recyclable inputs."
+      }
+    },
+    "governance": {
+      "kicker": "Governance & Responsibility",
+      "title": "Responsible Business, Responsible Employer",
+      "description": "Transparency, safety, and community investment guide every partnership, from material sourcing to long-term aftercare.",
+      "cards": {
+        "ethics": {
+          "title": "Ethics & Compliance",
+          "point1": "ISO-aligned audits and traceable procurement",
+          "point2": "Data protection and governance frameworks",
+          "point3": "Dedicated compliance officers for export markets"
+        },
+        "community": {
+          "title": "Community Investment",
+          "point1": "STEM scholarships for local talent",
+          "point2": "Environmental restoration partnerships",
+          "point3": "Regional supplier development programs"
+        },
+        "people": {
+          "title": "People & Wellbeing",
+          "point1": "Safety-first culture with continuous training",
+          "point2": "Career acceleration and technical mentorship",
+          "point3": "Inclusive policies across languages and regions"
+        },
+        "impact": {
+          "title": "Environmental Impact",
+          "point1": "Lifecycle assessments embedded in R&D",
+          "point2": "Emission reduction roadmaps monitored quarterly",
+          "point3": "Supplier engagement to raise shared standards"
+        }
+      }
+    },
+    "products": {
+      "portfolio": {
+        "kicker": "Innovation & Quality",
+        "title": "A World-Class Product Portfolio",
+        "body": "Every series is born from collaborative research with architects, material scientists, and specification experts. From immersive, multi-angle product imagery to installation galleries and packaging data, we equip professionals with everything they need to build confidently.",
+        "highlight1": "High-definition visuals of each surface, texture, and lay pattern across luxury residential and commercial projects.",
+        "highlight2": "Laboratory-tested performance data covering scratch resistance, stain protection, and climatic durability.",
+        "highlight3": "Export-grade packaging engineered for long-haul supply routes and just-in-time deliveries.",
+        "cta": "View Product Portfolio"
+      },
+      "export": {
+        "kicker": "Global Partnership Mindset",
+        "title": "Export Services: Seamless Pathways to Global Markets",
+        "body": "For us, exporting is more than just shipping tiles—it's a professional partnership for long-term success and the global promotion of Iranian architectural heritage. Our export services cover comprehensive consulting from product selection to installation guidance on-site; professional international transport logistics; complete handling of all legal documentation and global agreements; and end-to-end post-delivery support.",
+        "highlight1": "We offer unmatched flexibility in the customization of dimensions, designs, colors, and packaging tailored to specific market needs—particularly for large-volume orders exceeding 100,000 m², where we adapt production for truly unique projects.",
+        "highlight2": "Competitive pricing is always backed by a quality guarantee, versatile payment options, and ongoing technical support after delivery.",
+        "highlight3": "There are no restrictions—every client, from boutique projects to national distributors, can benefit from our efficient, transparent, and agile export process.",
+        "cta": "Connect with Export Advisors"
+      },
+      "smart": {
+        "kicker": "Digital Decision-Making",
+        "title": "Smart Product Combination Module: Tailoring Spaces with Intelligent Choice",
+        "body": "Our Smart Combination Module is more than a tool—it's a state-of-the-art interactive platform for designers and clients to visualize and experiment with multiple products in any space. Unlike conventional selection tools, our system analyzes buyer behavior patterns and global customer preferences, offering personalized recommendations based on country, trends, and the latest in design.",
+        "highlight1": "After choosing preferred combinations, users can save or share renderings with architects and project teams. Fully rendered concept files are available for negotiation or detailed planning.",
+        "highlight2": "This module delivers a modern and enjoyable user experience, acting as your digital advisor for smart, strategic product selection.",
+        "highlight3": "For specialized combinations or major projects, connect with our technical advisors for expert collaboration and tailored solutions.",
+        "cta": "Launch the Smart Module"
+      }
+    },
+    "certificates": {
+      "environment": "Environmental Management System",
+      "safety": "Occupational Health & Safety Program",
+      "quality": "Quality Management System",
+      "integrated": "Integrated Management Systems",
+      "integratedSubtitle": "ISO 9001 · ISO 14001 · ISO 45001"
+    },
+    "certifications": {
+      "kicker": "Verified Excellence",
+      "title": "Certifications that Validate Our Promise",
+      "description": "Internationally recognised standards confirm the reliability, transparency, and sustainability of our manufacturing ecosystem.",
+      "view": "Preview",
+      "download": "Download",
+      "downloadCta": "Download",
+      "modalTitle": "Accredited Certifications",
+      "modalDescription": "Click outside the frame to close and continue exploring our credentials.",
+      "heading": "Regulatory Certifications",
+      "intro": "Verified documentation demonstrating Almas Kavir Rafsanjan's compliance with international tile manufacturing and export standards.",
+      "projectSamples": "Project Installation Samples",
+      "additionalCertificates": "Additional Certificates",
+      "closeLightbox": "Close lightbox",
+      "certificatePreview": "Certificate preview",
+      "imageAlt": "Pietra Luxe Hub porcelain texture",
+      "certificateImageAlt": "Certificate preview",
+      "certificates": {
+        "iso14001": {
+          "title": "ISO 14001:2015 - Environmental Management System",
+          "description": "This certificate demonstrates that Almas Kavir Rafsanjan has implemented an effective environmental management system. The primary objective of this standard focuses on managing and reducing the harmful impacts of the company's activities on the environment. This means working to prevent pollution, optimize resource consumption (such as water and energy), and comply with environmental laws and regulations.",
+          "verification": "Issued by <strong>QMS Italia</strong> and its exclusive representative in Iran and the Middle East, <strong>QMS Arian Institute</strong>. Issue Date: March 26, 2020 | Valid Until: March 25, 2026",
+          "previewAlt": "ISO 14001:2015 Environmental Management System Certificate"
+        },
+        "iso45001": {
+          "title": "ISO 45001:2018 - Occupational Health & Safety Management",
+          "description": "This certificate confirms that Almas Kavir Rafsanjan complies with international occupational health and safety standards. The objective of this standard is to create a safe and healthy working environment for all employees. This system helps the company identify, assess, and control occupational hazards, and prevent workplace accidents and occupational diseases.",
+          "verification": "Issued by <strong>QMS Italia</strong> and its representative <strong>QMS Arian</strong>. Issue Date: March 26, 2020 | Valid Until: March 25, 2026",
+          "previewAlt": "ISO 45001:2018 Occupational Health & Safety Certificate"
+        },
+        "iso9001": {
+          "title": "ISO 9001:2015 - Quality Management System",
+          "description": "This certificate is one of the most recognized management standards in the world and demonstrates that the company has an effective quality management system. The primary focus of this standard is on customer satisfaction. A company that receives this certificate demonstrates that it has designed its processes so that its products and services (wall tiles, ceramics, and granite) are consistently produced with high quality and in accordance with customer needs.",
+          "verification": "Issued by <strong>QMSCERT</strong>, an accredited third-party body based in Greece. Issue Date: March 26, 2020 | Valid Until: March 25, 2026",
+          "previewAlt": "ISO 9001:2015 Quality Management System Certificate"
+        },
+        "ims": {
+          "title": "IMS - Integrated Management System",
+          "description": "This certificate is not a separate standard, but rather confirms that Almas Kavir Rafsanjan has implemented the three management systems above—quality (ISO 9001), environmental (ISO 14001), and occupational health and safety (ISO 45001)—in an integrated and coordinated manner. The Integrated Management System (IMS) allows the organization to merge common processes between these three standards. This reduces redundancies, saves time and costs, and increases the overall efficiency of the organization.",
+          "verification": "Issued by <strong>QMS Italia</strong>. Issue Date: March 26, 2020 | Valid Until: March 25, 2026",
+          "previewAlt": "Integrated Management System (IMS) Certificate"
+        }
+      },
+      "downloadLabel": "Download Certificate (PDF)",
+      "pdfCertificates": {
+        "vcp12094": {
+          "title": "VCP12094 Certificate of Conformity",
+          "description": "OTC Bulgaria Ltd. certifies that Almas Kavir Rafsanjan's dry-pressed ceramic tiles for internal walls and floorings comply with EN 14411:2016 standard. Valid from 07.02.2024 to 06.02.2027. System of Attestation of Conformity 4, according to Regulation 305/2011 Construction Products.",
+          "downloadLabel": "View Certificate (PDF)"
+        },
+        "industrialLicense": {
+          "title": "Industrial Production License",
+          "description": "Ministry of Industry, Mine & Trade of Iran license for manufacturing ceramic tiles, porcelain, and granite products. Authorizes production and export operations at Almas Kavir Rafsanjan facility located at 10th kilometer of Rafsanjan-Kerman road.",
+          "downloadLabel": "View License (PDF)"
+        }
+      }
+    },
+    "downloads": {
+      "kicker": "Download Centre",
+      "cta": "Download",
+      "items": {
+        "dossier": {
+          "title": "ISO Certification Dossier",
+          "description": "See the latest audits validating our environmental, quality, and health & safety management systems."
+        },
+        "license": {
+          "title": "Manufacturing License",
+          "description": "Review our official manufacturing licence issued by Iran’s Ministry of Industry, Mine and Trade."
+        },
+        "catalogue": {
+          "title": "Sustainable Collections Catalogue",
+          "description": "Explore export-ready surfaces, technical specs, and packaging data tailored for premium projects."
+        }
+      }
+    },
+    "final": {
+      "kicker": "Partner with Us",
+      "title": "Let’s Build Extraordinary Spaces Together",
+      "description": "Let our export specialists, product engineers, and design strategists support your next landmark project with precision and authenticity.",
+      "primaryCta": "Contact our export desk",
+      "secondaryCta": "Explore digital catalogue",
+      "contact": {
+        "title": "Direct Access",
+        "body": "Email, phone, and live support channels connect you with consultants who understand regional regulations and technical standards."
+      },
+      "support": {
+        "title": "Project Aftercare",
+        "body": "We provide maintenance guidance, replacement strategies, and continuous supply reviews to protect your investment."
+      },
+      "heading": "Partner with Pietra Luxe Hub",
+      "projectAdvisory": {
+        "title": "Export Consultancy Request",
+        "body": "Engage our experts from planning to project completion. Fill out our export consultancy request form to get started with professional guidance tailored to your needs."
+      },
+      "afterSales": {
+        "title": "Partnership Terms & Factory Tour",
+        "body": "Request detailed partnership terms, pricing tables, or schedule a factory tour. Plan an on-site visit for your team or chat live with our export team to discuss technical details, logistics, or custom requirements."
+      }
+    },
+    "loading": "Loading sustainability content…",
+    "impact": {
+      "exportServices": {
+        "heading": "<b>Export Services</b><br>Seamless Pathways to Global Markets",
+        "body": "<p>For us, exporting is more than just shipping tiles—it's a professional partnership for long-term success and the global promotion of Iranian architectural heritage. Our export services cover comprehensive consulting from product selection to installation guidance on-site; professional international transport logistics; complete handling of all legal documentation and global agreements; and end-to-end post-delivery support.</p><ul><li>Unmatched flexibility in the customization of dimensions, designs, colors, and packaging tailored to specific market needs—particularly for large-volume orders exceeding 100,000 m².</li><li>Competitive pricing always backed by a quality guarantee, versatile payment options, and ongoing technical support after delivery.</li><li>No restrictions—every client, from boutique projects to national distributors, can benefit from our efficient, transparent, and agile export process.</li></ul>"
+      },
+      "smartCombination": {
+        "heading": "<b>Smart Product Combination Module</b><br>Tailoring Spaces with Intelligent Choice",
+        "body": "<p>Our Smart Combination Module is more than a tool—it's a state-of-the-art interactive platform for designers and clients to visualize and experiment with multiple products in any space. Unlike conventional selection tools, our system analyzes buyer behavior patterns and global customer preferences, offering personalized recommendations based on country, trends, and the latest in design.</p><ul><li>After choosing preferred combinations, users can save or share renderings with architects and project teams. Fully rendered concept files are available for negotiation or detailed planning.</li><li>This module delivers a modern and enjoyable user experience, acting as your digital advisor for smart, strategic product selection.</li><li>For specialized combinations or major projects, connect with our technical advisors for expert collaboration and tailored solutions.</li></ul>"
+      }
+    },
+    "solutions": {
+      "intro": {
+        "heading": "<b>Intelligent</b> Specification Tools",
+        "body": "<p>We translate decades of manufacturing excellence into digital experiences that help designers compare surfaces, technical specs, and real-world installations without guesswork.</p>"
+      },
+      "features": {
+        "signatureWhitebody": {
+          "heading": "<b>Signature</b> Whitebody Collections",
+          "body": "<p>Premium whitebody cores with luxurious glazes deliver enduring colour depth and clarity for flagship projects.</p><ul><li>Multiple calibrations across matte, semi-polished, and full-gloss finishes.</li><li>Real-life installation photography for hospitality, residential, and public spaces.</li><li>Comprehensive packaging and palletisation data for streamlined logistics.</li></ul>",
+          "cta": "Browse export catalogue"
+        },
+        "largeFormat": {
+          "heading": "<b>Large-Format</b> Slabs &amp; Panels",
+          "body": "<p>Architects rely on our large-format porcelain for façades, lobbies, and immersive interiors that demand seamless continuity.</p><ul><li>Advanced kiln technology ensures dimensional stability across oversized formats.</li><li>Precise thickness control makes installation faster with minimal waste.</li><li>Project advisory teams assist with anchoring systems and technical drawings.</li></ul>",
+          "cta": "Book a specification call"
+        },
+        "performance": {
+          "heading": "<b>Performance</b> Surface Innovations",
+          "body": "<p>Anti-slip, antibacterial, and high-impact finishes empower designers to balance aesthetics with strict compliance standards.</p><ul><li>Laboratory-tested glazes maintain hygiene in healthcare and commercial settings.</li><li>Outdoor-rated textures resist UV fading, frost, and heavy footfall.</li><li>Technical sheets cover coefficient, resistance, and maintenance guidance.</li></ul>",
+          "cta": "Request technical dossier"
+        },
+        "hospitality": {
+          "heading": "<b>Hospitality</b> &amp; Retail Concepts",
+          "body": "<p>Curated moodboards combine expressive décors with durable base tiles, helping operators roll out brand experiences faster.</p><ul><li>Ready-to-use design packs for cafés, resorts, residences, and malls.</li><li>Coordinated trims, mosaics, and transition pieces for consistent detailing.</li><li>On-demand sampling with expedited international shipping.</li></ul>",
+          "cta": "Connect with design studio"
+        },
+        "healthcare": {
+          "heading": "<b>Healthcare</b> &amp; Wellness Programs",
+          "body": "<p>Solutions engineered for hygiene-critical environments without sacrificing warmth or tactility.</p><ul><li>Slip-resistant, easy-clean surfaces for clinics, spas, and educational campuses.</li><li>Certified antibacterial glazes that support maintenance protocols.</li><li>Custom accents and wayfinding inserts to enhance patient experiences.</li></ul>",
+          "cta": "Discuss compliance needs"
+        },
+        "circular": {
+          "heading": "<b>Circular</b> Manufacturing Loop",
+          "body": "<p>Waste minerals and kiln heat are recaptured through recycling systems that close the loop on production resources.</p><ul><li>Recovered materials are reintegrated into new bodies without degrading surface quality.</li><li>Water treatment facilities return processed water directly to the line.</li><li>Energy dashboards monitor kilns to fine-tune efficiency in real time.</li></ul>",
+          "cta": "See sustainability roadmap"
+        },
+        "climate": {
+          "heading": "<b>Climate-Responsive</b> Efficiency",
+          "body": "<p>Smart firing curves, insulation strategies, and logistics planning cut emissions while preserving Italian-inspired craftsmanship.</p><ul><li>Thermal analytics guide kiln adjustments for maximum output with minimal fuel.</li><li>Route optimisation reduces transport footprints to our global partners.</li><li>Transparent reporting keeps clients audit-ready for ESG requirements.</li></ul>",
+          "cta": "Download ESG snapshot"
+        }
+      }
+    },
+    "html": {
+      "sustainabilityCommitments": "Our sustainability commitments",
+      "rakCeramicsIntro": "Our brand's history is rooted in the real challenges faced by Iranian building professionals—with a vision for global quality and authentic innovation. We built teams of experienced engineers, sales experts, designers, and operators, institutionalizing continuous learning and professional development. Active R&D divisions and a culture centered on transparency and ethics earned us long-term client trust both locally and internationally.",
+      "strategicInitiatives": "Our mission: deliver professional, expectation-defying solutions to builders, designers, and industry leaders. Our vision: to rank among the region's leading exporters, establishing the Iranian name at the forefront of global tile and ceramic excellence. Our core values—uncompromising quality, honesty, customer satisfaction, respect, and professional conduct—are lived daily. With 14+ years of experience, distribution across 13 countries, a catalog of over 350 unique models and sizes, and quality certifications from top international authorities, our journey is a testament to the right path in branding.",
+      "reuse": "RE-USE",
+      "reuseDescription": "RE-USE is a porcelain collection made entirely from 100% pre-consumer recycled materials. It keeps premium durability while cutting waste for projects that need sustainability and style.",
+      "rimlessTechnology": "RIMLESS TECHNOLOGY",
+      "rimlessDescription": "RIMLESS TECHNOLOGY removes hidden rims and ledges so bathrooms stay cleaner, quieter, and easier to maintain while using less water per flush.",
+      "rimlessFeatures": {
+        "hygienic": "Hygienic and easy cleaning",
+        "waterSaving": "Water saving",
+        "efficientDesign": "Efficient design",
+        "silentFlush": "Silent flush",
+        "noLedges": "No ledges or rim."
+      },
+      "rakProTek": "RAK-ProTeK ANTIBACTERIAL AND HYGIENIC GLAZE",
+      "rakProTekDescription": "RAK-ProTeK is a permanently baked glaze that creates an ultra-smooth, antibacterial surface for washbasins, toilets, and urinals, reducing stains and cleaning time.",
+      "rakMaxxFlush": "RAK MAXXFLUSH",
+      "rakMaxxFlushDescription": "RAK MAXXFLUSH offers adjustable dual-flush control—6L for a full flush, 3L for a half flush, or 4.5L in reduced mode—delivering reliable performance with lower water consumption.",
+      "rakJoy": "RAK JOY",
+      "rakJoyDescription": "RAK JOY pairs refined design with responsibly sourced particleboard and MDF, giving eco-conscious projects durable storage that respects forests and local communities.",
+      "rakSanit": "RAK-SANIT A SAFE CHOICE",
+      "rakSanitDescription": "RAK-SANIT tiles embed silver-based antibacterial agents inside the ceramic body, limiting bacterial growth in kitchens, bathrooms, healthcare facilities, and high-traffic areas.",
+      "klima": "KLIMA",
+      "klimaDescription": "KLIMA tiles use smart ceramic materials to stay in balance with surrounding temperatures, boosting indoor comfort and lowering heating or cooling demand.",
+      "sustainabilityCertifications": "SUSTAINABILITY CERTIFICATIONS",
+      "findOutMore": "FIND OUT MORE ABOUT OUR SUSTAINABILITY APPROACH"
+    }
   },
   "notFound": {
     "title": "Page Not Found",
@@ -590,6 +913,156 @@
       "UV stable": "UV stable",
       "R10-R13": "R10-R13",
       "R10-R12": "R10-R12"
+    }
+  },
+  "lifestyleSolutions": {
+    "title": "LIFESTYLE SOLUTIONS",
+    "subtitle": "Signature surfaces for standout spaces",
+    "cards": {
+      "lobbySerenity": {
+        "title": "Lobby Serenity",
+        "subtitle": "30x90 Alvin Silver relief wall panels"
+      },
+      "signatureBathSuite": {
+        "title": "Signature Bath Suite",
+        "subtitle": "60x120 Soufia Satin large-format walls"
+      },
+      "gourmetStudio": {
+        "title": "Gourmet Studio",
+        "subtitle": "30x90 Alvin Pearl backsplash with textured accents"
+      }
+    }
+  },
+  "innovativeSolutions": {
+    "title": "ADVANCED TECHNOLOGY",
+    "description": "Combining traditional Iranian craftsmanship with modern innovation, we deliver premium ceramic tiles that transform architectural visions into reality. Our state-of-the-art manufacturing ensures exceptional quality and timeless design.",
+    "panels": {
+      "isoCertified": {
+        "title": "ISO Certified Quality",
+        "subtitle": "QUALITY STANDARDS"
+      },
+      "environmental": {
+        "title": "Environmental Excellence",
+        "subtitle": "SUSTAINABILITY COMMITMENT"
+      },
+      "global": {
+        "title": "Global Manufacturing",
+        "subtitle": "INNOVATION & TECHNOLOGY"
+      }
+    }
+  },
+  "newsBanner": {
+    "slides": {
+      "legacy": {
+        "description": "From bespoke slabs to hospitality-scale fit-outs, our production teams deliver disciplined quality with a signature Pietra Luxe finish."
+      },
+      "people": {
+        "heading": "Crafted by People, Powered by Expertise",
+        "description": "Our engineers, designers, and field specialists partner with clients to translate architectural visions into ready-to-install surface solutions.",
+        "ctaLabel": "Meet the team"
+      }
+    },
+    "previousSlide": "Previous slide",
+    "nextSlide": "Next slide"
+  },
+  "chatAssistant": {
+    "title": "Almas Assistant",
+    "welcomeMessage": "Hello! I'm Almas Assistant. How can I help you with our ceramic tiles today?",
+    "rateLimitMessage": "Please wait {seconds} seconds before sending your next message.",
+    "errorMessage": "Sorry, but I'm having trouble responding right now. Please try again or contact us directly: +98 21 88218520",
+    "openChat": "Open chat assistant",
+    "inputPlaceholder": "Type your message...",
+    "closeChat": "Close chat",
+    "sendMessage": "Send message",
+    "inputHint": "Press Enter to send, Shift+Enter for new line"
+  },
+  "featuredCollections": {
+    "label": "Featured Collections",
+    "title": "Premium Tile Collections",
+    "subtitle": "Discover our curated selection of premium ceramic and porcelain tile collections",
+    "filterAll": "All",
+    "filterWoodLook": "Wood Look",
+    "filterMarbleLook": "Marble Look",
+    "filterStoneLook": "Stone Look",
+    "filterConcrete": "Concrete",
+    "filterMetalEffect": "Metal Effect",
+    "collection1Name": "Natural Wood Collection",
+    "collection1Category": "Wood Look",
+    "collection1Description": "Authentic wood aesthetics with ceramic durability and easy maintenance",
+    "badgeNew": "New",
+    "collection2Name": "Luxury Marble Collection",
+    "collection2Category": "Marble Look",
+    "collection2Description": "Elegant marble-inspired designs for sophisticated interiors",
+    "badgeBestseller": "Bestseller",
+    "collection3Name": "Modern Concrete Collection",
+    "collection3Category": "Concrete",
+    "collection3Description": "Industrial chic with contemporary concrete finishes",
+    "products": "products",
+    "finishes": "finishes",
+    "viewCollection": "View Collection"
+  },
+  "technicalSpecs": {
+    "label": "Technical Excellence",
+    "title": "Technical Specifications",
+    "subtitle": "Premium quality standards that ensure durability and performance",
+    "waterAbsorption": "Water Absorption",
+    "waterAbsorptionDesc": "Ultra-low water absorption ensures durability in wet conditions",
+    "frostResistance": "Frost Resistance",
+    "certified": "Certified",
+    "frostResistanceDesc": "Tested and certified for extreme temperature variations",
+    "slipResistance": "Slip Resistance",
+    "slipResistanceDesc": "High slip resistance rating for safe walking surfaces",
+    "breakingStrength": "Breaking Strength",
+    "breakingStrengthDesc": "Exceptional breaking strength for long-lasting installations",
+    "standardsCompliance": "All products comply with international standards including ISO 13006",
+    "downloadDatasheet": "Download Datasheet"
+  },
+  "projects": {
+    "subtitle": "Discover our completed projects and installations"
+  },
+  "productSpotlight": {
+    "title": "PRODUCT SPOTLIGHT",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right",
+    "tiles": {
+      "alvinSilver": {
+        "title": "Alvin Silver 30×90",
+        "description": "Layered wave relief panels finished in a cool silver tone for hotel lobbies and feature walls."
+      },
+      "soufiaSand": {
+        "title": "Soufia Sand 60×120",
+        "description": "Porcelain slabs with desert-inspired veining that wrap spa suites in gentle warmth."
+      },
+      "rakuStone": {
+        "title": "Raku Stone 60×120",
+        "description": "Four-match composition showcasing the depth of our Raku stone collection for expansive living areas."
+      },
+      "klaraGrey": {
+        "title": "Klara Grey 60×120",
+        "description": "Soft grey marble graphics with high-reflective surfaces suited for contemporary kitchens."
+      },
+      "waldoMatt": {
+        "title": "Waldo Matt 60×120",
+        "description": "Refined matt finish tiles delivering monolithic volumes for premium retail interiors."
+      }
+    }
+  },
+  "packagingInfo": {
+    "title": "Packaging Information",
+    "singlePackage": {
+      "title": "Single Package Information",
+      "label": "Single Package",
+      "dimension": "Dimension",
+      "piecesPerCarton": "Pieces per Carton",
+      "squareMetersPerCarton": "Square Meters per Carton",
+      "weightPerCarton": "Weight per Carton"
+    },
+    "pallet": {
+      "title": "Multiple Packages / Pallet Information",
+      "label": "Pallet",
+      "cartonsPerPallet": "Cartons per Pallet",
+      "squareMetersPerPallet": "Square Meters per Pallet",
+      "totalPalletWeight": "Total Pallet Weight"
     }
   }
 }

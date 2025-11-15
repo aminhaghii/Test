@@ -1,0 +1,17 @@
+HTTrack3.49-2+htsswf+htsjava launched on Mon, 10 Nov 2025 22:14:01 at https://www.rakceramics.com/uk/en/sustainability/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://www.rakceramics.com/uk/en/sustainability/ -O1 "C:\My Web Sites\r" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+22:14:40	Warning: 	Retry after error -5 (Unable to get server's address: No such host is known. ) at link https://www.rakceramics.comhttps://diix1yrt822hg.cloudfront.net/static/themes/images/interface/logo/logo_og.png (from https://www.rakceramics.com/uk/en/sustainability/)
+22:14:40	Warning: 	Retry after error -5 (error:00000005:lib(0):func(0):DH lib) at link https://www.googletagmanager.com/gtm.js?id=GTM-5JMSRX7 (from https://www.rakceramics.com/uk/en/sustainability/)
+22:14:50	Warning: 	Retry after error -5 (Unable to get server's address: unknown error) at link https://www.rakceramics.comhttps://diix1yrt822hg.cloudfront.net/static/themes/images/interface/logo/logo_og.png (from https://www.rakceramics.com/uk/en/sustainability/)
+22:14:50	Warning: 	Retry after error -5 (error:00000005:lib(0):func(0):DH lib) at link https://www.googletagmanager.com/gtm.js?id=GTM-5JMSRX7 (from https://www.rakceramics.com/uk/en/sustainability/)
+22:14:51	Error: 	"Unable to get server's address: unknown error" (-5) after 2 retries at link https://www.rakceramics.comhttps://diix1yrt822hg.cloudfront.net/static/themes/images/interface/logo/logo_og.png (from https://www.rakceramics.com/uk/en/sustainability/)
+22:14:52	Error: 	"error:00000005:lib(0):func(0):DH lib" (-5) after 2 retries at link https://www.googletagmanager.com/gtm.js?id=GTM-5JMSRX7 (from https://www.rakceramics.com/uk/en/sustainability/)
+
+HTTrack Website Copier/3.49-2 mirror complete in 51 seconds : 76 links scanned, 68 files written (11920932 bytes overall) [11145378 bytes received at 218536 bytes/sec], 1049023 bytes transferred using HTTP compression in 6 files, ratio 22%, 5.8 requests per connection
+(2 errors, 4 warnings, 0 messages)

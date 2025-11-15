@@ -3,15 +3,15 @@
   position: fixed;
   width: 12px;
   height: 12px;
-  background: rgba(212, 175, 55, 0.3);
-  border: 1px solid #D4AF37;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #000000;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
   will-change: transform;
   transition: none;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Content Styles */
@@ -67,9 +67,9 @@
 .cream-button {
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #F5F5DC 0%, #E6E6FA 100%);
-  border: 2px solid #D4AF37;
+  border: 2px solid #000000;
   border-radius: 25px;
-  color: #8B4513;
+  color: #1a1a1a;
   font-size: 1rem;
   font-weight: bold;
   cursor: none;
@@ -78,7 +78,7 @@
 }
 
 .cream-button:hover {
-  background: linear-gradient(135deg, #D4AF37 0%, #F5F5DC 100%);
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
   color: #FFF;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
@@ -104,8 +104,8 @@
 }
 
 .cream-link:hover {
-  color: #D4AF37;
-  border-bottom-color: #D4AF37;
+  color: #000000;
+  border-bottom-color: #000000;
   transform: translateY(-1px);
 }
 
@@ -118,7 +118,7 @@
 
 .cream-card {
   background: linear-gradient(135deg, #FFF8DC 0%, #F5F5DC 100%);
-  border: 2px solid #D4AF37;
+  border: 2px solid #000000;
   border-radius: 15px;
   padding: 2rem;
   text-align: center;
@@ -130,7 +130,7 @@
 .cream-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  border-color: #B8860B;
+  border-color: #1a1a1a;
 }
 
 .cream-card h3 {

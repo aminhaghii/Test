@@ -46,8 +46,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   onMenuClose
 }) => {
   const [open, setOpen] = useState(false);
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   const openRef = useRef(false);
   const panelRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const initialPositionRef = useRef<{ top: number; right: number } | null>(null);
+  const scrollPositionRef = useRef<number>(0);
   const preLayersRef = useRef<HTMLDivElement>(null);
   const preLayerElsRef = useRef<HTMLElement[]>([]);
   const plusHRef = useRef<HTMLSpanElement>(null);
@@ -296,7 +300,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         busyRef.current = false;
       });
       // Play immediately without delay
-      tl.play(0);
+        tl.play(0);
     } else {
       busyRef.current = false;
     }
@@ -442,6 +446,72 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       document.removeEventListener('keydown', handleEsc);
     };
   }, [open, toggleMenu]);
+
+  // Prevent page interaction and scroll when menu is open
+  React.useEffect(() => {
+    if (open) {
+      // Store current scroll position
+      scrollPositionRef.current = window.scrollY;
+      
+      // Disable pointer events on body to prevent hover/interaction with page content
+      document.body.style.pointerEvents = 'none';
+      // Disable scroll on body - only menu should scroll
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPositionRef.current}px`;
+      document.body.style.width = '100%';
+      
+      // Re-enable pointer events for menu elements and header
+      const panel = panelRef.current;
+      const btn = toggleBtnRef.current;
+      // Find header element (it has z-50 class)
+      const header = document.querySelector('header.fixed.top-0') as HTMLElement;
+      if (panel) {
+        (panel as HTMLElement).style.pointerEvents = 'auto';
+      }
+      if (btn) {
+        (btn as HTMLElement).style.pointerEvents = 'auto';
+      }
+      if (header) {
+        header.style.pointerEvents = 'auto';
+      }
+    } else {
+      // Re-enable pointer events and scroll on body when menu is closed
+      document.body.style.pointerEvents = '';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      
+      // Restore scroll position
+      window.scrollTo(0, scrollPositionRef.current);
+      
+      const panel = panelRef.current;
+      const btn = toggleBtnRef.current;
+      const header = document.querySelector('header.fixed.top-0') as HTMLElement;
+      if (panel) {
+        (panel as HTMLElement).style.pointerEvents = '';
+      }
+      if (btn) {
+        (btn as HTMLElement).style.pointerEvents = '';
+      }
+      if (header) {
+        header.style.pointerEvents = '';
+      }
+    }
+    
+    // Cleanup function to ensure styles are reset if component unmounts
+    return () => {
+      if (open) {
+        document.body.style.pointerEvents = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollPositionRef.current);
+      }
+    };
+  }, [open]);
 
   // Close on outside click only (keep menu open on scroll - no scroll listener)
   React.useEffect(() => {
@@ -596,9 +666,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       className="sm-panel-item"
                       aria-label={it.ariaLabel || it.label}
                       data-index={idx + 1}
-                      onClick={() => {
-                        it.onClick?.();
-                        toggleMenu();
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Execute onClick first, then close menu
+                        if (it.onClick) {
+                          it.onClick();
+                        }
+                        // Close menu after a small delay to ensure navigation happens
+                        setTimeout(() => {
+                          toggleMenu();
+                        }, 100);
                       }}
                     >
                       <span className="sm-panel-itemLabel">{it.label}</span>
@@ -641,7 +719,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                       to={it.link}
                       aria-label={it.ariaLabel || it.label}
                       data-index={idx + 1}
-                      onClick={toggleMenu}
+                      onClick={(e) => {
+                        // Close menu when link is clicked
+                        if (openRef.current) {
+                          toggleMenu();
+                        }
+                      }}
                     >
                       <span className="sm-panel-itemLabel">{it.label}</span>
                     </Link>

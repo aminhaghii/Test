@@ -275,16 +275,16 @@ const TileVisualizer = ({ products }: TileVisualizerProps) => {
         {/* Left: Upload & Selection */}
         <div className="space-y-6">
           {/* Upload Section */}
-          <Card className="border-2 border-dashed border-luxury-gold/30 hover:border-luxury-gold/60 transition-colors">
+          <Card className="border-2 border-dashed border-neutral-charcoal/30 hover:border-neutral-charcoal/60 transition-colors">
             <CardContent className="p-8">
               <div className="text-center">
                 {!uploadedImage ? (
                   <>
-                    <Upload className="w-16 h-16 mx-auto mb-4 text-luxury-gold" />
+                    <Upload className="w-16 h-16 mx-auto mb-4 text-neutral-charcoal" />
                     <h3 className="text-xl font-bold mb-2">{t('tileVisualizer.uploadRoomPhoto')}</h3>
                     <p className="text-sm text-muted-foreground mb-6">{t('tileVisualizer.uploadRoomPhotoDesc')}</p>
                     <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" id="room-upload" />
-                    <Button onClick={() => fileInputRef.current?.click()} className="bg-luxury-gold hover:bg-luxury-bronze text-neutral-charcoal">{t('tileVisualizer.chooseImage')}</Button>
+                    <button onClick={() => fileInputRef.current?.click()} className="text-neutral-charcoal font-semibold">{t('tileVisualizer.chooseImage')}</button>
                   </>
                 ) : (
                   <div className="space-y-4">
@@ -364,7 +364,7 @@ const TileVisualizer = ({ products }: TileVisualizerProps) => {
                       <Download className="w-4 h-4 mr-2" /> {t('tileVisualizer.download')}
                     </Button>
                   </div>
-                  <div className="rounded-lg overflow-hidden border-2 border-luxury-gold/30">
+                  <div className="rounded-lg overflow-hidden border-2 border-neutral-charcoal/30">
                     <img src={resultImage} alt="Visualization result" className="w-full h-auto" />
                   </div>
                   <div className="bg-luxury-gold/10 p-4 rounded-lg">

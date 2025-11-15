@@ -87,52 +87,60 @@ const ChatAssistant = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-4 md:bottom-10 md:right-6 z-[100] w-14 h-14 md:w-16 md:h-16 rounded-full bg-luxury-gold hover:bg-luxury-bronze text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+          className="fixed bottom-6 right-4 md:bottom-10 md:right-8 z-[100] inline-flex h-12 w-12 items-center justify-center rounded-[14px] border border-neutral-stone/50 bg-white/70 text-neutral-charcoal shadow-lg backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:border-neutral-charcoal/60 hover:bg-white/90"
           aria-label={t('chatAssistant.openChat')}
         >
-          <MessageCircle className="w-6 h-6 md:w-7 md:h-7 group-hover:scale-110 transition-transform" />
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+          <MessageCircle className="h-[22px] w-[22px]" strokeWidth={1.75} />
         </button>
       )}
 
       {/* Chat Panel */}
       {isOpen && (
-        <div 
-          className={`fixed ${isMobile ? 'inset-0' : 'bottom-4 right-4 md:bottom-6 md:right-6 w-[calc(100vw-2rem)] md:w-[380px]'} z-[100] bg-white rounded-2xl shadow-2xl border border-neutral-stone/20 overflow-hidden flex flex-col`}
-          style={!isMobile ? { height: '600px', maxHeight: 'calc(100vh - 6rem)' } : { height: '100vh', maxHeight: '100vh' }}
+        <div
+          className={`fixed ${isMobile ? 'inset-0' : 'bottom-4 right-4 md:bottom-6 md:right-6 w-[calc(100vw-2rem)] md:w-[360px]'} z-[100] flex flex-col overflow-hidden rounded-[20px] border border-neutral-stone/40 bg-white/95 text-neutral-charcoal shadow-2xl backdrop-blur`}
+          style={!isMobile ? { height: '560px', maxHeight: 'calc(100vh - 6rem)' } : { height: '100vh', maxHeight: '100vh' }}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-luxury-gold to-luxury-bronze p-4 flex items-center justify-between">
+          <div className="flex items-center justify-between border-b border-neutral-stone/30 px-5 py-4">
             <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-              <h3 className="text-white font-semibold text-lg">{t('chatAssistant.title')}</h3>
+              <div className="relative h-9 w-9 overflow-hidden rounded-full border border-neutral-stone/40 bg-neutral-alabaster/90">
+                <div className="absolute inset-0 flex items-center justify-center text-neutral-charcoal">
+                  <MessageCircle className="h-4 w-4" strokeWidth={1.6} />
+                </div>
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-sm font-semibold tracking-wide uppercase text-neutral-stone/80">
+                  {t('chatAssistant.title')}
+                </span>
+                <span className="text-xs text-neutral-slate">
+                  {t('chatAssistant.inputPlaceholder')}
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 rounded-full hover:bg-white/20 transition-colors"
-                aria-label={t('chatAssistant.closeChat')}
-              >
-                <X className="w-5 h-5 text-white" />
-              </button>
-            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-transparent text-neutral-slate transition-all duration-150 hover:border-neutral-stone/40 hover:text-neutral-charcoal"
+              aria-label={t('chatAssistant.closeChat')}
+            >
+              <X className="h-4 w-4" strokeWidth={1.6} />
+            </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-neutral-alabaster to-white">
+          <div className="flex-1 space-y-3 sm:space-y-4 overflow-y-auto bg-neutral-alabaster/40 px-3 sm:px-4 md:px-5 py-3 sm:py-4 -webkit-overflow-scrolling-touch">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 ${
+                  className={`max-w-[90%] sm:max-w-[85%] rounded-[14px] sm:rounded-[18px] px-3 sm:px-4 py-2 sm:py-3 ${
                     msg.role === 'user'
-                      ? 'bg-luxury-gold text-white rounded-br-sm'
-                      : 'bg-white text-neutral-charcoal border border-neutral-stone/20 rounded-bl-sm shadow-sm'
+                      ? 'bg-neutral-charcoal text-white/90 rounded-br-sm'
+                      : 'border border-neutral-stone/40 bg-white/95 text-neutral-charcoal rounded-bl-sm'
                   }`}
                 >
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+                  <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
                     {msg.content}
                   </p>
                 </div>
@@ -140,8 +148,8 @@ const ChatAssistant = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white border border-neutral-stone/20 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
-                  <Loader2 className="w-5 h-5 text-luxury-gold animate-spin" />
+                <div className="rounded-[18px] border border-neutral-stone/40 bg-white/95 px-4 py-3">
+                  <Loader2 className="h-5 w-5 animate-spin text-neutral-charcoal" strokeWidth={1.7} />
                 </div>
               </div>
             )}
@@ -149,33 +157,33 @@ const ChatAssistant = () => {
           </div>
 
           {/* Input */}
-          <div className="border-t border-neutral-stone/20 p-4 bg-white">
-            <div className="flex gap-2">
+          <div className="border-t border-neutral-stone/30 bg-white/95 p-3 sm:p-4">
+            <div className="flex items-end gap-2 sm:gap-3">
               <textarea
                 ref={inputRef}
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder={t('chatAssistant.inputPlaceholder')}
-                className="flex-1 px-4 py-3 border border-neutral-stone/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-transparent resize-none text-sm"
+                className="flex-1 resize-none rounded-[14px] sm:rounded-[16px] border border-neutral-stone/40 bg-white/80 px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-neutral-charcoal shadow-inner outline-none transition focus:border-neutral-charcoal/40 focus:bg-white focus:shadow-none touch-manipulation"
                 rows={1}
-                style={{ minHeight: '48px', maxHeight: '120px' }}
+                style={{ minHeight: '44px', maxHeight: '120px', fontSize: '16px' }}
                 disabled={isLoading}
               />
-              <Button
+              <button
                 onClick={handleSend}
                 disabled={!inputValue.trim() || isLoading}
-                className="px-4 py-3 bg-luxury-gold hover:bg-luxury-bronze text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-[10px] sm:rounded-[12px] border border-neutral-stone/40 bg-white/80 text-neutral-charcoal transition-all duration-150 hover:-translate-y-[2px] hover:border-neutral-charcoal/50 hover:bg-white disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation"
                 aria-label={t('chatAssistant.sendMessage')}
               >
                 {isLoading ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.8} />
                 ) : (
-                  <Send className="w-5 h-5" />
+                  <Send className="h-4 w-4" strokeWidth={1.6} />
                 )}
-              </Button>
+              </button>
             </div>
-            <p className="text-xs text-neutral-stone mt-2 text-center">
+            <p className="mt-3 text-center text-[11px] uppercase tracking-[0.25em] text-neutral-stone/70">
               {t('chatAssistant.inputHint')}
             </p>
           </div>

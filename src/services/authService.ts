@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { getApiUrl } from '@/lib/getApiUrl';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = getApiUrl();
 
 // Add axios interceptor to handle 401 errors globally
 axios.interceptors.response.use(

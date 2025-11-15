@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import toast from 'react-hot-toast';
+import BrandLogo from '@/components/BrandLogo';
 
 const ProductList = () => {
   // Temporarily disable auth
@@ -168,74 +169,74 @@ const ProductList = () => {
     <div className="min-h-screen bg-neutral-50">
       {/* Admin Header */}
       <header className="bg-white border-b border-neutral-200 sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-8">
-              <Link to="/" className="flex items-center space-x-2">
-                <Home className="w-5 h-5 text-luxury-gold" />
-                <span className="font-display font-bold text-xl text-neutral-charcoal">
-                  Almas<span className="text-luxury-gold">Ceram</span>
-                </span>
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-20">
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-8">
+              <Link to="/" className="flex items-center space-x-1.5 sm:space-x-2">
+                <Home className="w-4 h-4 sm:w-5 sm:h-5 text-luxury-gold" />
+                <BrandLogo className="h-5 sm:h-6 md:h-7 w-auto" eager />
               </Link>
               
-              <nav className="hidden md:flex items-center space-x-6">
-                <Link to="/admin" className="text-sm font-medium text-neutral-slate hover:text-luxury-gold transition-colors">
+              <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <Link to="/admin" className="text-xs sm:text-sm font-medium text-neutral-slate hover:text-luxury-gold transition-colors">
                   Dashboard
                 </Link>
-                <Link to="/admin/products" className="text-sm font-medium text-luxury-gold border-b-2 border-luxury-gold pb-1">
+                <Link to="/admin/products" className="text-xs sm:text-sm font-medium text-luxury-gold border-b-2 border-luxury-gold pb-1">
                   Products
                 </Link>
               </nav>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               <Button
                 onClick={() => navigate('/')}
                 variant="outline"
                 size="sm"
-                className="text-neutral-graphite"
+                className="text-neutral-graphite text-xs sm:text-sm px-2 sm:px-3 py-1.5 sm:py-2 touch-manipulation"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                Exit Admin
+                <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Exit Admin</span>
+                <span className="sm:hidden">Exit</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
       
-      <div className="container mx-auto px-6 lg:px-20 py-12">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-20 py-6 sm:py-8 md:py-10 lg:py-12">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div>
-            <h1 className="font-display text-4xl font-bold text-neutral-charcoal mb-2">
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-charcoal mb-1 sm:mb-2">
               Products Management
             </h1>
-            <p className="text-neutral-slate">
+            <p className="text-neutral-slate text-sm sm:text-base">
               {total} total products
             </p>
           </div>
           
           <Button
             onClick={() => navigate('/admin/products/new')}
-            className="bg-luxury-gold hover:bg-luxury-bronze text-neutral-charcoal font-semibold px-6 py-6 rounded-full shadow-lg hover:shadow-xl transition-all"
+            className="bg-luxury-gold hover:bg-luxury-bronze text-neutral-charcoal font-semibold px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-6 rounded-full shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm md:text-base touch-manipulation w-full sm:w-auto"
           >
-            <Plus className="w-5 h-5 mr-2" />
+            <Plus className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
             Add New Product
           </Button>
         </div>
 
         {/* Filters & Search */}
-        <div className="bg-card rounded-2xl p-6 shadow-card border border-neutral-stone/20 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-card border border-neutral-stone/20 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             {/* Search */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-slate" />
+              <Search className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-neutral-slate" />
               <Input
                 type="text"
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="pl-11 h-12 text-base"
+                className="pl-9 sm:pl-11 h-10 sm:h-11 md:h-12 text-sm sm:text-base touch-manipulation"
+                style={{ fontSize: '16px' }}
               />
             </div>
 
@@ -243,9 +244,9 @@ const ProductList = () => {
             <Button
               onClick={() => setFilterOpen(!filterOpen)}
               variant="outline"
-              className="border-2 h-12 px-6"
+              className="border-2 h-10 sm:h-11 md:h-12 px-4 sm:px-5 md:px-6 text-xs sm:text-sm touch-manipulation"
             >
-              <Filter className="w-5 h-5 mr-2" />
+              <Filter className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
               Filters
             </Button>
 
@@ -254,9 +255,9 @@ const ProductList = () => {
               <Button
                 onClick={handleBulkDelete}
                 variant="destructive"
-                className="h-12 px-6"
+                className="h-10 sm:h-11 md:h-12 px-4 sm:px-5 md:px-6 text-xs sm:text-sm touch-manipulation"
               >
-                <Trash2 className="w-5 h-5 mr-2" />
+                <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
                 Delete ({selectedProducts.length})
               </Button>
             )}
@@ -264,8 +265,8 @@ const ProductList = () => {
 
           {/* Filter Panel */}
           {filterOpen && (
-            <div className="mt-6 pt-6 border-t border-neutral-stone/20">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="mt-4 sm:mt-5 md:mt-6 pt-4 sm:pt-5 md:pt-6 border-t border-neutral-stone/20">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                 {/* Dimensions */}
                 <div>
                   <label className="block text-sm font-semibold text-neutral-charcoal mb-2">
@@ -420,38 +421,38 @@ const ProductList = () => {
         </div>
 
         {/* Products Table */}
-        <div className="bg-card rounded-2xl shadow-card border border-neutral-stone/20 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
+        <div className="bg-card rounded-xl sm:rounded-2xl shadow-card border border-neutral-stone/20 overflow-hidden">
+          <div className="overflow-x-auto -webkit-overflow-scrolling-touch">
+            <table className="w-full min-w-[800px]">
               <thead className="bg-neutral-alabaster border-b border-neutral-stone/20">
                 <tr>
-                  <th className="px-6 py-4 text-left">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left">
                     <input
                       type="checkbox"
                       checked={selectedProducts.length === products.length && products.length > 0}
                       onChange={handleSelectAll}
-                      className="rounded"
+                      className="rounded w-4 h-4 touch-manipulation"
                     />
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal">
                     Image
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal">
                     Name
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal hidden md:table-cell">
                     Dimension
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal hidden lg:table-cell">
                     Surface
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal hidden lg:table-cell">
                     Category
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-neutral-charcoal">
+                  <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-neutral-charcoal">
                     Actions
                   </th>
                 </tr>
@@ -477,44 +478,47 @@ const ProductList = () => {
                       key={product.id}
                       className="border-b border-neutral-stone/10 hover:bg-neutral-alabaster/50 transition-colors"
                     >
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         <input
                           type="checkbox"
                           checked={selectedProducts.includes(product.id)}
                           onChange={() => handleToggleSelect(product.id)}
-                          className="rounded"
+                          className="rounded w-4 h-4 touch-manipulation"
                         />
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         {product.image_url && (
                           <img
                             src={product.image_url}
                             alt={product.name}
-                            className="w-16 h-16 object-cover rounded-lg"
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-cover rounded-lg"
                           />
                         )}
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="font-medium text-neutral-charcoal">{product.name}</div>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+                        <div className="font-medium text-neutral-charcoal text-xs sm:text-sm md:text-base">{product.name}</div>
                         {product.is_featured && (
-                          <span className="inline-block px-2 py-0.5 text-xs bg-luxury-gold/20 text-luxury-gold rounded-full mt-1">
+                          <span className="inline-block px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs bg-luxury-gold/20 text-luxury-gold rounded-full mt-1">
                             Featured
                           </span>
                         )}
+                        <div className="md:hidden text-xs text-neutral-slate mt-1">
+                          {product.dimension} • {product.surface}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-slate">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden md:table-cell">
                         {product.dimension}
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-slate">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden lg:table-cell">
                         {product.surface}
                       </td>
-                      <td className="px-6 py-4 text-sm text-neutral-slate">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-neutral-slate hidden lg:table-cell">
                         {product.category || '-'}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         <button
                           onClick={() => handleToggleActive(product)}
-                          className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${
+                          className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-medium touch-manipulation ${
                             product.is_active
                               ? 'bg-green-100 text-green-700'
                               : 'bg-red-100 text-red-700'
@@ -522,33 +526,34 @@ const ProductList = () => {
                         >
                           {product.is_active ? (
                             <>
-                              <Check className="w-3 h-3" />
+                              <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                               Active
                             </>
                           ) : (
                             <>
-                              <X className="w-3 h-3" />
+                              <X className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                               Inactive
                             </>
                           )}
                         </button>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+                        <div className="flex items-center gap-1.5 sm:gap-2">
                           <Button
                             onClick={() => navigate(`/admin/products/${product.id}`)}
                             variant="ghost"
                             size="sm"
+                            className="h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 p-0 touch-manipulation"
                           >
-                            <Edit2 className="w-4 h-4" />
+                            <Edit2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </Button>
                           <Button
                             onClick={() => handleDelete(product.id)}
                             variant="ghost"
                             size="sm"
-                            className="text-red-600 hover:text-red-700"
+                            className="text-red-600 hover:text-red-700 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 p-0 touch-manipulation"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </Button>
                         </div>
                       </td>
@@ -561,8 +566,8 @@ const ProductList = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="px-6 py-4 border-t border-neutral-stone/20 flex items-center justify-between">
-              <div className="text-sm text-neutral-slate">
+            <div className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 border-t border-neutral-stone/20 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+              <div className="text-xs sm:text-sm text-neutral-slate text-center sm:text-left">
                 Showing {(currentPage - 1) * pageSize + 1} to{' '}
                 {Math.min(currentPage * pageSize, total)} of {total} products
               </div>
@@ -573,11 +578,12 @@ const ProductList = () => {
                   disabled={currentPage === 1}
                   variant="outline"
                   size="sm"
+                  className="h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
                 
-                <span className="text-sm text-neutral-slate">
+                <span className="text-xs sm:text-sm text-neutral-slate px-2">
                   Page {currentPage} of {totalPages}
                 </span>
                 
@@ -586,8 +592,9 @@ const ProductList = () => {
                   disabled={currentPage === totalPages}
                   variant="outline"
                   size="sm"
+                  className="h-8 sm:h-9 px-2 sm:px-3 touch-manipulation"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Button>
               </div>
             </div>

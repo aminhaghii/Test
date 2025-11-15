@@ -91,6 +91,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@playwright/mcp": "^0.0.45",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.16.5",
     "@types/react": "^18.3.23",
@@ -101,6 +102,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^15.15.0",
+    "pdfjs-dist": "^3.11.174",
+    "playwright": "^1.56.1",
     "postcss": "^8.5.6",
     "rollup-plugin-visualizer": "^6.0.5",
     "tailwindcss": "^3.4.18",

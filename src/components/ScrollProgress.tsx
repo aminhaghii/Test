@@ -61,8 +61,8 @@ const ScrollProgress = () => {
           className="w-full rounded-b-full"
           style={{
             height: `${filledHeight}px`,
-            background: 'linear-gradient(180deg, rgba(212,175,55,1) 0%, rgba(212,175,55,0.7) 100%)',
-            boxShadow: isTouch ? 'none' : '0 0 10px rgba(212,175,55,0.55)',
+            background: 'linear-gradient(180deg, hsl(var(--charcoal-deep)) 0%, hsl(var(--carbon-steel)) 100%)',
+            boxShadow: isTouch ? 'none' : '0 0 10px rgba(0, 0, 0, 0.3)',
             transition: prefersReducedMotion ? 'none' : 'height 120ms ease-out',
           }}
         />

@@ -44,6 +44,7 @@ const staticHeaders = (res) => {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { setHeaders: staticHeaders }));
 app.use('/ALMAS', express.static(path.join(__dirname, '..', 'ALMAS'), { setHeaders: staticHeaders }));
 app.use('/DECORED', express.static(path.join(__dirname, '..', 'DECORED'), { setHeaders: staticHeaders }));
+app.use('/Content', express.static(path.join(__dirname, '..', 'Content'), { setHeaders: staticHeaders }));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -51,6 +52,7 @@ app.use('/api/products', require('./routes/products'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/ai', require('./routes/ai'));
+app.use('/api/blog', require('./routes/blog'));
 
 // Health check
 app.get('/health', (req, res) => {

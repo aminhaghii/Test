@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 type CollectionCard = {
   id: string;

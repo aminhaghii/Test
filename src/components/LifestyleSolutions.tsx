@@ -1,70 +1,80 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getApiUrl } from '@/lib/getApiUrl';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_URL = getApiUrl();
 
 type Card = { title: string; subtitle: string; image: string; to: string };
+
+const decorBase = `${API_URL}/DECORED`;
+const withPath = (path: string) => `${decorBase}/${path.split('/').map(segment => encodeURIComponent(segment)).join('/')}`;
 
 const LifestyleSolutions = () => {
   const { t } = useLanguage();
 
   const cards: Card[] = [
     {
-      title: t('common.surfaces') || 'Surfaces',
-      subtitle: t('common.surfacesSub') || 'Premium ceramic surfaces inspired by natural colors and textures',
-      image: `${API_URL}/ALMAS/victoria.jpg`,
-      to: '/collections#surfaces',
+      title: t('lifestyleSolutions.cards.lobbySerenity.title'),
+      subtitle: t('lifestyleSolutions.cards.lobbySerenity.subtitle'),
+      image: withPath("30x90/alvin2.jpg"),
+      to: '/products?dimension=30x90',
     },
     {
-      title: t('common.bigSlabs') || 'Big slabs',
-      subtitle: t('common.bigSlabsSub') || 'Large-format porcelain slabs for seamless, modern spaces',
-      image: `${API_URL}/ALMAS/PORPJA.jpg`,
-      to: '/collections#big-slabs',
+      title: t('lifestyleSolutions.cards.signatureBathSuite.title'),
+      subtitle: t('lifestyleSolutions.cards.signatureBathSuite.subtitle'),
+      image: withPath("60X120/SOUFIA.jpg"),
+      to: '/products?dimension=60x120',
     },
     {
-      title: t('common.bathKitchen') || 'Bathroom & kitchen',
-      subtitle: t('common.bathKitchenSub') || 'Designer bathroom and kitchen tile collections crafted for everyday living',
-      image: `${API_URL}/ALMAS/ROJINA.jpg`,
-      to: '/collections#bathroom-kitchen',
+      title: t('lifestyleSolutions.cards.gourmetStudio.title'),
+      subtitle: t('lifestyleSolutions.cards.gourmetStudio.subtitle'),
+      image: withPath("30x90/alvin3.jpg"),
+      to: '/products?dimension=30x90&space=kitchen',
     },
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-background">
-      <div className="container mx-auto px-6 lg:px-20 max-w-[1800px]">
-        <div className="mb-10 text-center">
-          <h2 className="font-display text-3xl md:text-5xl tracking-tight text-neutral-charcoal font-bold">
-            LIFESTYLE <strong>SOLUTIONS</strong>
+    <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20 max-w-[1800px]">
+        <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-neutral-charcoal font-bold mb-3">
+            {t('lifestyleSolutions.title')}
           </h2>
+          <p className="text-sm sm:text-base md:text-lg text-neutral-slate">
+            {t('lifestyleSolutions.subtitle')}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
           {cards.map((card, index) => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               className="group relative overflow-hidden bg-white"
             >
-              <Link to={card.to} className="block">
+              <Link
+                to={card.to}
+                className="block"
+              >
                 {/* Image takes top 2/3 */}
-                <div className="relative h-[400px] md:h-[500px]">
+                <div className="relative h-[280px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
                   <img 
                     src={card.image} 
                     alt={card.title} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" 
                     loading="lazy" 
                   />
                 </div>
                 {/* Text area takes bottom 1/3 */}
-                <div className="bg-white p-6 text-center">
-                  <h3 className="font-display text-2xl md:text-3xl font-bold uppercase text-neutral-charcoal mb-2">
+                <div className="bg-white p-4 sm:p-5 md:p-6 text-center">
+                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase text-neutral-charcoal mb-2">
                     {card.title}
                   </h3>
-                  <p className="text-neutral-slate text-sm md:text-base">
+                  <p className="text-neutral-slate text-xs sm:text-sm md:text-base mb-3">
                     {card.subtitle}
                   </p>
                 </div>

@@ -30,12 +30,12 @@ All colors MUST be HSL.
     --light-smoke: 0 0% 80%;
     --whisper: 0 0% 90%;
     
-    /* Luxury Accent Palette */
-    --champagne-gold: 43 63% 52%;
-    --burnished-bronze: 35 32% 51%;
-    --antique-brass: 30 22% 43%;
-    --rose-gold: 350 27% 58%;
-    --deep-amber: 42 45% 59%;
+    /* Luxury Accent Palette - Replaced with black/gray */
+    --champagne-gold: 0 0% 20%;
+    --burnished-bronze: 0 0% 30%;
+    --antique-brass: 0 0% 25%;
+    --rose-gold: 0 0% 35%;
+    --deep-amber: 0 0% 40%;
     
     /* Semantic Colors */
     --card: 0 0% 100%;
@@ -44,7 +44,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 4%;
     
-    --primary: 43 63% 52%;
+    --primary: 0 0% 20%;
     --primary-foreground: 0 0% 4%;
     
     --secondary: 36 14% 91%;
@@ -53,7 +53,7 @@ All colors MUST be HSL.
     --muted: 36 14% 91%;
     --muted-foreground: 0 0% 42%;
     
-    --accent: 43 63% 52%;
+    --accent: 0 0% 20%;
     --accent-foreground: 0 0% 4%;
     
     --destructive: 0 72% 51%;
@@ -65,21 +65,21 @@ All colors MUST be HSL.
     
     --border: 0 0% 90%;
     --input: 36 14% 91%;
-    --ring: 43 63% 52%;
+    --ring: 0 0% 20%;
     
     --radius: 0.625rem;
     
     /* Gradients */
     --gradient-hero-dark: linear-gradient(135deg, rgba(10,10,10,0.78) 0%, rgba(26,26,26,0.42) 50%, rgba(10,10,10,0.68) 100%);
     --gradient-card-elegance: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,0.88) 100%);
-    --gradient-gold-shimmer: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.35) 50%, rgba(212,175,55,0.1) 100%);
+    --gradient-gold-shimmer: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 100%);
     --gradient-glass-morph: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 100%);
     --gradient-warm-fade: linear-gradient(180deg, rgba(245,243,240,0) 0%, rgba(245,243,240,1) 85%);
-    --gradient-premium-overlay: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.15) 0%, transparent 70%);
+    --gradient-premium-overlay: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.08) 0%, transparent 70%);
     
     /* Shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--champagne-gold) / 0.3);
-    --shadow-glow: 0 0 40px hsl(var(--champagne-gold) / 0.4);
+    --shadow-elegant: 0 10px 30px -10px rgba(0,0,0,0.15);
+    --shadow-glow: 0 0 40px rgba(0,0,0,0.2);
     --shadow-card: 0 3px 18px rgba(0,0,0,0.08);
     --shadow-card-hover: 0 20px 56px rgba(0,0,0,0.16);
     
@@ -103,7 +103,7 @@ All colors MUST be HSL.
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 43 63% 52%;
+    --primary: 0 0% 20%;
     --primary-foreground: 0 0% 4%;
     --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 98%;
@@ -115,7 +115,7 @@ All colors MUST be HSL.
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 43 63% 52%;
+    --ring: 0 0% 20%;
   }
 }
 
@@ -124,9 +124,31 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    /* Better font rendering on mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text size adjustment on iOS */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    /* Better touch scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Safe area insets for iOS notch */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -162,7 +184,7 @@ All colors MUST be HSL.
   }
   /* Focus visible styles for keyboard users */
   .focus-visible:focus-visible {
-    outline: 2px solid hsl(var(--champagne-gold));
+    outline: 2px solid hsl(var(--charcoal-deep));
     outline-offset: 2px;
   }
   /* Reduce motion support to lower GPU usage on low-power devices */
@@ -249,9 +271,51 @@ All colors MUST be HSL.
   /* On touch devices, slightly reduce shadow intensity to lower GPU cost */
   @media (pointer: coarse) {
     :root {
-      --shadow-elegant: 0 8px 24px -10px hsl(var(--champagne-gold) / 0.22);
+      --shadow-elegant: 0 8px 24px -10px rgba(0,0,0,0.12);
       --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
       --shadow-card-hover: 0 14px 40px rgba(0,0,0,0.12);
+    }
+    
+    /* Better touch interactions */
+    button, a, [role="button"], input, select, textarea {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Prevent text selection on buttons */
+    button, [role="button"] {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    /* Better scrolling on mobile */
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    /* Reduce animation complexity on mobile */
+    * {
+      will-change: auto;
+    }
+    
+    /* Better image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+    
+    /* Prevent zoom on input focus (iOS) */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    textarea,
+    select {
+      font-size: 16px !important;
     }
   }
   
@@ -289,20 +353,29 @@ All colors MUST be HSL.
     scrollbar-width: thin;
   }
   .scrollbar-thumb-luxury-gold {
-    scrollbar-color: hsl(var(--champagne-gold)) hsl(var(--champagne-gold) / 0.3);
+    scrollbar-color: hsl(var(--charcoal-deep)) hsl(var(--charcoal-deep) / 0.3);
   }
   .scrollbar-track-luxury-gold\/30::-webkit-scrollbar {
     height: 4px;
   }
   .scrollbar-track-luxury-gold\/30::-webkit-scrollbar-track {
-    background: hsl(var(--champagne-gold) / 0.3);
+    background: hsl(var(--charcoal-deep) / 0.3);
   }
   .scrollbar-track-luxury-gold\/30::-webkit-scrollbar-thumb {
-    background: hsl(var(--champagne-gold));
+    background: hsl(var(--charcoal-deep));
     border-radius: 10px;
   }
 
   /* Product page animations */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -321,4 +394,13 @@ All colors MUST be HSL.
   /* Hide native cursor globally: only custom cream dot will be seen */
   *, *:hover, *:focus, *:active { cursor: none !important; }
   a, button, [role="button"], input, select, textarea, label, .cursor-pointer { cursor: none !important; }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

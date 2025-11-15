@@ -37,10 +37,10 @@ const ScrollToTop = () => {
           whileHover={prefersReducedMotion || isTouch ? undefined : { scale: 1.1 }}
           whileTap={prefersReducedMotion || isTouch ? undefined : { scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 left-8 z-50 p-4 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-bronze text-white shadow-xl hover:shadow-2xl transition-shadow duration-300 flex items-center justify-center"
+          className="fixed bottom-8 left-6 z-50 inline-flex h-12 w-12 items-center justify-center rounded-[14px] border border-neutral-stone/50 bg-white/60 text-neutral-charcoal shadow-lg backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:border-neutral-charcoal/60 hover:bg-white/85"
           aria-label="Scroll to top"
         >
-          <ChevronUp className="w-6 h-6" />
+          <ChevronUp className="h-[22px] w-[22px]" strokeWidth={1.75} />
         </motion.button>
       )}
     </AnimatePresence>

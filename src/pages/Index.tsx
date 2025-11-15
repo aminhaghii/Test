@@ -3,14 +3,13 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import SmoothScroll from "@/components/SmoothScroll";
 import ChatAssistant from "@/components/ChatAssistant";
+import LifestyleSolutions from "@/components/LifestyleSolutions";
+import ProductSpotlight from "@/components/ProductSpotlight";
+import NewsBanner from "@/components/NewsBanner";
+import InnovativeSolutions from "@/components/InnovativeSolutions";
+import JoinCommunity from "@/components/JoinCommunity";
 
-// Lazy load heavy components
-const BentoShowcase = lazy(() => import("@/components/BentoShowcase"));
-const ImageTextSplit = lazy(() => import("@/components/ImageTextSplit"));
-const StatsMarquee = lazy(() => import("@/components/StatsMarquee"));
-const ModernTestimonials = lazy(() => import("@/components/ModernTestimonials"));
-const FAQ = lazy(() => import("@/components/FAQ"));
-const ContactShowroom = lazy(() => import("@/components/ContactShowroom"));
+// Lazy load footer only
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Loading component for sections
@@ -25,13 +24,17 @@ const Index = () => {
         <Navigation />
         <Hero />
         <div className="relative z-10">
+          {/* RAK Ceramics exact structure */}
+          <LifestyleSolutions />
+          <div className="border-t border-neutral-stone/20" />
+          <ProductSpotlight />
+          <div className="border-t border-neutral-stone/20" />
+          <NewsBanner />
+          <div className="border-t border-neutral-stone/20" />
+          <InnovativeSolutions />
+          <div className="border-t border-neutral-stone/20" />
+          <JoinCommunity />
           <Suspense fallback={<LoadingPlaceholder />}>
-            <BentoShowcase />
-            <ImageTextSplit />
-            <StatsMarquee />
-            <ModernTestimonials />
-            <FAQ />
-            <ContactShowroom />
             <Footer />
           </Suspense>
         </div>

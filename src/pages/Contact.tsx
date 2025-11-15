@@ -10,7 +10,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -70,21 +71,22 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-alabaster via-background to-neutral-alabaster">
       <Navigation />
       
       {/* Hero with Background Image */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[40vh] min-h-[300px] sm:h-[45vh] sm:min-h-[350px] md:h-[50vh] md:min-h-[400px] lg:h-[60vh] lg:min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={`${API_URL}/ALMAS/PORPJA.jpg`}
             alt="Contact Us"
             className="w-full h-full object-cover"
+            loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/40 via-luxury-bronze/30 to-blue-900/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/50"></div>
         </div>
         
-        <div className="container mx-auto px-6 lg:px-20 text-center relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-20 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,7 +96,7 @@ const Contact = () => {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white drop-shadow-2xl"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 text-white drop-shadow-2xl leading-[1.1]"
             >
               {t('contact.title')}
             </motion.h1>
@@ -102,7 +104,7 @@ const Contact = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2"
             >
               {t('contact.subtitle')}
             </motion.p>
@@ -111,9 +113,9 @@ const Contact = () => {
       </section>
 
       {/* Contact Cards Grid */}
-      <section className="py-16 -mt-20 relative z-20">
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-28 -mt-12 sm:-mt-16 md:-mt-20 relative z-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={info.title}
@@ -122,11 +124,11 @@ const Contact = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="group"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full hover:-translate-y-2">
-                  <h3 className="font-bold text-xl text-gray-900 mb-3">{info.title}</h3>
+                <div className="bg-background rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-neutral-stone/30 h-full hover:-translate-y-2">
+                  <h3 className="font-bold text-lg sm:text-xl text-neutral-charcoal mb-2 sm:mb-3">{info.title}</h3>
                   <div className="space-y-1">
                     {info.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600 group-hover:text-gray-800 transition-colors">{detail}</p>
+                      <p key={idx} className="text-neutral-slate group-hover:text-neutral-charcoal transition-colors leading-relaxed">{detail}</p>
                     ))}
                   </div>
                   
@@ -134,7 +136,7 @@ const Contact = () => {
                     <div className="mt-4">
                       <a 
                         href={info.action}
-                        className="text-gray-900 underline underline-offset-4 hover:text-gray-600 font-medium text-sm transition-colors"
+                        className="text-neutral-charcoal underline underline-offset-4 hover:text-neutral-slate font-medium text-sm transition-colors focus-visible:outline-2 focus-visible:outline-neutral-charcoal focus-visible:outline-offset-2 rounded"
                       >
                         {info.title === t('contact.phone') && t('contact.callNow')}
                         {info.title === t('contact.email') && t('contact.emailUs')}
@@ -150,28 +152,29 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-16">
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="grid lg:grid-cols-5 gap-12">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+          <div className="grid lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12">
             {/* Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
               className="lg:col-span-3"
             >
-              <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-gray-100">
-                <div className="mb-8">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                    <span className="bg-gradient-to-r from-luxury-gold to-luxury-bronze bg-clip-text text-transparent">{t('contact.sendMessageTitle')}</span>
+              <div className="bg-background rounded-3xl p-6 sm:p-7 md:p-8 lg:p-10 shadow-xl border border-neutral-stone/30">
+                <div className="mb-6 sm:mb-8">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-charcoal mb-2 sm:mb-3 leading-[1.3]">
+                    <span className="bg-gradient-to-r from-neutral-charcoal to-neutral-charcoal/80 bg-clip-text text-transparent">{t('contact.sendMessageTitle')}</span>
                   </h2>
-                  <p className="text-gray-600">{t('contact.sendMessageDesc')}</p>
+                  <p className="text-sm sm:text-base text-neutral-slate leading-relaxed">{t('contact.sendMessageDesc')}</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                     <div>
-                      <Label htmlFor="name" className="text-gray-700 font-semibold mb-2 block">
+                      <Label htmlFor="name" className="text-neutral-charcoal font-semibold mb-2 block">
                         {t('contact.name')} *
                       </Label>
                       <Input 
@@ -183,12 +186,12 @@ const Contact = () => {
                         required
                         aria-invalid={Boolean(errors.name)}
                         aria-describedby={errors.name ? 'name-error' : undefined}
-                        className={`h-12 ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-luxury-gold focus:ring-luxury-gold'}`}
+                        className={`h-12 ${errors.name ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-neutral-stone/50 focus:border-neutral-charcoal focus:ring-neutral-charcoal'}`}
                       />
                       {errors.name && <p id="name-error" className="mt-1 text-sm text-red-600">{errors.name}</p>}
                     </div>
                     <div>
-                      <Label htmlFor="email" className="text-gray-700 font-semibold mb-2 block">
+                      <Label htmlFor="email" className="text-neutral-charcoal font-semibold mb-2 block">
                         {t('contact.email')} *
                       </Label>
                       <Input 
@@ -200,14 +203,14 @@ const Contact = () => {
                         required
                         aria-invalid={Boolean(errors.email)}
                         aria-describedby={errors.email ? 'email-error' : undefined}
-                        className={`h-12 ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-luxury-gold focus:ring-luxury-gold'}`}
+                        className={`h-12 ${errors.email ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-neutral-stone/50 focus:border-neutral-charcoal focus:ring-neutral-charcoal'}`}
                       />
                       {errors.email && <p id="email-error" className="mt-1 text-sm text-red-600">{errors.email}</p>}
                     </div>
                   </div>
                   
                   <div>
-                    <Label htmlFor="phone" className="text-gray-700 font-semibold mb-2 block">
+                    <Label htmlFor="phone" className="text-neutral-charcoal font-semibold mb-2 block">
                       {t('contact.phone')}
                     </Label>
                     <Input 
@@ -216,12 +219,12 @@ const Contact = () => {
                       placeholder={t('contact.phonePlaceholder')}
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="h-12 border-gray-300 focus:border-luxury-gold focus:ring-luxury-gold"
+                      className="h-12 border-neutral-stone/50 focus:border-neutral-charcoal focus:ring-neutral-charcoal"
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="subject" className="text-gray-700 font-semibold mb-2 block">
+                    <Label htmlFor="subject" className="text-neutral-charcoal font-semibold mb-2 block">
                       {t('contact.subject')} *
                     </Label>
                     <select
@@ -231,7 +234,7 @@ const Contact = () => {
                       required
                       aria-invalid={Boolean(errors.subject)}
                       aria-describedby={errors.subject ? 'subject-error' : undefined}
-                      className={`w-full h-12 px-3 border rounded-md focus:outline-none ${errors.subject ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-luxury-gold focus:ring-luxury-gold'}`}
+                      className={`w-full h-12 px-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${errors.subject ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-neutral-stone/50 focus:border-neutral-charcoal focus:ring-neutral-charcoal'}`}
                     >
                       <option value="">{t('contact.selectSubject')}</option>
                       <option value="sales">{t('contact.salesInquiry')}</option>
@@ -244,7 +247,7 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="message" className="text-gray-700 font-semibold mb-2 block">
+                    <Label htmlFor="message" className="text-neutral-charcoal font-semibold mb-2 block">
                       {t('contact.message')} *
                     </Label>
                     <Textarea 
@@ -256,7 +259,7 @@ const Contact = () => {
                       required
                       aria-invalid={Boolean(errors.message)}
                       aria-describedby={errors.message ? 'message-error' : undefined}
-                      className={`resize-none ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-gray-300 focus:border-luxury-gold focus:ring-luxury-gold'}`}
+                      className={`resize-none ${errors.message ? 'border-red-400 focus:border-red-500 focus:ring-red-500' : 'border-neutral-stone/50 focus:border-neutral-charcoal focus:ring-neutral-charcoal'}`}
                     />
                     {errors.message && <p id="message-error" className="mt-1 text-sm text-red-600">{errors.message}</p>}
                   </div>
@@ -264,7 +267,7 @@ const Contact = () => {
                   <Button 
                     type="submit" 
                     disabled={submitting}
-                    className={`w-full h-14 text-lg font-semibold ${submitting ? 'bg-neutral-500' : 'bg-neutral-900 hover:bg-neutral-800'} text-white transition-all duration-300`}
+                    className={`w-full h-14 text-lg font-semibold ${submitting ? 'bg-neutral-500' : 'bg-neutral-charcoal hover:bg-neutral-charcoal/90'} text-white transition-all duration-300 focus-visible:outline-2 focus-visible:outline-neutral-charcoal focus-visible:outline-offset-2`}
                   >
                     {submitting ? t('contact.sending') : t('contact.send')}
                   </Button>
@@ -277,20 +280,21 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
               className="lg:col-span-2"
             >
-              <div className="bg-gradient-to-br from-luxury-gold/10 to-luxury-bronze/10 rounded-3xl p-8 border-2 border-luxury-gold/20 h-full">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <div className="bg-gradient-to-br from-neutral-alabaster to-background rounded-3xl p-6 sm:p-7 md:p-8 border-2 border-neutral-stone/30 h-full">
+                <h3 className="text-xl sm:text-2xl font-bold text-neutral-charcoal mb-4 sm:mb-5 md:mb-6 leading-[1.3]">
                   {t('contact.visitFactory')}
                 </h3>
                 
-                <div className="space-y-6">
-                  <div className="bg-white/80 backdrop-blur rounded-2xl p-6">
+                <div className="space-y-4 sm:space-y-5 md:space-y-6">
+                  <div className="bg-background/80 backdrop-blur rounded-2xl p-4 sm:p-5 md:p-6">
                     <div className="flex items-start gap-4">
                       <div className="hidden" />
                       <div>
-                        <h4 className="font-bold text-lg text-gray-900 mb-2">Almas Kavir Rafsanjan</h4>
-                        <p className="text-gray-700 leading-relaxed mb-3">
+                        <h4 className="font-bold text-lg text-neutral-charcoal mb-2">Almas Kavir Rafsanjan</h4>
+                        <p className="text-neutral-slate leading-relaxed mb-3">
                           10 Kilometers Rafsanjan-Kerman Road<br />
                           Rafsanjan, Kerman Province<br />
                           Iran
@@ -299,7 +303,7 @@ const Contact = () => {
                           href="https://maps.google.com/?q=30.4067,55.9939"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center h-12 px-5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 transition-colors"
+                          className="inline-flex items-center justify-center h-12 px-5 rounded-lg bg-neutral-charcoal text-white hover:bg-neutral-charcoal/90 transition-colors focus-visible:outline-2 focus-visible:outline-neutral-charcoal focus-visible:outline-offset-2"
                         >
                           {t('contact.getDirections')}
                         </a>
@@ -308,8 +312,8 @@ const Contact = () => {
                   </div>
 
                   {/* Google Maps */}
-                  <div className="bg-white/80 backdrop-blur rounded-2xl p-6">
-                    <h4 className="font-bold text-lg text-gray-900 mb-4">
+                  <div className="bg-background/80 backdrop-blur rounded-2xl p-6">
+                    <h4 className="font-bold text-lg text-neutral-charcoal mb-4">
                       {t('contact.ourLocation')}
                     </h4>
                     <div className="rounded-xl overflow-hidden">
@@ -326,11 +330,11 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="bg-white/80 backdrop-blur rounded-2xl p-6">
-                    <h4 className="font-bold text-lg text-gray-900 mb-4">
+                  <div className="bg-background/80 backdrop-blur rounded-2xl p-6">
+                    <h4 className="font-bold text-lg text-neutral-charcoal mb-4">
                       {t('contact.whyVisitUs')}
                     </h4>
-                    <ul className="space-y-3 list-disc list-inside text-gray-700">
+                    <ul className="space-y-3 list-disc list-inside text-neutral-slate leading-relaxed">
                       <li>{t('contact.visitReason1')}</li>
                       <li>{t('contact.visitReason2')}</li>
                       <li>{t('contact.visitReason3')}</li>

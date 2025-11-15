@@ -11,12 +11,13 @@
     "contact": "Contatti",
     "catalogues": "Cataloghi",
     "about": "Chi Siamo",
-    "showroom": "Showroom",
+    "showroom": "Esposizione",
     "allProducts": "Tutti i Prodotti",
     "byDimension": "Prodotti per Dimensione",
     "byMaterial": "Prodotti per Materiale",
-    "admin": "Admin",
-    "goToAdmin": "Vai al Pannello Admin"
+    "admin": "Amministratore",
+    "goToAdmin": "Vai al Pannello Admin",
+    "blog": "Blog"
   },
   "products": {
     "title": "I Nostri Prodotti",
@@ -63,7 +64,7 @@
     "title": "Certificazioni di Qualità",
     "subtitle": "Standard Internazionali",
     "iso": "Certificato ISO 9001",
-    "eco": "Eco-Friendly",
+    "eco": "Eco-Compatibile",
     "durability": "Resistenza Testata"
   },
   "technical": {
@@ -95,18 +96,18 @@
     "description": "Ascolta da architetti e designer che scelgono l'eccellenza",
     "exportCountries": "Paesi di Esportazione",
     "productModels": "Modelli di Prodotti",
-    "role1": "Project Manager",
+    "role1": "Responsabile Progetto",
     "text1": "Qualità eccellente con certificazione ISO. Le dimensioni da 30x30 a 100x100 coprono tutte le esigenze dei nostri progetti di lusso.",
-    "role2": "Interior Designer",
+    "role2": "Designer d'Interni",
     "text2": "Qualità eccezionale e finiture bellissime. I nostri clienti residenziali sono soddisfatti dei risultati.",
-    "role3": "Export Manager",
+    "role3": "Responsabile Esportazioni",
     "text3": "Qualità certificata ISO, esportata verso 13 paesi. I nostri clienti internazionali si fidano di questo marchio."
   },
   "contact": {
     "title": "Contattaci",
     "subtitle": "Mettiti in Contatto",
     "name": "Nome",
-    "email": "Email",
+    "email": "Posta Elettronica",
     "phone": "Telefono",
     "message": "Messaggio",
     "send": "Invia Messaggio",
@@ -117,7 +118,7 @@
     "sendMessageTitle": "Inviaci un Messaggio",
     "sendMessageDesc": "Compila il modulo qui sotto e ti risponderemo il prima possibile",
     "fullNamePlaceholder": "Nome Completo",
-    "emailPlaceholder": "john@example.com",
+    "emailPlaceholder": "correo@ejemplo.com",
     "phonePlaceholder": "+98 912-345-6789",
     "selectSubject": "Seleziona un oggetto",
     "salesInquiry": "Richiesta di Vendita",
@@ -165,14 +166,35 @@
     "success": "Successo",
     "login": "Accedi",
     "logout": "Esci",
-    "admin": "Admin",
-    "account": "Account",
-    "home": "Home",
+    "admin": "Amministratore",
+    "account": "Conto",
+    "home": "Casa",
     "logoutSuccess": "Disconnessione avvenuta con successo",
     "logoutFailed": "Errore durante la disconnessione",
     "required": "Obbligatorio",
     "invalidEmail": "Email non valida",
-    "minChars": "Minimo 10 caratteri"
+    "minChars": "Minimo 10 caratteri",
+    "lifestyleSolutions": "Soluzioni per lo Stile di Vita",
+    "surfaces": "Superfici",
+    "surfacesSub": "Superfici ceramiche premium ispirate a colori e texture naturali",
+    "bigSlabs": "Lastre grandi",
+    "bigSlabsSub": "Lastre in porcellana di grande formato per spazi senza soluzione di continuità e moderni",
+    "bathKitchen": "Bagno e cucina",
+    "bathKitchenSub": "Collezioni di piastrelle per bagno e cucina progettate per la vita quotidiana",
+    "signature": "Collezioni firmate",
+    "signatureSub": "Catturando l'essenza del lusso",
+    "productSpotlight": "Messa in Evidenza del Prodotto",
+    "productSpotlightDesc": "Scopri superfici premium selezionate realizzate per la vita moderna.",
+    "discoverMore": "Scopri di più",
+    "premiumSurface": "Superficie premium per spazi moderni",
+    "explore": "Esplora",
+    "latestNews": "Ultime Notizie",
+    "excellenceBanner": "Oltre 14 anni di eccellenza nella produzione ceramica iraniana",
+    "readMore": "Leggi di più",
+    "designStories": "Storie di Design",
+    "discoverAll": "Scopri tutto",
+    "latestProjects": "I Nostri Ultimi Progetti",
+    "profile": "Profilo"
   },
   "bento": {
     "experience": "Sperimenta",
@@ -192,7 +214,15 @@
   },
   "heroSection": {
     "eyebrow": "Almas Kavir Rafsanjan - Eccellenza Ceramica Iraniana",
-    "title": "Piastrelle Ceramiche e in Porcellana Premium Iraniane"
+    "title": "Piastrelle Ceramiche e in Porcellana Premium Iraniane",
+    "tagline": "Piastrelle Premium Iraniane Progettate per Spazi Iconici",
+    "videoNotSupported": "Il tuo browser non supporta il tag video.",
+    "loading": "Caricamento",
+    "previous": "Precedente",
+    "next": "Successivo",
+    "craftedForLiving": "Creato Per Vivere",
+    "signatureSurfaces": "Superfici distintive per spazi di rilievo",
+    "imageAlt": "Piastrelle ceramiche premium iraniane - Almas Kavir Rafsanjan"
   },
   "about": {
     "title": "Almas Kavir Rafsanjan",
@@ -202,11 +232,84 @@
     "story": "Storia",
     "milestones": "Traguardi",
     "capabilities": "Capacità",
-    "certifications": "Certificazioni",
-    "downloads": "Download",
+    "certifications": {
+      "kicker": "Eccellenza Verificata",
+      "title": "Certificazioni che Convalidano la Nostra Promessa",
+      "description": "Gli standard riconosciuti a livello internazionale confermano l'affidabilità, la trasparenza e la sostenibilità del nostro ecosistema di produzione.",
+      "view": "Anteprima",
+      "download": "Scarica",
+      "downloadCta": "Scarica",
+      "modalTitle": "Certificazioni Accreditate",
+      "modalDescription": "Clicca fuori dalla cornice per chiudere e continuare ad esplorare le nostre credenziali.",
+      "heading": "Certificazioni Regolatorie",
+      "intro": "Documentazione verificata che dimostra la conformità di Almas Kavir Rafsanjan agli standard internazionali di produzione ed esportazione di piastrelle.",
+      "projectSamples": "Campioni di Installazione del Progetto",
+      "additionalCertificates": "Certificati Aggiuntivi",
+      "closeLightbox": "Chiudi lightbox",
+      "certificatePreview": "Anteprima certificato",
+      "imageAlt": "Texture porcellana Pietra Luxe Hub",
+      "certificateImageAlt": "Anteprima certificato",
+      "certificates": {
+        "iso14001": {
+          "title": "ISO 14001:2015 - Sistema di Gestione Ambientale",
+          "description": "Questo certificato dimostra che Almas Kavir Rafsanjan ha implementato un sistema di gestione ambientale efficace. L'obiettivo principale di questo standard si concentra sulla gestione e riduzione degli impatti dannosi delle attività dell'azienda sull'ambiente. Ciò significa lavorare per prevenire l'inquinamento, ottimizzare il consumo di risorse (come acqua ed energia) e conformarsi alle leggi e ai regolamenti ambientali.",
+          "verification": "Rilasciato da <strong>QMS Italia</strong> e dal suo rappresentante esclusivo in Iran e Medio Oriente, <strong>Istituto QMS Arian</strong>. Data di Emissione: 26 marzo 2020 | Valido fino a: 25 marzo 2026",
+          "previewAlt": "Certificato del Sistema di Gestione Ambientale ISO 14001:2015"
+        },
+        "iso45001": {
+          "title": "ISO 45001:2018 - Sistema di Gestione della Salute e Sicurezza sul Lavoro",
+          "description": "Questo certificato conferma che Almas Kavir Rafsanjan è conforme agli standard internazionali di salute e sicurezza sul lavoro. L'obiettivo di questo standard è creare un ambiente di lavoro sicuro e sano per tutti i dipendenti. Questo sistema aiuta l'azienda a identificare, valutare e controllare i pericoli occupazionali e prevenire incidenti sul lavoro e malattie professionali.",
+          "verification": "Rilasciato da <strong>QMS Italia</strong> e dal suo rappresentante <strong>QMS Arian</strong>. Data di Emissione: 26 marzo 2020 | Valido fino a: 25 marzo 2026",
+          "previewAlt": "Certificato di Salute e Sicurezza sul Lavoro ISO 45001:2018"
+        },
+        "iso9001": {
+          "title": "ISO 9001:2015 - Sistema di Gestione della Qualità",
+          "description": "Questo certificato è uno degli standard di gestione più riconosciuti al mondo e dimostra che l'azienda ha un sistema di gestione della qualità efficace. L'attenzione principale di questo standard è sulla soddisfazione del cliente. Un'azienda che riceve questo certificato dimostra di aver progettato i suoi processi in modo che i suoi prodotti e servizi (piastrelle per pareti, ceramica e granito) siano prodotti in modo coerente con alta qualità e in conformità alle esigenze del cliente.",
+          "verification": "Rilasciato da <strong>QMSCERT</strong>, un organismo accreditato di terze parti con sede in Grecia. Data di Emissione: 26 marzo 2020 | Valido fino a: 25 marzo 2026",
+          "previewAlt": "Certificato del Sistema di Gestione della Qualità ISO 9001:2015"
+        },
+        "ims": {
+          "title": "IMS - Sistema di Gestione Integrato",
+          "description": "Questo certificato non è uno standard separato, ma conferma che Almas Kavir Rafsanjan ha implementato i tre sistemi di gestione sopra—qualità (ISO 9001), ambientale (ISO 14001) e salute e sicurezza sul lavoro (ISO 45001)—in modo integrato e coordinato. Il Sistema di Gestione Integrato (IMS) consente all'organizzazione di fondere processi comuni tra questi tre standard. Ciò riduce le ridondanze, risparmia tempo e costi e aumenta l'efficienza complessiva dell'organizzazione.",
+          "verification": "Rilasciato da <strong>QMS Italia</strong>. Data di Emissione: 26 marzo 2020 | Valido fino a: 25 marzo 2026",
+          "previewAlt": "Certificato del Sistema di Gestione Integrato (IMS)"
+        }
+      },
+      "downloadLabel": "Scarica Certificato (PDF)",
+      "pdfCertificates": {
+        "vcp12094": {
+          "title": "Certificato di Conformità VCP12094",
+          "description": "OTC Bulgaria Ltd. certifica che le piastrelle ceramiche pressate a secco di Almas Kavir Rafsanjan per pareti interne e pavimenti sono conformi allo standard EN 14411:2016. Valido dal 07.02.2024 al 06.02.2027. Sistema di Attestazione di Conformità 4, secondo il Regolamento 305/2011 Prodotti da Costruzione.",
+          "downloadLabel": "Visualizza Certificato (PDF)"
+        },
+        "industrialLicense": {
+          "title": "Licenza di Produzione Industriale",
+          "description": "Licenza del Ministero dell'Industria, Miniere e Commercio dell'Iran per la produzione di piastrelle ceramiche, porcellana e prodotti in granito. Autorizza operazioni di produzione ed esportazione presso la struttura Almas Kavir Rafsanjan situata al chilometro 10 della strada Rafsanjan-Kerman.",
+          "downloadLabel": "Visualizza Licenza (PDF)"
+        }
+      }
+    },
+    "downloads": {
+      "kicker": "Centro Download",
+      "cta": "Scarica",
+      "items": {
+        "dossier": {
+          "title": "Dossier Certificazione ISO",
+          "description": "Vedi le ultime audit che convalidano i nostri sistemi di gestione ambientale, qualità e salute e sicurezza."
+        },
+        "license": {
+          "title": "Licenza di Produzione",
+          "description": "Rivedi la nostra licenza di produzione ufficiale rilasciata dal Ministero dell'Industria, delle Miniere e del Commercio dell'Iran."
+        },
+        "catalogue": {
+          "title": "Catalogo Collezioni Sostenibili",
+          "description": "Esplora superfici pronte per l'esportazione, specifiche tecniche e dati di imballaggio progettati per progetti premium."
+        }
+      }
+    },
     "exportServices": "Servizi di Esportazione",
     "smartCombinations": "Combinazioni Intelligenti",
-    "account": "Account",
+    "account": "Conto",
     "milestonesDesc": "Momenti chiave che hanno plasmato il nostro viaggio",
     "capabilitiesDesc": "Cosa rende unica la nostra produzione e il nostro servizio",
     "certificationsDesc": "Standard di qualità e gestione riconosciuti a livello internazionale",
@@ -235,7 +338,284 @@
     "cert4Title": "Sistemi di Gestione Integrati",
     "cert4Description": "Certificazione combinata per tutti e tre i sistemi di gestione",
     "pdf1Title": "Certificato ISO (Ufficiale)",
-    "pdf2Title": "Licenza di Produzione"
+    "pdf2Title": "Licenza di Produzione",
+    "menu": {
+      "overview": "Panoramica",
+      "commitments": "Impegni",
+      "impact": "Storie di Impatto",
+      "metrics": "KPI di Sostenibilità",
+      "solutions": "Innovazioni di Prodotto",
+      "certifications": "Certificazioni",
+      "downloads": "Download"
+    },
+    "media": {
+      "kicker": "All'Interno del Nostro Campus di Rafsanjan",
+      "caption": "Forni avanzati, sistemi di ispezione digitale e logistica di esportazione operano sotto un unico tetto per fornire qualità costante per progetti iconici.",
+      "imageAlt": "Vista aerea del campus di produzione di Pietra Luxe Hub a Rafsanjan"
+    },
+    "intro": {
+      "title": "Guidare la Strada verso la Sostenibilità Attraverso l'Innovazione",
+      "paragraph1": "Dalla prima verifica delle materie prime all'ispezione finale, ogni piastrella è progettata da team multidisciplinari di designer, ingegneri e commercianti basati sui dati. Documentiamo ogni faccia, texture e scenario di installazione in modo che architetti e team di approvvigionamento possano specificare con certezza.",
+      "paragraph2": "<strong>La nostra promessa:</strong> immagini immersive, dati tecnici trasparenti e QA rigoroso che proteggono i tuoi programmi, budget e intento di progettazione attraverso progetti di ospitalità, residenziali, retail e civici.",
+      "heading": "Scalare l'Artigianato Iraniano <b>per Specifiche Globali</b>"
+    },
+    "mediaFallback": "Immagine panoramica della fabbrica",
+    "hero": {
+      "kicker": "Sostenibilità di Pietra Luxe Hub",
+      "title": "Collegare i Mondi con Ceramica e Piastrelle Iraniane",
+      "description": "Nato dalle pressioni delle sanzioni e dalla scarsità di risorse, il nostro team ha trasformato l'avversità in una piattaforma per l'innovazione globale. Ogni lotto che produciamo riflette rigorosa scienza dei materiali, ingegneria orientata all'esportazione e un impegno a fornire superfici di classe mondiale per progetti iconici in 13 paesi.",
+      "primaryCta": "Esplora l'Ispirazione Digitale",
+      "secondaryCta": "Scarica Cataloghi",
+      "imageAlt": "Vista panoramica delle strutture di produzione di Almas Kavir Rafsanjan al tramonto",
+      "lead": "Trasformando le sfide in opportunità globali, Pietra Luxe Hub trasforma la resilienza dell'industria ceramica iraniana in esperienze di prodotto di classe mondiale.",
+      "detail": "Nati in mezzo a sanzioni, scarsità di risorse e turbolenza economica, abbiamo investito in forni avanzati, smaltatura digitale e linee di produzione orientate all'esportazione per costruire collezioni che superano gli standard internazionali."
+    },
+    "stories": {
+      "ecocycle": {
+        "kicker": "Produzione Circolare",
+        "title": "EcoCycle: Sistemi ad Acqua e Materiali a Circuito Chiuso",
+        "body": "Il nostro programma EcoCycle recupera materie prime naturali e filtra le acque reflue prima di reintrodurle nella produzione. Le strutture di riciclaggio costruite su misura riducono la nostra impronta garantendo che ogni lotto di porcellana soddisfi le prestazioni di grado esportazione.",
+        "point1": "Il 100% delle acque reflue trattate viene reindirizzato alle linee di produzione delle piastrelle.",
+        "point2": "I minerali recuperati rafforzano nuovi corpi senza degradare la qualità della superficie.",
+        "point3": "Le iniziative di sviluppo pulito riducono la produzione di carbonio attraverso i cicli del forno.",
+        "imageAlt": "Ingegneri che monitorano il circuito di riciclaggio EcoCycle nella fabbrica"
+      },
+      "circular": {
+        "kicker": "Impatto Responsabile",
+        "title": "Progettare Risultati Positivi per le Comunità",
+        "body": "Il nostro mandato di sostenibilità si estende oltre la gestione dei materiali. Programmi di sicurezza dedicati, investimenti comunitari e formazione tecnica mantengono il talento locale al centro della nostra espansione.",
+        "point1": "Gerarchia completa dei rifiuti che dà priorità al riutilizzo, al riciclaggio e allo smaltimento certificato.",
+        "point2": "Cultura della sicurezza prima con audit allineati ISO e monitoraggio in tutto il sito.",
+        "point3": "Formazione continua della forza lavoro per elevare le competenze per la produzione premium.",
+        "imageAlt": "Membri del team che rivedono le dashboard di sostenibilità sul pavimento di produzione"
+      }
+    },
+    "commitments": {
+      "kicker": "I Nostri Impegni",
+      "title": "Innovazione, Impatto, Integrità",
+      "description": "Progettiamo ogni processo, dall'approvvigionamento di materie prime all'imballaggio pronto per l'esportazione, per superare le aspettative internazionali proteggendo le comunità e gli ambienti in cui lavoriamo.",
+      "sustainability": {
+        "title": "DNA di Produzione Sostenibile",
+        "body": "I sistemi idrici a circuito chiuso, le materie prime riciclate e le iniziative di energia pulita riducono la nostra impronta certificando ogni piastrella per le prestazioni ecologiche."
+      },
+      "global": {
+        "title": "Mentalità di Partnership Globale",
+        "body": "Co-creiamo con architetti, distributori e sviluppatori, abbinando esecuzioni di produzione su misura con competenze logistiche per fornire su scala in 13+ mercati."
+      },
+      "integrity": {
+        "title": "Integrità in Ogni Lotto",
+        "body": "Le certificazioni ISO 9001, 14001 e 45001 rafforzano la nostra promessa di qualità del prodotto affidabile, operazioni sicure e governance trasparente."
+      },
+      "heading": "<b>Classe Mondiale</b><br>Portafoglio Prodotti",
+      "body": "<p>Pietra Luxe Hub categorizza ogni collezione per prestazioni, finitura e applicazione in modo da poter allineare l'intento di progettazione con la realtà tecnica in pochi minuti.</p><ul><li>Le immagini ad alta definizione rivelano ogni variazione di superficie, calibrazione e livello di lucentezza.</li><li>Test estensivi garantiscono resistenza ai graffi, stabilità del colore, tolleranza agli urti e sicurezza antiscivolo su tutti i formati.</li><li>L'imballaggio di grado esportazione mantiene le piastrelle intatte attraverso le rotte logistiche più impegnative.</li></ul>"
+    },
+    "kpis": {
+      "kicker": "Migliori Pratiche di Sostenibilità",
+      "title": "Metriche di Prestazione che Alimentano Partnership Globali",
+      "description": "Misuriamo e riferiamo continuamente su efficienza delle risorse, investimento comunitario e governance per mantenere i nostri partner pronti per l'audit.",
+      "reuse": {
+        "value": "92%",
+        "label": "Recupero Materiali",
+        "description": "I corpi ceramici pre-consumo vengono recuperati, riprocessati e reintrodotti in nuove linee di prodotti."
+      },
+      "water": {
+        "value": "100%",
+        "label": "Acque Reflue Trattate",
+        "description": "La filtrazione a circuito chiuso cattura, pulisce e ricircola l'acqua del processo attraverso ogni sala forno."
+      },
+      "production": {
+        "value": "100K m²",
+        "label": "Capacità Mensile",
+        "description": "Le linee flessibili si adattano a volumi personalizzati che superano 100.000 metri quadrati per ordine."
+      },
+      "people": {
+        "value": "13+",
+        "label": "Paesi Serviti",
+        "description": "Specialisti di esportazione dedicati coordinano conformità, traduzioni e assistenza post-consegna attraverso i mercati globali."
+      },
+      "energy": {
+        "value": "45,000+",
+        "label": "MMBTU Risparmiati",
+        "description": "I programmi di ottimizzazione termica riducono il consumo di gas stabilizzando le prestazioni del forno."
+      },
+      "packaging": {
+        "value": "80%",
+        "label": "Imballaggio Riciclato",
+        "description": "Pallet e materiali di protezione di grado esportazione sono ottenuti da input riciclati e riciclabili."
+      }
+    },
+    "governance": {
+      "kicker": "Governance e Responsabilità",
+      "title": "Business Responsabile, Datore di Lavoro Responsabile",
+      "description": "Trasparenza, sicurezza e investimento comunitario guidano ogni partnership, dall'approvvigionamento di materiali all'assistenza a lungo termine post-installazione.",
+      "cards": {
+        "ethics": {
+          "title": "Etica e Conformità",
+          "point1": "Audit allineati ISO e approvvigionamento tracciabile",
+          "point2": "Protezione dei dati e framework di governance",
+          "point3": "Ufficiali di conformità dedicati per i mercati di esportazione"
+        },
+        "community": {
+          "title": "Investimento Comunitario",
+          "point1": "Borse di studio STEM per talenti locali",
+          "point2": "Partnership di ripristino ambientale",
+          "point3": "Programmi di sviluppo fornitori regionali"
+        },
+        "people": {
+          "title": "Persone e Benessere",
+          "point1": "Cultura della sicurezza prima con formazione continua",
+          "point2": "Accelerazione della carriera e mentorship tecnica",
+          "point3": "Politiche inclusive attraverso lingue e regioni"
+        },
+        "impact": {
+          "title": "Impatto Ambientale",
+          "point1": "Valutazioni del ciclo di vita integrate in R&S",
+          "point2": "Roadmap di riduzione delle emissioni monitorate trimestralmente",
+          "point3": "Coinvolgimento dei fornitori per elevare standard condivisi"
+        }
+      }
+    },
+    "products": {
+      "portfolio": {
+        "kicker": "Innovazione e Qualità",
+        "title": "Un Portafoglio Prodotti di Classe Mondiale",
+        "body": "Ogni serie nasce dalla ricerca collaborativa con architetti, scienziati dei materiali ed esperti di specifiche. Dalle immagini di prodotto immersive e multiangolo alle gallerie di installazione e dati di imballaggio, equipaggiamo i professionisti con tutto ciò di cui hanno bisogno per costruire con fiducia.",
+        "highlight1": "Visuali ad alta definizione di ogni superficie, texture e pattern di posa attraverso progetti residenziali e commerciali di lusso.",
+        "highlight2": "Dati di prestazione testati in laboratorio che coprono resistenza ai graffi, protezione dalle macchie e durata climatica.",
+        "highlight3": "Imballaggio di grado esportazione progettato per rotte di approvvigionamento a lunga distanza e consegne just-in-time.",
+        "cta": "Visualizza Portafoglio Prodotti"
+      },
+      "export": {
+        "kicker": "Mentalità di Partnership Globale",
+        "title": "Servizi di Esportazione che Riducono il Rischio dei Progetti Globali",
+        "body": "Agiamo come partner strategici dal concetto all'installazione, fornendo programmi di produzione personalizzati, dossier tecnici e gestione logistica end-to-end per le parti interessate in tutto il mondo.",
+        "highlight1": "Consulenti di esportazione dedicati che allineano specifiche, certificazioni e preferenze di mercato.",
+        "highlight2": "Coordinamento integrato di trasporto, assicurazione e dogana con flussi di lavoro di documentazione trasparenti.",
+        "highlight3": "Dimensioni, colori e imballaggi personalizzati per sviluppi su larga scala che richiedono finiture uniche.",
+        "cta": "Connetti con Consulenti di Esportazione"
+      },
+      "smart": {
+        "kicker": "Decision-Making Digitale",
+        "title": "Modulo di Combinazione Intelligente per Design Basato su Dati",
+        "body": "La nostra piattaforma interattiva aiuta i team di design a prototipare, visualizzare e condividere combinazioni di piastrelle adattate alle tendenze dei consumatori in ogni regione. È un co-pilota digitale che accelera il processo decisionale.",
+        "highlight1": "Raccomandazioni assistite dall'IA guidate dal comportamento dell'acquirente e benchmark di design internazionali.",
+        "highlight2": "Tavole di concetto e rendering esportabili per allineamento cross-funzionale con architetti e investitori.",
+        "highlight3": "Collaborazione consulente tecnico per programmi di ospitalità, retail e residenziali ad alto rischio.",
+        "cta": "Avvia il Modulo Intelligente"
+      }
+    },
+    "certificates": {
+      "environment": "Sistema di Gestione Ambientale",
+      "safety": "Programma di Salute e Sicurezza sul Lavoro",
+      "quality": "Sistema di Gestione della Qualità",
+      "integrated": "Sistemi di Gestione Integrati",
+      "integratedSubtitle": "ISO 9001 · ISO 14001 · ISO 45001"
+    },
+    "final": {
+      "kicker": "Collabora con Noi",
+      "title": "Costruiamo Spazi Straordinari Insieme",
+      "description": "Lascia che i nostri specialisti di esportazione, ingegneri di prodotto e strategisti di design supportino il tuo prossimo progetto iconico con precisione e autenticità.",
+      "primaryCta": "Contatta il nostro ufficio esportazioni",
+      "secondaryCta": "Esplora il catalogo digitale",
+      "contact": {
+        "title": "Accesso Diretto",
+        "body": "Email, telefono e canali di supporto dal vivo ti collegano con consulenti che comprendono le normative regionali e gli standard tecnici."
+      },
+      "support": {
+        "title": "Assistenza Post-Progetto",
+        "body": "Forniamo orientamento sulla manutenzione, strategie di sostituzione e revisioni continue dell'approvvigionamento per proteggere il tuo investimento."
+      },
+      "heading": "Collaborare con Pietra Luxe Hub",
+      "projectAdvisory": {
+        "title": "Consulenza Progetto",
+        "body": "Dalla programmazione delle piastrelle alla documentazione logistica, forniamo supporto agile e multilingue."
+      },
+      "afterSales": {
+        "title": "Assistenza Post-Vendita",
+        "body": "I team tecnici rimangono disponibili per la guida all'installazione, la pianificazione della manutenzione e le fasi future."
+      }
+    },
+    "loading": "Caricamento contenuto sostenibilità…",
+    "impact": {
+      "exportServices": {
+        "heading": "<b>Servizi di Esportazione</b><br>Consegna Globale Senza Interruzioni",
+        "body": "<p>Esportare è una partnership. I nostri team supportano ogni fase—dalla specifica e campionamento alla documentazione, spedizione e coordinamento in loco.</p><ul><li>Colori, dimensioni e imballaggio personalizzabili per programmi superiori a 100,000 m².</li><li>Piani di pagamento flessibili, prezzi competitivi e tracciamento ordini trasparente.</li><li>Consulenti dedicati disponibili per chat live, tour della fabbrica e supporto post-installazione.</li></ul>"
+      },
+      "smartCombination": {
+        "heading": "<b>Modulo Combinazione Intelligente</b><br>Supporto Specifica Intelligente",
+        "body": "<p>Il nostro modulo interattivo analizza dati di mercato e tendenze di design per raccomandare combinazioni che risuonano con le preferenze regionali.</p><ul><li>Visualizza miscele di colori, finiture e formati su misura per ogni spazio.</li><li>Salva e condividi output pronti per il rendering direttamente con clienti e partner del progetto.</li><li>Invita esperti Pietra Luxe per combinazioni su misura e ingegneria del valore.</li></ul>"
+      }
+    },
+    "solutions": {
+      "intro": {
+        "heading": "<b>Intelligenti</b> Strumenti di Specifica",
+        "body": "<p>Traduciamo decenni di eccellenza manifatturiera in esperienze digitali che aiutano i designer a confrontare superfici, specifiche tecniche e installazioni del mondo reale senza congetture.</p>"
+      },
+      "features": {
+        "signatureWhitebody": {
+          "heading": "<b>Firma</b> Collezioni Corpo Bianco",
+          "body": "<p>I nuclei corpo bianco premium con smalti lussuosi offrono profondità di colore e chiarezza duratura per progetti di punta.</p><ul><li>Calibrazioni multiple su finiture opache, semi-lucidate e lucide complete.</li><li>Fotografia di installazione reale per spazi di ospitalità, residenziali e pubblici.</li><li>Dati completi di imballaggio e pallettizzazione per logistica semplificata.</li></ul>",
+          "cta": "Sfoglia catalogo esportazione"
+        },
+        "largeFormat": {
+          "heading": "<b>Formato Grande</b> Lastre e Pannelli",
+          "body": "<p>Gli architetti si affidano alla nostra porcellana formato grande per facciate, atri e interni immersivi che richiedono continuità senza interruzioni.</p><ul><li>La tecnologia avanzata dei forni garantisce stabilità dimensionale su formati di grandi dimensioni.</li><li>Il controllo preciso dello spessore rende l'installazione più veloce con sprechi minimi.</li><li>I team di consulenza progetto assistono con sistemi di ancoraggio e disegni tecnici.</li></ul>",
+          "cta": "Prenota chiamata specifica"
+        },
+        "performance": {
+          "heading": "<b>Prestazioni</b> Innovazioni Superficie",
+          "body": "<p>Le finiture antiscivolo, antibatteriche e ad alto impatto consentono ai designer di bilanciare l'estetica con standard di conformità rigorosi.</p><ul><li>Gli smalti testati in laboratorio mantengono l'igiene in ambienti sanitari e commerciali.</li><li>Le texture classificate per esterni resistono allo sbiadimento UV, al gelo e al traffico intenso.</li><li>Le schede tecniche coprono coefficiente, resistenza e orientamento alla manutenzione.</li></ul>",
+          "cta": "Richiedi dossier tecnico"
+        },
+        "hospitality": {
+          "heading": "<b>Ospitalità</b> e Concetti Retail",
+          "body": "<p>Le moodboard curate combinano decorazioni espressive con piastrelle base durevoli, aiutando gli operatori a lanciare esperienze di marca più velocemente.</p><ul><li>Pacchetti di design pronti all'uso per caffè, resort, residenze e centri commerciali.</li><li>Bordi coordinati, mosaici e pezzi di transizione per dettagli coerenti.</li><li>Campionamento su richiesta con spedizione internazionale accelerata.</li></ul>",
+          "cta": "Connetti con studio di design"
+        },
+        "healthcare": {
+          "heading": "<b>Sanità</b> e Programmi Benessere",
+          "body": "<p>Soluzioni progettate per ambienti critici per l'igiene senza sacrificare calore o tattilità.</p><ul><li>Superfici antiscivolo e facili da pulire per cliniche, spa e campus educativi.</li><li>Smalti antibatterici certificati che supportano protocolli di manutenzione.</li><li>Accenti personalizzati e inserti di orientamento per migliorare le esperienze dei pazienti.</li></ul>",
+          "cta": "Discuti esigenze conformità"
+        },
+        "circular": {
+          "heading": "<b>Circolare</b> Ciclo di Produzione",
+          "body": "<p>I minerali di scarto e il calore del forno vengono recuperati attraverso sistemi di riciclaggio che chiudono il ciclo delle risorse di produzione.</p><ul><li>I materiali recuperati vengono reintegrati in nuovi corpi senza degradare la qualità della superficie.</li><li>Gli impianti di trattamento dell'acqua restituiscono l'acqua trattata direttamente alla linea.</li><li>Le dashboard energetiche monitorano i forni per ottimizzare l'efficienza in tempo reale.</li></ul>",
+          "cta": "Vedi roadmap sostenibilità"
+        },
+        "climate": {
+          "heading": "<b>Efficienza</b> Responsiva al Clima",
+          "body": "<p>Le curve di cottura intelligenti, le strategie di isolamento e la pianificazione logistica riducono le emissioni preservando l'artigianato ispirato all'Italia.</p><ul><li>Le analisi termiche guidano gli aggiustamenti del forno per massima produzione con minimo combustibile.</li><li>L'ottimizzazione delle rotte riduce le impronte di trasporto ai nostri partner globali.</li><li>La rendicontazione trasparente mantiene i clienti pronti per audit per requisiti ESG.</li></ul>",
+          "cta": "Scarica snapshot ESG"
+        }
+      }
+    },
+    "html": {
+      "sustainabilityCommitments": "I nostri impegni per la sostenibilità",
+      "rakCeramicsIntro": "In RAK Ceramics, il nostro impegno per creare una società sostenibile è al centro di tutto ciò che facciamo. Siamo orgogliosi di sfruttare i nostri prodotti e la nostra esperienza per avere un impatto positivo e ti invitiamo a unirti a noi in questo viaggio verso un mondo migliore.",
+      "strategicInitiatives": "Le nostre iniziative strategiche nel fornire ai nostri clienti prodotti e soluzioni sostenibili e innovative che migliorano la loro qualità della vita si concentrano sul principio del cambiamento e del miglioramento costanti. La nostra capacità innovativa può essere vista nella vasta gamma di prodotti che offriamo, che si estende attraverso tipi di prodotti, stili, design e punti di prezzo per soddisfare i requisiti e le preferenze variabili dei nostri clienti.",
+      "reuse": "RIUTILIZZO",
+      "reuseDescription": "Riutilizzo è una collezione innovativa di piastrelle di porcellana realizzate interamente con materiali riciclati al 100% pre-consumo. Ogni piastrella è una testimonianza del nostro impegno per la sostenibilità, poiché riutilizziamo materiali da più processi di produzione ceramica per creare soluzioni di piastrellatura durevoli ed ecologiche.",
+      "rimlessTechnology": "TECNOLOGIA SENZA BORDO",
+      "rimlessFeatures": {
+        "hygienic": "Igienico e facile da pulire",
+        "waterSaving": "Risparmio idrico",
+        "efficientDesign": "Design efficiente",
+        "silentFlush": "Sciacquone silenzioso",
+        "noLedges": "Nessun bordo o orlo."
+      },
+      "rakProTek": "SMALTO ANTIBATTERICO E IGIENICO RAK-ProTeK",
+      "rakProTekDescription": "RAK-ProTeK è lo smalto ceramico innovativo sviluppato per proteggere lavabo, servizi igienici e orinatoi, per renderli più igienici e facili da pulire. RAK-ProTeK, che viene cotto nella ceramica durante la cottura, risulta in una superficie più liscia, a differenza della ceramica standard con superficie irregolare.",
+      "rakMaxxFlush": "RAK MAXXFLUSH",
+      "rakMaxxFlushDescription": "Questo prodotto consente il risparmio idrico permettendo agli utenti di scegliere di usare lo sciacquone completo o mezzo sciacquone, con diversi volumi di sciacquone: 6 Litri per il completo e 3 Litri per il mezzo sciacquone. I serbatoi possono anche essere regolati per sciacquare con un volume di sciacquone completo ridotto a 4.5 Litri.",
+      "rakJoy": "RAK JOY",
+      "rakJoyDescription": "La collezione di mobili in legno RAK-Joy rispetta l'ambiente e la vita del mobile stesso. Tutti i pannelli truciolati e MDF utilizzati nella costruzione di questa straordinaria collezione di mobili provengono da fonti responsabili certificate, rispettando le foreste, le persone e la fauna selvatica che le chiamano casa.",
+      "rakSanit": "RAK-SANIT UNA SCELTA SICURA",
+      "rakSanitDescription": "Riduce la contaminazione batterica e contribuisce a un ambiente di vita e lavoro più sano grazie alle sue proprietà antibatteriche fornite da composti di nitrato d'argento. La collezione antibatterica RAK-Sanit di piastrelle per pareti e pavimenti presenta una tecnologia antibatterica che è permanentemente integrata nella superficie della piastrella",
+      "klima": "KLIMA",
+      "klimaDescription": "Klima è una ceramica di nuova generazione che, grazie a materiali speciali, è in grado di resistere a temperature fredde o calde secondo le esigenze individuali e mantenere la stessa temperatura dell'ambiente circostante.",
+      "sustainabilityCertifications": "CERTIFICAZIONI DI SOSTENIBILITÀ",
+      "findOutMore": "SCOPRI DI PIÙ SUL NOSTRO APPROCCIO ALLA SOSTENIBILITÀ"
+    }
   },
   "notFound": {
     "title": "Pagina Non Trovata",
@@ -334,7 +714,7 @@
     "welcomeBack": "Bentornato",
     "email": "Indirizzo Email",
     "emailPlaceholder": "tuo@email.com",
-    "password": "Password",
+    "password": "Parola d'Ordine",
     "passwordPlaceholder": "Inserisci la tua password",
     "signingIn": "Accesso in corso...",
     "localBackend": "Backend Locale - Non richiede internet",
@@ -520,13 +900,13 @@
       "Good": "Buono",
       "Yes": "Sì"
     },
-    "min": "Min",
+    "min": "Minimo",
     "perfValue": {
       "Class A (Non-combustible)": "Classe A (Non combustibile)",
       "High resistance to acids and alkalis": "Alta resistenza ad acidi e alcali",
-      "Good resistance to common chemicals": "Buona resistenza a sostanze chimiche comuni",
-      "Mohs scale: 6-7": "Scala Mohs: 6-7",
-      "Mohs scale: 5-6": "Scala Mohs: 5-6",
+      "Good resistance to common chemicals": "Buona resistenza a prodotti chimici comuni",
+      "Mohs scale: 6-7": "Scala di Mohs: 6-7",
+      "Mohs scale: 5-6": "Scala di Mohs: 5-6",
       "UV stable": "Stabile ai raggi UV",
       "R10-R13": "R10-R13",
       "R10-R12": "R10-R12"
@@ -535,13 +915,13 @@
   "chatAssistant": {
     "title": "Assistente Almas",
     "welcomeMessage": "Ciao! Sono l'Assistente Almas. Come posso aiutarti oggi con le nostre piastrelle ceramiche?",
-    "rateLimitMessage": "Attendi {seconds} secondo(i) prima di inviare un altro messaggio.",
-    "errorMessage": "Mi dispiace, ma sto avendo problemi a rispondere in questo momento. Riprova o contattaci direttamente al +98 21-88218520.",
+    "rateLimitMessage": "Attendi {seconds} secondi prima di inviare il tuo prossimo messaggio.",
+    "errorMessage": "Scusa, ma sto avendo problemi a rispondere ora. Riprova o contattaci direttamente: +98 21 88218520",
     "openChat": "Apri assistente chat",
     "closeChat": "Chiudi chat",
-    "inputPlaceholder": "Chiedimi qualsiasi cosa sui nostri prodotti...",
+    "inputPlaceholder": "Scrivi il tuo messaggio...",
     "sendMessage": "Invia messaggio",
-    "inputHint": "Chiedi su prodotti, specifiche, certificazioni o informazioni aziendali"
+    "inputHint": "Premi Invio per inviare, Maiusc+Invio per nuova riga"
   },
   "modernHero": {
     "badge": "Eccellenza Italiana dal 1962",
@@ -555,44 +935,180 @@
   },
   "technicalSpecs": {
     "label": "Eccellenza Tecnica",
-    "title": "Prestazioni Superiori",
-    "subtitle": "Progettato per superare gli standard internazionali per applicazioni architettoniche",
-    "waterAbsorption": "Assorbimento d'Acqua",
-    "waterAbsorptionDesc": "Bassa porosità, ideale per aree umide",
+    "title": "Specifiche Tecniche",
+    "subtitle": "Standard di qualità premium che assicurano durabilità e prestazioni",
+    "waterAbsorption": "Assorbimento Acqua",
+    "waterAbsorptionDesc": "Assorbimento acqua ultra basso assicura durabilità in condizioni umide",
     "frostResistance": "Resistenza al Gelo",
     "certified": "Certificato",
-    "frostResistanceDesc": "Adatto per applicazioni esterne",
+    "frostResistanceDesc": "Testato e certificato per variazioni estreme di temperatura",
     "slipResistance": "Resistenza allo Scivolamento",
-    "slipResistanceDesc": "Sicuro per uso residenziale e commerciale",
+    "slipResistanceDesc": "Alta classificazione di resistenza allo scivolamento per superfici di camminata sicure",
     "breakingStrength": "Resistenza alla Rottura",
-    "breakingStrengthDesc": "Durata e resistenza eccezionali",
-    "standardsCompliance": "Tutti i prodotti sono conformi agli standard internazionali EN 14411 e ISO 13006",
+    "breakingStrengthDesc": "Resistenza alla rottura eccezionale per installazioni durature",
+    "standardsCompliance": "Tutti i prodotti sono conformi agli standard internazionali inclusi ISO 13006",
     "downloadDatasheet": "Scarica Scheda Tecnica"
   },
   "featuredCollections": {
-    "label": "Le Nostre Collezioni Firmate",
-    "title": "Collezioni in Evidenza",
-    "subtitle": "Selezioni curate dei nostri design ceramici e in porcellana più distinti",
-    "filterAll": "Tutti",
+    "label": "Collezioni in Evidenza",
+    "title": "Collezioni Piastrelle Premium",
+    "subtitle": "Scopri la nostra selezione curata di collezioni di piastrelle ceramiche e porcellanato premium",
+    "filterAll": "Tutte",
     "filterWoodLook": "Aspetto Legno",
     "filterMarbleLook": "Aspetto Marmo",
     "filterStoneLook": "Aspetto Pietra",
-    "filterConcrete": "Cemento",
+    "filterConcrete": "Calcestruzzo",
     "filterMetalEffect": "Effetto Metallo",
     "collection1Name": "Collezione Legno Naturale",
     "collection1Category": "Aspetto Legno",
-    "collection1Description": "Tonality calde della quercia con texture autentica della venatura del legno",
-    "collection2Name": "Eleganza Marmo Carrara",
+    "collection1Description": "Estetica del legno autentica con durabilità ceramica e manutenzione facile",
+    "collection2Name": "Collezione Marmo di Lusso",
     "collection2Category": "Aspetto Marmo",
-    "collection2Description": "Marmo bianco classico con delicate venature grigie",
-    "collection3Name": "Serie Cemento Urbano",
-    "collection3Category": "Aspetto Cemento",
-    "collection3Description": "Estetica industriale contemporanea per spazi moderni",
-    "badgeNew": "NUOVO",
-    "badgeBestseller": "BESTSELLER",
-    "products": "Prodotti",
-    "finishes": "Finiture",
+    "collection2Description": "Design ispirati al marmo per interni sofisticati",
+    "collection3Name": "Collezione Calcestruzzo Moderno",
+    "collection3Category": "Calcestruzzo",
+    "collection3Description": "Eleganza industriale con finiture in calcestruzzo contemporanee",
+    "badgeNew": "Nuovo",
+    "badgeBestseller": "Bestseller",
+    "products": "prodotti",
+    "finishes": "finiture",
     "viewCollection": "Visualizza Collezione"
+  },
+  "innovative": {
+    "title": "Soluzioni Innovative",
+    "iso": "Standard di Qualità Certificati",
+    "isoDesc": "ISO 9001, 14001 e 45001 assicurano qualità, ambiente e sicurezza.",
+    "environment": "Impegno Ambientale",
+    "environmentDesc": "Processi responsabili e materiali sostenibili.",
+    "export": "Esportazione Globale",
+    "exportDesc": "Fornitura di piastrelle premium a più di 13 paesi."
+  },
+  "stories": {
+    "subtitle": "Ispirazione da applicazioni e spazi del mondo reale.",
+    "residential": "Spazi Residenziali",
+    "residentialDesc": "Superfici calde, eleganti e durevoli per le case.",
+    "commercial": "Progetti Commerciali",
+    "commercialDesc": "Prestazioni affidabili per retail e ospitalità.",
+    "interior": "Interni Moderni",
+    "interiorDesc": "Aspetti raffinati per design contemporaneo."
+  },
+  "digital": {
+    "experiences": "Esperienze Prodotto Digitali",
+    "visualizer": "Visualizzatore Stanza 3D",
+    "visualizerDesc": "Progetta il tuo spazio e visualizza le piastrelle in tempo reale.",
+    "catalog": "Catalogo Prodotti",
+    "catalogDesc": "Sfoglia e scarica i nostri ultimi cataloghi.",
+    "showroom": "Tour Virtuale dello Showroom",
+    "showroomDesc": "Fai un tour digitale del nostro showroom."
+  },
+  "community": {
+    "title": "UNISCITI ALLA NOSTRA COMUNITÀ",
+    "subtitle": "Iscriviti per ricevere aggiornamenti su prodotti, progetti e notizie.",
+    "email": "Inserisci la tua email",
+    "subscribe": "Iscriviti",
+    "thanks": "Grazie per esserti iscritto!"
+  },
+  "blog": {
+    "subtitle": "Ultime intuizioni, tendenze e ispirazione dal mondo delle piastrelle ceramiche",
+    "viewAll": "Visualizza tutti i post",
+    "readMore": "Leggi di più"
+  },
+  "lifestyleSolutions": {
+    "title": "SOLUZIONI DI STILE DI VITA",
+    "subtitle": "Superfici distintive per spazi di rilievo",
+    "cards": {
+      "lobbySerenity": {
+        "title": "Serenità della Lobby",
+        "subtitle": "Pannelli murali 30x90 Alvin Silver a rilievo"
+      },
+      "signatureBathSuite": {
+        "title": "Suite Bagno Distintiva",
+        "subtitle": "Pareti grande formato 60x120 Soufia Satin"
+      },
+      "gourmetStudio": {
+        "title": "Studio Gourmet",
+        "subtitle": "Rivestimento 30x90 Alvin Pearl con accenti testurizzati"
+      }
+    }
+  },
+  "innovativeSolutions": {
+    "title": "TECNOLOGIA AVANZATA",
+    "description": "Combinando l'artigianato iraniano tradizionale con l'innovazione moderna, offriamo piastrelle ceramiche premium che trasformano le visioni architettoniche in realtà. La nostra produzione all'avanguardia garantisce qualità eccezionale e design senza tempo.",
+    "panels": {
+      "isoCertified": {
+        "title": "Qualità Certificata ISO",
+        "subtitle": "STANDARD DI QUALITÀ"
+      },
+      "environmental": {
+        "title": "Eccellenza Ambientale",
+        "subtitle": "IMPEGNO PER LA SOSTENIBILITÀ"
+      },
+      "global": {
+        "title": "Produzione Globale",
+        "subtitle": "INNOVAZIONE E TECNOLOGIA"
+      }
+    }
+  },
+  "newsBanner": {
+    "slides": {
+      "legacy": {
+        "description": "Dalle lastre su misura alle installazioni su scala ospitalità, i nostri team di produzione offrono qualità disciplinata con una finitura distintiva Pietra Luxe."
+      },
+      "people": {
+        "heading": "Creato dalle Persone, Alimentato dall'Esperienza",
+        "description": "I nostri ingegneri, designer e specialisti sul campo collaborano con i clienti per tradurre visioni architettoniche in soluzioni di superficie pronte per l'installazione.",
+        "ctaLabel": "Incontra il team"
+      }
+    },
+    "previousSlide": "Diapositiva precedente",
+    "nextSlide": "Diapositiva successiva"
+  },
+  "projects": {
+    "subtitle": "Scopri i nostri progetti completati e installazioni"
+  },
+  "productSpotlight": {
+    "title": "PRODOTTO IN EVIDENZA",
+    "scrollLeft": "Scorri a sinistra",
+    "scrollRight": "Scorri a destra",
+    "tiles": {
+      "alvinSilver": {
+        "title": "Alvin Silver 30×90",
+        "description": "Pannelli a rilievo ondulato a strati finiti in una tonalità argento fresca per atri di hotel e pareti caratteristiche."
+      },
+      "soufiaSand": {
+        "title": "Soufia Sand 60×120",
+        "description": "Lastre di porcellana con venature ispirate al deserto che avvolgono suite spa in calore delicato."
+      },
+      "rakuStone": {
+        "title": "Raku Stone 60×120",
+        "description": "Composizione a quattro corrispondenze che mostra la profondità della nostra collezione di pietra Raku per aree living ampie."
+      },
+      "klaraGrey": {
+        "title": "Klara Grey 60×120",
+        "description": "Grafiche di marmo grigio morbido con superfici altamente riflettenti adatte a cucine contemporanee."
+      },
+      "waldoMatt": {
+        "title": "Waldo Matt 60×120",
+        "description": "Piastrelle con finitura opaca raffinata che offrono volumi monolitici per interni retail premium."
+      }
+    }
+  },
+  "packagingInfo": {
+    "title": "Informazioni di Imballaggio",
+    "singlePackage": {
+      "title": "Informazioni Pacchetto Singolo",
+      "label": "Pacchetto Singolo",
+      "dimension": "Dimensione",
+      "piecesPerCarton": "Pezzi per Scatola",
+      "squareMetersPerCarton": "Metri Quadrati per Scatola",
+      "weightPerCarton": "Peso per Scatola"
+    },
+    "pallet": {
+      "title": "Informazioni Pacchetti Multipli / Pallet",
+      "label": "Pallet",
+      "cartonsPerPallet": "Scatole per Pallet",
+      "squareMetersPerPallet": "Metri Quadrati per Pallet",
+      "totalPalletWeight": "Peso Totale del Pallet"
+    }
   }
 }
-

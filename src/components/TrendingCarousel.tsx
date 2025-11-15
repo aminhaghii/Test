@@ -133,18 +133,18 @@ const TrendingCarousel = () => {
         {/* Scrollable Cards */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-7 overflow-x-auto px-6 lg:px-20 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-luxury-gold scrollbar-track-luxury-gold/30"
+          className="flex gap-4 sm:gap-5 md:gap-6 lg:gap-7 overflow-x-auto px-4 sm:px-5 md:px-6 lg:px-20 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-luxury-gold scrollbar-track-luxury-gold/30 -webkit-overflow-scrolling-touch touch-pan-x"
           style={{ scrollbarGutter: "stable" }}
         >
           {trendingCollections.map((collection, index) => (
             <div
               key={collection.id}
-              className={`flex-shrink-0 w-[440px] snap-start group ${disableMotion ? '' : 'animate-fade-in-up'}`}
+              className={`flex-shrink-0 w-[85vw] sm:w-[75vw] md:w-[60vw] lg:w-[440px] snap-start group ${disableMotion ? '' : 'animate-fade-in-up'}`}
               style={disableMotion ? undefined : { animationDelay: `${index * 0.1}s` }}
             >
               <div className="bg-background rounded-[14px] overflow-hidden shadow-elegant transition-elegant hover:shadow-[0_16px_48px_rgba(0,0,0,0.18)] hover:scale-103">
                 {/* Image Section */}
-                <div className="relative h-[380px] overflow-hidden">
+                <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[380px] overflow-hidden">
                   <img
                     src={collection.image}
                     alt={collection.name}
@@ -153,7 +153,7 @@ const TrendingCarousel = () => {
                     decoding="async"
                     width={440}
                     height={380}
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 440px"
+                    sizes="(max-width: 640px) 85vw, (max-width: 768px) 75vw, (max-width: 1024px) 60vw, 440px"
                   />
 
                   {/* Trending Badge */}
@@ -174,16 +174,16 @@ const TrendingCarousel = () => {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-6.5">
-                  <h3 className="font-sans text-[23px] font-semibold text-neutral-charcoal mb-2.5">
+                <div className="p-4 sm:p-5 md:p-6 lg:p-6.5">
+                  <h3 className="font-sans text-lg sm:text-xl md:text-[21px] lg:text-[23px] font-semibold text-neutral-charcoal mb-2 sm:mb-2.5">
                     {collection.name}
                   </h3>
-                  <p className="font-technical text-xs uppercase text-neutral-slate tracking-wide mb-3.5">
+                  <p className="font-technical text-[10px] sm:text-xs uppercase text-neutral-slate tracking-wide mb-2.5 sm:mb-3 md:mb-3.5">
                     {collection.category}
                   </p>
 
                   {/* Quick Stats */}
-                  <div className="flex flex-wrap gap-4.5 text-[13px] text-neutral-stone">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-4.5 text-xs sm:text-[12px] md:text-[13px] text-neutral-stone">
                     <span>{collection.products} Products</span>
                     <span className="text-neutral-stone/50">•</span>
                     <span>{collection.finishes} Finishes</span>

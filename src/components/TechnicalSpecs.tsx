@@ -5,33 +5,33 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const TechnicalSpecs = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollReveal();
-  
-  const specifications = [
-    {
-      icon: Droplets,
+
+const specifications = [
+  {
+    icon: Droplets,
       title: t('technicalSpecs.waterAbsorption'),
-      value: "< 0.5%",
+    value: "< 0.5%",
       description: t('technicalSpecs.waterAbsorptionDesc'),
-    },
-    {
-      icon: Thermometer,
+  },
+  {
+    icon: Thermometer,
       title: t('technicalSpecs.frostResistance'),
       value: t('technicalSpecs.certified'),
       description: t('technicalSpecs.frostResistanceDesc'),
-    },
-    {
-      icon: Footprints,
+  },
+  {
+    icon: Footprints,
       title: t('technicalSpecs.slipResistance'),
-      value: "R10-R11",
+    value: "R10-R11",
       description: t('technicalSpecs.slipResistanceDesc'),
-    },
-    {
-      icon: Zap,
+  },
+  {
+    icon: Zap,
       title: t('technicalSpecs.breakingStrength'),
-      value: "> 1300N",
+    value: "> 1300N",
       description: t('technicalSpecs.breakingStrengthDesc'),
-    },
-  ];
+  },
+];
 
   return (
     <section className="py-20 lg:py-28 bg-neutral-alabaster">

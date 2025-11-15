@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 // API URL for backend resources
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 const BrandStory = () => {
   const { elementRef, isVisible } = useScrollReveal();

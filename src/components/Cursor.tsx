@@ -42,7 +42,7 @@ const Cursor = () => {
         transition: 'none',
         width: '14px',
         height: '14px',
-        backgroundColor: '#D4A737',
+        backgroundColor: '#000000',
         boxShadow: 'none',
       }}
     />

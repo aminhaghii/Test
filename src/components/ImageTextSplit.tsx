@@ -6,7 +6,8 @@ import { useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // API URL for backend resources
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 const ImageTextSplit = () => {
   const { t } = useLanguage();
@@ -29,12 +30,12 @@ const ImageTextSplit = () => {
   ];
 
   return (
-    <section ref={containerRef} className="relative py-24 lg:py-32 bg-gradient-to-b from-background via-neutral-alabaster to-background overflow-hidden">
+    <section ref={containerRef} className="relative py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-gradient-to-b from-background via-neutral-alabaster to-background overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-luxury-bronze/10 rounded-full blur-3xl -translate-y-1/2" />
       
-      <div className="container mx-auto px-6 lg:px-20">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 items-center">
           {/* Image Side with Parallax */}
           <motion.div 
             style={{ y: imageY }}
@@ -48,11 +49,11 @@ const ImageTextSplit = () => {
               className="relative"
             >
               {/* Main Image */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
                 <img 
                   src={`${API_URL}/ALMAS/victoria.jpg`}
                   alt="Luxury ceramic installation"
-                  className="w-full h-[600px] object-cover"
+                  className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-charcoal/50 to-transparent" />
               </div>
@@ -84,7 +85,7 @@ const ImageTextSplit = () => {
               </div>
 
               {/* Heading */}
-              <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-charcoal mb-6 leading-tight tracking-tight">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-charcoal mb-4 sm:mb-5 md:mb-6 leading-tight tracking-tight">
                 {t('imageTextSplit.title')}
                 <br />
                 <span className="bg-gradient-to-r from-luxury-gold via-luxury-bronze to-luxury-brass bg-clip-text text-transparent">
@@ -93,12 +94,12 @@ const ImageTextSplit = () => {
               </h2>
 
               {/* Description */}
-              <p className="text-lg lg:text-xl text-neutral-slate leading-relaxed mb-8">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-slate leading-relaxed mb-6 sm:mb-7 md:mb-8">
                 {t('imageTextSplit.description')}
               </p>
 
               {/* Features List */}
-              <div className="space-y-4 mb-10">
+              <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-9 md:mb-10">
                 {features.map((feature, index) => (
                   <motion.div
                     key={feature}
@@ -106,35 +107,35 @@ const ImageTextSplit = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-2 sm:gap-3"
                   >
-                    <div className="w-6 h-6 rounded-full bg-luxury-gold/20 flex items-center justify-center flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-luxury-gold" />
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-luxury-gold/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-luxury-gold" />
                     </div>
-                    <span className="text-neutral-charcoal font-medium">{feature}</span>
+                    <span className="text-sm sm:text-base text-neutral-charcoal font-medium">{feature}</span>
                   </motion.div>
                 ))}
               </div>
 
               {/* CTA */}
-              <div className="flex flex-wrap gap-4">
-                <Link to="/about">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                <Link to="/about" className="w-full sm:w-auto">
                   <Button 
                     size="lg"
-                    className="group bg-neutral-charcoal hover:bg-luxury-gold text-background rounded-full px-8 py-6 font-semibold transition-all duration-300 hover:scale-105"
+                    className="group w-full sm:w-auto bg-neutral-charcoal hover:bg-luxury-gold text-background rounded-full px-6 sm:px-8 py-4 sm:py-6 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 touch-manipulation"
                   >
                     <span className="flex items-center gap-2">
                       {t('imageTextSplit.learnStory')}
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
                 </Link>
                 
-                <Link to="/technical">
+                <Link to="/technical" className="w-full sm:w-auto">
                   <Button 
                     size="lg"
                     variant="outline"
-                    className="border-2 border-neutral-charcoal text-neutral-charcoal hover:bg-neutral-charcoal hover:text-background rounded-full px-8 py-6 font-semibold transition-all duration-300"
+                    className="w-full sm:w-auto border-2 border-neutral-charcoal text-neutral-charcoal hover:bg-neutral-charcoal hover:text-background rounded-full px-6 sm:px-8 py-4 sm:py-6 text-sm sm:text-base font-semibold transition-all duration-300 touch-manipulation"
                   >
                     {t('imageTextSplit.technicalSpecs')}
                   </Button>

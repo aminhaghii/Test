@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import collectionWood from "@/assets/collection-wood-look.jpg";
 import collectionMarble from "@/assets/collection-marble.jpg";
 import collectionConcrete from "@/assets/collection-concrete.jpg";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const FeaturedCollections = () => {
@@ -18,52 +17,45 @@ const FeaturedCollections = () => {
     t('featuredCollections.filterConcrete'),
     t('featuredCollections.filterMetalEffect')
   ];
-  
-  const collections = [
-    {
-      id: 1,
+
+const collections = [
+  {
+    id: 1,
       name: t('featuredCollections.collection1Name'),
       category: t('featuredCollections.collection1Category'),
-      image: collectionWood,
+    image: collectionWood,
       description: t('featuredCollections.collection1Description'),
-      products: 22,
-      finishes: 6,
+    products: 22,
+    finishes: 6,
       badge: t('featuredCollections.badgeNew'),
-    },
-    {
-      id: 2,
+  },
+  {
+    id: 2,
       name: t('featuredCollections.collection2Name'),
       category: t('featuredCollections.collection2Category'),
-      image: collectionMarble,
+    image: collectionMarble,
       description: t('featuredCollections.collection2Description'),
-      products: 18,
-      finishes: 5,
+    products: 18,
+    finishes: 5,
       badge: t('featuredCollections.badgeBestseller'),
-    },
-    {
-      id: 3,
+  },
+  {
+    id: 3,
       name: t('featuredCollections.collection3Name'),
       category: t('featuredCollections.collection3Category'),
-      image: collectionConcrete,
+    image: collectionConcrete,
       description: t('featuredCollections.collection3Description'),
-      products: 15,
-      finishes: 4,
-      badge: null,
-    },
-  ];
-  
-  const { elementRef, isVisible } = useScrollReveal();
+    products: 15,
+    finishes: 4,
+    badge: null,
+  },
+];
 
   return (
     <section id="collections" className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-6 lg:px-20">
         {/* Section Header */}
-        <div
-          ref={elementRef}
-          className={`text-center mb-16 lg:mb-20 max-w-4xl mx-auto transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          }`}
-        >
+        <div className="text-center mb-16 lg:mb-20 max-w-4xl mx-auto">
           <div className="mb-4">
             <span className="font-technical text-[13px] font-semibold uppercase tracking-[0.28em] text-luxury-gold">
               {t('featuredCollections.label')}
@@ -103,31 +95,32 @@ const FeaturedCollections = () => {
               style={{ animationDelay: `${index * 0.12}s` }}
             >
               {/* Card Container */}
-              <div className="bg-card rounded-[14px] overflow-hidden shadow-card hover:shadow-card-hover transition-elegant hover:-translate-y-2">
+              <div className="bg-card rounded-[14px] overflow-hidden shadow-card hover:shadow-card-hover transition-transform duration-500 hover:-translate-y-2">
                 {/* Image Section */}
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <div className="relative aspect-[4/5] overflow-hidden group">
                   <img
                     src={collection.image}
                     alt={collection.name}
-                    className="w-full h-full object-cover transition-elegant group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   
-                  {/* Gradient Overlay on Hover */}
-                  <div className="absolute inset-0 gradient-card-elegance opacity-0 group-hover:opacity-100 transition-elegant flex flex-col justify-end p-9">
-                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-elegant opacity-0 group-hover:opacity-100">
-                      <h3 className="font-sans text-[26px] font-semibold text-background mb-2">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 p-8 transform translate-y-8 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                    <h3 className="font-sans text-[26px] font-semibold text-white mb-2">
                         {collection.name}
                       </h3>
-                      <p className="font-technical text-xs uppercase tracking-widest text-luxury-gold mb-2">
+                    <p className="font-technical text-xs uppercase tracking-widest text-luxury-gold mb-3">
                         {collection.category}
                       </p>
-                      <p className="text-sm text-background/85 mb-5">
+                    <p className="text-sm text-white/85 mb-5">
                         {collection.products} {t('featuredCollections.products')} • {collection.finishes} {t('featuredCollections.finishes')}
                       </p>
+                    <div className="inline-flex">
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-2 border-background text-background hover:bg-background hover:text-foreground rounded-full px-7 transition-smooth"
+                        className="pointer-events-auto border-2 border-white text-white hover:bg-white hover:text-neutral-charcoal rounded-full px-7 transition-smooth"
                       >
                         {t('featuredCollections.viewCollection')}
                       </Button>

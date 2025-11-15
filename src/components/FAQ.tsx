@@ -52,12 +52,12 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-background to-neutral-alabaster relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-gradient-to-b from-background to-neutral-alabaster relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-luxury-gold/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-luxury-bronze/5 rounded-full blur-3xl" />
 
-      <div className="container mx-auto px-6 lg:px-20 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-20 relative">
         {/* Header */}
         <motion.div
           ref={headerRef}
@@ -65,23 +65,23 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 mb-6">
-            <HelpCircle className="w-4 h-4 text-luxury-gold" />
-            <span className="font-technical text-xs uppercase tracking-wider text-luxury-gold font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 mb-4 sm:mb-5 md:mb-6">
+            <HelpCircle className="w-3 h-3 sm:w-4 sm:h-4 text-luxury-gold" />
+            <span className="font-technical text-[10px] sm:text-xs uppercase tracking-wider text-luxury-gold font-semibold">
               {t('faq.label')}
             </span>
           </div>
 
-          <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-charcoal mb-6 tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-charcoal mb-4 sm:mb-5 md:mb-6 tracking-tight">
             {t('faq.title')}
             <br />
             <span className="bg-gradient-to-r from-luxury-gold via-luxury-bronze to-luxury-brass bg-clip-text text-transparent">
               {t('faq.titleHighlight')}
             </span>
           </h2>
-          <p className="text-xl text-neutral-slate max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-slate max-w-3xl mx-auto leading-relaxed px-2">
             {t('faq.description')}
           </p>
         </motion.div>
@@ -94,17 +94,17 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <Accordion type="single" collapsible className="w-full space-y-4">
+          <Accordion type="single" collapsible className="w-full space-y-3 sm:space-y-3.5 md:space-y-4">
             {faqItems.map((item, index) => (
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="bg-card rounded-2xl border border-neutral-stone/20 shadow-card hover:shadow-card-hover transition-all duration-300"
+                className="bg-card rounded-xl sm:rounded-2xl border border-neutral-stone/20 shadow-card hover:shadow-card-hover transition-all duration-300"
               >
-                <AccordionTrigger className="text-left px-8 py-6 text-lg font-semibold text-neutral-charcoal hover:text-luxury-gold transition-colors">
+                <AccordionTrigger className="text-left px-4 sm:px-5 md:px-6 lg:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-semibold text-neutral-charcoal hover:text-luxury-gold transition-colors touch-manipulation">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="px-8 pb-6 text-neutral-slate leading-relaxed">
+                <AccordionContent className="px-4 sm:px-5 md:px-6 lg:px-8 pb-4 sm:pb-5 md:pb-6 text-xs sm:text-sm md:text-base text-neutral-slate leading-relaxed">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -118,25 +118,25 @@ const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-10 sm:mt-12 md:mt-14 lg:mt-16"
         >
-          <div className="bg-gradient-to-br from-luxury-gold/10 to-luxury-bronze/10 rounded-3xl p-8 lg:p-12 border border-luxury-gold/20">
-            <h3 className="font-display text-2xl lg:text-3xl font-semibold text-neutral-charcoal mb-4">
+          <div className="bg-gradient-to-br from-luxury-gold/10 to-luxury-bronze/10 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-12 border border-luxury-gold/20">
+            <h3 className="font-display text-xl sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-neutral-charcoal mb-3 sm:mb-3.5 md:mb-4">
               {t('faq.ctaTitle')}
             </h3>
-            <p className="text-lg text-neutral-slate mb-6 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-neutral-slate mb-5 sm:mb-5.5 md:mb-6 max-w-2xl mx-auto px-2">
               {t('faq.ctaDescription')}
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center">
               <a 
                 href="mailto:info@almasceram.com"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-luxury-gold hover:bg-luxury-bronze text-white rounded-full font-semibold transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 bg-luxury-gold hover:bg-luxury-bronze text-white rounded-full text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105 touch-manipulation"
               >
                 {t('faq.contactUs')}
               </a>
               <a 
                 href="tel:+982188218520"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-white rounded-full font-semibold transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 md:px-8 py-3 sm:py-3.5 md:py-4 border-2 border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-white rounded-full text-sm sm:text-base font-semibold transition-all duration-300 touch-manipulation"
               >
                 {t('faq.callNow')}
               </a>

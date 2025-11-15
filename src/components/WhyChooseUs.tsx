@@ -6,45 +6,45 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const WhyChooseUs = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useScrollReveal();
-  
-  const features = [
-    {
-      icon: Crown,
+
+const features = [
+  {
+    icon: Crown,
       title: t('whyChooseUs.premiumQuality'),
       description: t('whyChooseUs.premiumQualityDesc'),
-      color: "from-amber-400 to-amber-600",
-    },
-    {
-      icon: Palette,
+    color: "from-amber-400 to-amber-600",
+  },
+  {
+    icon: Palette,
       title: t('whyChooseUs.exclusiveDesigns'),
       description: t('whyChooseUs.exclusiveDesignsDesc'),
-      color: "from-blue-400 to-blue-600",
-    },
-    {
-      icon: Shield,
+    color: "from-blue-400 to-blue-600",
+  },
+  {
+    icon: Shield,
       title: t('whyChooseUs.durabilityGuaranteed'),
       description: t('whyChooseUs.durabilityGuaranteedDesc'),
-      color: "from-green-400 to-green-600",
-    },
-    {
-      icon: Truck,
+    color: "from-green-400 to-green-600",
+  },
+  {
+    icon: Truck,
       title: t('whyChooseUs.globalDelivery'),
       description: t('whyChooseUs.globalDeliveryDesc'),
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      icon: Award,
+    color: "from-purple-400 to-purple-600",
+  },
+  {
+    icon: Award,
       title: t('whyChooseUs.awardWinning'),
       description: t('whyChooseUs.awardWinningDesc'),
-      color: "from-red-400 to-red-600",
-    },
-    {
-      icon: HeartHandshake,
+    color: "from-red-400 to-red-600",
+  },
+  {
+    icon: HeartHandshake,
       title: t('whyChooseUs.expertSupport'),
       description: t('whyChooseUs.expertSupportDesc'),
-      color: "from-teal-400 to-teal-600",
-    },
-  ];
+    color: "from-teal-400 to-teal-600",
+  },
+];
 
   return (
     <section className="py-24 lg:py-32 bg-background relative overflow-hidden">

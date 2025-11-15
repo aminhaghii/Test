@@ -56,7 +56,18 @@ class ProductService {
   private baseURL: string;
 
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    // Use dynamic API URL detection for mobile compatibility
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const port = '3001';
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        this.baseURL = `http://${hostname}:${port}`;
+      } else {
+        this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      }
+    } else {
+      this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    }
   }
 
   private getAuthHeaders() {

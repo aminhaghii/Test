@@ -203,6 +203,24 @@ function initDatabase() {
     )
   `);
 
+  // Blog posts table
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS blog_posts (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      slug TEXT UNIQUE NOT NULL,
+      excerpt TEXT,
+      content TEXT NOT NULL,
+      image_url TEXT,
+      author_id TEXT,
+      is_published INTEGER DEFAULT 0,
+      published_at DATETIME,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (author_id) REFERENCES users(id)
+    )
+  `);
+
   // Create indexes
   db.exec(`
     CREATE INDEX IF NOT EXISTS idx_products_dimension ON products(dimension);
@@ -213,6 +231,9 @@ function initDatabase() {
     CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     CREATE INDEX IF NOT EXISTS idx_users_google_id ON users(google_id);
+    CREATE INDEX IF NOT EXISTS idx_blog_posts_slug ON blog_posts(slug);
+    CREATE INDEX IF NOT EXISTS idx_blog_posts_is_published ON blog_posts(is_published);
+    CREATE INDEX IF NOT EXISTS idx_blog_posts_published_at ON blog_posts(published_at);
   `);
 
   // Insert default categories
@@ -641,6 +662,90 @@ const dbHelpers = {
       params.push(searchTerm, searchTerm, searchTerm);
     }
     
+    const result = db.prepare(query).get(...params);
+    return result ? result.count : 0;
+  },
+
+  // Blog posts helpers
+  createBlogPost: (post) => {
+    const { id, title, slug, excerpt, content, image_url, author_id, is_published, published_at } = post;
+    const stmt = db.prepare(`
+      INSERT INTO blog_posts (id, title, slug, excerpt, content, image_url, author_id, is_published, published_at, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    `);
+    stmt.run(id, title, slug, excerpt || '', content, image_url || null, author_id || null, is_published ? 1 : 0, published_at || null);
+    return db.prepare('SELECT * FROM blog_posts WHERE id = ?').get(id);
+  },
+
+  updateBlogPost: (id, post) => {
+    const { title, slug, excerpt, content, image_url, is_published, published_at } = post;
+    const stmt = db.prepare(`
+      UPDATE blog_posts 
+      SET title = ?, slug = ?, excerpt = ?, content = ?, image_url = ?, is_published = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?
+    `);
+    stmt.run(title, slug, excerpt || '', content, image_url || null, is_published ? 1 : 0, published_at || null, id);
+    return db.prepare('SELECT * FROM blog_posts WHERE id = ?').get(id);
+  },
+
+  deleteBlogPost: (id) => {
+    const stmt = db.prepare('DELETE FROM blog_posts WHERE id = ?');
+    return stmt.run(id);
+  },
+
+  getBlogPost: (id) => {
+    return db.prepare('SELECT * FROM blog_posts WHERE id = ?').get(id);
+  },
+
+  getBlogPostBySlug: (slug) => {
+    return db.prepare('SELECT * FROM blog_posts WHERE slug = ?').get(slug);
+  },
+
+  getAllBlogPosts: (filters = {}) => {
+    let query = 'SELECT * FROM blog_posts WHERE 1=1';
+    const params = [];
+
+    if (filters.is_published !== undefined) {
+      query += ' AND is_published = ?';
+      params.push(filters.is_published ? 1 : 0);
+    }
+
+    if (filters.search) {
+      query += ' AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ?)';
+      const searchTerm = `%${filters.search}%`;
+      params.push(searchTerm, searchTerm, searchTerm);
+    }
+
+    query += ' ORDER BY created_at DESC';
+
+    if (filters.limit) {
+      query += ' LIMIT ?';
+      params.push(filters.limit);
+    }
+
+    if (filters.offset) {
+      query += ' OFFSET ?';
+      params.push(filters.offset);
+    }
+
+    return db.prepare(query).all(...params);
+  },
+
+  getBlogPostsCount: (filters = {}) => {
+    let query = 'SELECT COUNT(*) as count FROM blog_posts WHERE 1=1';
+    const params = [];
+
+    if (filters.is_published !== undefined) {
+      query += ' AND is_published = ?';
+      params.push(filters.is_published ? 1 : 0);
+    }
+
+    if (filters.search) {
+      query += ' AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ?)';
+      const searchTerm = `%${filters.search}%`;
+      params.push(searchTerm, searchTerm, searchTerm);
+    }
+
     const result = db.prepare(query).get(...params);
     return result ? result.count : 0;
   }

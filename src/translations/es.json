@@ -11,12 +11,13 @@
     "contact": "Contacto",
     "catalogues": "Catálogos",
     "about": "Acerca de",
-    "showroom": "Showroom",
+    "showroom": "Salón de Exposiciones",
     "allProducts": "Todos los Productos",
     "byDimension": "Productos por Dimensión",
     "byMaterial": "Productos por Material",
-    "admin": "Admin",
-    "goToAdmin": "Ir al Panel de Administración"
+    "admin": "Administrador",
+    "goToAdmin": "Ir al Panel de Administración",
+    "blog": "Blog"
   },
   "products": {
     "title": "Nuestros Productos",
@@ -25,7 +26,7 @@
     "allProducts": "Todos los Productos",
     "dimensions": "Dimensiones",
     "surface": "Superficie",
-    "material": "Material",
+    "material": "Materiale",
     "viewDetails": "Ver Detalles",
     "searchProducts": "Buscar Productos",
     "searchPlaceholder": "Buscar por nombre...",
@@ -148,7 +149,7 @@
     "about": "Acerca de Nosotros",
     "contact": "Contacto",
     "catalogues": "Catálogos",
-    "legal": "Legal",
+    "legal": "Jurídico",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "copyright": "Todos los derechos reservados"
@@ -166,12 +167,34 @@
     "required": "Requerido",
     "invalidEmail": "Correo electrónico inválido",
     "minChars": "Mínimo 10 caracteres",
-    "admin": "Admin",
+    "admin": "Administrador",
     "login": "Iniciar Sesión",
     "logout": "Cerrar Sesión",
     "account": "Cuenta",
     "logoutSuccess": "Sesión cerrada exitosamente",
-    "logoutFailed": "Error al cerrar sesión"
+    "logoutFailed": "Error al cerrar sesión",
+    "home": "Inicio",
+    "lifestyleSolutions": "Soluciones de Estilo de Vida",
+    "surfaces": "Superficies",
+    "surfacesSub": "Superficies cerámicas premium inspiradas en colores y texturas naturales",
+    "bigSlabs": "Losas grandes",
+    "bigSlabsSub": "Losas de porcelana de gran formato para espacios sin costuras y modernos",
+    "bathKitchen": "Baño y cocina",
+    "bathKitchenSub": "Colecciones de azulejos de baño y cocina diseñadas para la vida cotidiana",
+    "signature": "Colecciones de firma",
+    "signatureSub": "Capturando la esencia del lujo",
+    "productSpotlight": "Destacado de Producto",
+    "productSpotlightDesc": "Descubre superficies premium seleccionadas elaboradas para la vida moderna.",
+    "discoverMore": "Descubrir más",
+    "premiumSurface": "Superficie premium para espacios modernos",
+    "explore": "Explorar",
+    "latestNews": "Últimas Noticias",
+    "excellenceBanner": "Más de 14 años de excelencia en la fabricación de cerámica iraní",
+    "readMore": "Leer más",
+    "designStories": "Historias de Diseño",
+    "discoverAll": "Descubrir todo",
+    "latestProjects": "Nuestros Últimos Proyectos",
+    "profile": "Perfil"
   },
   "bento": {
     "experience": "Experimenta",
@@ -191,7 +214,15 @@
   },
   "heroSection": {
     "eyebrow": "Almas Kavir Rafsanjan - Excelencia Cerámica Iraní",
-    "title": "Baldosas Cerámicas y de Porcelana Premium Iraníes"
+    "title": "Baldosas Cerámicas y de Porcelana Premium Iraníes",
+    "tagline": "Baldosas Premium Iraníes Diseñadas para Espacios Icónicos",
+    "videoNotSupported": "Tu navegador no admite la etiqueta de video.",
+    "loading": "Cargando",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "craftedForLiving": "Creado Para Vivir",
+    "signatureSurfaces": "Superficies distintivas para espacios destacados",
+    "imageAlt": "Baldosas cerámicas premium iraníes - Almas Kavir Rafsanjan"
   },
   "about": {
     "title": "Almas Kavir Rafsanjan",
@@ -201,8 +232,81 @@
     "story": "Historia",
     "milestones": "Hitos",
     "capabilities": "Capacidades",
-    "certifications": "Certificaciones",
-    "downloads": "Descargas",
+    "certifications": {
+      "kicker": "Excelencia Verificada",
+      "title": "Certificaciones que Validan Nuestra Promesa",
+      "description": "Los estándares reconocidos internacionalmente confirman la confiabilidad, transparencia y sostenibilidad de nuestro ecosistema de fabricación.",
+      "view": "Vista Previa",
+      "download": "Descargar",
+      "downloadCta": "Descargar",
+      "modalTitle": "Certificaciones Acreditadas",
+      "modalDescription": "Haz clic fuera del marco para cerrar y continuar explorando nuestras credenciales.",
+      "heading": "Certificaciones Regulatorias",
+      "intro": "Documentación verificada que demuestra el cumplimiento de Almas Kavir Rafsanjan con los estándares internacionales de fabricación y exportación de baldosas.",
+      "projectSamples": "Muestras de Instalación del Proyecto",
+      "additionalCertificates": "Certificados Adicionales",
+      "closeLightbox": "Cerrar caja de luz",
+      "certificatePreview": "Vista previa del certificado",
+      "imageAlt": "Textura de porcelana Pietra Luxe Hub",
+      "certificateImageAlt": "Vista previa del certificado",
+      "certificates": {
+        "iso14001": {
+          "title": "ISO 14001:2015 - Sistema de Gestión Ambiental",
+          "description": "Este certificado demuestra que Almas Kavir Rafsanjan ha implementado un sistema de gestión ambiental efectivo. El objetivo principal de este estándar se centra en gestionar y reducir los impactos nocivos de las actividades de la empresa en el medio ambiente. Esto significa trabajar para prevenir la contaminación, optimizar el consumo de recursos (como agua y energía) y cumplir con las leyes y regulaciones ambientales.",
+          "verification": "Emitido por <strong>QMS Italia</strong> y su representante exclusivo en Irán y Medio Oriente, <strong>Instituto QMS Arian</strong>. Fecha de Emisión: 26 de marzo de 2020 | Válido hasta: 25 de marzo de 2026",
+          "previewAlt": "Certificado del Sistema de Gestión Ambiental ISO 14001:2015"
+        },
+        "iso45001": {
+          "title": "ISO 45001:2018 - Sistema de Gestión de Salud y Seguridad Ocupacional",
+          "description": "Este certificado confirma que Almas Kavir Rafsanjan cumple con los estándares internacionales de salud y seguridad ocupacional. El objetivo de este estándar es crear un ambiente de trabajo seguro y saludable para todos los empleados. Este sistema ayuda a la empresa a identificar, evaluar y controlar los peligros ocupacionales, y prevenir accidentes laborales y enfermedades ocupacionales.",
+          "verification": "Emitido por <strong>QMS Italia</strong> y su representante <strong>QMS Arian</strong>. Fecha de Emisión: 26 de marzo de 2020 | Válido hasta: 25 de marzo de 2026",
+          "previewAlt": "Certificado de Salud y Seguridad Ocupacional ISO 45001:2018"
+        },
+        "iso9001": {
+          "title": "ISO 9001:2015 - Sistema de Gestión de Calidad",
+          "description": "Este certificado es uno de los estándares de gestión más reconocidos en el mundo y demuestra que la empresa tiene un sistema de gestión de calidad efectivo. El enfoque principal de este estándar está en la satisfacción del cliente. Una empresa que recibe este certificado demuestra que ha diseñado sus procesos para que sus productos y servicios (baldosas de pared, cerámica y granito) se produzcan consistentemente con alta calidad y de acuerdo con las necesidades del cliente.",
+          "verification": "Emitido por <strong>QMSCERT</strong>, un organismo acreditado de terceros con sede en Grecia. Fecha de Emisión: 26 de marzo de 2020 | Válido hasta: 25 de marzo de 2026",
+          "previewAlt": "Certificado del Sistema de Gestión de Calidad ISO 9001:2015"
+        },
+        "ims": {
+          "title": "IMS - Sistema de Gestión Integrado",
+          "description": "Este certificado no es un estándar separado, sino que confirma que Almas Kavir Rafsanjan ha implementado los tres sistemas de gestión anteriores—calidad (ISO 9001), ambiental (ISO 14001) y salud y seguridad ocupacional (ISO 45001)—de manera integrada y coordinada. El Sistema de Gestión Integrado (IMS) permite a la organización fusionar procesos comunes entre estos tres estándares. Esto reduce redundancias, ahorra tiempo y costos, y aumenta la eficiencia general de la organización.",
+          "verification": "Emitido por <strong>QMS Italia</strong>. Fecha de Emisión: 26 de marzo de 2020 | Válido hasta: 25 de marzo de 2026",
+          "previewAlt": "Certificado del Sistema de Gestión Integrado (IMS)"
+        }
+      },
+      "downloadLabel": "Descargar Certificado (PDF)",
+      "pdfCertificates": {
+        "vcp12094": {
+          "title": "Certificado de Conformidad VCP12094",
+          "description": "OTC Bulgaria Ltd. certifica que las baldosas cerámicas prensadas en seco de Almas Kavir Rafsanjan para paredes internas y pisos cumplen con el estándar EN 14411:2016. Válido del 07.02.2024 al 06.02.2027. Sistema de Atestación de Conformidad 4, según el Reglamento 305/2011 Productos de Construcción.",
+          "downloadLabel": "Ver Certificado (PDF)"
+        },
+        "industrialLicense": {
+          "title": "Licencia de Producción Industrial",
+          "description": "Licencia del Ministerio de Industria, Minería y Comercio de Irán para la fabricación de baldosas cerámicas, porcelana y productos de granito. Autoriza operaciones de producción y exportación en las instalaciones de Almas Kavir Rafsanjan ubicadas en el kilómetro 10 de la carretera Rafsanjan-Kerman.",
+          "downloadLabel": "Ver Licencia (PDF)"
+        }
+      }
+    },
+    "downloads": {
+      "kicker": "Centro de Descargas",
+      "cta": "Descargar",
+      "items": {
+        "dossier": {
+          "title": "Expediente de Certificación ISO",
+          "description": "Consulta las últimas auditorías que validan nuestros sistemas de gestión ambiental, calidad y salud y seguridad."
+        },
+        "license": {
+          "title": "Licencia de Fabricación",
+          "description": "Revisa nuestra licencia de fabricación oficial emitida por el Ministerio de Industria, Minería y Comercio de Irán."
+        },
+        "catalogue": {
+          "title": "Catálogo de Colecciones Sostenibles",
+          "description": "Explora superficies listas para exportar, especificaciones técnicas y datos de empaque diseñados para proyectos premium."
+        }
+      }
+    },
     "exportServices": "Servicios de Exportación",
     "smartCombinations": "Combinaciones Inteligentes",
     "account": "Cuenta",
@@ -258,7 +362,284 @@
     "capability5": "Ventas y Exportación",
     "capability5Desc": "Especialistas con profundo conocimiento del mercado que atienden a clientes en 13 países.",
     "capability6": "Soporte al Cliente",
-    "capability6Desc": "Asistencia técnica, orientación de instalación y servicio postventa atento."
+    "capability6Desc": "Asistencia técnica, orientación de instalación y servicio postventa atento.",
+    "menu": {
+      "overview": "Resumen",
+      "commitments": "Compromisos",
+      "impact": "Historias de Impacto",
+      "metrics": "KPIs de Sostenibilidad",
+      "solutions": "Innovaciones de Producto",
+      "certifications": "Certificaciones",
+      "downloads": "Descargas"
+    },
+    "media": {
+      "kicker": "Dentro de Nuestro Campus de Rafsanjan",
+      "caption": "Hornos avanzados, sistemas de inspección digital y logística de exportación operan bajo un mismo techo para entregar calidad consistente para proyectos emblemáticos.",
+      "imageAlt": "Vista aérea del campus de fabricación de Pietra Luxe Hub en Rafsanjan"
+    },
+    "intro": {
+      "title": "Liderando el Camino hacia la Sostenibilidad a través de la Innovación",
+      "paragraph1": "Desde la primera auditoría de materias primas hasta la inspección final, cada baldosa es diseñada por equipos multidisciplinarios de diseñadores, ingenieros y comerciantes basados en datos. Documentamos cada cara, textura y escenario de instalación para que arquitectos y equipos de adquisiciones puedan especificar con certeza.",
+      "paragraph2": "<strong>Nuestra promesa:</strong> imágenes inmersivas, datos técnicos transparentes y QA riguroso que protegen sus cronogramas, presupuestos e intención de diseño en proyectos de hospitalidad, residenciales, retail y cívicos.",
+      "heading": "Escalando la Artesanía Iraní <b>para Especificaciones Globales</b>"
+    },
+    "mediaFallback": "Imagen de resumen de la fábrica",
+    "hero": {
+      "kicker": "Sostenibilidad de Pietra Luxe Hub",
+      "title": "Conectando Mundos con Cerámica y Baldosas Iraníes",
+      "description": "Nacido de las presiones de las sanciones y la escasez de recursos, nuestro equipo transformó la adversidad en una plataforma para la innovación global. Cada lote que producimos refleja ciencia de materiales rigurosa, ingeniería orientada a la exportación y un compromiso de entregar superficies de clase mundial para proyectos emblemáticos en 13 países.",
+      "primaryCta": "Explorar Inspiración Digital",
+      "secondaryCta": "Descargar Catálogos",
+      "imageAlt": "Vista panorámica de las instalaciones de fabricación de Almas Kavir Rafsanjan al atardecer",
+      "lead": "Transformando desafíos en oportunidades globales, Pietra Luxe Hub convierte la resiliencia de la industria cerámica iraní en experiencias de producto de clase mundial.",
+      "detail": "Nacidos en medio de sanciones, escasez de recursos y turbulencia económica, invertimos en hornos avanzados, esmaltado digital y líneas de producción orientadas a la exportación para construir colecciones que superan los estándares internacionales."
+    },
+    "stories": {
+      "ecocycle": {
+        "kicker": "Producción Circular",
+        "title": "EcoCycle: Sistemas de Agua y Materiales de Circuito Cerrado",
+        "body": "Nuestro programa EcoCycle recupera materias primas naturales y filtra las aguas residuales antes de reintroducirlas en la producción. Las instalaciones de reciclaje construidas específicamente reducen nuestra huella mientras aseguran que cada lote de porcelana cumpla con el rendimiento de grado de exportación.",
+        "point1": "El 100% de las aguas residuales tratadas se enrutan de vuelta a las líneas de producción de baldosas.",
+        "point2": "Los minerales recuperados refuerzan nuevos cuerpos sin degradar la calidad de la superficie.",
+        "point3": "Las iniciativas de desarrollo limpio reducen la producción de carbono en los ciclos del horno.",
+        "imageAlt": "Ingenieros monitoreando el circuito de reciclaje EcoCycle en la fábrica"
+      },
+      "circular": {
+        "kicker": "Impacto Responsable",
+        "title": "Diseñando Resultados Positivos para las Comunidades",
+        "body": "Nuestro mandato de sostenibilidad se extiende más allá de la gestión de materiales. Los programas de seguridad dedicados, las inversiones comunitarias y la capacitación técnica mantienen el talento local en el corazón de nuestra expansión.",
+        "point1": "Jerarquía integral de residuos que prioriza la reutilización, el reciclaje y la eliminación certificada.",
+        "point2": "Cultura de seguridad primero con auditorías alineadas con ISO y monitoreo en todo el sitio.",
+        "point3": "Educación continua de la fuerza laboral para elevar las habilidades para la fabricación premium.",
+        "imageAlt": "Miembros del equipo revisando paneles de sostenibilidad en el piso de producción"
+      }
+    },
+    "commitments": {
+      "kicker": "Nuestros Compromisos",
+      "title": "Innovación, Impacto, Integridad",
+      "description": "Diseñamos cada proceso, desde el abastecimiento de materias primas hasta el empaque listo para exportar, para superar las expectativas internacionales mientras protegemos las comunidades y los entornos en los que trabajamos.",
+      "sustainability": {
+        "title": "ADN de Fabricación Sostenible",
+        "body": "Los sistemas de agua de circuito cerrado, las materias primas recicladas y las iniciativas de energía limpia reducen nuestra huella mientras certifican cada baldosa para el rendimiento ecológico."
+      },
+      "global": {
+        "title": "Mentalidad de Asociación Global",
+        "body": "Co-creamos con arquitectos, distribuidores y desarrolladores, emparejando ejecuciones de producción personalizadas con experiencia logística para entregar a escala en 13+ mercados."
+      },
+      "integrity": {
+        "title": "Integridad en Cada Lote",
+        "body": "Las certificaciones ISO 9001, 14001 y 45001 refuerzan nuestra promesa de calidad de producto confiable, operaciones seguras y gobernanza transparente."
+      },
+      "heading": "<b>Clase Mundial</b><br>Portafolio de Productos",
+      "body": "<p>Pietra Luxe Hub categoriza cada colección por rendimiento, acabado y aplicación para que pueda alinear la intención de diseño con la realidad técnica en minutos.</p><ul><li>Las imágenes de alta definición revelan cada variación de superficie, calibración y nivel de brillo.</li><li>Las pruebas exhaustivas garantizan resistencia a rayones, estabilidad del color, tolerancia al impacto y seguridad antideslizante en todos los formatos.</li><li>El embalaje de grado de exportación mantiene las baldosas en perfecto estado a través de las rutas logísticas más exigentes.</li></ul>"
+    },
+    "kpis": {
+      "kicker": "Mejores Prácticas de Sostenibilidad",
+      "title": "Métricas de Rendimiento que Impulsan Asociaciones Globales",
+      "description": "Medimos y reportamos continuamente sobre eficiencia de recursos, inversión comunitaria y gobernanza para mantener a nuestros socios listos para auditoría.",
+      "reuse": {
+        "value": "92%",
+        "label": "Recuperación de Materiales",
+        "description": "Los cuerpos cerámicos pre-consumo se recuperan, reprocesan y reintroducen en nuevas líneas de productos."
+      },
+      "water": {
+        "value": "100%",
+        "label": "Aguas Residuales Tratadas",
+        "description": "La filtración de circuito cerrado captura, limpia y recircula el agua del proceso en cada sala de horno."
+      },
+      "production": {
+        "value": "100K m²",
+        "label": "Capacidad Mensual",
+        "description": "Las líneas flexibles se ajustan a volúmenes personalizados que exceden 100,000 metros cuadrados por pedido."
+      },
+      "people": {
+        "value": "13+",
+        "label": "Países Atendidos",
+        "description": "Especialistas en exportación dedicados coordinan el cumplimiento, las traducciones y la atención posterior en los mercados globales."
+      },
+      "energy": {
+        "value": "45,000+",
+        "label": "MMBTU Ahorrados",
+        "description": "Los programas de optimización térmica reducen el consumo de gas mientras estabilizan el rendimiento del horno."
+      },
+      "packaging": {
+        "value": "80%",
+        "label": "Embalaje Reciclado",
+        "description": "Las paletas y materiales de protección de grado de exportación se obtienen de insumos reciclados y reciclables."
+      }
+    },
+    "governance": {
+      "kicker": "Gobernanza y Responsabilidad",
+      "title": "Negocio Responsable, Empleador Responsable",
+      "description": "La transparencia, la seguridad y la inversión comunitaria guían cada asociación, desde el abastecimiento de materiales hasta la atención a largo plazo posterior a la instalación.",
+      "cards": {
+        "ethics": {
+          "title": "Ética y Cumplimiento",
+          "point1": "Auditorías alineadas con ISO y adquisiciones rastreables",
+          "point2": "Protección de datos y marcos de gobernanza",
+          "point3": "Oficiales de cumplimiento dedicados para mercados de exportación"
+        },
+        "community": {
+          "title": "Inversión Comunitaria",
+          "point1": "Becas STEM para talento local",
+          "point2": "Asociaciones de restauración ambiental",
+          "point3": "Programas de desarrollo de proveedores regionales"
+        },
+        "people": {
+          "title": "Personas y Bienestar",
+          "point1": "Cultura de seguridad primero con capacitación continua",
+          "point2": "Aceleración de carrera y mentoría técnica",
+          "point3": "Políticas inclusivas en todos los idiomas y regiones"
+        },
+        "impact": {
+          "title": "Impacto Ambiental",
+          "point1": "Evaluaciones del ciclo de vida integradas en I+D",
+          "point2": "Hojas de ruta de reducción de emisiones monitoreadas trimestralmente",
+          "point3": "Compromiso de proveedores para elevar estándares compartidos"
+        }
+      }
+    },
+    "products": {
+      "portfolio": {
+        "kicker": "Innovación y Calidad",
+        "title": "Un Portafolio de Productos de Clase Mundial",
+        "body": "Cada serie nace de la investigación colaborativa con arquitectos, científicos de materiales y expertos en especificaciones. Desde imágenes de productos inmersivas y multiángulo hasta galerías de instalación y datos de empaque, equipamos a los profesionales con todo lo que necesitan para construir con confianza.",
+        "highlight1": "Visuales de alta definición de cada superficie, textura y patrón de colocación en proyectos residenciales y comerciales de lujo.",
+        "highlight2": "Datos de rendimiento probados en laboratorio que cubren resistencia al rayado, protección contra manchas y durabilidad climática.",
+        "highlight3": "Embalaje de grado de exportación diseñado para rutas de suministro de larga distancia y entregas justo a tiempo.",
+        "cta": "Ver Portafolio de Productos"
+      },
+      "export": {
+        "kicker": "Mentalidad de Asociación Global",
+        "title": "Servicios de Exportación que Reducen el Riesgo de Proyectos Globales",
+        "body": "Actuamos como socios estratégicos desde el concepto hasta la instalación, entregando horarios de producción personalizados, expedientes técnicos y gestión logística integral para las partes interesadas en todo el mundo.",
+        "highlight1": "Consultores de exportación dedicados que alinean especificaciones, certificaciones y preferencias de mercado.",
+        "highlight2": "Coordinación integrada de carga, seguros y aduanas con flujos de trabajo de documentación transparentes.",
+        "highlight3": "Dimensiones, colores y empaques personalizados para desarrollos a gran escala que requieren acabados únicos.",
+        "cta": "Conectar con Asesores de Exportación"
+      },
+      "smart": {
+        "kicker": "Toma de Decisiones Digitales",
+        "title": "Módulo de Combinación Inteligente para Diseño Basado en Datos",
+        "body": "Nuestra plataforma interactiva ayuda a los equipos de diseño a prototipar, visualizar y compartir combinaciones de baldosas adaptadas a las tendencias del consumidor en cada región. Es un copiloto digital que acelera la toma de decisiones.",
+        "highlight1": "Recomendaciones asistidas por IA guiadas por el comportamiento del comprador y puntos de referencia de diseño internacional.",
+        "highlight2": "Tableros de conceptos y renderizados exportables para alineación multifuncional con arquitectos e inversores.",
+        "highlight3": "Colaboración de asesor técnico para programas de hospitalidad, retail y residenciales de alto riesgo.",
+        "cta": "Lanzar el Módulo Inteligente"
+      }
+    },
+    "certificates": {
+      "environment": "Sistema de Gestión Ambiental",
+      "safety": "Programa de Salud y Seguridad Ocupacional",
+      "quality": "Sistema de Gestión de Calidad",
+      "integrated": "Sistemas de Gestión Integrados",
+      "integratedSubtitle": "ISO 9001 · ISO 14001 · ISO 45001"
+    },
+    "final": {
+      "kicker": "Asociarse con Nosotros",
+      "title": "Construyamos Espacios Extraordinarios Juntos",
+      "description": "Permita que nuestros especialistas en exportación, ingenieros de producto y estrategas de diseño apoyen su próximo proyecto emblemático con precisión y autenticidad.",
+      "primaryCta": "Contacte con nuestro escritorio de exportación",
+      "secondaryCta": "Explore el catálogo digital",
+      "contact": {
+        "title": "Acceso Directo",
+        "body": "El correo electrónico, el teléfono y los canales de soporte en vivo te conectan con consultores que entienden las regulaciones regionales y los estándares técnicos."
+      },
+      "support": {
+        "title": "Atención Post-Proyecto",
+        "body": "Proporcionamos orientación de mantenimiento, estrategias de reemplazo y revisiones continuas de suministro para proteger su inversión."
+      },
+      "heading": "Asociarse con Pietra Luxe Hub",
+      "projectAdvisory": {
+        "title": "Asesoría de Proyecto",
+        "body": "Desde la programación de baldosas hasta la documentación logística, ofrecemos soporte ágil y multilingüe."
+      },
+      "afterSales": {
+        "title": "Atención Postventa",
+        "body": "Los equipos técnicos permanecen disponibles para orientación de instalación, planificación de mantenimiento y fases futuras."
+      }
+    },
+    "loading": "Cargando contenido de sostenibilidad…",
+    "impact": {
+      "exportServices": {
+        "heading": "<b>Servicios de Exportación</b><br>Entrega Global Sin Interrupciones",
+        "body": "<p>Exportar es una asociación. Nuestros equipos apoyan cada fase—desde especificación y muestreo hasta documentación, envío y coordinación en el sitio.</p><ul><li>Colores, dimensiones y embalaje personalizables para programas superiores a 100,000 m².</li><li>Planes de pago flexibles, precios competitivos y seguimiento transparente de pedidos.</li><li>Asesores dedicados disponibles para chat en vivo, recorridos por fábrica y soporte post-instalación.</li></ul>"
+      },
+      "smartCombination": {
+        "heading": "<b>Módulo de Combinación Inteligente</b><br>Soporte de Especificación Inteligente",
+        "body": "<p>Nuestro módulo interactivo analiza datos de mercado y tendencias de diseño para recomendar combinaciones que resuenan con las preferencias regionales.</p><ul><li>Visualice mezclas de colores, acabados y formatos adaptados a cada espacio.</li><li>Guarde y comparta salidas listas para renderizar directamente con clientes y socios del proyecto.</li><li>Invite a expertos de Pietra Luxe para combinaciones personalizadas e ingeniería de valor.</li></ul>"
+      }
+    },
+    "solutions": {
+      "intro": {
+        "heading": "<b>Inteligentes</b> Herramientas de Especificación",
+        "body": "<p>Traducimos décadas de excelencia manufacturera en experiencias digitales que ayudan a los diseñadores a comparar superficies, especificaciones técnicas e instalaciones del mundo real sin conjeturas.</p>"
+      },
+      "features": {
+        "signatureWhitebody": {
+          "heading": "<b>Firma</b> Colecciones de Cuerpo Blanco",
+          "body": "<p>Los núcleos de cuerpo blanco premium con esmaltes lujosos ofrecen profundidad de color y claridad duradera para proyectos insignia.</p><ul><li>Múltiples calibraciones en acabados mate, semi-pulidos y de brillo completo.</li><li>Fotografía de instalación en la vida real para espacios de hospitalidad, residenciales y públicos.</li><li>Datos completos de embalaje y paletización para logística simplificada.</li></ul>",
+          "cta": "Explorar catálogo de exportación"
+        },
+        "largeFormat": {
+          "heading": "<b>Formato Grande</b> Losas y Paneles",
+          "body": "<p>Los arquitectos confían en nuestra porcelana de formato grande para fachadas, vestíbulos e interiores inmersivos que exigen continuidad sin interrupciones.</p><ul><li>La tecnología avanzada de hornos garantiza estabilidad dimensional en formatos de gran tamaño.</li><li>El control preciso del grosor hace que la instalación sea más rápida con un desperdicio mínimo.</li><li>Los equipos de asesoría de proyectos ayudan con sistemas de anclaje y dibujos técnicos.</li></ul>",
+          "cta": "Reservar llamada de especificación"
+        },
+        "performance": {
+          "heading": "<b>Rendimiento</b> Innovaciones de Superficie",
+          "body": "<p>Los acabados antideslizantes, antibacterianos y de alto impacto permiten a los diseñadores equilibrar la estética con estándares de cumplimiento estrictos.</p><ul><li>Los esmaltes probados en laboratorio mantienen la higiene en entornos sanitarios y comerciales.</li><li>Las texturas clasificadas para exteriores resisten el desvanecimiento por UV, las heladas y el tráfico intenso.</li><li>Las hojas técnicas cubren coeficiente, resistencia y orientación de mantenimiento.</li></ul>",
+          "cta": "Solicitar expediente técnico"
+        },
+        "hospitality": {
+          "heading": "<b>Hospitalidad</b> y Conceptos Retail",
+          "body": "<p>Los tableros de estado de ánimo curados combinan decoraciones expresivas con baldosas base duraderas, ayudando a los operadores a implementar experiencias de marca más rápido.</p><ul><li>Paquetes de diseño listos para usar para cafés, resorts, residencias y centros comerciales.</li><li>Molduras coordinadas, mosaicos y piezas de transición para detalles consistentes.</li><li>Muestreo bajo demanda con envío internacional acelerado.</li></ul>",
+          "cta": "Conectar con estudio de diseño"
+        },
+        "healthcare": {
+          "heading": "<b>Atención Médica</b> y Programas de Bienestar",
+          "body": "<p>Soluciones diseñadas para entornos críticos de higiene sin sacrificar calidez o tactilidad.</p><ul><li>Superficies antideslizantes y fáciles de limpiar para clínicas, spas y campus educativos.</li><li>Esmaltes antibacterianos certificados que apoyan protocolos de mantenimiento.</li><li>Acentos personalizados e inserciones de señalización para mejorar las experiencias de los pacientes.</li></ul>",
+          "cta": "Discutir necesidades de cumplimiento"
+        },
+        "circular": {
+          "heading": "<b>Circular</b> Bucle de Fabricación",
+          "body": "<p>Los minerales de desecho y el calor del horno se recuperan a través de sistemas de reciclaje que cierran el ciclo de los recursos de producción.</p><ul><li>Los materiales recuperados se reintegran en nuevos cuerpos sin degradar la calidad de la superficie.</li><li>Las instalaciones de tratamiento de agua devuelven el agua procesada directamente a la línea.</li><li>Los tableros de energía monitorean los hornos para ajustar la eficiencia en tiempo real.</li></ul>",
+          "cta": "Ver hoja de ruta de sostenibilidad"
+        },
+        "climate": {
+          "heading": "<b>Eficiencia</b> Responsiva al Clima",
+          "body": "<p>Las curvas de cocción inteligentes, las estrategias de aislamiento y la planificación logística reducen las emisiones mientras preservan la artesanía inspirada en Italia.</p><ul><li>Los análisis térmicos guían los ajustes del horno para máxima producción con mínimo combustible.</li><li>La optimización de rutas reduce las huellas de transporte a nuestros socios globales.</li><li>Los informes transparentes mantienen a los clientes listos para auditorías para requisitos ESG.</li></ul>",
+          "cta": "Descargar instantánea ESG"
+        }
+      }
+    },
+    "html": {
+      "sustainabilityCommitments": "Nuestros compromisos de sostenibilidad",
+      "rakCeramicsIntro": "En RAK Ceramics, nuestra dedicación a crear una sociedad sostenible está en el centro de todo lo que hacemos. Estamos orgullosos de aprovechar nuestros productos y experiencia para generar un impacto positivo, y lo invitamos a unirse a nosotros en este viaje hacia un mundo mejor.",
+      "strategicInitiatives": "Nuestras iniciativas estratégicas para proporcionar a nuestros clientes productos y soluciones sostenibles e innovadoras que mejoren su calidad de vida se centran en el principio de cambio y mejora constantes. Nuestro poder innovador se puede ver en la amplia gama de productos que ofrecemos, que abarca tipos de productos, estilos, diseños y puntos de precio para satisfacer los requisitos y preferencias variables de nuestros clientes.",
+      "reuse": "REUTILIZACIÓN",
+      "reuseDescription": "Reutilización es una colección innovadora de baldosas de porcelana hechas completamente de materiales 100% reciclados pre-consumo. Cada baldosa es un testimonio de nuestro compromiso con la sostenibilidad, ya que reutilizamos materiales de múltiples procesos de producción cerámica para crear soluciones de embaldosado duraderas y ecológicas.",
+      "rimlessTechnology": "TECNOLOGÍA SIN BORDE",
+      "rimlessFeatures": {
+        "hygienic": "Higiénico y fácil de limpiar",
+        "waterSaving": "Ahorro de agua",
+        "efficientDesign": "Diseño eficiente",
+        "silentFlush": "Descarga silenciosa",
+        "noLedges": "Sin repisas o borde."
+      },
+      "rakProTek": "ESMALTE ANTIBACTERIANO E HIGIÉNICO RAK-ProTeK",
+      "rakProTekDescription": "RAK-ProTeK es el esmalte cerámico innovador desarrollado para proteger lavabos, inodoros y urinarios, para hacerlos más higiénicos y fáciles de limpiar. RAK-ProTeK, que se hornea en la cerámica durante la cocción, resulta en una superficie más suave, a diferencia de la cerámica estándar con superficie irregular.",
+      "rakMaxxFlush": "RAK MAXXFLUSH",
+      "rakMaxxFlushDescription": "Este producto permite el ahorro de agua al permitir a los usuarios elegir usar el descarga completa o la media descarga, con diferentes volúmenes de descarga: 6 Litros para la completa y 3 Litros para la media descarga. Los tanques también se pueden ajustar para descargar con un volumen de descarga completa reducido a 4.5 Litros.",
+      "rakJoy": "RAK JOY",
+      "rakJoyDescription": "La colección de muebles de madera RAK-Joy respeta el medio ambiente y la vida del mueble mismo. Todos los tableros de partículas y MDF utilizados en la construcción de esta impresionante colección de muebles provienen de fuentes responsables certificadas, respetando los bosques, las personas y la vida silvestre que los llaman hogar.",
+      "rakSanit": "RAK-SANIT UNA ELECCIÓN SEGURA",
+      "rakSanitDescription": "Reduce la contaminación bacteriana y contribuye a un entorno de vida y trabajo más saludable debido a sus propiedades antibacterianas proporcionadas por compuestos de nitrato de plata. La colección antibacteriana RAK-Sanit de baldosas de pared y piso cuenta con tecnología antibacteriana que está integrada permanentemente en la superficie de la baldosa",
+      "klima": "KLIMA",
+      "klimaDescription": "Klima es una cerámica de nueva generación que, gracias a materiales especiales, es capaz de resistir temperaturas frías o cálidas según las necesidades individuales y mantener la misma temperatura que el entorno circundante.",
+      "sustainabilityCertifications": "CERTIFICACIONES DE SOSTENIBILIDAD",
+      "findOutMore": "DESCUBRA MÁS SOBRE NUESTRO ENFOQUE DE SOSTENIBILIDAD"
+    }
   },
   "notFound": {
     "title": "Página No Encontrada",
@@ -557,14 +938,14 @@
   },
   "chatAssistant": {
     "title": "Asistente Almas",
-    "welcomeMessage": "¡Hola! Soy el Asistente Almas. ¿Cómo puedo ayudarte con nuestras baldosas cerámicas hoy?",
-    "rateLimitMessage": "Por favor espera {seconds} segundo(s) antes de enviar otro mensaje.",
-    "errorMessage": "Lo siento, pero estoy teniendo problemas para responder en este momento. Por favor intenta de nuevo o contáctanos directamente al +98 21-88218520.",
+    "welcomeMessage": "¡Hola! Soy el Asistente Almas. ¿Cómo puedo ayudarte hoy con nuestras baldosas cerámicas?",
+    "rateLimitMessage": "Por favor espera {seconds} segundos antes de enviar tu próximo mensaje.",
+    "errorMessage": "Lo siento, pero estoy teniendo problemas para responder ahora. Por favor intenta de nuevo o contáctanos directamente: +98 21 88218520",
     "openChat": "Abrir asistente de chat",
     "closeChat": "Cerrar chat",
-    "inputPlaceholder": "Pregúntame cualquier cosa sobre nuestros productos...",
+    "inputPlaceholder": "Escribe tu mensaje...",
     "sendMessage": "Enviar mensaje",
-    "inputHint": "Pregunta sobre productos, especificaciones, certificaciones o información de la empresa"
+    "inputHint": "Presiona Enter para enviar, Shift+Enter para nueva línea"
   },
   "modernHero": {
     "badge": "Excelencia Italiana Desde 1962",
@@ -578,44 +959,180 @@
   },
   "technicalSpecs": {
     "label": "Excelencia Técnica",
-    "title": "Rendimiento Superior",
-    "subtitle": "Diseñado para superar los estándares internacionales para aplicaciones arquitectónicas",
+    "title": "Especificaciones Técnicas",
+    "subtitle": "Estándares de calidad premium que aseguran durabilidad y rendimiento",
     "waterAbsorption": "Absorción de Agua",
-    "waterAbsorptionDesc": "Baja porosidad, ideal para áreas húmedas",
+    "waterAbsorptionDesc": "Absorción de agua ultra baja asegura durabilidad en condiciones húmedas",
     "frostResistance": "Resistencia a las Heladas",
     "certified": "Certificado",
-    "frostResistanceDesc": "Adecuado para aplicaciones exteriores",
+    "frostResistanceDesc": "Probado y certificado para variaciones extremas de temperatura",
     "slipResistance": "Resistencia al Deslizamiento",
-    "slipResistanceDesc": "Seguro para uso residencial y comercial",
+    "slipResistanceDesc": "Alta clasificación de resistencia al deslizamiento para superficies de caminata seguras",
     "breakingStrength": "Resistencia a la Rotura",
-    "breakingStrengthDesc": "Durabilidad y resistencia excepcionales",
-    "standardsCompliance": "Todos los productos cumplen con los estándares internacionales EN 14411 e ISO 13006",
-    "downloadDatasheet": "Descargar Hoja de Datos Técnicos"
+    "breakingStrengthDesc": "Resistencia a la rotura excepcional para instalaciones duraderas",
+    "standardsCompliance": "Todos los productos cumplen con estándares internacionales incluyendo ISO 13006",
+    "downloadDatasheet": "Descargar Hoja de Datos"
   },
   "featuredCollections": {
-    "label": "Nuestras Colecciones Signatura",
-    "title": "Colecciones Destacadas",
-    "subtitle": "Selecciones curadas de nuestros diseños cerámicos y de porcelana más distinguidos",
-    "filterAll": "Todos",
+    "label": "Colecciones Destacadas",
+    "title": "Colecciones de Baldosas Premium",
+    "subtitle": "Descubre nuestra selección curada de colecciones de baldosas cerámicas y de porcelana premium",
+    "filterAll": "Todas",
     "filterWoodLook": "Aspecto Madera",
     "filterMarbleLook": "Aspecto Mármol",
     "filterStoneLook": "Aspecto Piedra",
     "filterConcrete": "Hormigón",
     "filterMetalEffect": "Efecto Metal",
-    "collection1Name": "Colección Natural Wood",
+    "collection1Name": "Colección Madera Natural",
     "collection1Category": "Aspecto Madera",
-    "collection1Description": "Tonos cálidos de roble con textura auténtica de veta de madera",
-    "collection2Name": "Elegancia Carrara Marble",
+    "collection1Description": "Estética de madera auténtica con durabilidad cerámica y mantenimiento fácil",
+    "collection2Name": "Colección Mármol de Lujo",
     "collection2Category": "Aspecto Mármol",
-    "collection2Description": "Mármol blanco clásico con delicadas vetas grises",
-    "collection3Name": "Serie Urban Concrete",
-    "collection3Category": "Aspecto Hormigón",
-    "collection3Description": "Estética industrial contemporánea para espacios modernos",
-    "badgeNew": "NUEVO",
-    "badgeBestseller": "MÁS VENDIDO",
-    "products": "Productos",
-    "finishes": "Acabados",
+    "collection2Description": "Diseños inspirados en mármol para interiores sofisticados",
+    "collection3Name": "Colección Hormigón Moderno",
+    "collection3Category": "Hormigón",
+    "collection3Description": "Elegancia industrial con acabados de hormigón contemporáneos",
+    "badgeNew": "Nuevo",
+    "badgeBestseller": "Más Vendido",
+    "products": "productos",
+    "finishes": "acabados",
     "viewCollection": "Ver Colección"
+  },
+  "innovative": {
+    "title": "Soluciones Innovadoras",
+    "iso": "Estándares de Calidad Certificados",
+    "isoDesc": "ISO 9001, 14001 y 45001 aseguran calidad, medio ambiente y seguridad.",
+    "environment": "Compromiso Ambiental",
+    "environmentDesc": "Procesos responsables y materiales sostenibles.",
+    "export": "Exportación Global",
+    "exportDesc": "Suministrando baldosas premium a más de 13 países."
+  },
+  "stories": {
+    "subtitle": "Inspiración de aplicaciones y espacios del mundo real.",
+    "residential": "Espacios Residenciales",
+    "residentialDesc": "Superficies cálidas, elegantes y duraderas para hogares.",
+    "commercial": "Proyectos Comerciales",
+    "commercialDesc": "Rendimiento confiable para retail y hospitalidad.",
+    "interior": "Interiores Modernos",
+    "interiorDesc": "Aspectos refinados para diseño contemporáneo."
+  },
+  "digital": {
+    "experiences": "Experiencias de Producto Digital",
+    "visualizer": "Visualizador de Habitación 3D",
+    "visualizerDesc": "Diseña tu espacio y previsualiza azulejos en tiempo real.",
+    "catalog": "Catálogo de Productos",
+    "catalogDesc": "Navega y descarga nuestros últimos catálogos.",
+    "showroom": "Tour Virtual del Showroom",
+    "showroomDesc": "Realiza un tour digital de nuestro showroom."
+  },
+  "community": {
+    "title": "ÚNETE A NUESTRA COMUNIDAD",
+    "subtitle": "Suscríbete para recibir actualizaciones sobre productos, proyectos y noticias.",
+    "email": "Ingresa tu correo electrónico",
+    "subscribe": "Suscribirse",
+    "thanks": "¡Gracias por suscribirte!"
+  },
+  "blog": {
+    "subtitle": "Últimas ideas, tendencias e inspiración del mundo de las baldosas cerámicas",
+    "viewAll": "Ver todas las publicaciones",
+    "readMore": "Leer más"
+  },
+  "lifestyleSolutions": {
+    "title": "SOLUCIONES DE ESTILO DE VIDA",
+    "subtitle": "Superficies distintivas para espacios destacados",
+    "cards": {
+      "lobbySerenity": {
+        "title": "Serenidad del Lobby",
+        "subtitle": "Paneles de pared 30x90 Alvin Silver en relieve"
+      },
+      "signatureBathSuite": {
+        "title": "Suite de Baño Distintiva",
+        "subtitle": "Paredes de gran formato 60x120 Soufia Satin"
+      },
+      "gourmetStudio": {
+        "title": "Estudio Gourmet",
+        "subtitle": "Revestimiento 30x90 Alvin Pearl con acentos texturizados"
+      }
+    }
+  },
+  "innovativeSolutions": {
+    "title": "TECNOLOGÍA AVANZADA",
+    "description": "Combinando la artesanía iraní tradicional con la innovación moderna, ofrecemos baldosas cerámicas premium que transforman las visiones arquitectónicas en realidad. Nuestra fabricación de vanguardia garantiza calidad excepcional y diseño atemporal.",
+    "panels": {
+      "isoCertified": {
+        "title": "Calidad Certificada ISO",
+        "subtitle": "ESTÁNDARES DE CALIDAD"
+      },
+      "environmental": {
+        "title": "Excelencia Ambiental",
+        "subtitle": "COMPROMISO DE SOSTENIBILIDAD"
+      },
+      "global": {
+        "title": "Fabricación Global",
+        "subtitle": "INNOVACIÓN Y TECNOLOGÍA"
+      }
+    }
+  },
+  "newsBanner": {
+    "slides": {
+      "legacy": {
+        "description": "Desde losas personalizadas hasta instalaciones a escala de hospitalidad, nuestros equipos de producción ofrecen calidad disciplinada con un acabado distintivo Pietra Luxe."
+      },
+      "people": {
+        "heading": "Creado por Personas, Impulsado por Experiencia",
+        "description": "Nuestros ingenieros, diseñadores y especialistas de campo se asocian con clientes para traducir visiones arquitectónicas en soluciones de superficie listas para instalar.",
+        "ctaLabel": "Conoce al equipo"
+      }
+    },
+    "previousSlide": "Diapositiva anterior",
+    "nextSlide": "Diapositiva siguiente"
+  },
+  "projects": {
+    "subtitle": "Descubre nuestros proyectos completados e instalaciones"
+  },
+  "productSpotlight": {
+    "title": "DESTACADO DE PRODUCTO",
+    "scrollLeft": "Desplazar a la izquierda",
+    "scrollRight": "Desplazar a la derecha",
+    "tiles": {
+      "alvinSilver": {
+        "title": "Alvin Silver 30×90",
+        "description": "Paneles de relieve en capas de onda terminados en un tono plateado frío para vestíbulos de hoteles y paredes destacadas."
+      },
+      "soufiaSand": {
+        "title": "Soufia Sand 60×120",
+        "description": "Losas de porcelana con vetas inspiradas en el desierto que envuelven suites de spa en calidez suave."
+      },
+      "rakuStone": {
+        "title": "Raku Stone 60×120",
+        "description": "Composición de cuatro coincidencias que muestra la profundidad de nuestra colección de piedra Raku para áreas de estar expansivas."
+      },
+      "klaraGrey": {
+        "title": "Klara Grey 60×120",
+        "description": "Gráficos de mármol gris suave con superficies altamente reflectantes adecuadas para cocinas contemporáneas."
+      },
+      "waldoMatt": {
+        "title": "Waldo Matt 60×120",
+        "description": "Baldosas con acabado mate refinado que ofrecen volúmenes monolíticos para interiores minoristas premium."
+      }
+    }
+  },
+  "packagingInfo": {
+    "title": "Información de Embalaje",
+    "singlePackage": {
+      "title": "Información de Paquete Individual",
+      "label": "Paquete Individual",
+      "dimension": "Dimensión",
+      "piecesPerCarton": "Piezas por Caja",
+      "squareMetersPerCarton": "Metros Cuadrados por Caja",
+      "weightPerCarton": "Peso por Caja"
+    },
+    "pallet": {
+      "title": "Información de Múltiples Paquetes / Paleta",
+      "label": "Paleta",
+      "cartonsPerPallet": "Cajas por Paleta",
+      "squareMetersPerPallet": "Metros Cuadrados por Paleta",
+      "totalPalletWeight": "Peso Total de la Paleta"
+    }
   }
 }
-

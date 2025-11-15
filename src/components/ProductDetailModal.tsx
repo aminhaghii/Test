@@ -1,27 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, 
-  ChevronDown, 
-  Package, 
-  Sparkles, 
-  Ruler, 
-  Eye, 
-  Info,
-  Layers,
-  Box,
-  Palette,
-  Shield,
-  Truck,
-  CheckCircle2,
-  FileText,
-  Grid3x3,
-  Image as ImageIcon
-} from 'lucide-react';
+import { X } from 'lucide-react';
 import { Product } from '@/services/productServiceBackend';
 import TestReportModal from './TestReportModal';
-import { FileCheck } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import MinimalBadgeIcon from './MinimalBadgeIcon';
+import { getPackagingInfo } from '@/data/packagingData';
+import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '@/lib/getApiUrl';
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -37,14 +23,11 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   relatedProducts = []
 }) => {
   const { t } = useLanguage();
-  const [expandedFeatures, setExpandedFeatures] = useState(false);
-  const [expandedPackaging, setExpandedPackaging] = useState(false);
-  const [expandedSpecs, setExpandedSpecs] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string>('');
+  const navigate = useNavigate();
   const [isTestReportOpen, setIsTestReportOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_URL = getApiUrl();
 
   useEffect(() => {
     if (isOpen) {
@@ -59,37 +42,26 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   }, [isOpen]);
 
   useEffect(() => {
-    if (product) {
-      setExpandedFeatures(false);
-      setExpandedPackaging(false);
-      setExpandedSpecs(false);
-      setSelectedImage(product.image_url || '');
-    }
+    // Reset states when product changes
   }, [product]);
 
   // Memoize expensive computations - MUST be before any conditional returns
-  const { environmentImage, textureImages, additionalImages, allImages } = useMemo(() => {
+  const { environmentImage, textureImages } = useMemo(() => {
     if (!product) {
       return {
         environmentImage: '',
-        textureImages: [],
-        additionalImages: [],
-        allImages: []
+        textureImages: []
       };
     }
     
-    const selectedImg = selectedImage || product.image_url || '';
+    const envImg = product.image_url || '';
     const textures = product.texture_images || [];
-    const additional = product.additional_images || [];
-    const all = [product.image_url, ...additional].filter(Boolean);
     
     return {
-      environmentImage: selectedImg,
-      textureImages: textures,
-      additionalImages: additional,
-      allImages: all
+      environmentImage: envImg,
+      textureImages: textures
     };
-  }, [product, selectedImage]);
+  }, [product]);
 
   const getImageUrl = useMemo(() => {
     return (url: string) => {
@@ -115,7 +87,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-2 sm:p-3 md:p-4"
           onClick={onClose}
         >
           <motion.div
@@ -123,366 +95,481 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-lg overflow-hidden shadow-lg"
+            className="relative w-full max-w-[98vw] sm:max-w-[95vw] max-h-[98vh] sm:max-h-[95vh] bg-white overflow-hidden shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 z-20 bg-white border-b px-6 py-4">
+            <div className="sticky top-0 z-20 bg-white border-b border-neutral-stone/30 px-3 sm:px-4 md:px-5 lg:px-6 py-2.5 sm:py-3 md:py-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-luxury-gold rounded-lg flex items-center justify-center">
-                    <Layers className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h1 className="text-lg font-bold text-gray-900">{t('productModal.title')}</h1>
-                    <p className="text-sm text-gray-500">{t('productModal.subtitle')}</p>
-                  </div>
-                </div>
-                
+                <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-neutral-charcoal">{t('productModal.title')}</h1>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-1 sm:p-1.5 md:p-2 hover:bg-neutral-slate/10 transition-colors touch-manipulation"
+                  aria-label="Close"
                 >
-                  <X className="w-5 h-5 text-gray-600" />
+                  <X className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-neutral-charcoal" />
                 </button>
               </div>
             </div>
 
             {/* Content */}
-            <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
-                {/* Left Side - Images */}
-                <div className="space-y-4">
-                  {/* Main Image */}
+            <div className="overflow-y-auto max-h-[calc(98vh-3.5rem)] sm:max-h-[calc(98vh-4rem)] md:max-h-[calc(95vh-5rem)] lg:max-h-[calc(95vh-5rem)] -webkit-overflow-scrolling-touch">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 p-3 sm:p-4 md:p-6 lg:p-8">
+                {/* Left Side - Product Info */}
+                <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+                  {/* Product Title */}
+                  <div className="space-y-0.5 sm:space-y-1 md:space-y-2">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-charcoal leading-tight">{product.name}</h1>
+                    <p className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.sku')}: {product.slug}</p>
+                  </div>
+
+                  {/* Specifications */}
+                  <div className="space-y-2.5 sm:space-y-3 md:space-y-4">
+                    <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                      <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.dimension')}</span>
+                      <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{product.dimension}</p>
+                    </div>
+
+                    <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                      <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.surface')}</span>
+                      <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{product.surface}</p>
+                    </div>
+
+                    <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                      <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.material')}</span>
+                      <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{product.body_type}</p>
+                    </div>
+
+                    {product.color && (
+                      <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                        <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.color')}</span>
+                        <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{product.color}</p>
+                      </div>
+                    )}
+
+                    {(product as any).thickness && (
+                      <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                        <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.thickness')}</span>
+                        <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{(product as any).thickness}mm</p>
+                      </div>
+                    )}
+
+                    {(product as any).absorption_rate && (
+                      <div className="border-b border-neutral-stone/30 pb-1.5 sm:pb-2">
+                        <span className="text-[10px] sm:text-xs md:text-sm text-neutral-slate">{t('productModal.absorption')}</span>
+                        <p className="text-sm sm:text-base md:text-lg font-medium text-neutral-charcoal mt-0.5 sm:mt-1">{(product as any).absorption_rate}%</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Enhanced Product Specifications Icons */}
+                  <div className="pt-3 sm:pt-4 md:pt-5 lg:pt-6 border-t border-neutral-stone/30">
+                    <h3 className="text-xs sm:text-sm md:text-base font-semibold text-neutral-charcoal mb-2 sm:mb-3 md:mb-4 text-center">Specifications</h3>
+                    <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:gap-3">
+                      {/* Dimension Icon */}
+                      <div className="relative group flex flex-col items-center">
+                        <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                            <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="3" y="3" width="18" height="18" rx="2" />
+                              <path d="M3 9h18M9 3v18" />
+                            </svg>
+                          </div>
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">DM</span>
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                          {t('productModal.dimension')}: {product.dimension}
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                        </div>
+                      </div>
+
+                      {/* Surface Icon */}
+                      <div className="relative group flex flex-col items-center">
+                        <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                            <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="3" y="3" width="18" height="18" rx="2" />
+                              <path d="M3 12h18M12 3v18" strokeDasharray="2 2" />
+                            </svg>
+                          </div>
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">SF</span>
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                          {t('productModal.surface')}: {product.surface}
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                        </div>
+                      </div>
+
+                      {/* Material Icon */}
+                      <div className="relative group flex flex-col items-center">
+                        <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                            <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="3" y="3" width="7" height="7" rx="1" />
+                              <rect x="14" y="3" width="7" height="7" rx="1" />
+                              <rect x="3" y="14" width="7" height="7" rx="1" />
+                              <rect x="14" y="14" width="7" height="7" rx="1" />
+                            </svg>
+                          </div>
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">MT</span>
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                          {t('productModal.material')}: {product.body_type}
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                        </div>
+                      </div>
+
+                      {/* Color Icon */}
+                      {product.color && (
+                        <div className="relative group flex flex-col items-center">
+                          <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                            <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                              <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" fill="currentColor" />
+                              </svg>
+                            </div>
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">Color</span>
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                            {t('productModal.color')}: {product.color}
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Thickness Icon */}
+                      {(product as any).thickness && (
+                        <div className="relative group flex flex-col items-center">
+                          <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                            <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                              <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <rect x="3" y="8" width="18" height="8" rx="1" />
+                                <path d="M3 12h18" strokeWidth="3" />
+                              </svg>
+                            </div>
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">TH</span>
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                            {t('productModal.thickness')}: {(product as any).thickness}mm
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Absorption Icon */}
+                      {(product as any).absorption_rate && (
+                        <div className="relative group flex flex-col items-center">
+                          <div className="relative cursor-pointer mb-0.5 sm:mb-1">
+                            <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-neutral-100 to-neutral-200 border border-neutral-300/50 flex items-center justify-center shadow-sm group-hover:border-neutral-charcoal/40 transition-colors touch-manipulation">
+                              <svg className="w-5 h-5 sm:w-[22px] sm:h-[22px] md:w-6 md:h-6 text-neutral-charcoal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                                <path d="M12 2.69v8.31" />
+                                <path d="M8 12h8" />
+                              </svg>
+                            </div>
+                          </div>
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-neutral-charcoal uppercase tracking-wide">AB</span>
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-neutral-charcoal text-white text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-xl rounded-md">
+                            {t('productModal.absorption')}: {(product as any).absorption_rate}%
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[5px] border-transparent border-t-neutral-charcoal"></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Test Report Button */}
+                  <button
+                    onClick={() => setIsTestReportOpen(true)}
+                    className="w-full border border-neutral-stone/30 hover:border-neutral-charcoal text-neutral-charcoal hover:text-neutral-charcoal py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 transition-all duration-200 text-xs sm:text-sm font-medium touch-manipulation"
+                  >
+                    {t('productModal.testReport')}
+                  </button>
+
+                  {/* Description */}
+                  {product.description && (
+                    <div className="pt-2.5 sm:pt-3 md:pt-4 border-t border-neutral-stone/30">
+                      <h3 className="text-sm sm:text-base md:text-lg font-semibold text-neutral-charcoal mb-1.5 sm:mb-2 md:mb-3">{t('productModal.description')}</h3>
+                      <p className="text-xs sm:text-sm md:text-base text-neutral-slate leading-relaxed">{product.description}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Side - Main Image */}
+                <div>
                   <div 
-                    className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer group"
+                    className="relative w-full aspect-square bg-neutral-slate/10 overflow-hidden cursor-pointer"
                     onClick={() => setLightboxImage(environmentImage)}
                   >
                     <img
                       src={getImageUrl(environmentImage)}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover hover:opacity-95 transition-opacity duration-300"
                       loading="eager"
                     />
-                    <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-luxury-gold text-white rounded text-sm font-medium">
-                        <Eye className="w-3 h-3" />
-                        {t('productModal.preview')}
-                      </span>
-                    </div>
-                    
-                    {product.stock_quantity > 0 && (
-                      <div className="absolute top-3 right-3">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-500 text-white rounded text-sm font-medium">
-                          <CheckCircle2 className="w-3 h-3" />
-                          {t('productModal.inStock')}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Thumbnail Gallery */}
-                  {allImages.length > 1 && (
-                    <div className="grid grid-cols-5 gap-2">
-                      {allImages.slice(0, 5).map((img, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setSelectedImage(img || '')}
-                          className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                            selectedImage === img 
-                              ? 'border-luxury-gold' 
-                              : 'border-gray-200 hover:border-luxury-gold/50'
-                          }`}
-                        >
-                          <img
-                            src={getImageUrl(img || '')}
-                            alt={`View ${index + 1}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Right Side - Product Info */}
-                <div className="space-y-4">
-                  {/* Product Title */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      {product.category && (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-luxury-gold/10 text-luxury-gold rounded text-sm font-medium">
-                          <Box className="w-3 h-3" />
-                          {product.category}
-                        </span>
-                      )}
-                      {product.is_featured && (
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-purple-100 text-purple-600 rounded text-sm font-medium">
-                          <Sparkles className="w-3 h-3" />
-                          {t('productModal.featured')}
-                        </span>
-                      )}
-                    </div>
-                    <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-                    <p className="text-gray-500">{t('productModal.sku')}: {product.slug}</p>
-                  </div>
-
-                  {/* Quick Specs */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Ruler className="w-4 h-4 text-luxury-gold" />
-                        <span className="text-sm font-medium text-gray-600">{t('productModal.dimension')}</span>
-                      </div>
-                      <p className="text-lg font-bold text-gray-900">{product.dimension}</p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Sparkles className="w-4 h-4 text-blue-500" />
-                        <span className="text-sm font-medium text-gray-600">{t('productModal.surface')}</span>
-                      </div>
-                      <p className="text-lg font-bold text-gray-900">{product.surface}</p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Layers className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium text-gray-600">{t('productModal.material')}</span>
-                      </div>
-                      <p className="text-lg font-bold text-gray-900">{product.body_type}</p>
-                    </div>
-
-                    {product.color && (
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Palette className="w-4 h-4 text-purple-500" />
-                          <span className="text-sm font-medium text-gray-600">{t('productModal.color')}</span>
-                        </div>
-                        <p className="text-lg font-bold text-gray-900">{product.color}</p>
-                      </div>
-                    )}
-
-                    {/* Thickness and Absorption Rate */}
-                    {(product as any).thickness && (
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Layers className="w-4 h-4 text-amber-600" />
-                          <span className="text-sm font-medium text-gray-600">{t('productModal.thickness')}</span>
-                        </div>
-                        <p className="text-lg font-bold text-gray-900">{(product as any).thickness}mm</p>
-                      </div>
-                    )}
-
-                    {(product as any).absorption_rate && (
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Shield className="w-4 h-4 text-teal-600" />
-                          <span className="text-sm font-medium text-gray-600">{t('productModal.absorption')}</span>
-                        </div>
-                        <p className="text-lg font-bold text-gray-900">{(product as any).absorption_rate}%</p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Price */}
-                  {product.price && (
-                    <div className="bg-luxury-gold/10 rounded-lg p-4 border border-luxury-gold/20">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Shield className="w-4 h-4 text-luxury-gold" />
-                        <span className="text-sm font-semibold text-gray-600">{t('productModal.price')}</span>
-                      </div>
-                      <p className="text-3xl font-bold text-luxury-gold">${product.price}</p>
-                      <p className="text-sm text-gray-500">{t('productModal.perSquareMeter')}</p>
-                    </div>
-                  )}
-
-                  {/* Test Report Button */}
-                  <button
-                    onClick={() => setIsTestReportOpen(true)}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg p-3 flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg text-sm font-medium"
-                  >
-                    <FileCheck className="w-4 h-4" />
-                    <span>{t('productModal.testReport')}</span>
-                  </button>
-
-                  {/* Description */}
-                  {product.description && (
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FileText className="w-4 h-4 text-luxury-gold" />
-                        <h3 className="text-lg font-bold text-gray-900">{t('productModal.description')}</h3>
-                      </div>
-                      <p className="text-gray-700">{product.description}</p>
-                    </div>
-                  )}
-
-                  {/* Expandable Sections */}
-                  <div className="space-y-2">
-                    {/* Features */}
-                    {product.features && product.features.length > 0 && (
-                      <div className="bg-white border rounded-lg overflow-hidden">
-                        <button
-                          onClick={() => setExpandedFeatures(!expandedFeatures)}
-                          className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Sparkles className="w-4 h-4 text-luxury-gold" />
-                            <span className="font-semibold text-gray-900">{t('productModal.keyFeatures')}</span>
-                            <span className="text-xs text-gray-500">({product.features.length})</span>
-                          </div>
-                          <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${expandedFeatures ? 'rotate-180' : ''}`} />
-                        </button>
-                        {expandedFeatures && (
-                          <div className="px-4 pb-4 space-y-2">
-                            {product.features.map((feature, index) => (
-                              <div key={index} className="flex items-start gap-2 p-2 bg-gray-50 rounded">
-                                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700">{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Technical Specifications */}
-                    {product.technical_specs && Object.keys(product.technical_specs).length > 0 && (
-                      <div className="bg-white border rounded-lg overflow-hidden">
-                        <button
-                          onClick={() => setExpandedSpecs(!expandedSpecs)}
-                          className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Grid3x3 className="w-4 h-4 text-luxury-gold" />
-                            <span className="font-semibold text-gray-900">{t('productModal.technicalSpecs')}</span>
-                            <span className="text-xs text-gray-500">({Object.keys(product.technical_specs).length})</span>
-                          </div>
-                          <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${expandedSpecs ? 'rotate-180' : ''}`} />
-                        </button>
-                        {expandedSpecs && (
-                          <div className="px-4 pb-4 space-y-2">
-                            {Object.entries(product.technical_specs).map(([key, value]) => (
-                              <div key={key} className="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span className="text-gray-600 capitalize">{key.replace(/_/g, ' ')}</span>
-                                <span className="font-medium text-gray-900">{formatSpecValue(value)}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Packaging */}
-                    {product.packaging && product.packaging.length > 0 && (
-                      <div className="bg-white border rounded-lg overflow-hidden">
-                        <button
-                          onClick={() => setExpandedPackaging(!expandedPackaging)}
-                          className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Package className="w-4 h-4 text-luxury-gold" />
-                            <span className="font-semibold text-gray-900">{t('productModal.packagingInfo')}</span>
-                            <span className="text-xs text-gray-500">({product.packaging.length})</span>
-                          </div>
-                          <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${expandedPackaging ? 'rotate-180' : ''}`} />
-                        </button>
-                        {expandedPackaging && (
-                          <div className="px-4 pb-4 space-y-2">
-                            {product.packaging.map((item, index) => (
-                              <div key={index} className="flex items-start gap-2 p-2 bg-gray-50 rounded">
-                                <Truck className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700">{item}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Texture Images Section */}
-              <div className="px-6 pb-6">
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <ImageIcon className="w-5 h-5 text-luxury-gold" />
-                    <h2 className="text-xl font-bold text-gray-900">{t('productModal.textureGallery')}</h2>
-                  </div>
-                  
-                  {textureImages.length > 0 ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                      {textureImages.map((image, index) => (
+              {/* Feature Icons Section */}
+              {product.features && product.features.length > 0 && (
+                <div className="px-3 sm:px-4 md:px-6 lg:px-8 pb-4 sm:pb-6 md:pb-8 border-t border-neutral-stone/30 pt-4 sm:pt-6 md:pt-8">
+                    <h2 className="text-base sm:text-lg md:text-xl font-semibold text-neutral-charcoal mb-3 sm:mb-4 md:mb-6 text-center sm:text-left">Features & Applications</h2>
+                    <div className="flex gap-2 sm:gap-2.5 md:gap-3 flex-wrap justify-center sm:justify-start">
+                      {product.features.map((feature, index) => {
+                      const featureKey = feature.toLowerCase().replace(/\s+/g, '');
+                      const normalized = feature.toLowerCase();
+                      
+                      // تعیین محتوا و استایل بر اساس feature
+                      const getFeatureConfig = () => {
+                        // Floor - حروف C/W با خط
+                        if (normalized.includes('floor')) {
+                          return {
+                            content: null,
+                            bgColor: '#fff',
+                            color: '#222',
+                            iconContent: (
+                              <g>
+                                <text x="0" y="0" textAnchor="middle" dominantBaseline="middle" fontSize="14" fontFamily="sans-serif" fontWeight="500" fill="currentColor">C/W</text>
+                                <line x1="-8" y1="6" x2="8" y2="6" stroke="currentColor" strokeWidth="1.5" />
+                              </g>
+                            )
+                          };
+                        }
+                        // Domestic - خانه
+                        if (normalized.includes('domestic') || normalized.includes('residential')) {
+                          return {
+                            content: null,
+                            bgColor: '#d3d3d3',
+                            color: '#222',
+                            iconContent: (
+                              <g transform="scale(0.7)">
+                                <path d="M12 3L3 12h3v9h6v-6h4v6h6v-9h3L12 3z" fill="currentColor" stroke="none" />
+                              </g>
+                            )
+                          };
+                        }
+                        // Commercial - کیف خرید
+                        if (normalized.includes('commercial') || normalized.includes('light commercial')) {
+                          return {
+                            content: null,
+                            bgColor: '#d3d3d3',
+                            color: '#222',
+                            iconContent: (
+                              <g transform="scale(0.7)">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                                <path d="M3 6h18" stroke="currentColor" strokeWidth="1.5" />
+                                <path d="M16 10a4 4 0 0 1-8 0" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                              </g>
+                            )
+                          };
+                        }
+                        // Rectified - LS یا grid
+                        if (normalized.includes('rectified')) {
+                          return {
+                            content: 'LS',
+                            bgColor: '#d3d3d3',
+                            color: '#222',
+                            iconContent: null
+                          };
+                        }
+                        // Random Faces - N یا grid
+                        if (normalized.includes('random') || normalized.includes('faces')) {
+                          return {
+                            content: 'N',
+                            bgColor: '#222',
+                            color: '#fff',
+                            iconContent: null
+                          };
+                        }
+                        // Default - M
+                        return {
+                          content: 'M',
+                          bgColor: '#d3d3d3',
+                          color: '#222',
+                          iconContent: null
+                        };
+                      };
+
+                      const config = getFeatureConfig();
+
+                      return (
                         <div
                           key={index}
-                          className="relative aspect-square bg-white rounded-lg overflow-hidden border hover:border-luxury-gold transition-all cursor-pointer group"
-                          onClick={() => setLightboxImage(image)}
+                          className="relative group"
                         >
-                          <img
-                            src={getImageUrl(image)}
-                            alt={`${t('productModal.application')} ${index + 1}`}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            loading="lazy"
-                          />
-                          <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div className="bg-black/70 text-white text-xs px-2 py-1 rounded">
-                              {t('productModal.view')} {index + 1}
-                            </div>
+                          <div className="cursor-pointer hover:opacity-80 transition-opacity touch-manipulation">
+                            <MinimalBadgeIcon
+                              content={config.iconContent || config.content}
+                              bgColor={config.bgColor}
+                              color={config.color}
+                              size={48}
+                            />
+                          </div>
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1.5 sm:mb-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-neutral-charcoal text-white text-[10px] sm:text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-lg">
+                            {t(`productModal.features.${featureKey}`) || feature}
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 sm:border-l-4 border-r-3 sm:border-r-4 border-t-3 sm:border-t-4 border-transparent border-t-neutral-charcoal"></div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-lg p-8 border-2 border-dashed border-gray-300 text-center">
-                      <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                      <h3 className="text-lg font-semibold text-gray-600 mb-2">
-                        {t('productModal.noTextureImages')}
-                      </h3>
-                      <p className="text-gray-500 text-sm">
-                        {t('productModal.noTextureImagesDesc')}
-                      </p>
-                    </div>
-                  )}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Texture Images Section */}
+              {textureImages.length > 0 && (
+                <div className="px-3 sm:px-4 md:px-6 lg:px-8 pb-4 sm:pb-6 md:pb-8 border-t border-neutral-stone/30 pt-4 sm:pt-6 md:pt-8">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold text-neutral-charcoal mb-3 sm:mb-4 md:mb-6 text-center sm:text-left">{t('productModal.textureGallery')}</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+                    {textureImages.map((image, index) => (
+                      <div
+                        key={index}
+                        className="relative aspect-square bg-neutral-slate/10 overflow-hidden border border-neutral-stone/30 hover:border-neutral-charcoal transition-all cursor-pointer touch-manipulation"
+                        onClick={() => setLightboxImage(image)}
+                      >
+                        <img
+                          src={getImageUrl(image)}
+                          alt={`${t('productModal.application')} ${index + 1}`}
+                          className="w-full h-full object-cover hover:opacity-90 transition-opacity duration-300"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Packaging Information Section - Between Texture and Related Products */}
+              {(() => {
+                const packagingInfo = getPackagingInfo(product.dimension);
+                // Always show packaging info if dimension exists
+                if (!packagingInfo) {
+                  return null;
+                }
+
+                return (
+                  <div className="pt-4 sm:pt-6 md:pt-8 pb-4 sm:pb-6 md:pb-8 border-t border-neutral-stone/30">
+                    <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+                      <h3 className="text-sm sm:text-base md:text-lg font-semibold text-neutral-charcoal mb-4 sm:mb-6 md:mb-8 text-center">{t('packagingInfo.title')}</h3>
+                      
+                      {/* Single Package Information */}
+                      <div className="mb-6 sm:mb-7 md:mb-8">
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                          <div className="relative group">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center">
+                              <img 
+                                src="/Content/box.png" 
+                                alt={t('packagingInfo.singlePackage.label')} 
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1.5 sm:mb-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-neutral-charcoal text-white text-[10px] sm:text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-lg">
+                              {t('packagingInfo.singlePackage.label')}
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 sm:border-l-4 border-r-3 sm:border-r-4 border-t-3 sm:border-t-4 border-transparent border-t-neutral-charcoal"></div>
+                            </div>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-medium text-neutral-charcoal text-center">{t('packagingInfo.singlePackage.title')}</h4>
+                        </div>
+                        <div className="border border-neutral-stone/30 max-w-2xl mx-auto overflow-x-auto">
+                          <table className="w-full text-xs sm:text-sm min-w-[280px]">
+                            <tbody>
+                              <tr className="border-b border-neutral-stone/30">
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 w-1/2 text-center">{t('packagingInfo.singlePackage.dimension')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.singlePackage.dimension}</td>
+                              </tr>
+                              <tr className="border-b border-neutral-stone/30">
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 text-center">{t('packagingInfo.singlePackage.piecesPerCarton')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.singlePackage.pieces}</td>
+                              </tr>
+                              <tr className="border-b border-neutral-stone/30">
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 text-center">{t('packagingInfo.singlePackage.squareMetersPerCarton')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.singlePackage.squareMeters} m²</td>
+                              </tr>
+                              <tr>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 text-center">{t('packagingInfo.singlePackage.weightPerCarton')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.singlePackage.weightKg} kg</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      {/* Pallet Information */}
+                      <div>
+                        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                          <div className="relative group">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center">
+                              <img 
+                                src="/Content/boxes.png" 
+                                alt={t('packagingInfo.pallet.label')} 
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1.5 sm:mb-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-neutral-charcoal text-white text-[10px] sm:text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 shadow-lg">
+                              {t('packagingInfo.pallet.label')}
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-3 sm:border-l-4 border-r-3 sm:border-r-4 border-t-3 sm:border-t-4 border-transparent border-t-neutral-charcoal"></div>
+                            </div>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-medium text-neutral-charcoal text-center">{t('packagingInfo.pallet.title')}</h4>
+                        </div>
+                        <div className="border border-neutral-stone/30 max-w-2xl mx-auto overflow-x-auto">
+                          <table className="w-full text-xs sm:text-sm min-w-[280px]">
+                            <tbody>
+                              <tr className="border-b border-neutral-stone/30">
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 w-1/2 text-center">{t('packagingInfo.pallet.cartonsPerPallet')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.pallet.boxes}</td>
+                              </tr>
+                              <tr className="border-b border-neutral-stone/30">
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 text-center">{t('packagingInfo.pallet.squareMetersPerPallet')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.pallet.squareMeters} m²</td>
+                              </tr>
+                              <tr>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-slate font-medium bg-neutral-slate/5 text-center">{t('packagingInfo.pallet.totalPalletWeight')}</td>
+                                <td className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-neutral-charcoal font-medium text-center">{packagingInfo.pallet.totalWeightKg} kg</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Related Products */}
               {relatedProducts.length > 0 && (
-                <div className="px-6 pb-6">
-                  <div className="bg-gray-50 rounded-lg p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Layers className="w-5 h-5 text-luxury-gold" />
-                      <h2 className="text-xl font-bold text-gray-900">{t('productModal.relatedProducts')}</h2>
-                    </div>
-                    
-                    <div className="flex gap-4 overflow-x-auto pb-2">
-                      {relatedProducts.map((relatedProduct) => (
-                        <div
-                          key={relatedProduct.id}
-                          className="flex-shrink-0 w-48 cursor-pointer group"
-                        >
-                          <div className="relative aspect-square bg-white rounded-lg overflow-hidden border group-hover:border-luxury-gold transition-colors">
-                            <img
-                              src={getImageUrl(relatedProduct.image_url || '')}
-                              alt={relatedProduct.name}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                          <div className="mt-2">
-                            <p className="text-sm font-medium text-gray-900 truncate group-hover:text-luxury-gold transition-colors">
-                              {relatedProduct.name}
-                            </p>
-                            <p className="text-xs text-gray-500">{relatedProduct.dimension} • {relatedProduct.surface}</p>
-                            {relatedProduct.price && (
-                              <p className="text-sm font-bold text-luxury-gold mt-1">${relatedProduct.price}</p>
-                            )}
-                          </div>
+                <div className="px-3 sm:px-4 md:px-6 lg:px-8 pb-4 sm:pb-6 md:pb-8 border-t border-neutral-stone/30 pt-4 sm:pt-5 md:pt-6 lg:pt-8">
+                  <h2 className="text-base sm:text-lg md:text-xl font-semibold text-neutral-charcoal mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-center sm:text-left">{t('productModal.relatedProducts')}</h2>
+                  <div className="flex gap-2 sm:gap-3 md:gap-4 lg:gap-6 overflow-x-auto pb-2 scroll-smooth hover:scroll-auto -webkit-overflow-scrolling-touch scrollbar-hide touch-pan-x" style={{ scrollbarWidth: 'thin' }}>
+                    {relatedProducts.map((relatedProduct) => (
+                      <div
+                        key={relatedProduct.id}
+                        className="flex-shrink-0 w-36 sm:w-40 md:w-44 lg:w-48 cursor-pointer group touch-manipulation"
+                        onClick={() => {
+                          onClose();
+                          setTimeout(() => {
+                            navigate(`/products?product=${relatedProduct.slug}&dimension=${relatedProduct.dimension}`);
+                          }, 300);
+                        }}
+                      >
+                        <div className="relative aspect-square bg-neutral-slate/10 overflow-hidden border border-neutral-stone/30 group-hover:border-neutral-charcoal transition-all duration-300 mb-1.5 sm:mb-2 md:mb-3 rounded-lg group-hover:shadow-md">
+                          <img
+                            src={getImageUrl(relatedProduct.image_url || '')}
+                            alt={relatedProduct.name}
+                            className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-300"
+                            loading="lazy"
+                          />
                         </div>
-                      ))}
-                    </div>
+                        <div>
+                          <p className="text-[10px] sm:text-xs md:text-sm font-medium text-neutral-charcoal truncate group-hover:text-neutral-charcoal/80 transition-colors">
+                            {relatedProduct.name}
+                          </p>
+                          <p className="text-[9px] sm:text-[10px] md:text-xs text-neutral-slate mt-0.5 sm:mt-1">{relatedProduct.dimension} • {relatedProduct.surface}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}

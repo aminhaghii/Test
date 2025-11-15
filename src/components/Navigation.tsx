@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, Square, Maximize2, LogIn, LogOut, User, Boxes, LayoutGrid } from "lucide-react";
 import { useAuth } from "@/contexts/BackendAuthContext";
@@ -7,9 +7,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
 import toast from "react-hot-toast";
 import StaggeredMenu from "./StaggeredMenu";
+import BrandLogo from "@/components/BrandLogo";
 
 // API URL for backend resources
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { getApiUrl } from '@/lib/getApiUrl';
+const API_URL = getApiUrl();
 
 // Available dimensions
 const dimensions = ['30x30', '30x90', '40x40', '40x100', '60x60', '60x120', '80x80', '100x100'];
@@ -19,20 +21,19 @@ const materials = ['White Body', 'Porcelain'];
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
   const [showDimensions, setShowDimensions] = useState(false);
   const [showMaterials, setShowMaterials] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
   const productsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const mobileDrawerRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+  const scrollRAF = useRef<number>();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { t, currentLanguage, setLanguage } = useLanguage();
-
-  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -47,19 +48,41 @@ export function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const current = window.scrollY;
+      setIsScrolled(current > 20);
+
+      if (scrollRAF.current) {
+        cancelAnimationFrame(scrollRAF.current);
+      }
+
+      scrollRAF.current = requestAnimationFrame(() => {
+        const delta = current - lastScrollY.current;
+
+        if (current < 40) {
+          setShowHeader(true);
+        } else if (delta > 6) {
+          setShowHeader(false);
+        } else if (delta < -6) {
+          setShowHeader(true);
+        }
+
+        lastScrollY.current = current;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollRAF.current) {
+        cancelAnimationFrame(scrollRAF.current);
+      }
+    };
   }, []);
 
-  // Close mobile menu, language dropdown, and products dropdown on outside click
+  // Close language dropdown and products dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (isMobileMenuOpen && mobileDrawerRef.current && !mobileDrawerRef.current.contains(target)) {
-        setIsMobileMenuOpen(false);
-      }
       // close language dropdown if clicked outside
       if (isLangOpen && langRef.current && !langRef.current.contains(target)) {
         setIsLangOpen(false);
@@ -77,8 +100,9 @@ export function Navigation() {
       }
     };
 
-    if (isMobileMenuOpen || isLangOpen || isProductsOpen) {
+    if (isLangOpen || isProductsOpen) {
       document.addEventListener('mousedown', handleClickOutside);
+      setShowHeader(true);
     }
 
     return () => {
@@ -88,89 +112,17 @@ export function Navigation() {
         clearTimeout(productsTimeoutRef.current);
       }
     };
-  }, [isMobileMenuOpen, isLangOpen, isProductsOpen]);
+  }, [isLangOpen, isProductsOpen]);
 
-  // Lock body scroll and trap focus when mobile menu is open
-  useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = originalOverflow || '';
-    }
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isMobileMenuOpen) return;
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-        return;
-      }
-      if (e.key === 'Tab') {
-        const drawer = mobileDrawerRef.current;
-        if (!drawer) return;
-        const focusableSelectors = [
-          'a[href]',
-          'button:not([disabled])',
-          'textarea',
-          'input',
-          'select',
-          '[tabindex]:not([tabindex="-1"])',
-        ];
-        const focusables = Array.from(
-          drawer.querySelectorAll<HTMLElement>(focusableSelectors.join(','))
-        ).filter(el => !el.hasAttribute('disabled') && el.tabIndex !== -1);
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        const active = (document.activeElement as HTMLElement) || null;
-        if (e.shiftKey) {
-          if (active === first || !drawer.contains(active)) {
-            e.preventDefault();
-            last.focus();
-          }
-        } else {
-          if (active === last || !drawer.contains(active)) {
-            e.preventDefault();
-            first.focus();
-          }
-        }
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = originalOverflow || '';
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isMobileMenuOpen]);
-
-  // ESC to close mobile menu
-  useEffect(() => {
-    const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener('keydown', handleEscKey);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscKey);
-    };
-  }, [isMobileMenuOpen]);
 
   // Build menu items for StaggeredMenu
   const buildMenuItems = () => {
     const items: { label: string; link: string; ariaLabel: string; onClick?: () => void }[] = [
-      { label: t('nav.inspiration'), link: "/inspiration", ariaLabel: t('nav.inspiration') },
-      { label: t('nav.catalogues'), link: "/catalogues", ariaLabel: t('nav.catalogues') },
-      { label: t('nav.about'), link: "/about", ariaLabel: t('nav.about') },
-      { label: t('about.overview'), link: "/about#overview", ariaLabel: t('about.overview') },
-      { label: t('about.story'), link: "/about#story", ariaLabel: t('about.story') },
-      { label: t('about.milestones'), link: "/about#milestones", ariaLabel: t('about.milestones') },
-      { label: t('about.capabilities'), link: "/about#capabilities", ariaLabel: t('about.capabilities') },
-      { label: t('about.certifications'), link: "/about#certifications", ariaLabel: t('about.certifications') },
+      { label: t('nav.products'), link: "/products", ariaLabel: t('nav.products'), onClick: () => navigate('/products') },
+      { label: t('nav.inspiration'), link: "/inspiration", ariaLabel: t('nav.inspiration'), onClick: () => navigate('/inspiration') },
+      { label: t('nav.catalogues'), link: "/catalogues", ariaLabel: t('nav.catalogues'), onClick: () => navigate('/catalogues') },
+      { label: t('nav.blog') || 'Blog', link: "/blog", ariaLabel: t('nav.blog') || 'Blog', onClick: () => navigate('/blog') },
+      { label: t('nav.about'), link: "/about", ariaLabel: t('nav.about'), onClick: () => navigate('/about') },
       { label: t('about.exportServices'), link: "/about/export", ariaLabel: t('about.exportServices') },
       { label: t('about.smartCombinations'), link: "/about/combination", ariaLabel: t('about.smartCombinations') },
       { label: t('nav.contact'), link: "/contact", ariaLabel: t('nav.contact') },
@@ -181,10 +133,11 @@ export function Navigation() {
     // Add login/admin/logout
     if (user) {
       if (user.role === 'admin') {
+        // Use Link for admin panel (no onClick needed, Link handles navigation)
         items.push({
-          label: t('nav.admin'),
+          label: t('nav.admin') || 'Admin Panel',
           link: "/admin",
-          ariaLabel: t('nav.goToAdmin')
+          ariaLabel: t('nav.goToAdmin') || 'Go to Admin Panel'
         });
       }
       items.push({
@@ -204,54 +157,55 @@ export function Navigation() {
     return items;
   };
 
-  // Simple mobile items (no submenu)
-  const mobileNavItems = [
-    { label: t('nav.products'), href: "/products" },
-    { label: t('nav.inspiration'), href: "/inspiration" },
-    { label: t('nav.catalogues'), href: "/catalogues" },
-    { label: t('nav.about'), href: "/about" },
-    { label: t('nav.contact'), href: "/contact" },
-  ];
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 transform ${
           isScrolled
-            ? "bg-white backdrop-blur-xl shadow-elegant border-b border-neutral-stone/40"
-            : "bg-white"
-        }`}
+            ? "bg-white/80 backdrop-blur-[40px] shadow-elegant border-b border-white/30"
+            : "bg-white/95 backdrop-blur-[20px]"
+        } ${showHeader ? "translate-y-0" : "-translate-y-full"}`}
+        style={isScrolled ? {
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.75) 100%)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+          boxShadow: '0 8px 32px 0 rgba(15, 23, 42, 0.08)',
+        } : {
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.92) 100%)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        }}
       >
 
         {/* Main Navigation */}
-        <div className="container mx-auto px-6 lg:px-20">
-          <div className="flex items-center justify-between h-20 lg:h-24 relative">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-20">
+          <div className="flex items-center justify-between h-14 sm:h-16 md:h-20 lg:h-24 relative">
             {/* Logo */}
             <Link to="/" className="flex items-center z-50 group">
-              <span
-                className={`font-display uppercase text-2xl lg:text-3xl font-bold tracking-tighter transition-all duration-300 text-neutral-charcoal`}
-                style={{ letterSpacing: "-0.04em" }}
-              >
-                Almas<span className="text-luxury-gold group-hover:tracking-wider transition-all duration-300">Ceram</span>
-              </span>
+              <BrandLogo
+                eager
+                className="h-8 sm:h-9 md:h-10 lg:h-12 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
+                alt="Almas Ceram"
+              />
             </Link>
 
             {/* Desktop Navigation - minimal right-side links */}
             <div className="hidden lg:flex items-center justify-end" />
 
             {/* Right Side - Products Dropdown, Hamburger Menu and Mobile Button */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-6">
               {/* Products Full-Screen Overlay */}
               <div 
                 ref={productsRef} 
-                className="relative z-[100]"
-                  onMouseEnter={() => {
+                className="relative z-[100] hidden sm:block"
+                onMouseEnter={() => {
                   // Clear any pending close timeout
                   if (productsTimeoutRef.current) {
                     clearTimeout(productsTimeoutRef.current);
                     productsTimeoutRef.current = null;
                   }
-                      setIsProductsOpen(true);
+                  setIsProductsOpen(true);
                 }}
                 onMouseLeave={() => {
                   // Add delay before closing to allow user to move mouse to overlay
@@ -263,7 +217,7 @@ export function Navigation() {
                 }}
               >
                 <button
-                  className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
+                  className={`inline-flex items-center px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-1.5 md:py-2 rounded-md sm:rounded-lg font-medium text-xs sm:text-xs md:text-sm transition-all touch-manipulation ${
                     isScrolled 
                       ? "text-neutral-charcoal hover:bg-neutral-100" 
                       : "text-neutral-charcoal hover:bg-neutral-100/70"
@@ -271,12 +225,19 @@ export function Navigation() {
                 >
                   {t('nav.products')}
                 </button>
+                
+                {/* Overlay Container */}
                 <div 
-                  className={`fixed inset-x-0 top-20 lg:top-24 bottom-0 z-[99] transition-all duration-500 ease-out ${
+                  className={`fixed inset-x-0 top-14 sm:top-16 md:top-20 lg:top-24 z-[99] bg-white/40 backdrop-blur-lg transition-all duration-500 ease-in-out ${
                     isProductsOpen 
-                      ? 'opacity-100 translate-y-0 pointer-events-auto' 
-                      : 'opacity-0 -translate-y-4 pointer-events-none'
+                      ? 'opacity-100 pointer-events-auto visible' 
+                      : 'opacity-0 pointer-events-none invisible'
                   }`}
+                  style={{
+                    height: isProductsOpen ? '550px' : '0',
+                    overflow: 'hidden',
+                    transition: 'height 0.5s ease-in-out, opacity 0.5s ease-in-out'
+                  }}
                   onMouseEnter={() => {
                     // Clear timeout when mouse enters overlay
                     if (productsTimeoutRef.current) {
@@ -288,23 +249,26 @@ export function Navigation() {
                   onMouseLeave={() => {
                     // Add delay before closing
                     productsTimeoutRef.current = setTimeout(() => {
-                    setIsProductsOpen(false);
+                      setIsProductsOpen(false);
                       setShowDimensions(false);
                       setShowMaterials(false);
                     }, 200);
                   }}
                 >
-                  <div className="container mx-auto px-6 lg:px-20 pt-12 pb-8 h-full flex items-start">
-                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto transition-all duration-700 ease-out ${
+                  <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-20 h-full flex items-center justify-center overflow-hidden py-6 sm:py-8">
+                    <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full max-w-6xl mx-auto ${
                       isProductsOpen 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-8'
-                    }`}>
+                        ? 'opacity-100' 
+                        : 'opacity-0'
+                    } transition-opacity duration-500 ease-in-out`}
+                    style={{
+                      transitionDelay: isProductsOpen ? '0.15s' : '0s'
+                    }}>
                         {/* All Products */}
                         <Link
                           to="/products"
                           onClick={() => setIsProductsOpen(false)}
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-[400px] md:h-[420px] lg:h-[450px] border-2 border-neutral-200 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl touch-manipulation"
                         >
                           {/* Background Image */}
                           <img
@@ -315,20 +279,20 @@ export function Navigation() {
                           {/* Gradient Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                           {/* Content */}
-                          <div className="absolute inset-0 flex flex-col justify-end p-8 z-10">
-                            <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
+                          <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 md:p-6 lg:p-8 z-10">
+                            <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-2.5 md:mb-3 text-white">
                               {t('nav.allProducts') || 'All Products'}
                             </h3>
-                            <p className="text-white/90 text-lg mb-6">
+                            <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6">
                               {t('products.allProductsDesc') || 'Explore our complete collection of premium ceramic tiles'}
                             </p>
-                            <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
+                            <div className="w-12 sm:w-14 md:w-16 h-0.5 sm:h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                           </div>
                         </Link>
 
                         {/* By Dimension */}
                         <div 
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-[400px] md:h-[420px] lg:h-[450px] border-2 border-neutral-200 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl touch-manipulation"
                           onClick={() => setShowDimensions(!showDimensions)}
                         >
                           {/* Background Image */}
@@ -342,25 +306,25 @@ export function Navigation() {
                           
                           {/* Default Content */}
                           {!showDimensions && (
-                            <div className="absolute inset-0 flex flex-col justify-end p-8 z-10 transition-opacity duration-300">
-                              <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
+                            <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 md:p-6 lg:p-8 z-10 transition-opacity duration-300">
+                              <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-2.5 md:mb-3 text-white">
                                 {t('products.byDimension') || 'By Dimension'}
                               </h3>
-                              <p className="text-white/90 text-lg mb-6">
+                              <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6">
                                 {t('products.byDimensionDesc') || 'Find tiles by size: 30x30, 60x60, 60x120 and more'}
                               </p>
-                              <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
+                              <div className="w-12 sm:w-14 md:w-16 h-0.5 sm:h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                             </div>
                           )}
                           
                           {/* Dimensions Grid - appears on click */}
                           {showDimensions && (
-                            <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                              <div className="w-full max-w-lg backdrop-blur-xl rounded-2xl border border-white/40 p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-transparent">
-                                <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
+                            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6 z-10 overflow-y-auto -webkit-overflow-scrolling-touch">
+                              <div className="w-full max-w-lg backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/40 p-4 sm:p-5 md:p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-transparent">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-white text-center animate-fade-in-up">
                                   {t('products.byDimension') || 'By Dimension'}
                                 </h3>
-                                <div className="grid grid-cols-4 gap-3">
+                                <div className="grid grid-cols-4 gap-2 sm:gap-2.5 md:gap-3">
                                   {dimensions.map((dim, index) => (
                                     <button
                                       key={dim}
@@ -370,7 +334,7 @@ export function Navigation() {
                                         setShowDimensions(false);
                                         navigate(`/products?dimension=${dim}`);
                                       }}
-                                      className="w-full aspect-square flex items-center justify-center bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
+                                      className="w-full aspect-square flex items-center justify-center bg-white/10 border border-white/20 rounded-md sm:rounded-lg text-white text-xs sm:text-xs md:text-sm font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up touch-manipulation"
                                       style={{
                                         animationDelay: `${index * 50}ms`,
                                         animationFillMode: 'forwards'
@@ -387,7 +351,7 @@ export function Navigation() {
               
                         {/* By Material */}
                         <div 
-                          className="group relative h-96 border-2 border-neutral-200 rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                          className="group relative h-[400px] md:h-[420px] lg:h-[450px] border-2 border-neutral-200 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl touch-manipulation"
                           onClick={() => setShowMaterials(!showMaterials)}
                         >
                           {/* Background Image */}
@@ -401,25 +365,25 @@ export function Navigation() {
                           
                           {/* Default Content */}
                           {!showMaterials && (
-                            <div className="absolute inset-0 flex flex-col justify-end p-8 z-10 transition-opacity duration-300">
-                              <h3 className="text-3xl font-bold mb-3 text-white group-hover:text-luxury-gold transition-colors">
+                            <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 md:p-6 lg:p-8 z-10 transition-opacity duration-300">
+                              <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-2.5 md:mb-3 text-white">
                                 {t('products.byMaterial') || 'By Material'}
                               </h3>
-                              <p className="text-white/90 text-lg mb-6">
+                              <p className="text-white/90 text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6">
                                 {t('products.byMaterialDesc') || 'Browse by material type: Porcelain, White Body and more'}
                               </p>
-                              <div className="w-16 h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
+                              <div className="w-12 sm:w-14 md:w-16 h-0.5 sm:h-1 bg-white transform group-hover:scale-x-125 transition-transform origin-left" />
                             </div>
                           )}
                           
                           {/* Materials Grid - appears on click */}
                           {showMaterials && (
-                            <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                              <div className="w-full max-w-md backdrop-blur-xl rounded-2xl border border-white/40 p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-transparent">
-                                <h3 className="text-2xl font-bold mb-6 text-white text-center animate-fade-in-up">
+                            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-4 md:p-5 lg:p-6 z-10 overflow-y-auto -webkit-overflow-scrolling-touch">
+                              <div className="w-full max-w-md backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/40 p-4 sm:p-5 md:p-6 shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-transparent">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 sm:mb-5 md:mb-6 text-white text-center animate-fade-in-up">
                                   {t('products.byMaterial') || 'By Material'}
                                 </h3>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-2 gap-3 sm:gap-3.5 md:gap-4">
                                   {materials.map((material, index) => (
                       <button
                                       key={material}
@@ -429,7 +393,7 @@ export function Navigation() {
                                         setShowMaterials(false);
                                         navigate(`/products?bodyType=${material}`);
                                       }}
-                                      className="w-full aspect-square flex items-center justify-center bg-white/10 border border-white/20 rounded-lg text-white text-base font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up"
+                                      className="w-full aspect-square flex items-center justify-center bg-white/10 border border-white/20 rounded-md sm:rounded-lg text-white text-sm sm:text-sm md:text-base font-medium hover:bg-white/20 hover:scale-110 hover:border-white/40 transition-all duration-200 transform opacity-0 animate-fade-in-up touch-manipulation"
                                       style={{
                                         animationDelay: `${index * 80}ms`,
                                         animationFillMode: 'forwards'
@@ -471,7 +435,7 @@ export function Navigation() {
                   }}
                   aria-haspopup="listbox"
                   aria-expanded={isLangOpen}
-                  className={`px-3 py-2 rounded-md text-xs font-semibold transition-colors cursor-pointer pointer-events-auto ${
+                  className={`px-2 sm:px-2.5 md:px-3 py-1.5 sm:py-1.5 md:py-2 rounded-md text-[10px] sm:text-[11px] md:text-xs font-semibold transition-colors cursor-pointer pointer-events-auto touch-manipulation ${
                     isScrolled
                       ? 'text-neutral-charcoal hover:text-neutral-600'
                       : 'text-neutral-charcoal hover:text-neutral-600'
@@ -483,7 +447,7 @@ export function Navigation() {
                 {isLangOpen && (
                   <ul
                     role="listbox"
-                    className="absolute right-0 mt-2 w-36 rounded-md border border-neutral-200 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
+                    className="absolute right-0 mt-1.5 sm:mt-2 w-32 sm:w-36 rounded-md border border-neutral-200 bg-white text-neutral-charcoal shadow-lg overflow-hidden z-[100] pointer-events-auto"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {[
@@ -497,7 +461,7 @@ export function Navigation() {
                         key={lang.code} 
                         role="option" 
                         aria-selected={currentLanguage===lang.code}
-                        className={`px-3 py-2 text-sm cursor-pointer hover:bg-neutral-100 transition-colors ${currentLanguage===lang.code ? 'font-semibold bg-neutral-100' : ''}`}
+                        className={`px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm cursor-pointer hover:bg-neutral-100 transition-colors touch-manipulation ${currentLanguage===lang.code ? 'font-semibold bg-neutral-100' : ''}`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -512,12 +476,23 @@ export function Navigation() {
                 )}
               </div>
 
+              {/* Panel Shortcut */}
+              {user && (
+                <Link
+                  to={user.role === 'admin' ? '/admin' : '/profile-completion'}
+                  className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-neutral-charcoal text-white hover:bg-neutral-charcoal/90 transition-colors duration-200"
+                >
+                  <User className="w-4 h-4" />
+                  {user.role === 'admin' ? t('nav.admin') || 'Admin Panel' : t('common.profile') || 'My Panel'}
+                </Link>
+              )}
+
               {/* Decorative Hash Line - thinner but longer */}
-              <div className={`hidden md:block h-[1px] w-16 lg:w-24 transition-all duration-300 ${
+              <div className={`hidden md:block h-[1px] w-12 md:w-16 lg:w-24 transition-all duration-300 ${
                 isScrolled ? "bg-neutral-300/40" : "bg-neutral-200"
               }`} />
               {/* Hamburger Menu - StaggeredMenu */}
-              <div className="relative z-[50]">
+              <div className="relative z-[50] flex items-center gap-1.5 sm:gap-2 md:gap-3">
                 <StaggeredMenu
                   position="right"
                   colors={['#1e1e22', '#35353c']}
@@ -531,214 +506,19 @@ export function Navigation() {
                   isFixed={false}
                   inline={true}
                   onMenuOpen={() => { 
-                    setIsMobileMenuOpen(false);
                     setIsLangOpen(false);
                     setIsProductsOpen(false);
                   }}
                   onMenuClose={() => {}}
                 />
-            </div>
+              </div>
 
-              {/* Mobile Menu Button - fallback for small screens */}
-            <button
-              aria-label="Toggle navigation"
-              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-200 ${isScrolled ? 'border-neutral-300 text-neutral-700' : 'border-neutral-300 text-neutral-700'}`}
-              onClick={() => {
-                setIsMobileMenuOpen((v)=>!v);
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                {isMobileMenuOpen ? (
-                  <path d="M18 6L6 18M6 6l12 12" />
-                ) : (
-                  <>
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </>
-                )}
-              </svg>
-            </button>
             </div>
 
           </div>
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-[80]" aria-hidden={!isMobileMenuOpen}>
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
-          {/* Drawer */}
-          <div
-            id="mobile-nav-drawer"
-            ref={mobileDrawerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-            className="absolute top-0 left-0 right-0 bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-xl rounded-b-2xl p-4 pt-[calc(80px+env(safe-area-inset-top))] pb-[env(safe-area-inset-bottom)]"
-          >
-            <nav className="space-y-2" aria-label="Primary">
-              {mobileNavItems.map((item) => (
-                <button
-                  key={item.href}
-                  className="w-full text-left px-4 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition-colors text-white"
-                  onClick={() => { setIsMobileMenuOpen(false); navigate(item.href); }}
-                >
-                  {item.label}
-                </button>
-              ))}
-
-              <div className="mt-3">
-                <div className="px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/70">{t('nav.about')}</div>
-                <div className="grid grid-cols-2 gap-2 px-2">
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'overview';
-                      } else {
-                        window.location.hash = 'overview';
-                        const element = document.getElementById('overview');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.overview')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'story';
-                      } else {
-                        window.location.hash = 'story';
-                        const element = document.getElementById('story');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.story')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'milestones';
-                      } else {
-                        window.location.hash = 'milestones';
-                        const element = document.getElementById('milestones');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.milestones')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'capabilities';
-                      } else {
-                        window.location.hash = 'capabilities';
-                        const element = document.getElementById('capabilities');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.capabilities')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'certifications';
-                      } else {
-                        window.location.hash = 'certifications';
-                        const element = document.getElementById('certifications');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.certifications')}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      if (location.pathname !== '/about') {
-                        navigate('/about');
-                        window.location.hash = 'downloads';
-                      } else {
-                        window.location.hash = 'downloads';
-                        const element = document.getElementById('downloads');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }
-                    }}
-                    className="px-3 py-2 rounded-lg border border-white/20 hover:bg-white/10 transition-colors text-white text-left"
-                  >
-                    {t('about.downloads')}
-                  </button>
-                </div>
-                <div className="px-4 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <a href="/about/export" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/15 transition-colors">{t('about.exportServices')}</a>
-                  <a href="/about/combination" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/15 transition-colors">{t('about.smartCombinations')}</a>
-                </div>
-              </div>
-
-              <div className="pt-4 px-2 mb-3">
-                <LanguageSelector />
-              </div>
-
-              <div className="pt-2 grid grid-cols-2 gap-2 px-2">
-                <button
-                  className="px-4 py-3 rounded-xl bg-luxury-gold text-neutral-charcoal font-semibold"
-                  onClick={() => { setIsMobileMenuOpen(false); navigate('/contact'); }}
-                >
-                  {t('nav.contact')}
-                </button>
-                {user ? (
-                  <button
-                    className="px-4 py-3 rounded-xl border border-white/20 text-white"
-                    onClick={() => { setIsMobileMenuOpen(false); navigate(user.role === 'admin' ? '/admin' : '/'); }}
-                  >
-                    {user.role === 'admin' ? t('common.admin') : t('common.account')}
-                  </button>
-                ) : (
-                  <button
-                    className="px-4 py-3 rounded-xl border border-white/20 text-white"
-                    onClick={() => { setIsMobileMenuOpen(false); navigate('/login'); }}
-                  >
-                    {t('common.login')}
-                  </button>
-                )}
-              </div>
-            </nav>
-          </div>
-        </div>
-      )}
     </>
   );
 }
